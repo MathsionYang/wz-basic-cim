@@ -1,0 +1,124 @@
+.bimframe {
+  position  : fixed;
+  //top       : 100px;
+  bottom    : 40px;
+  overflow  : hidden;
+  right     : 30px;
+  width     : 370px;
+  height    : 830px;
+  //background: rgba(11, 20, 35, 0.8);
+  background: rgba(3, 10, 25, 0.7);
+  //border    : 1px solid rgba(81, 161, 201, 0.6);
+  border: 1px solid #356DA2;
+  color     : white;
+  box-sizing: border-box;
+  padding   : 10px;
+  border-radius: 10px;
+  z-index: 999999;
+  ._bimframe_ {
+    position: relative;
+    height  : 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    .close {
+      position: absolute;
+      right   : 4px;
+      top     : 0;
+      width   : 0.2rem;
+      height  : 0.2rem;
+      display : block;
+      .bg-image("../../../page/map/images/zoom-in");
+      transform : rotate(-45deg);
+      transition: all 0.1s linear;
+      cursor    : pointer;
+      z-index: 10;
+
+      &:hover {
+        transform: rotate(45deg);
+      }
+    }
+
+    /deep/.is-active {
+      //color: #409EFF !important;
+      //新增被选中的时候样式
+      width: 80px;
+      height: 32px;
+      background: #00A3FF;
+      border-radius: 16px;
+      color: #FFFFFF;
+      line-height: 32px;
+    }
+
+    /deep/.el-tabs--top {
+      display       : flex;
+      flex-direction: column;
+      height        : 100%;
+      overflow      : hidden;
+
+      /deep/.el-tabs__header {
+        .el-tabs__item {
+          //color: aliceblue;
+          width: 80px;
+          height: 32px;
+          font-size: 16px;
+          font-family: PingFangSC-Semibold, PingFang SC;
+          font-weight: 600;
+          color: #FFFFFF;
+          padding-left: 7px;
+          line-height: 32px;
+        }
+      }
+
+      /deep/.el-tabs__content {
+        flex      : 1;
+        overflow-y: scroll;
+
+        table {
+          tr:nth-child(2){
+            height: auto;
+          }
+          tr:nth-child(4){
+            height: auto;
+          }
+          tr:nth-child(5){
+            height: auto;
+          }
+          tr:nth-child(6){
+            height: auto;
+          }
+          tr {
+            //border-bottom: 1px red solid;
+            //width: 355px;
+            height: auto;
+            border: 1px solid #3E7AAD;    
+            background: rgba(32, 101, 150, 0.3);
+            //float: left;
+            border-radius: 5px;
+            margin-top: 8px;
+            display: inline-block;
+          }
+          td {
+            line-height: 15px;
+            // height: 22px;
+            font-size: 16px;
+            font-family: PingFangSC-Semibold, PingFang SC;
+            font-weight: 550;
+            color: #63B5FF;
+            width: 288px;
+            vertical-align: middle;
+            //padding-top: 14px;
+            padding-left: 17px;
+            
+          }
+          td:nth-child(2){
+            color: #FFFFFF;
+            vertical-align: middle;
+            padding-top: 10px;
+            padding-bottom: 10px;
+          }
+
+        }
+      }
+    }
+  }
+}

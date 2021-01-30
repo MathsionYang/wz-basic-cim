@@ -1,0 +1,2261 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 1,
+                "name": "东屏街道",
+                "code": "330305003000",
+                "SHAPE_Leng": 0.920058832188,
+                "SHAPE_Area": 0.00126890939049,
+                "x": 121.141020703,
+                "y": 27.8044
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 2,
+                "name": "灵昆街道",
+                "code": "330305002000",
+                "SHAPE_Leng": 0.381609469326,
+                "SHAPE_Area": 0.00631847669274,
+                "x": 120.910549564,
+                "y": 27.9549
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 3,
+                "name": "霓屿街道",
+                "code": "330305005000",
+                "SHAPE_Leng": 0.558128632505,
+                "SHAPE_Area": 0.00118640829582,
+                "x": 121.04349884,
+                "y": 27.8624
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 4,
+                "name": "大门镇",
+                "code": "330305101000",
+                "SHAPE_Leng": 0.735884540223,
+                "SHAPE_Area": 0.00357361162042,
+                "x": 121.083823497,
+                "y": 27.9686
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 5,
+                "name": "元觉街道",
+                "code": "330305004000",
+                "SHAPE_Leng": 0.468114339147,
+                "SHAPE_Area": 0.00109949774245,
+                "x": 121.125309489,
+                "y": 27.8906
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 6,
+                "name": "北岙街道",
+                "code": "330305001000",
+                "SHAPE_Leng": 0.693008077984,
+                "SHAPE_Area": 0.00253925459647,
+                "x": 121.138336881,
+                "y": 27.8414
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 7,
+                "name": "鹿西乡",
+                "code": "330305202000",
+                "SHAPE_Leng": 0.492841503903,
+                "SHAPE_Area": 0.000832353048531,
+                "x": 121.194467803,
+                "y": 27.9869
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 8,
+                "name": "大麦屿街道",
+                "code": "331083003000",
+                "SHAPE_Leng": 0.00676755288964,
+                "SHAPE_Area": 0.00000120263706248,
+                "x": 121.123222165,
+                "y": 28.1539
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 9,
+                "name": "盐盆街道",
+                "code": "330382004000",
+                "SHAPE_Leng": 0.267603840527,
+                "SHAPE_Area": 0.00174344196877,
+                "x": 120.981256209,
+                "y": 28.069
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 10,
+                "name": "城南街道",
+                "code": "330382003000",
+                "SHAPE_Leng": 0.326225117945,
+                "SHAPE_Area": 0.00200944799249,
+                "x": 120.96931497,
+                "y": 28.0945
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 11,
+                "name": "白石街道",
+                "code": "330382006000",
+                "SHAPE_Leng": 0.5414671905,
+                "SHAPE_Area": 0.0045459429154,
+                "x": 120.860120045,
+                "y": 28.1166
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 12,
+                "name": "城东街道",
+                "code": "330382001000",
+                "SHAPE_Leng": 0.416320766532,
+                "SHAPE_Area": 0.00372299883563,
+                "x": 120.994531146,
+                "y": 28.1418
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 13,
+                "name": "蒲岐镇",
+                "code": "330382124000",
+                "SHAPE_Leng": 0.34523393511,
+                "SHAPE_Area": 0.00204359777446,
+                "x": 121.058669292,
+                "y": 28.1577
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 14,
+                "name": "天成街道",
+                "code": "330382008000",
+                "SHAPE_Leng": 0.306679011232,
+                "SHAPE_Area": 0.00094335831153,
+                "x": 121.029989186,
+                "y": 28.1657
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 15,
+                "name": "乐成街道",
+                "code": "330382002000",
+                "SHAPE_Leng": 0.675572781304,
+                "SHAPE_Area": 0.00687451382158,
+                "x": 120.917638544,
+                "y": 28.1453
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 16,
+                "name": "石帆街道",
+                "code": "330382007000",
+                "SHAPE_Leng": 0.429236724574,
+                "SHAPE_Area": 0.0027910177092,
+                "x": 120.988443879,
+                "y": 28.1892
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 17,
+                "name": "淡溪镇",
+                "code": "330382111000",
+                "SHAPE_Leng": 0.629683876647,
+                "SHAPE_Area": 0.00785561124452,
+                "x": 120.943179102,
+                "y": 28.2255
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 18,
+                "name": "芙蓉镇",
+                "code": "330382105000",
+                "SHAPE_Leng": 0.683165617582,
+                "SHAPE_Area": 0.00828052676503,
+                "x": 121.01450035,
+                "y": 28.3204
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 19,
+                "name": "龙西乡",
+                "code": "330382211000",
+                "SHAPE_Leng": 0.374977106519,
+                "SHAPE_Area": 0.00376178008875,
+                "x": 121.013682716,
+                "y": 28.3817
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 20,
+                "name": "湖雾镇",
+                "code": "330382121000",
+                "SHAPE_Leng": 0.376206800747,
+                "SHAPE_Area": 0.00284882054976,
+                "x": 121.213680517,
+                "y": 28.4101
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 21,
+                "name": "仙溪镇",
+                "code": "330382102000",
+                "SHAPE_Leng": 0.767083838983,
+                "SHAPE_Area": 0.0090764499745,
+                "x": 121.026921963,
+                "y": 28.4319
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 22,
+                "name": "虹桥镇",
+                "code": "330382108000",
+                "SHAPE_Leng": 0.588653640608,
+                "SHAPE_Area": 0.00563335648974,
+                "x": 121.040358648,
+                "y": 28.2333
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 23,
+                "name": "清江镇",
+                "code": "330382106000",
+                "SHAPE_Leng": 0.602850216212,
+                "SHAPE_Area": 0.00348716862584,
+                "x": 121.08874218,
+                "y": 28.282
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 24,
+                "name": "大荆镇",
+                "code": "330382101000",
+                "SHAPE_Leng": 0.00375142364013,
+                "SHAPE_Area": 9.19044573949e-7,
+                "x": 121.192581086,
+                "y": 28.3738
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 25,
+                "name": "大荆镇",
+                "code": "330382101000",
+                "SHAPE_Leng": 0.906441052449,
+                "SHAPE_Area": 0.011850951128,
+                "x": 121.134229738,
+                "y": 28.4395
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 26,
+                "name": "雁荡镇",
+                "code": "330382104000",
+                "SHAPE_Leng": 0.706166760558,
+                "SHAPE_Area": 0.00770259640985,
+                "x": 121.114874542,
+                "y": 28.3518
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 27,
+                "name": "南塘镇",
+                "code": "330382122000",
+                "SHAPE_Leng": 0.245291955008,
+                "SHAPE_Area": 0.00144278178449,
+                "x": 121.109736974,
+                "y": 28.241
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 28,
+                "name": "南岳镇",
+                "code": "330382123000",
+                "SHAPE_Leng": 0.297161276146,
+                "SHAPE_Area": 0.00223110531253,
+                "x": 121.092424421,
+                "y": 28.1992
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 29,
+                "name": "磐石镇",
+                "code": "330382125000",
+                "SHAPE_Leng": 0.206807629768,
+                "SHAPE_Area": 0.00173126031607,
+                "x": 120.821585412,
+                "y": 27.9971
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 30,
+                "name": "北白象镇",
+                "code": "330382115000",
+                "SHAPE_Leng": 0.727356723358,
+                "SHAPE_Area": 0.00579085199073,
+                "x": 120.836043027,
+                "y": 28.0419
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 31,
+                "name": "翁垟街道",
+                "code": "330382005000",
+                "SHAPE_Leng": 0.293006619419,
+                "SHAPE_Area": 0.00314135888358,
+                "x": 120.977291013,
+                "y": 28.0306
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 32,
+                "name": "柳市镇",
+                "code": "330382114000",
+                "SHAPE_Leng": 0.654531340689,
+                "SHAPE_Area": 0.00912841028631,
+                "x": 120.912768303,
+                "y": 28.0366
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 33,
+                "name": "智仁乡",
+                "code": "330382210000",
+                "SHAPE_Leng": 0.45871413748,
+                "SHAPE_Area": 0.00375227554734,
+                "x": 121.11702987,
+                "y": 28.5045
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 34,
+                "name": "坞根镇",
+                "code": "331081110000",
+                "SHAPE_Leng": 0.000148265090118,
+                "SHAPE_Area": 4.85792047258e-11,
+                "x": 121.20581486,
+                "y": 28.3293
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 35,
+                "name": "岭底乡",
+                "code": "330382212000",
+                "SHAPE_Leng": 0.543173319404,
+                "SHAPE_Area": 0.00617130695664,
+                "x": 120.931678592,
+                "y": 28.296
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 36,
+                "name": "青街畲族乡",
+                "code": "330326214000",
+                "SHAPE_Leng": 0.310066240124,
+                "SHAPE_Area": 0.00198532030333,
+                "x": 120.220272316,
+                "y": 27.5483
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 37,
+                "name": "顺溪镇",
+                "code": "330326108000",
+                "SHAPE_Leng": 0.710572323274,
+                "SHAPE_Area": 0.00909833177957,
+                "x": 120.143573991,
+                "y": 27.5878
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 38,
+                "name": "怀溪镇",
+                "code": "330326122000",
+                "SHAPE_Leng": 0.531619259769,
+                "SHAPE_Area": 0.00574691551687,
+                "x": 120.171995456,
+                "y": 27.656
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 39,
+                "name": "萧江镇",
+                "code": "330326103000",
+                "SHAPE_Leng": 0.535424429157,
+                "SHAPE_Area": 0.00336640462504,
+                "x": 120.447841634,
+                "y": 27.577
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 40,
+                "name": "麻步镇",
+                "code": "330326120000",
+                "SHAPE_Leng": 0.322370854401,
+                "SHAPE_Area": 0.00391298279734,
+                "x": 120.398936113,
+                "y": 27.6053
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 41,
+                "name": "海西镇",
+                "code": "330326118000",
+                "SHAPE_Leng": 0.528258858366,
+                "SHAPE_Area": 0.00356489250859,
+                "x": 120.650869032,
+                "y": 27.6524
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 42,
+                "name": "水头镇",
+                "code": "330326102000",
+                "SHAPE_Leng": 0.767938365585,
+                "SHAPE_Area": 0.00861606334109,
+                "x": 120.349167937,
+                "y": 27.6303
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 43,
+                "name": "南滨街道",
+                "code": "330381011000",
+                "SHAPE_Leng": 0.328058671103,
+                "SHAPE_Area": 0.0029217007558,
+                "x": 120.648031234,
+                "y": 27.7079
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 44,
+                "name": "闹村乡",
+                "code": "330326217000",
+                "SHAPE_Leng": 0.393261469185,
+                "SHAPE_Area": 0.00418528559252,
+                "x": 120.288239937,
+                "y": 27.564
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 45,
+                "name": "南雁镇",
+                "code": "330326109000",
+                "SHAPE_Leng": 0.42492431435,
+                "SHAPE_Area": 0.00429136273,
+                "x": 120.241407798,
+                "y": 27.5997
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 46,
+                "name": "山门镇",
+                "code": "330326107000",
+                "SHAPE_Leng": 0.411039969187,
+                "SHAPE_Area": 0.00376857256974,
+                "x": 120.234667084,
+                "y": 27.654
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 47,
+                "name": "凤卧镇",
+                "code": "330326121000",
+                "SHAPE_Leng": 0.379062392665,
+                "SHAPE_Area": 0.00332490043215,
+                "x": 120.269070253,
+                "y": 27.6741
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 48,
+                "name": "腾蛟镇",
+                "code": "330326105000",
+                "SHAPE_Leng": 0.67434378492,
+                "SHAPE_Area": 0.00734417521076,
+                "x": 120.316927919,
+                "y": 27.7043
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 49,
+                "name": "昆阳镇",
+                "code": "330326100000",
+                "SHAPE_Leng": 0.53202389134,
+                "SHAPE_Area": 0.008009122568,
+                "x": 120.542509829,
+                "y": 27.6846
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 50,
+                "name": "鳌江镇",
+                "code": "330326101000",
+                "SHAPE_Leng": 0.994657039686,
+                "SHAPE_Area": 0.0149284259035,
+                "x": 120.514069367,
+                "y": 27.6287
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 51,
+                "name": "南麂镇",
+                "code": "330326119000",
+                "SHAPE_Leng": 0.766763363476,
+                "SHAPE_Area": 0.00100994885329,
+                "x": 121.074010169,
+                "y": 27.4622
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 52,
+                "name": "万全镇",
+                "code": "330326117000",
+                "SHAPE_Leng": 0.623481454802,
+                "SHAPE_Area": 0.00492272227253,
+                "x": 120.582861341,
+                "y": 27.715
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 53,
+                "name": "桂山乡",
+                "code": "330328225000",
+                "SHAPE_Leng": 0.493475979901,
+                "SHAPE_Area": 0.00248935704563,
+                "x": 120.065182342,
+                "y": 27.5958
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 54,
+                "name": "珊溪镇",
+                "code": "330328105000",
+                "SHAPE_Leng": 0.761759104165,
+                "SHAPE_Area": 0.0105213983083,
+                "x": 120.043311067,
+                "y": 27.6557
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 55,
+                "name": "双桂乡",
+                "code": "330328226000",
+                "SHAPE_Leng": 0.28003977882,
+                "SHAPE_Area": 0.00154555095171,
+                "x": 120.1552798,
+                "y": 27.7047
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 56,
+                "name": "巨屿镇",
+                "code": "330328106000",
+                "SHAPE_Leng": 0.434707374671,
+                "SHAPE_Area": 0.0043549291081,
+                "x": 120.088028506,
+                "y": 27.7091
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 57,
+                "name": "公阳乡",
+                "code": "330328228000",
+                "SHAPE_Leng": 0.287609974677,
+                "SHAPE_Area": 0.00191214046228,
+                "x": 120.195163074,
+                "y": 27.7227
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 58,
+                "name": "周山畲族乡",
+                "code": "330328217000",
+                "SHAPE_Leng": 0.291287428722,
+                "SHAPE_Area": 0.00124457539751,
+                "x": 120.156209379,
+                "y": 27.7331
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 59,
+                "name": "百丈镇",
+                "code": "330329102000",
+                "SHAPE_Leng": 0.740018512224,
+                "SHAPE_Area": 0.00984826165282,
+                "x": 119.851402971,
+                "y": 27.6278
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 60,
+                "name": "泗溪镇",
+                "code": "330329104000",
+                "SHAPE_Leng": 0.891576001589,
+                "SHAPE_Area": 0.0108970011467,
+                "x": 120.037598213,
+                "y": 27.505
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 61,
+                "name": "峃口镇",
+                "code": "330328108000",
+                "SHAPE_Leng": 0.634664586769,
+                "SHAPE_Area": 0.00267142580279,
+                "x": 120.149603791,
+                "y": 27.7602
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 62,
+                "name": "司前畲族镇",
+                "code": "330329101000",
+                "SHAPE_Leng": 1.64882615704,
+                "SHAPE_Area": 0.0192564207014,
+                "x": 119.771296362,
+                "y": 27.7171
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 63,
+                "name": "黄坦镇",
+                "code": "330328104000",
+                "SHAPE_Leng": 1.01698850947,
+                "SHAPE_Area": 0.0170506812528,
+                "x": 119.944470104,
+                "y": 27.7458
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 64,
+                "name": "大峃镇",
+                "code": "330328100000",
+                "SHAPE_Leng": 0.973728552345,
+                "SHAPE_Area": 0.0116548631344,
+                "x": 120.082590463,
+                "y": 27.7898
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 65,
+                "name": "铜铃山镇",
+                "code": "330328110000",
+                "SHAPE_Leng": 0.958481529755,
+                "SHAPE_Area": 0.0155341043971,
+                "x": 119.84606382,
+                "y": 27.8456
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 66,
+                "name": "平和乡",
+                "code": "330328227000",
+                "SHAPE_Leng": 0.227599988487,
+                "SHAPE_Area": 0.00202152270083,
+                "x": 120.215219383,
+                "y": 27.7501
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 67,
+                "name": "周壤镇",
+                "code": "330328109000",
+                "SHAPE_Leng": 0.367401295713,
+                "SHAPE_Area": 0.00283291293474,
+                "x": 120.134357706,
+                "y": 27.8374
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 68,
+                "name": "百丈漈镇",
+                "code": "330328101000",
+                "SHAPE_Leng": 0.532622910415,
+                "SHAPE_Area": 0.00438553893868,
+                "x": 120.000204615,
+                "y": 27.8408
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 69,
+                "name": "西坑畲族镇",
+                "code": "330328103000",
+                "SHAPE_Leng": 0.468120751511,
+                "SHAPE_Area": 0.00460254650942,
+                "x": 119.930397544,
+                "y": 27.8478
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 70,
+                "name": "二源镇",
+                "code": "330328111000",
+                "SHAPE_Leng": 0.477500542693,
+                "SHAPE_Area": 0.00427030619087,
+                "x": 120.046809677,
+                "y": 27.8742
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 71,
+                "name": "南田镇",
+                "code": "330328102000",
+                "SHAPE_Leng": 1.21524679597,
+                "SHAPE_Area": 0.01497496746,
+                "x": 119.951562583,
+                "y": 27.9249
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 72,
+                "name": "玉壶镇",
+                "code": "330328107000",
+                "SHAPE_Leng": 1.07355273426,
+                "SHAPE_Area": 0.0166644949054,
+                "x": 120.141972456,
+                "y": 27.9127
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 73,
+                "name": "桥头镇",
+                "code": "330324102000",
+                "SHAPE_Leng": 0.604756496175,
+                "SHAPE_Area": 0.0083568240868,
+                "x": 120.467418155,
+                "y": 28.1842
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 74,
+                "name": "巽宅镇",
+                "code": "330324107000",
+                "SHAPE_Leng": 0.913218876885,
+                "SHAPE_Area": 0.0167442190671,
+                "x": 120.41631791,
+                "y": 28.3676
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 75,
+                "name": "界坑乡",
+                "code": "330324229000",
+                "SHAPE_Leng": 0.616725603698,
+                "SHAPE_Area": 0.00679903024504,
+                "x": 120.433752494,
+                "y": 28.4566
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 76,
+                "name": "瓯北街道",
+                "code": "330324009000",
+                "SHAPE_Leng": 0.279882069131,
+                "SHAPE_Area": 0.00377425532916,
+                "x": 120.632959335,
+                "y": 28.0588
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 77,
+                "name": "三江街道",
+                "code": "330324006000",
+                "SHAPE_Leng": 0.502536502498,
+                "SHAPE_Area": 0.00562009088865,
+                "x": 120.720485263,
+                "y": 28.0693
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 78,
+                "name": "黄田街道",
+                "code": "330324007000",
+                "SHAPE_Leng": 0.352133371691,
+                "SHAPE_Area": 0.00285430124666,
+                "x": 120.675018719,
+                "y": 28.0927
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 79,
+                "name": "乌牛街道",
+                "code": "330324008000",
+                "SHAPE_Leng": 0.645041175686,
+                "SHAPE_Area": 0.00732276279268,
+                "x": 120.787490379,
+                "y": 28.09
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 80,
+                "name": "云岭乡",
+                "code": "330324226000",
+                "SHAPE_Leng": 0.612493895629,
+                "SHAPE_Area": 0.00874251506211,
+                "x": 120.920074461,
+                "y": 28.4581
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 81,
+                "name": "鹤盛镇",
+                "code": "330324112000",
+                "SHAPE_Leng": 0.820478460423,
+                "SHAPE_Area": 0.0161360193424,
+                "x": 120.864515043,
+                "y": 28.3888
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 82,
+                "name": "溪下乡",
+                "code": "330324228000",
+                "SHAPE_Leng": 0.622464850991,
+                "SHAPE_Area": 0.0107116537207,
+                "x": 120.481391505,
+                "y": 28.5286
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 83,
+                "name": "岩坦镇",
+                "code": "330324110000",
+                "SHAPE_Leng": 1.42518406609,
+                "SHAPE_Area": 0.0429317146296,
+                "x": 120.691810703,
+                "y": 28.5014
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 84,
+                "name": "茗岙乡",
+                "code": "330324227000",
+                "SHAPE_Leng": 0.383543688243,
+                "SHAPE_Area": 0.00374605330991,
+                "x": 120.506120539,
+                "y": 28.2951
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 85,
+                "name": "大若岩镇",
+                "code": "330324105000",
+                "SHAPE_Leng": 0.543001187039,
+                "SHAPE_Area": 0.00840447634104,
+                "x": 120.637194199,
+                "y": 28.2901
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 86,
+                "name": "枫林镇",
+                "code": "330324109000",
+                "SHAPE_Leng": 0.57348366727,
+                "SHAPE_Area": 0.00745839281852,
+                "x": 120.809335567,
+                "y": 28.3204
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 87,
+                "name": "岩头镇",
+                "code": "330324108000",
+                "SHAPE_Leng": 1.15894716776,
+                "SHAPE_Area": 0.0204531282405,
+                "x": 120.708213213,
+                "y": 28.3795
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 88,
+                "name": "碧莲镇",
+                "code": "330324106000",
+                "SHAPE_Leng": 0.913500051229,
+                "SHAPE_Area": 0.0160485103304,
+                "x": 120.536815263,
+                "y": 28.3841
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 89,
+                "name": "南城街道",
+                "code": "330324003000",
+                "SHAPE_Leng": 0.702842390852,
+                "SHAPE_Area": 0.00642916582589,
+                "x": 120.675330113,
+                "y": 28.1439
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 90,
+                "name": "东城街道",
+                "code": "330324001000",
+                "SHAPE_Leng": 0.701966885602,
+                "SHAPE_Area": 0.00904696888488,
+                "x": 120.80281465,
+                "y": 28.1831
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 91,
+                "name": "北城街道",
+                "code": "330324002000",
+                "SHAPE_Leng": 0.477290659016,
+                "SHAPE_Area": 0.00572767512491,
+                "x": 120.665455735,
+                "y": 28.2058
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 92,
+                "name": "桥下镇",
+                "code": "330324104000",
+                "SHAPE_Leng": 0.897646065652,
+                "SHAPE_Area": 0.0138700669701,
+                "x": 120.58068155,
+                "y": 28.1825
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 93,
+                "name": "金溪镇",
+                "code": "330324113000",
+                "SHAPE_Leng": 0.509767551545,
+                "SHAPE_Area": 0.00766317837475,
+                "x": 120.483892365,
+                "y": 28.2481
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 94,
+                "name": "沙头镇",
+                "code": "330324111000",
+                "SHAPE_Leng": 0.846398323168,
+                "SHAPE_Area": 0.0175275423035,
+                "x": 120.784964003,
+                "y": 28.2475
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 95,
+                "name": "莒溪镇",
+                "code": "330327125000",
+                "SHAPE_Leng": 0.721535083901,
+                "SHAPE_Area": 0.00604009859863,
+                "x": 120.155055457,
+                "y": 27.5216
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 96,
+                "name": "罗阳镇",
+                "code": "330329100000",
+                "SHAPE_Leng": 1.60948460627,
+                "SHAPE_Area": 0.0392988836757,
+                "x": 119.741322716,
+                "y": 27.5455
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 97,
+                "name": "包垟乡",
+                "code": "330329225000",
+                "SHAPE_Leng": 0.443005748242,
+                "SHAPE_Area": 0.00336909605234,
+                "x": 119.948179941,
+                "y": 27.6718
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 98,
+                "name": "南浦溪镇",
+                "code": "330329111000",
+                "SHAPE_Leng": 0.597265936998,
+                "SHAPE_Area": 0.00560478544879,
+                "x": 119.959219864,
+                "y": 27.6123
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 99,
+                "name": "筱村镇",
+                "code": "330329103000",
+                "SHAPE_Leng": 1.03790361762,
+                "SHAPE_Area": 0.0104740834057,
+                "x": 119.918878058,
+                "y": 27.5644
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 100,
+                "name": "凤垟乡",
+                "code": "330329226000",
+                "SHAPE_Leng": 0.403674465926,
+                "SHAPE_Area": 0.00341307613312,
+                "x": 119.972015111,
+                "y": 27.5186
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 101,
+                "name": "东溪乡",
+                "code": "330329227236",
+                "SHAPE_Leng": 0.455503155642,
+                "SHAPE_Area": 0.00297731232292,
+                "x": 119.959381413,
+                "y": 27.4335
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 102,
+                "name": "柳峰乡",
+                "code": "330329228000",
+                "SHAPE_Leng": 0.376855773616,
+                "SHAPE_Area": 0.0027371805589,
+                "x": 120.002187311,
+                "y": 27.4152
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 103,
+                "name": "雅阳镇",
+                "code": "330329106000",
+                "SHAPE_Leng": 0.668989489951,
+                "SHAPE_Area": 0.00926669312865,
+                "x": 120.062263572,
+                "y": 27.4198
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 104,
+                "name": "雪溪乡",
+                "code": "330329229000",
+                "SHAPE_Leng": 0.391922371151,
+                "SHAPE_Area": 0.00240543367853,
+                "x": 119.940384508,
+                "y": 27.3886
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 105,
+                "name": "龟湖镇",
+                "code": "330329112000",
+                "SHAPE_Leng": 0.44143910771,
+                "SHAPE_Area": 0.00491489171726,
+                "x": 119.807682458,
+                "y": 27.339
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 106,
+                "name": "仕阳镇",
+                "code": "330329107000",
+                "SHAPE_Leng": 0.748007074698,
+                "SHAPE_Area": 0.00757266635422,
+                "x": 119.886398514,
+                "y": 27.3575
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 107,
+                "name": "大安乡",
+                "code": "330329230000",
+                "SHAPE_Leng": 0.340210012218,
+                "SHAPE_Area": 0.00242965972611,
+                "x": 119.874218468,
+                "y": 27.4716
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 108,
+                "name": "三魁镇",
+                "code": "330329109000",
+                "SHAPE_Leng": 0.681988504759,
+                "SHAPE_Area": 0.00618805550505,
+                "x": 119.914655865,
+                "y": 27.4619
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 109,
+                "name": "西旸镇",
+                "code": "330329113000",
+                "SHAPE_Leng": 0.764918757606,
+                "SHAPE_Area": 0.00807590779283,
+                "x": 119.816150495,
+                "y": 27.4143
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 110,
+                "name": "彭溪镇",
+                "code": "330329105000",
+                "SHAPE_Leng": 0.768460532445,
+                "SHAPE_Area": 0.0084596139286,
+                "x": 120.15587213,
+                "y": 27.4519
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 111,
+                "name": "竹里畲族乡",
+                "code": "330329204000",
+                "SHAPE_Leng": 0.456580204156,
+                "SHAPE_Area": 0.00430913434306,
+                "x": 119.77261089,
+                "y": 27.7345
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 112,
+                "name": "曹村镇",
+                "code": "330381128000",
+                "SHAPE_Leng": 0.362020603232,
+                "SHAPE_Area": 0.00334032098361,
+                "x": 120.459125704,
+                "y": 27.7115
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 113,
+                "name": "北麂乡",
+                "code": "330381222000",
+                "SHAPE_Leng": 0.478486546807,
+                "SHAPE_Area": 0.000392940035756,
+                "x": 121.197090638,
+                "y": 27.6254
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 114,
+                "name": "东山街道",
+                "code": "330381004000",
+                "SHAPE_Leng": 0.94125061593,
+                "SHAPE_Area": 0.00204392662153,
+                "x": 120.742741735,
+                "y": 27.7216
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 115,
+                "name": "玉海街道",
+                "code": "330381002000",
+                "SHAPE_Leng": 0.125808727641,
+                "SHAPE_Area": 0.000371041430179,
+                "x": 120.627316103,
+                "y": 27.781
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 116,
+                "name": "安阳街道",
+                "code": "330381001000",
+                "SHAPE_Leng": 0.181956653197,
+                "SHAPE_Area": 0.00119718732827,
+                "x": 120.653136543,
+                "y": 27.7896
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 117,
+                "name": "云周街道",
+                "code": "330381013000",
+                "SHAPE_Leng": 0.324282590871,
+                "SHAPE_Area": 0.00227760652614,
+                "x": 120.573513053,
+                "y": 27.8002
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 118,
+                "name": "锦湖街道",
+                "code": "330381003000",
+                "SHAPE_Leng": 0.266296584193,
+                "SHAPE_Area": 0.00178302580529,
+                "x": 120.621981536,
+                "y": 27.8114
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 119,
+                "name": "潘岱街道",
+                "code": "330381012000",
+                "SHAPE_Leng": 0.314839371905,
+                "SHAPE_Area": 0.00253883583405,
+                "x": 120.593894791,
+                "y": 27.8428
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 120,
+                "name": "陶山镇",
+                "code": "330381120000",
+                "SHAPE_Leng": 0.562665896985,
+                "SHAPE_Area": 0.00808877067246,
+                "x": 120.491744972,
+                "y": 27.8374
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 121,
+                "name": "桐浦镇",
+                "code": "330381126000",
+                "SHAPE_Leng": 0.488427384914,
+                "SHAPE_Area": 0.00444530087534,
+                "x": 120.55320504,
+                "y": 27.8776
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 122,
+                "name": "林川镇",
+                "code": "330381127000",
+                "SHAPE_Leng": 0.550820933879,
+                "SHAPE_Area": 0.00633747665009,
+                "x": 120.447885885,
+                "y": 27.9383
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 123,
+                "name": "芳庄乡",
+                "code": "330381221000",
+                "SHAPE_Leng": 0.362312000762,
+                "SHAPE_Area": 0.00403189885059,
+                "x": 120.363719449,
+                "y": 27.9531
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 124,
+                "name": "湖岭镇",
+                "code": "330381122000",
+                "SHAPE_Leng": 1.04362633854,
+                "SHAPE_Area": 0.0167396282276,
+                "x": 120.352894857,
+                "y": 27.9057
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 125,
+                "name": "上望街道",
+                "code": "330381005000",
+                "SHAPE_Leng": 0.329765679368,
+                "SHAPE_Area": 0.00290147136355,
+                "x": 120.69711754,
+                "y": 27.7366
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 126,
+                "name": "飞云街道",
+                "code": "330381009000",
+                "SHAPE_Leng": 0.315763426909,
+                "SHAPE_Area": 0.00240597809636,
+                "x": 120.606516376,
+                "y": 27.7563
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 127,
+                "name": "莘塍街道",
+                "code": "330381007000",
+                "SHAPE_Leng": 0.295485143709,
+                "SHAPE_Area": 0.00260861600459,
+                "x": 120.711320636,
+                "y": 27.7638
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 128,
+                "name": "平阳坑镇",
+                "code": "330381129000",
+                "SHAPE_Leng": 0.320687096818,
+                "SHAPE_Area": 0.00220158311506,
+                "x": 120.360682695,
+                "y": 27.7513
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 129,
+                "name": "汀田街道",
+                "code": "330381008000",
+                "SHAPE_Leng": 0.30130736892,
+                "SHAPE_Area": 0.00214460582627,
+                "x": 120.716312341,
+                "y": 27.7888
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 130,
+                "name": "马屿镇",
+                "code": "330381116000",
+                "SHAPE_Leng": 1.10477430089,
+                "SHAPE_Area": 0.014059748287,
+                "x": 120.419800537,
+                "y": 27.7766
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 131,
+                "name": "高楼镇",
+                "code": "330381125000",
+                "SHAPE_Leng": 0.992063377663,
+                "SHAPE_Area": 0.0229630672427,
+                "x": 120.269178911,
+                "y": 27.8193
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 132,
+                "name": "塘下镇",
+                "code": "330381101000",
+                "SHAPE_Leng": 0.662046598567,
+                "SHAPE_Area": 0.00794283627573,
+                "x": 120.703917405,
+                "y": 27.8321
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 133,
+                "name": "仙降街道",
+                "code": "330381010000",
+                "SHAPE_Leng": 0.3886584806,
+                "SHAPE_Area": 0.00311336294988,
+                "x": 120.524728676,
+                "y": 27.7755
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 134,
+                "name": "岱岭畲族乡",
+                "code": "330327218000",
+                "SHAPE_Leng": 0.286762976876,
+                "SHAPE_Area": 0.0018532421911,
+                "x": 120.435380043,
+                "y": 27.2921
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 135,
+                "name": "凤阳畲族乡",
+                "code": "330327216000",
+                "SHAPE_Leng": 0.309908134385,
+                "SHAPE_Area": 0.00188208758184,
+                "x": 120.459602623,
+                "y": 27.3394
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 136,
+                "name": "南宋镇",
+                "code": "330327126000",
+                "SHAPE_Leng": 0.312822463612,
+                "SHAPE_Area": 0.00199751058673,
+                "x": 120.396183015,
+                "y": 27.3946
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 137,
+                "name": "矾山镇",
+                "code": "330327116000",
+                "SHAPE_Leng": 0.919808715155,
+                "SHAPE_Area": 0.00896189247993,
+                "x": 120.416886642,
+                "y": 27.3584
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 138,
+                "name": "望里镇",
+                "code": "330327122000",
+                "SHAPE_Leng": 0.33700362763,
+                "SHAPE_Area": 0.00294073710092,
+                "x": 120.509440538,
+                "y": 27.4668
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 139,
+                "name": "藻溪镇",
+                "code": "330327112000",
+                "SHAPE_Leng": 0.616151443682,
+                "SHAPE_Area": 0.00715511737362,
+                "x": 120.445429815,
+                "y": 27.4518
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 140,
+                "name": "钱库镇",
+                "code": "330327104000",
+                "SHAPE_Leng": 0.630259067373,
+                "SHAPE_Area": 0.00574036856972,
+                "x": 120.557793168,
+                "y": 27.4639
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 141,
+                "name": "宜山镇",
+                "code": "330327103000",
+                "SHAPE_Leng": 0.233222382687,
+                "SHAPE_Area": 0.00102264827888,
+                "x": 120.532079768,
+                "y": 27.5151
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 142,
+                "name": "灵溪镇",
+                "code": "330327100000",
+                "SHAPE_Leng": 1.12255618565,
+                "SHAPE_Area": 0.0163374562058,
+                "x": 120.384010108,
+                "y": 27.4987
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 143,
+                "name": "桥墩镇",
+                "code": "330327113000",
+                "SHAPE_Leng": 0.925333395422,
+                "SHAPE_Area": 0.013374707329,
+                "x": 120.278463507,
+                "y": 27.4693
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 144,
+                "name": "炎亭镇",
+                "code": "330327123000",
+                "SHAPE_Leng": 0.463657622991,
+                "SHAPE_Area": 0.00136917712717,
+                "x": 120.657914585,
+                "y": 27.4631
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 145,
+                "name": "金乡镇",
+                "code": "330327107000",
+                "SHAPE_Leng": 0.667370632367,
+                "SHAPE_Area": 0.0047276001555,
+                "x": 120.614463973,
+                "y": 27.4303
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 146,
+                "name": "马站镇",
+                "code": "330327118000",
+                "SHAPE_Leng": 0.785815670342,
+                "SHAPE_Area": 0.0061226188592,
+                "x": 120.481949824,
+                "y": 27.2656
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 147,
+                "name": "大渔镇",
+                "code": "330327124000",
+                "SHAPE_Leng": 0.420815740971,
+                "SHAPE_Area": 0.00137182658637,
+                "x": 120.600959571,
+                "y": 27.3907
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 148,
+                "name": "霞关镇",
+                "code": "330327127000",
+                "SHAPE_Leng": 0.837650636936,
+                "SHAPE_Area": 0.00266831141724,
+                "x": 120.494362046,
+                "y": 27.1953
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 149,
+                "name": "沿浦镇",
+                "code": "330327128000",
+                "SHAPE_Leng": 0.718916434703,
+                "SHAPE_Area": 0.00332893157542,
+                "x": 120.439410327,
+                "y": 27.2213
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 150,
+                "name": "龙港镇",
+                "code": "330327101000",
+                "SHAPE_Leng": 1.11585862156,
+                "SHAPE_Area": 0.0136224367592,
+                "x": 120.570381542,
+                "y": 27.5361
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 151,
+                "name": "赤溪镇",
+                "code": "330327117000",
+                "SHAPE_Leng": 1.13205486505,
+                "SHAPE_Area": 0.00784819962257,
+                "x": 120.514629409,
+                "y": 27.3587
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 152,
+                "name": "天河街道",
+                "code": "330371009000",
+                "SHAPE_Leng": 0.414041107785,
+                "SHAPE_Area": 0.0020223602567,
+                "x": 120.781556096,
+                "y": 27.8527
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 153,
+                "name": "山福镇",
+                "code": "330302105000",
+                "SHAPE_Leng": 0.52355783902,
+                "SHAPE_Area": 0.00552230504556,
+                "x": 120.458078702,
+                "y": 28.13
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 154,
+                "name": "仙岩街道",
+                "code": "330304012000",
+                "SHAPE_Leng": 0.60056609308,
+                "SHAPE_Area": 0.00337618650218,
+                "x": 120.681765193,
+                "y": 27.8795
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 155,
+                "name": "丽岙街道",
+                "code": "330304011000",
+                "SHAPE_Leng": 0.324427400601,
+                "SHAPE_Area": 0.00318101289007,
+                "x": 120.631099413,
+                "y": 27.9039
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 156,
+                "name": "茶山街道",
+                "code": "330304004000",
+                "SHAPE_Leng": 0.348613914561,
+                "SHAPE_Area": 0.00274621023498,
+                "x": 120.711334245,
+                "y": 27.9175
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 157,
+                "name": "南白象街道",
+                "code": "330304003000",
+                "SHAPE_Leng": 0.203330063593,
+                "SHAPE_Area": 0.00116196207048,
+                "x": 120.675693577,
+                "y": 27.94
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 158,
+                "name": "三垟街道",
+                "code": "330304007000",
+                "SHAPE_Leng": 0.200099853812,
+                "SHAPE_Area": 0.00115931711637,
+                "x": 120.705837341,
+                "y": 27.9617
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 159,
+                "name": "潘桥街道",
+                "code": "330304010000",
+                "SHAPE_Leng": 0.508191330569,
+                "SHAPE_Area": 0.00530064373713,
+                "x": 120.553708519,
+                "y": 27.9353
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 160,
+                "name": "梧田街道",
+                "code": "330304002000",
+                "SHAPE_Leng": 0.356549813397,
+                "SHAPE_Area": 0.00204098982275,
+                "x": 120.657561759,
+                "y": 27.9584
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 161,
+                "name": "娄桥街道",
+                "code": "330304005000",
+                "SHAPE_Leng": 0.297965552873,
+                "SHAPE_Area": 0.00213979827179,
+                "x": 120.608084042,
+                "y": 27.9582
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 162,
+                "name": "新桥街道",
+                "code": "330304006000",
+                "SHAPE_Leng": 0.182615005652,
+                "SHAPE_Area": 0.000699442768524,
+                "x": 120.624454781,
+                "y": 27.9816
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 163,
+                "name": "南郊街道",
+                "code": "330302031000",
+                "SHAPE_Leng": 0.119641807155,
+                "SHAPE_Area": 0.00059244993588,
+                "x": 120.651798419,
+                "y": 27.9876
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 164,
+                "name": "蒲州街道",
+                "code": "330303002000",
+                "SHAPE_Leng": 0.148407786252,
+                "SHAPE_Area": 0.000758062473964,
+                "x": 120.726853117,
+                "y": 27.9834
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 165,
+                "name": "南汇街道",
+                "code": "330302025000",
+                "SHAPE_Leng": 0.132254259388,
+                "SHAPE_Area": 0.000783179767256,
+                "x": 120.688230343,
+                "y": 27.9927
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 166,
+                "name": "瞿溪街道",
+                "code": "330304008000",
+                "SHAPE_Leng": 0.372476603023,
+                "SHAPE_Area": 0.00316783060472,
+                "x": 120.508906274,
+                "y": 27.9771
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 167,
+                "name": "景山街道",
+                "code": "330304001000",
+                "SHAPE_Leng": 0.140937926655,
+                "SHAPE_Area": 0.000352482688847,
+                "x": 120.627550282,
+                "y": 27.9993
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 168,
+                "name": "蒲鞋市街道",
+                "code": "330302030000",
+                "SHAPE_Leng": 0.0853774468534,
+                "SHAPE_Area": 0.00031840583619,
+                "x": 120.681112886,
+                "y": 28.0079
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 169,
+                "name": "大南街道",
+                "code": "330302029000",
+                "SHAPE_Leng": 0.0671195997068,
+                "SHAPE_Area": 0.000213891977172,
+                "x": 120.659208764,
+                "y": 28.0057
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 170,
+                "name": "广化街道",
+                "code": "330302032000",
+                "SHAPE_Leng": 0.103833221186,
+                "SHAPE_Area": 0.000372749895381,
+                "x": 120.625077828,
+                "y": 28.015
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 171,
+                "name": "滨江街道",
+                "code": "330302024000",
+                "SHAPE_Leng": 0.205752407564,
+                "SHAPE_Area": 0.00165103206687,
+                "x": 120.709427972,
+                "y": 28.0142
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 172,
+                "name": "五马街道",
+                "code": "330302006000",
+                "SHAPE_Leng": 0.104157555529,
+                "SHAPE_Area": 0.000538382055664,
+                "x": 120.660728295,
+                "y": 28.0229
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 173,
+                "name": "松台街道",
+                "code": "330302026000",
+                "SHAPE_Leng": 0.145641978836,
+                "SHAPE_Area": 0.000590772563825,
+                "x": 120.639615512,
+                "y": 28.0185
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 174,
+                "name": "双屿街道",
+                "code": "330302027000",
+                "SHAPE_Leng": 0.178774215956,
+                "SHAPE_Area": 0.00114625886493,
+                "x": 120.598548892,
+                "y": 28.0179
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 175,
+                "name": "郭溪街道",
+                "code": "330304009000",
+                "SHAPE_Leng": 0.509938338687,
+                "SHAPE_Area": 0.00393910618992,
+                "x": 120.545634405,
+                "y": 28.0057
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 176,
+                "name": "丰门街道",
+                "code": "330302033000",
+                "SHAPE_Leng": 0.177519450526,
+                "SHAPE_Area": 0.00119436844567,
+                "x": 120.576759279,
+                "y": 28.0387
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 177,
+                "name": "泽雅镇",
+                "code": "330304108000",
+                "SHAPE_Leng": 0.84583176529,
+                "SHAPE_Area": 0.0134719099695,
+                "x": 120.41087599,
+                "y": 28.0259
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 178,
+                "name": "仰义街道",
+                "code": "330302028000",
+                "SHAPE_Leng": 0.416253644389,
+                "SHAPE_Area": 0.00289484259768,
+                "x": 120.561146964,
+                "y": 28.0652
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 179,
+                "name": "藤桥镇",
+                "code": "330302102000",
+                "SHAPE_Leng": 0.738700143769,
+                "SHAPE_Area": 0.00903057678034,
+                "x": 120.49063231,
+                "y": 28.0832
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 180,
+                "name": "永兴街道",
+                "code": "330303004000",
+                "SHAPE_Leng": 0.263756555259,
+                "SHAPE_Area": 0.0025635131538,
+                "x": 120.844266494,
+                "y": 27.875
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 181,
+                "name": "海滨街道",
+                "code": "330303003000",
+                "SHAPE_Leng": 0.288173773308,
+                "SHAPE_Area": 0.00315395518526,
+                "x": 120.86147254,
+                "y": 27.923
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 182,
+                "name": "沙城街道",
+                "code": "330371008000",
+                "SHAPE_Leng": 0.320482284717,
+                "SHAPE_Area": 0.00160530880616,
+                "x": 120.81664488,
+                "y": 27.8573
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 183,
+                "name": "星海街道",
+                "code": "330371011000",
+                "SHAPE_Leng": 0.149901709025,
+                "SHAPE_Area": 0.000955832145032,
+                "x": 120.80624593,
+                "y": 27.8602
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 184,
+                "name": "海城街道",
+                "code": "330371005000",
+                "SHAPE_Leng": 0.262108196256,
+                "SHAPE_Area": 0.00287426588023,
+                "x": 120.782889972,
+                "y": 27.819
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 185,
+                "name": "永中街道",
+                "code": "330303001000",
+                "SHAPE_Leng": 0.386786972955,
+                "SHAPE_Area": 0.00405779140824,
+                "x": 120.788961697,
+                "y": 27.9149
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 186,
+                "name": "瑶溪街道",
+                "code": "330303007000",
+                "SHAPE_Leng": 0.450722041112,
+                "SHAPE_Area": 0.00343026663292,
+                "x": 120.793062265,
+                "y": 27.9527
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 187,
+                "name": "状元街道",
+                "code": "330303006000",
+                "SHAPE_Leng": 0.262284893784,
+                "SHAPE_Area": 0.00164173648635,
+                "x": 120.746588228,
+                "y": 27.9638
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "OBJECTID": 188,
+                "name": "七都街道",
+                "code": "330302023000",
+                "SHAPE_Leng": 0.190087430312,
+                "SHAPE_Area": 0.00203186090593,
+                "x": 120.76538302,
+                "y": 28.0019
+            }
+        }
+    ]
+}

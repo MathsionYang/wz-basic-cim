@@ -1,0 +1,154 @@
+[
+  {
+    "id": 4,
+    "label": "白模",
+    "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ/rest/realspace/datas/RES_YJ_Z_EraseMax_Model@Baimo/config",
+    "bgcolor": "#cecdcd",
+    "legendImg": "",
+    "legendStatus": false
+  },
+  {
+    "id": 30,
+    "label": "2012精模",
+    "url": "http://172.20.83.223:8098/iserver/services/3D-MAX_LuCheng/rest/realspace/datas/%E5%B8%82%E5%8C%BA_2012/config",
+    "dataurl": "http://172.20.83.223:8098/iserver/services/data-ChengShiJingMo/rest/data",
+    "bgcolor": "",
+    "legendImg": "",
+    "legendStatus": false
+  },
+  {
+    "id": 31,
+    "label": "2017精模",
+    "url": "http://172.20.83.223:8098/iserver/services/3D-MAX_LuCheng/rest/realspace/datas/%E5%B8%82%E5%8C%BA_2017/config",
+    "dataurl": "http://172.20.83.223:8098/iserver/services/data-ChengShiJingMo/rest/data",
+    "bgcolor": "",
+    "legendImg": "",
+    "legendStatus": false
+  },
+  {
+    "id": 40,
+    "label": "山区村落自然灾害易发区",
+    "url": "http://10.36.234.83:8090/iserver/services/map-FXFX_DATA/rest/maps/FXFX_YJ_ComprehensiveScore",
+    "bgcolor": "",
+    "legendImg": "",
+    "legendStatus": false
+  },
+  {
+    "id": 20,
+    "label": "倾斜摄影",
+    "children": [
+      {
+        "id": 201,
+        "label": "永嘉鹤盛镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_HESHENGZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 202,
+        "label": "永嘉大若岩镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_DARUOYANZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 203,
+        "label": "永嘉枫林镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_FENGLINZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 204,
+        "label": "永嘉界坑乡",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_JIEKENGX/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 205,
+        "label": "永嘉桥下镇1",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_QIAOXIAZ1/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 206,
+        "label": "永嘉桥下镇2",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_QIAOXIAZ2/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 207,
+        "label": "永嘉溪下乡",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_XIXIAX/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 208,
+        "label": "永嘉沙头镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_SHATOUZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 209,
+        "label": "永嘉巽宅镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_XUNZHAIZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 210,
+        "label": "永嘉岩头镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_YANTOUZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 211,
+        "label": "永嘉岩坦镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_YANTANZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 213,
+        "label": "永嘉水云溪",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_SHUIYUNX/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 212,
+        "label": "永嘉碧莲镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_BILIANZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      },
+      {
+        "id": 214,
+        "label": "永嘉桥头镇",
+        "url": "http://10.36.234.83:8098/iserver/services/3D-SW_YJ_QX/rest/realspace/datas/QINGXIE_YJ_QIAOTOUZ/config",
+        "dataurl": "http://10.36.234.83:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
+        "legendImg": "",
+        "legendStatus": false
+      }
+    ]
+  }
+]

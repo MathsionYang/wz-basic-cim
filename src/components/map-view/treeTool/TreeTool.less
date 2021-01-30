@@ -1,0 +1,230 @@
+.coverage {
+  position: absolute;
+  bottom  : 40px;
+  left    : 50px;
+
+  .treeFilterInput {
+    position       : absolute;
+    right          : 25px;
+    top            : 12px;
+    width          : 40%;
+    height         : 40px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+
+    .el-input__inner {
+      background: none;
+      border    : 1px solid #449bf6;
+      color     : white;
+    }
+  }
+
+  .layerTreeContainer {
+    height  : calc(100% - 110px);
+    overflow: hidden auto;
+
+    .el-tree-node__expand-icon {
+      color    : #449bf6;
+      font-size: 18px;
+    }
+
+    .el-tree-node__expand-icon.is-leaf {
+      color: transparent;
+    }
+
+    .el-tree-node__label {
+      color: white;
+      text-shadow: #449bf6 1px 0 0, #449bf6 0 1px 0, #449bf6 -1px 0 0,
+        #449bf6 0 -1px 0;
+    }
+
+    .el-tree-node:focus>.el-tree-node__content {
+      background: none;
+    }
+
+    .el-tree-node__content:hover {
+      background: none;
+    }
+
+    .el-checkbox__input.is-checked .el-checkbox__inner,
+    .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+      background-color: #0adffa;
+      border-color    : #0adffa;
+    }
+
+    .el-checkbox__inner::after {
+      border     : 1px solid black;
+      border-left: 0;
+      border-top : 0;
+    }
+
+    .el-checkbox__inner::before {
+      background-color: black !important;
+    }
+  }
+
+  .el-popover {
+    height         : 600px;
+    background     : url("../../../common/images/popover.png") no-repeat;
+    background-size: 100% 100%;
+    border         : none !important;
+    bottom         : 16px;
+    left           : 30px;
+
+    .el-popover__title {
+      margin-bottom: 10px;
+      padding      : 10px;
+      font-size    : 16px;
+      border-bottom: 1px solid #449bf6;
+      color        : white;
+      font-size    : 18px;
+      line-height  : 20px;
+      text-shadow  : #449bf6 1px 0 0, #449bf6 0 1px 0, #449bf6 -1px 0 0,
+        #449bf6 0 -1px 0;
+    }
+  }
+
+  .el-tree {
+    background: none;
+  }
+
+  .custom-tree-node {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
+    color: #fffbf0;
+    .icon-search {
+      width: 0.16rem;
+      height: 0.16rem;
+      display: block;
+      .bg-image('../../../common/images/search2');
+      margin-left: 0.1rem;
+    }
+  }
+
+  .searchBox {
+    .el-popover {
+      background: none;
+      padding: 0;
+      height: 42vh;
+    }
+    .result-wrapper {
+      .bg-image('../../../common/images/search-bg');
+      width: 99%;
+      height  : calc(100% - 40px);
+      padding: 10px 10px 10px 0;
+      .result-list{
+        height: 100%;
+        overflow-y: auto;
+        .result-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 5px 0 5px 15px;
+          .left {
+            display: flex;
+            flex-direction: column;
+            .name {
+              padding-left: 0.15rem;
+              color: #fff;
+              font-size: 14px;
+            }
+            .address {
+              font-size: 12px;
+              color: #cbcbcb;
+              .icon-position {
+                display: inline-block;
+                width: 0.12rem;
+                height: 0.12rem;
+                vertical-align: middle;
+                .bg-image('../../../common/images/position');
+              }
+            }
+          }
+          .right {
+            position: relative;
+            input[type=checkbox]{
+              width: 16px;
+              height: 16px;
+              background-color: #fff;
+              appearance:none;
+              -webkit-appearance:none;
+              outline: none;
+            }
+            input[type=checkbox]:checked{
+              background: url("../../../common/images/checked.png")no-repeat center;
+              background-size: 16px;
+            }
+          }
+        }
+        .checked {
+          .bg-image('../../../common/images/search-checked');
+          .icon-position {
+            .bg-image('../../../common/images/position-sel') !important;
+          }
+        }
+      }
+    }
+  }
+
+  .searchHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 99%;
+    margin: 5px 0;
+    .bg-image('../../../common/images/search-input');
+    .searchFilterInput {
+      width          : 80%;
+      .el-input__inner {
+        background: none;
+        border    : none;
+        color     : white;
+      }
+    }
+    .button-container {
+      width: 30%;
+      display: flex;
+      justify-content: space-around;
+      .button-item {
+        position: relative;
+        flex: 1;
+        &:after {
+          content: " ";
+          position: absolute;
+          right: 3px;
+          top: 50%;
+          width: 1px;
+          height: 0.15rem;
+          bottom: 0;
+          border-right: 1px solid rgba(42, 203, 254, 0.55);
+          color: rgba(42, 203, 254, 0.55);
+          transform-origin: 100% 0;
+          transform: scaleX(0.5);
+          transform: translateY(-50%);
+        }
+        &:last-child {
+          &:after {
+            display: none;
+          }
+        }
+      }
+      .icon-common {
+        display: block;
+        width: 0.2rem;
+        height: 0.2rem;
+      }
+      .icon-clear {
+        .bg-image('../../../common/images/clear');
+      }
+      .icon-back {
+        .bg-image('../../../common/images/back');
+      }
+      .icon-search {
+        .bg-image('../../../common/images/search2');
+      }
+    }
+  }
+}
