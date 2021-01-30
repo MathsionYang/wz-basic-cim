@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['exports', './Check-70bec281', './Cartographic-fe4be337', './Cartesian2-85064f09', './BoundingSphere-775c5788', './OrientedBoundingBox-64cb80e5'], function (exports, Check, Cartographic, Cartesian2, BoundingSphere, OrientedBoundingBox) { 'use strict';
+define(['exports', './Check-70bec281', './Cartographic-fe4be337', './Cartesian2-85064f09', './BoundingSphere-8f8a682c', './OrientedBoundingBox-64cb80e5'], function (exports, Check, Cartographic, Cartesian2, BoundingSphere, OrientedBoundingBox) { 'use strict';
 
     /**
          * @private

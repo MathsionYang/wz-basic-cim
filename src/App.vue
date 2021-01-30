@@ -1,17 +1,13 @@
 <template>
   <div id="app">
-    <m-header></m-header>
     <loading v-show="isLoading"></loading>
     <div class="content">
-      <!--      <keep-alive>-->
       <router-view />
-      <!--      </keep-alive>-->
     </div>
   </div>
 </template>
 
 <script>
-import MHeader from "components/m-header/m-header";
 import Loading from "components/loading/loading";
 import { getUserInfo } from "./api/public/public";
 import { mapGetters, mapActions, mapState } from "vuex";
@@ -20,49 +16,39 @@ import category from "mock/category";
 export default {
   name: "App",
   components: {
-    MHeader,
-    Loading
+    // MHeader,
+    Loading,
   },
   data() {
     return {
-      nameList: []
+      nameList: [],
     };
   },
   computed: {
     ...mapGetters(["userInfo"]),
     ...mapState({
-      isLoading: "isLoading"
-    })
+      isLoading: "isLoading",
+    }),
   },
-  mounted() {
-    getUserInfo().then(data => {
-      if (data.districtName !== this.userInfo.districtName) {
-        this.$router.push("/map");
-          //window.location.reload()
-      }
-      this.SetUserInfo(data);
-      document.getElementsByTagName("title")[0].innerText =
-        "温州市CIM基础平台";
-    });
-    // // 下面跟我没关系
-    getRoleCategory().then(res => {
-      // this.getName(category);
-      this.getName(res);
-      this.SetNameList(this.nameList);
-    });
+  created() {
+    // 监听父窗口事件
+    window.addEventListener(
+      "message",
+      (e) => {
+        let data = e.data;
+        if (!data.layer) return;
+        console.log("message", e);
+        window._POST_MESSAGE_ = data.layer;
+        this.$bus.$emit("source-message");
+      },
+      false
+    );
   },
+  mounted() {},
   methods: {
     ...mapActions(["SetUserInfo", "changeLoad", "SetResize"]),
     ...mapActions("map", ["SetNameList"]),
-    getName(arr) {
-      if (arr && arr.length) {
-        for (let i = 0; i < arr.length; i++) {
-          this.nameList.push(arr[i].name);
-          this.getName(arr[i].children);
-        }
-      }
-    }
-  }
+  },
 };
 </script>
 
@@ -74,9 +60,10 @@ export default {
 * {
   box-sizing: border-box;
   font-family: "Microsoft YaHei";
+  user-select: none;
 }
 body {
-  font-size: 0.16rem;
+  font-size: 14px;
 }
 html,
 body {
@@ -91,11 +78,11 @@ body {
 #app {
   width: 100%;
   height: 100%;
-  .bg-image("common/images/bg");
+  // .bg-image("common/images/bg");
 }
 #app > .content {
   position: absolute;
-  top: 0.5rem;
+  top: 0;
   bottom: 0;
   width: 100%;
   z-index: 9;
@@ -105,7 +92,7 @@ body {
   }
 }
 .water-detail {
-  border: 1px solid #40c7ff;
+  border: 1px solid #4099ff;
   /deep/.el-picker-panel__body-wrapper {
     background-color: #0d182c;
   }
@@ -202,5 +189,13 @@ body {
     background: rgba(0, 0, 0, 0);
     color: #159bfd;
   }
+}
+// transform css
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
 }
 </style>

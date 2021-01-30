@@ -210,12 +210,12 @@ export default {
   }
   .map-around {
     opacity: 1;
-    width: 3.3rem;
+    width: 3.6rem;
     position: absolute;
     min-height: 1rem;
     max-height: calc(100% - 0.1rem);
     right: 4rem;
-    top: 0.6rem;
+    top: 0.05rem;
     z-index: 1;
     background: rgba(38, 104, 159, 0.95);
     padding: 0.1rem;

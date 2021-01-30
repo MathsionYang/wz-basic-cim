@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['exports', './when-8d13db60', './Check-70bec281', './Cartographic-fe4be337', './Cartesian2-85064f09', './BoundingSphere-775c5788'], function (exports, when, Check, Cartographic, Cartesian2, BoundingSphere) { 'use strict';
+define(['exports', './when-8d13db60', './Check-70bec281', './Cartographic-fe4be337', './Cartesian2-85064f09', './BoundingSphere-8f8a682c'], function (exports, when, Check, Cartographic, Cartesian2, BoundingSphere) { 'use strict';
 
     /**
          * A bounding rectangle given by a corner, width and height.

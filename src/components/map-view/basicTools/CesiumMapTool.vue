@@ -60,7 +60,7 @@ export default {
       ],
       toolType: "空间测量",
       // cesium Object
-      
+      viewer: undefined,
       handlerDis: undefined,
       handlerArea: undefined,
       handlerHeight: undefined,
@@ -68,18 +68,19 @@ export default {
     };
   },
   created() {
+    this.viewer = window.earth;
     this.handlerDis = new Cesium.MeasureHandler(
-      window.earth,
+      this.viewer,
       Cesium.MeasureMode.Distance,
       this.clampMode
     );
     this.handlerArea = new Cesium.MeasureHandler(
-      window.earth,
+      this.viewer,
       Cesium.MeasureMode.Area,
       this.clampMode
     );
     this.handlerHeight = new Cesium.MeasureHandler(
-      window.earth,
+      this.viewer,
       Cesium.MeasureMode.DVH
     );
   },
@@ -87,6 +88,7 @@ export default {
     this.eventRegsiter();
   },
   beforeDestroy() {
+    this.viewer = undefined;
     this.handlerDis = undefined;
     this.handlerArea = undefined;
     this.handlerHeight = undefined;
@@ -105,11 +107,11 @@ export default {
       });
       that.handlerDis.activeEvt.addEventListener(function (isActive) {
         if (isActive == true) {
-          window.earth.enableCursorStyle = false;
-          window.earth._element.style.cursor = "";
+          that.viewer.enableCursorStyle = false;
+          that.viewer._element.style.cursor = "";
           $("body").removeClass("measureCur").addClass("measureCur");
         } else {
-          window.earth.enableCursorStyle = true;
+          that.viewer.enableCursorStyle = true;
           $("body").removeClass("measureCur");
         }
       });
@@ -124,11 +126,11 @@ export default {
       });
       that.handlerArea.activeEvt.addEventListener(function (isActive) {
         if (isActive == true) {
-          window.earth.enableCursorStyle = false;
-          window.earth._element.style.cursor = "";
+          that.viewer.enableCursorStyle = false;
+          that.viewer._element.style.cursor = "";
           $("body").removeClass("measureCur").addClass("measureCur");
         } else {
-          window.earth.enableCursorStyle = true;
+          that.viewer.enableCursorStyle = true;
           $("body").removeClass("measureCur");
         }
       });
@@ -151,11 +153,11 @@ export default {
       });
       that.handlerHeight.activeEvt.addEventListener(function (isActive) {
         if (isActive == true) {
-          window.earth.enableCursorStyle = false;
-          window.earth._element.style.cursor = "";
+          that.viewer.enableCursorStyle = false;
+          that.viewer._element.style.cursor = "";
           $("body").removeClass("measureCur").addClass("measureCur");
         } else {
-          window.earth.enableCursorStyle = true;
+          that.viewer.enableCursorStyle = true;
           $("body").removeClass("measureCur");
         }
       });

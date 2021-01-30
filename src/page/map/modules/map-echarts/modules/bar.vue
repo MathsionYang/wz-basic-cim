@@ -5,7 +5,7 @@
         <li :key="index" v-for="(item,index) in myData">
           <div>
             <span>{{item.key}}</span>
-            <div @click.prevent="jump(item,index)" :class="{'active':activeIndex===index}">
+            <div @click="jump(item,index)" :class="{'active':activeIndex===index}">
               <b></b>
               <div>
                 <span :style="{'width': myDataMax>0?item.count/myDataMax*100 +'%':0}"></span>
@@ -50,7 +50,7 @@ export default {
   computed: {
     myData() {
       const defaultData = [...this.data]
-/*       if (this.city) {
+      if (this.city) {
         const allData = [
           { key: '鹿城区', count: 0 },
           { key: '龙湾区', count: 0 },
@@ -79,7 +79,7 @@ export default {
             defaultData.push(allData[i])
           }
         }
-      } */
+      }
       // for (let i = 0; i < defaultData.length - 1; i++) {
       //   for (let j = 0; j < defaultData.length - 1 - i; j++) {
       //     if (defaultData[j].count > defaultData[j + 1].count) {
@@ -114,7 +114,7 @@ export default {
         } else {
           // this.city 为true是温州市
           // 如果是区县
-         
+          if (!this.city) {
             const wrapper = parseInt(window.getComputedStyle(this.$refs.wrapper).height)
             const ul = parseInt(window.getComputedStyle(this.$refs.ul).height)
             if (ul < wrapper) {
@@ -128,7 +128,9 @@ export default {
                 }, 100)
               })
             }
-         
+          } else {
+            this.isFull = true
+          }
         }
       })
     },
@@ -147,9 +149,7 @@ export default {
         this.$emit('change', data)
       } else {
         this.activeIndex = -1
-        this.$emit('change', {key:''})
-        //this.$emit('itemBarClick', { key: '' })
-        //this.$emit('itemClick',{key:''})
+        this.$emit('change', { key: '' })
       }
       if (!bool) {
         let flag = {}
@@ -165,9 +165,8 @@ export default {
         }
       }
     },
-    //自动滚动效果
     scrollStartHandler() {
-      /* if (!this.scrollFlag) {
+      if (!this.scrollFlag) {
         this.scrollFlag = setInterval(() => {
           const dom = $('#' + this.myUuid)[0]
           this.scrollTop += 1
@@ -177,7 +176,7 @@ export default {
             this.scrollTop = 0
           }
         }, 100)
-      } */
+      }
     },
     scrollDestroyHandler() {
       if (this.scrollFlag) {
@@ -230,7 +229,6 @@ export default {
       font-size: 0.16rem;
       position: relative;
       height: 0.26rem;
-      margin-top: 10px;
       > div {
         position: relative;
         top: 50%;
@@ -295,7 +293,7 @@ export default {
       }
     }
     &.full {
-     /*  height: 100%; */
+      height: 100%;
       display: flex;
       flex-direction: column;
       > li {

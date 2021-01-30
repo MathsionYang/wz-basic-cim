@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographic-fe4be337', './Cartesian2-85064f09', './AttributeCompression-84a90a13', './createTaskProcessorWorker'], function (when, Check, _Math, Cartographic, Cartesian2, AttributeCompression, createTaskProcessorWorker) { 'use strict';
+define(['./when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographic-fe4be337', './createTaskProcessorWorker', './Cartesian2-85064f09', './AttributeCompression-84a90a13'], function (when, Check, _Math, Cartographic, createTaskProcessorWorker, Cartesian2, AttributeCompression) { 'use strict';
 
     var maxShort = 32767;
 

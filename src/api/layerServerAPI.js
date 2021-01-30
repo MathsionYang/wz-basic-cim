@@ -51,3 +51,80 @@ export const getMedicalList = () => {
 export const getBayonetList = () => {
   return getWzKindsData(8);
 };
+
+/**
+ * 获取站点各类数据
+ */
+export const getStationList = () => {
+  return getWzKindsData(9);
+};
+
+/**
+ * 获取景点人流量数据
+ */
+export const getTourPointList = () => {
+  return getWzKindsData(11)
+};
+
+/**
+ * 获取全市总览数据
+ */
+export const fetchWzOverviewData = () => {
+  return getWzKindsData(4)
+}
+
+/**
+ * 获取全市人口数据
+ */
+export const fetchWzPeopleData = () => {
+  return getWzKindsData(10)
+}
+
+/**
+ * 获取全市医疗数据
+ */
+export const fetchMedicalData = () => {
+  return getWzKindsData(2)
+};
+
+/**
+ * 获取全市旅游数据
+ */
+export const fetchTourData = () => {
+  return getWzKindsData(6)
+};
+
+/**
+ * 获取全市应急数据
+ */
+export const fetchEmergencyData = () => {
+  return getWzKindsData(12)
+};
+
+/**
+ * 获取全市资源数据
+ */
+export const fetchSourceData = () => {
+  return getWzKindsData(3)
+};
+
+/**
+ * 获取全市基础数据
+ */
+export const fetchBasicData = () => {
+  return getWzKindsData(7)
+};
+
+/**
+ * 获取全市文化数据
+ */
+export const fetchCultureData = () => {
+  return getWzKindsData(5)
+};
+
+/**
+ * 获取全市交通数据
+ */
+export const fetchWzTrafficData = () => {
+  return getWzKindsData(1)
+}

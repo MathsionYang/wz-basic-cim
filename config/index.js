@@ -1,10 +1,10 @@
 /*
  * @Author: eds
  * @Date: 2020-07-01 15:22:04
- * @LastEditTime: 2020-07-21 08:58:47
+ * @LastEditTime: 2020-08-31 09:48:42
  * @LastEditors: eds
  * @Description:
- * @FilePath: \wzsjjt-bd-visual\config\index.js
+ * @FilePath: \wz-city-culture-tour\config\index.js
  */
 "use strict";
 // Template version: 1.3.1
@@ -19,7 +19,6 @@ module.exports = {
     assetsPublicPath: "/",
     proxyTable: {
       "/": {
-        //target:"http://10.36.198.17:9000",
         target: "http://172.20.83.195:9000",
         changeOrigin: true,
         pathRewrite: {

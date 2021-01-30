@@ -24,7 +24,7 @@
           align="center"
           :prop="areaProp"
           :label="currentOnePoint.showHeader&&currentOnePoint.showHeader[0].toLowerCase()"
-          :width="userInfo.district && userInfo.district.length>4?130:120"
+          :width="userInfo.district && userInfo.district.length>4?85:70"
           header-align="center"
         ></el-table-column>
         <el-table-column
@@ -242,14 +242,8 @@ export default {
       }
     },
     rowClick(data) {
-      if(this.currentOnePoint.mapPopField==undefined){
-        data._mapPopField = this.currentOnePoint.allCheckData[0].showField;
-        data._mapPopName = this.currentOnePoint.allCheckData[0].showHeader;
-        
-      }else{
       data._mapPopField = this.currentOnePoint.mapPopField;
       data._mapPopName = this.currentOnePoint.mapPopName;
-      }
       this.$emit("rowClick", data);
     },
     clearCurrentTableRow() {

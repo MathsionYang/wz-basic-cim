@@ -1,186 +1,122 @@
+/*
+ * @Author: eds
+ * @Date: 2020-08-11 20:39:44
+ * @LastEditTime: 2020-09-14 16:38:02
+ * @LastEditors: eds
+ * @Description:
+ * @FilePath: \wz-city-culture-tour\src\config\server\mapConfig.js
+ */
 export const ServiceUrl = {
-  // 矢量底图服务
-  vectorMap:
-    "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJSGBZB2019CGCS2000/rest/maps/YJ_SG_BZB_2019_CGCS2000",
-  // 大数据底图服务
-  bigDataMap:
-    "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJDSJCGCS2000/rest/maps/YJ_DSJ_CGCS2000",
-  // 影像底图服务
-  image2019Map:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000",
-  // 影像底图服务
-  image2018Map:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YX2018CGC2000/rest/maps/YX_2018_CGC2000",
-  // 影像底图服务
-  image2017Map:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-Layers/rest/maps/Layers",
-  // 影像底图服务
-  image2014Map:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YX2014CGC2000/rest/maps/YX_2014_CGC2000",
-  // 影像底图服务
-  image2012Map:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-Layers2/rest/maps/Layers",
-  // 全球图
-  globalMap:
-    //"http://10.36.245.203:8090/iserver/services/map-agscachev2-QQXZQ/rest/maps/QQXZQ",
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJDSJCGCS2000/rest/maps/YJ_DSJ_CGCS2000",
-  // 中国地图
-  ZGMap:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-DSJZG/rest/maps/DSJ_ZG",
-  // 温州地图
-  WZMap:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJDSJCGCS2000/rest/maps/YJ_DSJ_CGCS2000",
-  // 实时降雨插值图
-  hourUrl_0:
-    "http://10.36.234.83:8090/iserver/services/map-Weather_Pr/rest/maps/chazhi",
-  // 1小时降雨预报网格
-  hourUrl_1:
-    "http://10.36.234.83:8090/iserver/services/map-Weather_Pr/rest/maps/Pr01%4010.36.234.85_Weather_RainFall",
-  // 3小时降雨预报网格
-  hourUrl_3:
-    "http://10.36.234.83:8090/iserver/services/map-Weather_Pr/rest/maps/Pr03%4010.36.234.85_Weather_RainFall",
-  // 6小时降雨预报网格
-  hourUrl_6:
-    "http://10.36.234.83:8090/iserver/services/map-Weather_Pr/rest/maps/Pr06%4010.36.234.85_Weather_RainFall",
-  // 超图分析服务地址
-  SpatialAnalyst:
-    "http://172.20.83.218:8090/iserver/services/spatialAnalysis-test/restjsr/spatialanalyst",
-  // 克里金插值 1小时
-  klj_1_Url:
-    "http://10.36.234.83:8090/iserver/services/map-kljcz_1/rest/maps/klj01@10.36.234.85_klj_RainFall",
-  // 克里金插值 3小时
-  klj_3_Url:
-    "http://10.36.234.83:8090/iserver/services/map-kljcz_3/rest/maps/klj03",
-  // 克里金插值 6小时
-  klj_6_Url:
-    "http://10.36.234.83:8090/iserver/services/map-kljcz_6/rest/maps/klj06",
-  // 永嘉县范围层
-  YJMap: "http://10.36.234.83:8090/iserver/services/map-XZQH/rest/maps/yjx",
-  // 温州地形全市域dem
-  WZDem:
-    "http://172.20.83.223:8098/iserver/services/3D-dem/rest/realspace/datas/dem@2018dem",
-  // 温州白模
-  WZBaimo:
-    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb/rest/realspace/datas/RES_LC_Model@baimo/config",
-  // 三维影像地图2019
-  // SWImage: 'http://10.36.234.83:8098/iserver/services/3D-YX_2019_SW/rest/realspace/datas/YX_2019_SW',
+  //  温州全市域白模
+  WZBaimo: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-RESPYQSY/rest/realspace/datas/RES_PY_QSY/config",
+  //  夜间模型
+  WZBaimo_OBJ: [
+    {
+      KEY: 'WZBaimo_POINT_AROUND',
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-BaiMo/rest/realspace/datas/BaiMo/config",
+      FLOW: true,
+    },
+    {
+      KEY: "WZBaimo_WITHOUT_FIX",
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-BaiMoQiTaModel/rest/realspace/datas/BaiMoQiTaModel/config",
+      withoutFix: true
+    },
+    {
+      KEY: 'WZBaimo_POINT_JZ',
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb4/rest/realspace/datas/JZ/config",
+      FLOW: false,
+    },
+    {
+      KEY: 'WZBaimo_POINT_QT',
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb4/rest/realspace/datas/QT/config",
+      FLOW: false,
+      d: 2200
+    },
+    {
+      KEY: 'WZBaimo_POINT_DX',
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb4/rest/realspace/datas/DX/config",
+      FLOW: false,
+      d: 2400
+    },
+    {
+      KEY: 'WZBaimo_POINT_DL',
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb4/rest/realspace/datas/DL/config",
+      FLOW: false,
+      d: 3000
+    },
+    {
+      KEY: 'WZBaimo_POINT_ZB',
+      URL: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb4/rest/realspace/datas/ZB/config",
+      FLOW: false,
+      d: 2200
+    }
+  ],
+  //  动态水面模型
+  RIVER: "https://ditu.wzcitybrain.com/iserver/services/3D-River_CityBrain/rest/realspace/datas/River_CityBrain/config",
+  //  静态水面模型
+  STATIC_RIVER: "https://ditu.wzcitybrain.com/iserver/services/3D-River_Static/rest/realspace/datas/River@River/config",
+  //  影像底图
   SWImage:
-    "http://172.20.83.223:8098/iserver/services/3D-YX_2019_SW/rest/realspace/datas/YX_2019_SW",
-  // 瑞安影像
-  RAImage:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000",
-  // 瑞安dem
-  RADem:
-    "http://172.20.83.218:8098/iserver/services/3D-DEM_RA/rest/realspace/datas/DEM_RA",
-  // 标准版地图
-  RABZMap:
-    "http://10.36.245.203:8090/iserver/services/map-agscache-YJSGBZB2019CGCS2000/rest/maps/YJ_SG_BZB_2019_CGCS2000",
-  // 永嘉影像
-  YJImage:
-    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000",
-  // 永嘉影像注记
-  YJYXZJ:
-    "http://10.36.245.203:8090/iserver/services/map-agscache-YJYXZJ2019CGCS2000/rest/maps/YJ_YXZJ_2019_CGCS2000",
-  // 永嘉dem
-  YJDem:
-    //"http://172.20.83.223:8098/iserver/services/3D-dem/rest/realspace/datas/dem@2018dem",
-    "http://172.20.83.223:8098/iserver/services/3D-DEM_TT/rest/realspace/datas/2018gddem",
-  //   "http://10.36.234.83:8098/iserver/services/3D-DEM_YJ/rest/realspace/datas/DEM_YJ@2018dem",
-
-  // 标准版地图
-  YJBZMap:
-    //"http://10.36.245.203:8090/iserver/services/map-agscache-YJSGBZB2019CGCS2000/rest/maps/YJ_SG_BZB_2019_CGCS2000",
-    "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJSGBZB2019CGCS2000/rest/maps/YJ_SG_BZB_2019_CGCS2000",
-
-  // mvt矢量服务
-  YJMVT:
-    //   "http://10.36.234.83:8098/iserver/services/map-mvt-XZQHYJ/restjsr/v1/vectortile/maps/XZQH_YJ"
-    //"http://172.20.83.223:8098/iserver/services/map-mvt-SummaryPOI/restjsr/v1/vectortile/maps/Summary_POI",
-    "http://172.20.83.223:8098/iserver/services/map-mvt-SummaryPOILine/restjsr/v1/vectortile/maps/Summary_POI_Line",
-
-  //  全市区精模
-  WZMODEL:
-    // "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-JMLC20121/rest/realspace/datas/JM_LC_2012_1/config"
-    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-JMLC20121/rest/realspace/datas/JM_LC_2012_1/config",
-  // "http://10.36.217.240:8098/iserver/services/3D-mongodb/rest/realspace/datas/JM_LC_2012_1/config"
-
+    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-YX2019SW/rest/realspace/datas/YX_2019_SW",
   //  大数据底图
   DataImage:
-    "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJDSJCGCS2000/rest/maps/YJ_DSJ_CGCS2000"
-  //"https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DSJCGS2000SW/rest/realspace/datas/DSJ_CGS2000_SW"
+    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DSJCGS2000SW/rest/realspace/datas/DSJ_CGS2000_SW",
+  // 全市域地形
+  YJDem:
+    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DEMLC/rest/realspace/datas/DEM_LC",
+  // mvt矢量服务
+  YJMVT:
+    "https://ditu.wzcitybrain.com/iserver/services/map-mongodbMvt-Routesdata3/restjsr/v1/vectortile/maps/Routes_data3",
+  //  重要地物注记
+  KEYMVT: "https://ditu.wzcitybrain.com/iserver/services/map-mongodbMvt-ZhongYaoDiWu/restjsr/v1/vectortile/maps/ZhongYaoDiWu",
+  //  全市区精模
+  WZMODEL:
+    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-JMLC20121/rest/realspace/datas/JM_LC_2012_1/config",
+  SCENE_WZMODEL: [
+    //  市区
+    { key: "ZGDYP_ZB", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/ZGDYP_ZB/config" },
+    { key: "ZGDYP_DL", d: 5500, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/ZGDYP_DL/config" },
+    { key: "ZGDYP_QT", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/ZGDYP_QT/config" },
+    { key: "ZGDYP_SX", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/ZGDYP_SX/config" },
+    { key: "ZGDYP_JZ", d: 5500, s: true, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/ZGDYP_JZ/config" },
+    { key: "ZGDYP_DX", d: 5500, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/ZGDYP_DX/config" },
+    { key: "MaxShijuJZ", d: 5500, s: true, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/MaxShijuJZ/config" },
+    { key: "MaxShijuQT", d: 1400, s: true, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb3/rest/realspace/datas/MaxShijuQT/config" },
+    //  瓯江口
+    { key: "OJK_BUILDING", d: 5500, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb/rest/realspace/datas/JZ/config" },
+    { key: "OJK_DMG", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb/rest/realspace/datas/DX/config" },
+    { key: "OJK_RIVER", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb/rest/realspace/datas/SX/config" },
+    { key: "OJK_ROAD", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb/rest/realspace/datas/DL/config" },
+    { key: "OJK_PLANT", d: 1400, url: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb/rest/realspace/datas/ZB/config" }
+  ],
+  ROAD_LAMP: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-LightModel/rest/realspace/datas/LightModel/config"
 };
 
-export const dataSourceUrl = {
-  // 温州数据资源库
-  dataWenzhouyingji:
-    "http://10.36.234.83:8090/iserver/services/data-wenzhouyingji/rest/data",
+export const ImagesURL = [
+  { year: 2019, url: "https://sourceserver.wzcitybrain.com/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000" },
+  { year: 2018, url: "https://sourceserver.wzcitybrain.com/iserver/services/map-agscachev2-YX2018CGC2000/rest/maps/YX_2018_CGC2000" },
+  { year: 2017, url: "https://sourceserver.wzcitybrain.com/iserver/services/map-agscachev2-Layers/rest/maps/Layers" },
+  { year: 2014, url: "https://sourceserver.wzcitybrain.com/iserver/services/map-agscachev2-YX2014CGC2000/rest/maps/YX_2014_CGC2000" },
+  { year: 2012, url: "https://sourceserver.wzcitybrain.com/iserver/services/map-agscachev2-Layers2/rest/maps/Layers" },
+]
 
-  //不稳定斜坡-风险防范区-避险点-撤离路线
-  // slopeAndAreaAndPlace: 'http://10.36.234.83:8090/iserver/services/map-ZIRANZH_SHIZHENG_DAOLU/rest/maps/BWDXP'
-  slopeAndAreaAndPlace:
-    "http://10.36.234.83:8093/iserver/services/map-BiaoHui_n/rest/maps/Biaohui",
-  areaRoadUrl:
-    "http://10.36.234.83:8090/iserver/services/map-ZIRANZH_SHIZHENG_DAOLU/rest/maps/BWDXP"
+export const ExtraSourceURL = {
+  S1:
+    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-S1/rest/realspace/datas/S1/config",
 };
+
 
 export const BimSourceURL = {
-  //安置房三维服务
   SCENE_URL:
-    //"http://172.20.83.223:8098/iserver/services/3D-Placement_house_0728/rest/realspace",
-    "http://172.20.83.223:8098/iserver/services/3D-Placement_house_onetable/rest/realspace",
-  //安置房数据服务  
+    "http://172.20.83.223:8098/iserver/services/3D-Placement_house_0728/rest/realspace",
   SCENE_DATA_URL:
-    //"http://172.20.83.223:8098/iserver/services/data-Placement_house_0728/rest/data",
-    "http://172.20.83.223:8098/iserver/services/data-Placement_house_onetable/rest/data",
-  //安置房sql查询  
+    "http://172.20.83.223:8098/iserver/services/data-Placement_house_0728/rest/data",
   SCENE_SQL_URL:
-    //"http://172.20.83.223:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
-    "http://172.20.83.223:8098/iserver/services/data-Placement_house_0728/rest/data/featureResults.rjson?returnContent=true",
-  //机场三维数据  
+    "http://172.20.83.223:8098/iserver/services/data-SW_Data/rest/data/featureResults.rjson?returnContent=true",
   STATION_SCENE_URL:
     "http://172.20.83.223:8098/iserver/services/3D-Airport_Station/rest/realspace",
-  //机场数据服务    
   STATION_DATA_URL:
     "http://172.20.83.223:8098/iserver/services/data-Airport_Station/rest/data",
-  //dsm - gem地形
-  DSM_DEM: "http://172.20.83.223:8098/iserver/services/3D-mongodb-DSMDEM/rest/realspace/datas/DSM_DEM",
-  //dsm - map地图
-  DSM_MAP: "http://172.20.83.223:8098/iserver/services/map-mongodb/rest/maps/DSMmap",
-  //地下管线  
   UNDERGROUND_SCENE_URL:
-    "http://172.20.83.223:8098/iserver/services/3D-ResultNetWork_JSLINE/rest/realspace",
-  //S1线轨道三维服务  
-  track_URL:
-    "http://172.20.83.223:8098/iserver/services/3D-GuiDaoS1Xian/rest/realspace",
-  Rivers_URL:
-    "http://172.20.83.223:8098/iserver/services/3D-ShuiYuYanShi/rest/realspace",
+    "http://172.20.83.223:8098/iserver/services/3D-GSLINE/rest/realspace"
 };
-
-export const CIVILIZATION_CENTER_URL = {
-  //市民中心地下管线
-  UNDERGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
-  //市民中心地下管线数据
-  UNDERGROUND_DATA: {
-    url: "http://172.20.83.223:8098/iserver/services/data-Pipes/rest/data",
-    dataSourceName: "Pipes_table"
-  },
-  //地上模型
-  ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb7/rest/realspace",
-  //地上模型数据绑定
-  ABOVEGROUND_DATA: {
-    url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
-  },
-  GEOLOGY: "http://172.20.83.223:8098/iserver/services/3D-mongodb-CIMGeology/rest/realspace",
-  GEOLOGY_DATA: {
-    url: "http://172.20.83.223:8098/iserver/services/data-DiZhiTi_table/rest/data",
-    dataSourceName: "地质体_table"
-  }
-} 
-export const CHAO_CENTER_URL = {
-  //地上模型
-  ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb8/rest/realspace",
-  //地上模型数据绑定
-  ABOVEGROUND_DATA: {
-    url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
-  },
-} 

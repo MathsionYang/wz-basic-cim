@@ -242,8 +242,7 @@ const WWW_MAP = document.location.protocol + "//" + window.location.host;
 dataurl =
   "http://10.36.234.83:8090/iserver/services/data-wenzhouyingji/rest/data";
 measureurl =
-  //"http://172.20.83.218:8090/iserver/services/map-world/rest/maps/World";
-  "http://10.36.234.83:8090/iserver/services/map-world/rest/maps/World";
+  "http://172.20.83.218:8090/iserver/services/map-world/rest/maps/World";
 multilayersTable = [
   "化工及危化品企业",
   "规上工贸企业",
@@ -274,51 +273,44 @@ basemapSourcesTiles = [
   {
     name: "bigdata-raster",
     tiles:
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJDSJCGCS2000/rest/maps/YJ_DSJ_CGCS2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJDSJCGCS2000/rest/maps/YJ_DSJ_CGCS2000"
   },
   {
     name: "standard-raster",
     // tiles: 'http://10.36.245.203:8090/iserver/services/map-agscache-ZWPTSGWZCGCS2000/rest/maps/ZWPT_SG_WZ_CGCS2000'
     tiles:
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJSGBZB2019CGCS2000/rest/maps/YJ_SG_BZB_2019_CGCS2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJSGBZB2019CGCS2000/rest/maps/YJ_SG_BZB_2019_CGCS2000"
   },
   {
     name: "2012YX",
     tiles:
-      //"http://10.36.245.203:8090/iserver/services/map-agscachev2-Layers2/rest/maps/Layers"
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YXYX2012CGCS2000/rest/maps/YX_YX_2012_CGCS2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-Layers2/rest/maps/Layers"
   },
   {
     name: "2014YX",
     tiles:
-      //"http://10.36.245.203:8090/iserver/services/map-agscachev2-YX2014CGC2000/rest/maps/YX_2014_CGC2000"
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YX2014CGC2000/rest/maps/YX_2014_CGC2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-YX2014CGC2000/rest/maps/YX_2014_CGC2000"
   },
   {
     name: "2017YX",
     tiles:
-      //"http://10.36.245.203:8090/iserver/services/map-agscachev2-Layers/rest/maps/Layers"
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YXYX2017CGC2000/rest/maps/YX_YX_2017_CGC2000"
-    
-    },
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-Layers/rest/maps/Layers"
+  },
   {
     name: "2018YX",
     tiles:
-      //"http://10.36.245.203:8090/iserver/services/map-agscachev2-YX2018CGC2000/rest/maps/YX_2018_CGC2000"
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YX2018CGC2000/rest/maps/YX_2018_CGC2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-YX2018CGC2000/rest/maps/YX_2018_CGC2000"
   },
   {
     name: "2019YX",
     // tiles: 'http://10.36.245.203:8090/iserver/services/map-agscache-ZWPTYX2019WZCGCS2000/rest/maps/ZWPT_YX_2019_WZ_CGCS2000'
     tiles:
-      //"http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000"
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYX2019CGCS2000/rest/maps/YJ_YX_2019_CGCS2000"
   },
   {
     name: "2019YXZJ",
     tiles:
-      //"http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYXZJ2019CGCS2000/rest/maps/YJ_YXZJ_2019_CGCS2000"
-      "http://172.20.83.223:8091/iserver/services/map-agscachev2-YJYXZJ2019CGCS2000/rest/maps/YJ_YXZJ_2019_CGCS2000"
+      "http://10.36.245.203:8090/iserver/services/map-agscachev2-YJYXZJ2019CGCS2000/rest/maps/YJ_YXZJ_2019_CGCS2000"
   }
 ];
 basemapTiles = "standard-raster";

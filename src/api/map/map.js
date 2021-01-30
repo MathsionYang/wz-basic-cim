@@ -11,6 +11,7 @@ export function getRoleCategory() {
   const url = '/coverage/coverage/getRoleCategory'
   return get(url)
 }
+
 /**
  * 获取周边分析的信息树
  * @returns {*}
@@ -122,7 +123,7 @@ export function likeStatistics(fieldLikeNameValue, fieldLikeNames, fieldName, fi
  * @param order
  * @returns {*}
  */
-export function likeStatisticsAll(fieldLikeNameValue, fieldLikeNames, fieldName, fieldNameValue, barName, barValue, pageNo, pageSize, Fieldsorder,tableName, district, typeName, order, value) {
+export function likeStatisticsAll(fieldLikeNameValue, fieldLikeNames, fieldName, fieldNameValue, barName, barValue, pageNo, pageSize, tableName, district, typeName, order, value) {
   const url = '/statistics/likeStatisticsAll'
   return post(url, {
     barName,
@@ -134,8 +135,8 @@ export function likeStatisticsAll(fieldLikeNameValue, fieldLikeNames, fieldName,
     fieldNameValue,
     pageNo,
     pageSize,
-    Fieldsorder,
     tableName,
+
     typeName,
     order,
     value
@@ -159,20 +160,11 @@ export function statistics(fieldNames, tableName, district, typeName) {
  * @param tableName
  * @returns {*}
  */
-export function getTableData(smid, tableName,Fieldsorder){ 
-  var url ="";
-  if(Fieldsorder==""){
-     url  = '/columnInfo/getTableData/' + tableName + '/' + smid 
-  }else{
-     url  = '/columnInfo/getTableData/' + tableName + '/' + smid + '/'+Fieldsorder
-  }
-  
+export function getTableData(smid, tableName) {
+  const url = '/columnInfo/getTableData/' + tableName + '/' + smid
   return get(url)
 }
-/* export function getTableData(smid, tableName) {
-  const url = '/columnInfo/getTableData/' + tableName + '/' + smid 
-  return get(url)
-} */
+
 /**
  * 测试mock数据
  * @returns {*}

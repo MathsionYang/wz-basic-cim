@@ -1,10 +1,10 @@
 <!--
  * @Author: eds
- * @Date: 2020-08-20 09:03:10
- * @LastEditTime: 2020-09-08 14:51:25
+ * @Date: 2020-08-12 15:17:46
+ * @LastEditTime: 2020-08-17 11:07:13
  * @LastEditors: eds
  * @Description:
- * @FilePath: \wz-city-culture-tour\src\components\medical-view\extraModel\NanTangModel.vue
+ * @FilePath: \wz-city-culture-tour\src\components\map-view\extraModel\NanTangModel.vue
 -->
 <template>
   <div class="nanTangModel"></div>
@@ -12,7 +12,6 @@
 
 <script>
 const Cesium = window.Cesium;
-import { ServiceUrl } from "config/server/mapConfig";
 import { mapGetters, mapActions } from "vuex";
 const SERVER_HOST = "http://10.36.217.240:8098/iserver/services";
 const LAYER_NAME = "南塘精细三维";
@@ -20,19 +19,28 @@ export default {
   data() {
     return {
       //  cesium Object
+      viewer: undefined,
     };
+  },
+  created() {
+    this.viewer = window.earth;
   },
   async mounted() {
     this.initBimScene();
-    // this.addEntities();
+    this.addEntities();
     this.eventRegsiter();
-    // this.cameraMove();
+    this.cameraMove();
+    this.SetIsInfoFrame(true);
   },
   beforeDestroy() {
+    this.viewer.entities.removeAll();
+    this.SetIsInfoFrame(false);
     this.$bus.$emit("cesium-3d-switch", { value: true });
     this.closeNanTangModel();
+    this.viewer = undefined;
   },
   methods: {
+    ...mapActions("map", ["SetIsInfoFrame"]),
     //  事件绑定
     eventRegsiter() {
       const that = this;
@@ -55,17 +63,18 @@ export default {
     },
     //  初始化BIM场景
     initBimScene(fn) {
-      const _LAYER_ = window.earth.scene.layers.find(LAYER_NAME);
+      const _LAYER_ = this.viewer.scene.layers.find(LAYER_NAME);
       if (_LAYER_) {
         _LAYER_.visible = true;
       } else {
-        const promise = window.earth.scene.addS3MTilesLayerByScp(
-          ServiceUrl.WZMODEL,
+        const promise = this.viewer.scene.addS3MTilesLayerByScp(
+          // `${SERVER_HOST}/3D-mongodb-JMLCDNJD/rest/realspace/datas/JM_LCDNJD/config`,
+          "http://10.36.217.240:8098/iserver/services/3D-mongodb/rest/realspace/datas/JM_LC_2012_1/config",
           { name: LAYER_NAME }
         );
         Cesium.when(promise, async (layers) => {
-          const layer = window.earth.scene.layers.find(LAYER_NAME);
-          layer.visibleDistanceMax = 1400;
+          const layer = this.viewer.scene.layers.find(LAYER_NAME);
+          layer.visibleDistanceMax = 1500;
         });
       }
     },
@@ -86,7 +95,7 @@ export default {
       this.addEntity([120.661, 27.999], "/static/images/people.png", "people");
     },
     addEntity([x, y], image, name = +new Date()) {
-      window.earth.entities.add({
+      this.viewer.entities.add({
         position: Cesium.Cartesian3.fromDegrees(x, y, 40),
         billboard: {
           image,
@@ -103,7 +112,7 @@ export default {
     },
     //  清除BIM模块
     clearNanTangModel() {
-      window.earth.scene.layers.find(LAYER_NAME).visible = false;
+      this.viewer.scene.layers.find(LAYER_NAME).visible = false;
     },
   },
 };

@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['exports', './when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographic-fe4be337', './Cartesian2-85064f09', './BoundingSphere-775c5788', './GeometryAttribute-06d31d45'], function (exports, when, Check, _Math, Cartographic, Cartesian2, BoundingSphere, GeometryAttribute) { 'use strict';
+define(['exports', './when-8d13db60', './Check-70bec281', './Math-61ede240', './Cartographic-fe4be337', './Cartesian2-85064f09', './BoundingSphere-8f8a682c', './GeometryAttribute-06d31d45'], function (exports, when, Check, _Math, Cartographic, Cartesian2, BoundingSphere, GeometryAttribute) { 'use strict';
 
     var cos = Math.cos;
         var sin = Math.sin;

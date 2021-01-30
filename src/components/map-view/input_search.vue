@@ -21,7 +21,7 @@
           :value="item.value">
         </el-option>
       </el-select>
-      <img @click="showSearch" src="../../common/images/search.png" alt="">
+      <img @click="showSearch" src="/static/images/common/search.png" alt="">
       <transition
         enter-active-class="animated lightSpeedIn"
         leave-active-class="animated lightSpeedOut"
@@ -219,8 +219,7 @@ export default {
     border-radius: 6px;
     outline: none;
     background: #03315a;
-    //display: flex;
-    display: none;
+    display: flex;
     align-items: center;
     padding: 0 0.1rem;
     // padding: 10px;
