@@ -103,7 +103,10 @@ const mutations = {
   },
   [types.SET_FORCE_TRUE_TOPIC_LABEL_ID](state, data) {
     state.forceTrueTopicLabelId = data;
-  }
+  },
+  [types.SET_FORCE_BIM_DATA](state, data) {
+    state.forceBimData = data;
+  },
 };
 
 export default mutations;

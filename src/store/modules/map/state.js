@@ -50,5 +50,6 @@ const state = {
   forceTreeLabel: "城市总览",
   forceTrueTopicLabels: [],
   forceTrueTopicLabelId: "",
+  forceBimData: [],
 };
 export default state;

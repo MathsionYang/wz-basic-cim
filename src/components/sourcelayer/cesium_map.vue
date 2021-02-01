@@ -40,6 +40,8 @@
       </div>
     </div>
     <AuthFailPopup ref="authFailPopup" v-if="authFailshallPop" />
+
+    <BIMinfoFrame ref="biminfoFrame" />
   </div>
 </template>
 
@@ -64,6 +66,9 @@ import RoadLine from "components/sourcelayer/extraModel/PolylineTrailLink/RoadLi
 import VideoCircle from "components/sourcelayer/commonFrame/postMessage/videoCircle";
 import AuthFailPopup from "components/sourcelayer/commonFrame/AuthFailPopup/AuthFailPopup";
 import Overview from "components/sourcelayer/extraModel/Overview/Overview.vue";
+
+import BIMinfoFrame from "components/map-view/commonFrame/BIMinfoFrame";
+
 import {
   getCurrentExtent,
   isContainByExtent,
@@ -80,7 +85,8 @@ import {
   mapShadowInit,
 } from "components/sourcelayer/cesium_map_init";
 import { doValidation } from "api/validation/validation";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
+
 const Cesium = window.Cesium;
 
 export default {
@@ -123,6 +129,7 @@ export default {
     VideoCircle,
     AuthFailPopup,
     Overview,
+    BIMinfoFrame
   },
   created() {
     //  点位信息 hash
@@ -144,6 +151,7 @@ export default {
     this.eventRegsiter();
   },
   methods: {
+    ...mapActions("map", ["SetForceBimData"]),
     async validate() {
       // let authorCode = this.$route.query.authorCode;
       // if (!authorCode) return (this.authFailshallPop = true);
@@ -215,6 +223,29 @@ export default {
           }
         }
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+      // 模型点击事件
+      window.earth.pickEvent.addEventListener((feature) => {
+        console.log("pickEvent", feature);
+        const _data_ = Object.keys(feature).map((k) => {
+          return { k, v: feature[k] };
+        });
+        console.log("data", _data_);
+        let gx = false;
+        for (let f = 0; f < _data_.length; f++) {
+          if (
+            _data_[f].k == "直径" ||
+            _data_[f].k == "长度" ||
+            _data_[f].k == "地质层"
+          ) {
+            gx = true;
+            break;
+          }
+        }
+        if (gx) {
+          this.SetForceBimData(_data_);
+        }
+      })
     },
     /**
      * 事件注册

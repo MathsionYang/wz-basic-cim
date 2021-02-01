@@ -233,3 +233,9 @@ export const SetForceTrueTopicLabels = ({ commit }, data) => {
 export const SetForceTrueTopicLabelId = ({ commit }, data) => {
   commit(types.SET_FORCE_TRUE_TOPIC_LABEL_ID, data);
 };
+
+// 设置bim详细数据
+export const SetForceBimData = function ({ commit }, data) {
+  console.log('SetForceBimDatadata', data);
+  commit(types.SET_FORCE_BIM_DATA, data);
+};
