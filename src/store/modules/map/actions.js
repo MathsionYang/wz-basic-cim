@@ -236,6 +236,15 @@ export const SetForceTrueTopicLabelId = ({ commit }, data) => {
 
 // 设置bim详细数据
 export const SetForceBimData = function ({ commit }, data) {
-  console.log('SetForceBimDatadata', data);
   commit(types.SET_FORCE_BIM_DATA, data);
+};
+
+// 设置bim房间数据
+export const SetForceRoomData = function ({ commit }, data) {
+  commit(types.SET_FORCE_ROOM_DATA, data);
+};
+
+// 设置bim单层可见id
+export const SetForceBimIDS = function ({ commit }, data) {
+  commit(types.SET_FORCE_BIM_IDS, data);
 };

@@ -19,6 +19,28 @@
               </tbody>
             </table>
           </el-tab-pane>
+          <el-tab-pane
+            label="房间信息"
+            name="room"
+            v-if="fixedForceRoomData.length"
+          >
+            <!-- <div v-if="forceBimIDS.length">
+              <button @click="openFloorStructure" class="buttons">
+                查看楼层结构
+              </button>
+              <button @click="closeFloorStructure" class="buttons">
+                关闭楼层结构
+              </button>
+            </div> -->
+            <table>
+              <tbody>
+                <tr v-for="(d, i) in fixedForceRoomData" :key="i">
+                  <td>{{ d.k }}:</td>
+                  <td>{{ d.v }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </el-tab-pane>
         </el-tabs>
       </div>
     </div>
@@ -39,6 +61,7 @@ export default {
     this.closeBimFrame();
   },
   computed: {
+    ...mapGetters("map", ["forceBimData", "forceRoomData", "forceBimIDS"]),
     fixedForceBimData() {
       return [
         ...this.forceBimData
@@ -47,6 +70,13 @@ export default {
             return { k: HASH_KEYS[k] || k, v };
           }),
       ];
+    },
+    fixedForceRoomData() {
+      return this.forceRoomData
+        .filter(({ k, v }) => !~FILTER_KEYS.indexOf(k))
+        .map(({ k, v }) => {
+          return { k: HASH_KEYS[k] || k, v };
+        });
     },
   },
   watch: {
@@ -57,10 +87,14 @@ export default {
   methods: {
     ...mapActions("map", [
       "SetForceBimData",
+      "SetForceRoomData",
+      "SetForceBimIDS",
     ]),
     closeBimFrame() {
       console.log('fuckb')
       this.SetForceBimData([]);
+      this.SetForceRoomData([]);
+      this.SetForceBimIDS([]);
     },
   },
 };

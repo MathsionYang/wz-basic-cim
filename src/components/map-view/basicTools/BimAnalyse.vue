@@ -238,15 +238,23 @@ export default {
         this.lastHouseEntity = null;
         this.SetForceRoomData([]);
       }
+      let louceng;
+      for (let i = 0; i < this.forceBimData.length; i++) {
+        if (this.forceBimData[i].k == "所属楼层") {
+          louceng = this.forceBimData[i].v;
+        }
+      }
       const selectedFloors = features.filter(({ fieldNames, fieldValues }) => {
-        const BOTTOM = fieldNames.indexOf("BOTTOM");
+        // const BOTTOM = fieldNames.indexOf("BOTTOM");
         const LSG = fieldNames.indexOf("LSG");
-        const isTheFloor =
-          BOTTOM > -1 &&
-          LSG > -1 &&
-          parseFloat(fieldValues[BOTTOM]) <= height &&
-          parseFloat(fieldValues[BOTTOM]) + parseFloat(fieldValues[LSG]) >=
-            height;
+        // const isTheFloor =
+        //   BOTTOM > -1 &&
+        //   LSG > -1 &&
+        //   parseFloat(fieldValues[BOTTOM]) <= height &&
+        //   parseFloat(fieldValues[BOTTOM]) + parseFloat(fieldValues[LSG]) >=
+        //     height;
+        const floorIndex = fieldNames.indexOf("所属楼层");
+        const isTheFloor = fieldValues[floorIndex] == louceng && LSG > -1;
         return isTheFloor;
       });
       const selectedFeature = selectedFloors.length ? selectedFloors[0] : null;

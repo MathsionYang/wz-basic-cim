@@ -107,6 +107,12 @@ const mutations = {
   [types.SET_FORCE_BIM_DATA](state, data) {
     state.forceBimData = data;
   },
+  [types.SET_FORCE_ROOM_DATA](state, data) {
+    state.forceRoomData = data;
+  },
+  [types.SET_FORCE_BIM_IDS](state, data) {
+    state.forceBimIDS = data;
+  },
 };
 
 export default mutations;

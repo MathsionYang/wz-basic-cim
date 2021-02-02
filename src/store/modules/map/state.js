@@ -50,6 +50,9 @@ const state = {
   forceTreeLabel: "城市总览",
   forceTrueTopicLabels: [],
   forceTrueTopicLabelId: "",
+  // bim
   forceBimData: [],
+  forceRoomData: [],
+  forceBimIDS: [],
 };
 export default state;
