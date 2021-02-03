@@ -53,6 +53,7 @@ export default {
 
 <style scoped lang="less">
 .roulette-wrapper {
+  display: none;
   > div {
     height: 100%;
   }

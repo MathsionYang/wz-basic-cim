@@ -12,7 +12,25 @@
       class="bottom-layers-container"
       v-show="forceTreeLabel != '城市总览' && forceTreeTopic.length"
     >
-      <div class="swiper-buttons swiper-button-left"></div>
+      <div v-for="(item, i) in forceTreeTopic" :key="i" class="erji">
+        <span class="erjitoubu">{{ item.id }}</span>
+        <div class="innerbox">
+          <div
+            v-for="(datas, j) in item.children"
+            :key="j"
+            :class="{
+            long: true,
+            active: ~forceTrueTopicLabels.indexOf(datas.id),
+          }"
+          >  
+            <div class="fuhao"></div>
+            <span @click="doForceTrueTopicLabels(item.children,datas.id)" class="ring">{{
+              datas.id
+            }}</span>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="swiper-buttons swiper-button-left"></div>
       <swiper ref="mySwiper" class="layers" :options="swiperOptions">
         <swiper-slide
           v-for="(item, i) in forceTreeTopic"
@@ -27,7 +45,7 @@
               :src="`/static/images/hub-ico/${item.icon}@2x.png`"
               @click="doForceTrueTopicLabels(item.id)"
             />
-            <!-- 先不用::after 伪类绑定 -->
+            
             <div
               class="rings"
               v-if="~forceTrueTopicLabels.indexOf(item.id)"
@@ -37,10 +55,23 @@
           </div>
         </swiper-slide>
       </swiper>
-      <div class="swiper-buttons swiper-button-right"></div>
+      <div class="swiper-buttons swiper-button-right"></div> -->
     </div>
     <div class="bottom-topics-container">
-      <ul class="labels">
+      <div
+        :class="{
+          label: true,
+          active: item.id == forceTreeLabel,
+          disabled: item.disabled,
+        }"
+        v-for="(item, i) in CESIUM_TREE_OPTION"
+        :key="i"
+        @click="!item.disabled ? SetForceTreeLabel(item.id) : undefined"
+      >
+        <div class="imgs"></div>
+        <span class="bt">{{ item.label }}</span>
+      </div>
+      <!-- <ul class="labels">
         <li
           v-for="(item, i) in CESIUM_TREE_OPTION"
           :key="i"
@@ -53,7 +84,7 @@
         >
           <i>{{ item.label }}</i>
         </li>
-      </ul>
+      </ul> -->
     </div>
     <!-- extra Components -->
     <transition name="fade">
@@ -67,10 +98,7 @@ import { mapGetters, mapActions } from "vuex";
 import KgLegend from "./components/KgLegend";
 import { treeDrawTool, fixTreeWithExtra } from "./TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
-import {
-  CESIUM_TREE_OPTION,
-  CESIUM_TREE_EXTRA_DATA,
-} from "config/server/sourceTreeOption";
+import { CESIUM_TREE_OPTION } from "config/server/sourceTreeOption";
 const Cesium = window.Cesium;
 
 export default {
@@ -94,11 +122,7 @@ export default {
   },
   components: { KgLegend },
   computed: {
-    ...mapGetters("map", [
-      "forceTreeLabel",
-      "forceTrueTopicLabels",
-      ...CESIUM_TREE_EXTRA_DATA,
-    ]),
+    ...mapGetters("map", ["forceTreeLabel", "forceTrueTopicLabels"]),
   },
   watch: {
     forceTreeLabel(n) {
@@ -129,6 +153,7 @@ export default {
        */
       this.$bus.$off("check-hub");
       this.$bus.$on("check-hub", ({ key }) => {
+        console.log("默认", key);
         this.SetForceTreeLabel(key);
       });
     },
@@ -145,12 +170,13 @@ export default {
       const Topics = this.CESIUM_TREE_OPTION.filter(
         (v) => v.label == this.forceTreeLabel
       );
+      console.log("图层", Topics);
       this.forceTreeTopic = Topics.length ? Topics[0].children : [];
       if (this.forceTreeTopic.length) {
-        const forceNode = this.forceTreeTopic[0];
-        this.SetForceTrueTopicLabelId(forceNode.id);
-        this.SetForceTrueTopicLabels([forceNode.id]);
-        this.nodeCheckChange(forceNode, true, true);
+        // const forceNode = this.forceTreeTopic[0];
+        // this.SetForceTrueTopicLabelId(forceNode.id);
+        // this.SetForceTrueTopicLabels([forceNode.id]);
+        // this.nodeCheckChange(forceNode, true, true);
       } else {
         this.SetForceTrueTopicLabels([]);
       }
@@ -159,8 +185,8 @@ export default {
      * 选中状态
      * @param {string} id
      */
-    doForceTrueTopicLabels(id) {
-      const label = this.forceTreeTopic.filter((v) => v.id == id)[0];
+    doForceTrueTopicLabels(children,id) {
+      const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
@@ -173,6 +199,7 @@ export default {
         this.SetForceTrueTopicLabelId(label.id);
         this.nodeCheckChange(label, true, true);
       }
+       console.log("数组",this.forceTrueTopicLabels);
     },
     /**
      * POI fetch
@@ -220,6 +247,7 @@ export default {
             node.componentKey &&
             this.$bus.$emit(node.componentEvent, { value: node.componentKey });
         } else if (node.type == "image") {
+          console.log("面",node);
           const LAYER = this.tileLayers[node.id];
           this.tileLayers[
             node.id

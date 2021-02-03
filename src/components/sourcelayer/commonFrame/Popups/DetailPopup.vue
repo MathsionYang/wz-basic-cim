@@ -174,7 +174,7 @@ export default {
   }
 
   .leaflet-popup-content-wrapper {
-    background-image: url("/static/images/common/detail@2x.png");
+    background-image: url("/static/images/common/框.png");
     background-size: 100% 100%;
     text-align: center;
     height: 27vh;

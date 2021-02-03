@@ -7,11 +7,106 @@
   transform: scale(0.9);
 
   .bottom-layers-container {
-    width: 100vh;
+   // width: 100vh;
     height: auto;
     margin: 0 auto;
     padding: 6px 0;
     overflow: hidden;
+    margin-left: 37vh;
+
+    .erji {
+      background-image: url("/static/images/mode-ico/树框.png");
+      background-size: 100% 100%;
+      max-width: 30vh;
+      min-width: 20vh;
+      height: 7vw;
+      margin-right: 1vh;
+
+      .innerbox {
+        overflow-y: auto;
+        height: 70%;
+      }
+
+      .erjitoubu {
+        font-size: 22px;
+        font-family: YouSheBiaoTiHei;
+        font-weight: 400;
+        line-height: 7px;
+        color: #061C48;
+        opacity: 1;
+        margin-top: 0.7vh;
+        margin-bottom: 2vh;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      .long {
+        display: inline-block;
+        //width: 50%;
+
+        .fuhao {
+          background-image: url("/static/images/mode-ico/未选中.png");
+          background-size: 100% 100%;
+          width: 23px;
+          height: 23px;
+          display: inline-block;
+          vertical-align: middle;
+          margin-left: 1vh;
+        }
+
+        &.active {
+          >.fuhao {
+            background-image: url("/static/images/mode-ico/选中.png");
+            background-size: 100% 100%;
+            width: 23px;
+            height: 23px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 1vh;
+          }
+        }
+
+        .ring {
+          font-size: 23px;
+          font-family: YouSheBiaoTiHei;
+          /* font-weight: 400; */
+          /* line-height: 7px; */
+          opacity: 1;
+          /* height: 4vh; */
+          display: initial;
+          width: 100%;
+          /* text-align: center; */
+          vertical-align: middle;
+          color: #FFFFFF;
+          text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.64);
+        }
+        &.active {
+          .ring {
+            font-size: 23px;
+            font-family: YouSheBiaoTiHei;
+            /* font-weight: 400; */
+            /* line-height: 7px; */
+            opacity: 1;
+            /* height: 4vh; */
+            display: initial;
+            width: 100%;
+            /* text-align: center; */
+            vertical-align: middle;
+            color: #FFFF08;
+            text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.64);
+          }
+        }
+
+      }
+
+      .short {
+        width: 100%;
+      }
+
+
+
+    }
 
     >* {
       display: inline-block;
@@ -139,6 +234,72 @@
         #0a4fbc 50%,
         rgba(17, 56, 99, 0.54) 55%,
         rgba(18, 53, 88, 0) 100%);
+
+    .label {
+      position: relative;
+      display: inline-block;
+
+      .imgs {
+        height: 2.5vw;
+        opacity: 1;
+        z-index: 7;
+        margin-right: 5px;
+        width: 16vh;
+        background-size: 100% 100%;
+        border: 0;
+        background-image: url(/static/images/mode-ico/底部标题.png);
+      }
+
+      &.active {
+        >.imgs {
+          height: 2.5vw;
+          opacity: 1;
+          z-index: 7;
+          width: 16vh;
+          border: 0;
+          margin-right: 5px;
+          background-size: 100% 100%;
+          background-image: url(/static/images/mode-ico/底部标题选中.png);
+        }
+      }
+
+      >.bt {
+        position: absolute;
+        font-size: 20px;
+        font-family: YouSheBiaoTiHei;
+        font-weight: 400;
+        line-height: 49px;
+        bottom: 0;
+        left: 0;
+        color: rgb(255, 255, 255);
+        text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
+        opacity: 1;
+        margin: 0.5vh 0vw;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      &.active {
+        >.bt {
+          position: absolute;
+          font-size: 20px;
+          font-family: YouSheBiaoTiHei;
+          font-weight: 400;
+          line-height: 49px;
+          bottom: 0;
+          left: 0;
+          color: #FFFF08;
+          text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
+          opacity: 1;
+          margin: 0.5vh 0vw;
+          display: block;
+          width: 100%;
+          text-align: center;
+        }
+      }
+
+    }
 
     .labels {
       display: flex;

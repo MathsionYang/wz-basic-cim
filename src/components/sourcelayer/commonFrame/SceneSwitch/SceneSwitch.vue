@@ -127,7 +127,7 @@ export default {
   width: 40vh;
   height: auto;
   top: 0;
-  left: 14vh;
+  left: 12vh;
   cursor: pointer;
   > * {
     vertical-align: middle;
@@ -135,7 +135,7 @@ export default {
 
   > img {
     display: inline-block;
-    height: 4vh;
+    height: 2vh;
   }
   > div {
     display: inline-block;

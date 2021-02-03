@@ -7,14 +7,28 @@
  * @FilePath: \wz-city-culture-tour\src\components\sourcelayer\cityIndex\index.vue
 -->
 <template>
-  <div class="cityIndex-source">
-    <div v-if="forceTime == 'now'">
-      <component :is="fixForceIndex" />
+  <div>
+    <div class="tbjb">
+      <img src="/static/images/mode-ico/icon.png" class="tb" />
+      <img src="/static/images/mode-ico/温州市CIM基础平台.png" class="xmname" />
+      <div class="line"></div>
+      <Switchlabel />
+      <img src="/static/images/mode-ico/装饰.png" class="zs" />
+      <img src="/static/images/mode-ico/温州设计集团logo.png" class="logo" />
+      <div style="top: 3.5vh; position: absolute; z-index: 7; right: 1vw">
+        <div class="sj">{{ nowTime }}</div>
+        <div class="rq">{{ nowDate }}</div>
+      </div>
     </div>
-    <div v-if="forceTime == 'pass'">
-      <cityIndexPass />
+    <div class="cityIndex-source">
+      <div v-if="false" style="margin-top: 5vh">
+        <component :is="fixForceIndex" />
+      </div>
+      <div v-if="forceTime == 'pass'">
+        <cityIndexPass />
+      </div>
+      <scene-switch />
     </div>
-    <scene-switch />
   </div>
 </template>
 
@@ -32,6 +46,7 @@ const indexHash = {
   重点项目: "keyIndex",
 };
 import { mapGetters } from "vuex";
+import Switchlabel from "../commonFrame/Switchlabels/Switchlabel";
 import SceneSwitch from "../commonFrame/SceneSwitch/SceneSwitch";
 //  now
 import cityIndex from "./now/cityIndex";
@@ -49,7 +64,16 @@ import cityIndexPass from "./pass/cityIndex";
 
 export default {
   data() {
-    return { indexHash };
+    return {
+      indexHash,
+      nowDate: null, //存放年月日变量
+      nowTime: null, //存放时分秒变量
+      timer: "", //定义一个定时器的变量
+      currentTime: new Date(),
+    };
+  },
+  created() {
+    this.timer = setInterval(this.getTime, 1000);
   },
   computed: {
     ...mapGetters("map", ["forceTime", "forceIndex"]),
@@ -60,6 +84,35 @@ export default {
   watch: {
     forceIndex(n) {
       console.log(n);
+    },
+  },
+  methods: {
+    getTime() {
+      const date = new Date();
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const hour = date.getHours();
+      const minute = date.getMinutes();
+      const second = date.getSeconds();
+      const str = "";
+      if (this.hour > 12) {
+        this.hour -= 12;
+        this.str = " AM";
+      } else {
+        this.str = " PM";
+      }
+      this.month = check(month);
+      this.day = check(day);
+      this.hour = check(hour);
+      this.minute = check(minute);
+      this.second = check(second);
+      function check(i) {
+        const num = i < 10 ? "0" + i : i;
+        return num;
+      }
+      this.nowDate = year + "-" + this.month + "-" + this.day;
+      this.nowTime = this.hour + ":" + this.minute + ":" + this.second;
     },
   },
   components: {
@@ -75,6 +128,7 @@ export default {
     trafficIndex,
     keyIndex,
     cityIndexPass,
+    Switchlabel,
   },
 };
 </script>

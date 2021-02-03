@@ -179,9 +179,9 @@ export default {
           this.$refs.tourPointPopup.fixPopup();
         }
         //  *****[indexPoints]  城市总览指标*****
-        if (this.isOverview && this.$refs.overview.$refs.overviewNow) {
-          this.$refs.overview.$refs.overviewNow.doIndexPoints();
-        }
+        // if (this.isOverview && this.$refs.overview.$refs.overviewNow) {
+        //   this.$refs.overview.$refs.overviewNow.doIndexPoints();
+        // }
         //  *****[videoCircle]  事件传递点位*****
         if (this.$refs.videoCircle && this.$refs.videoCircle.shallPop) {
           this.$refs.videoCircle.doPopup();

@@ -30,7 +30,7 @@ const router = new Router({
       path: "/sourcelayer", // 医疗
       name: "sourcelayer",
       meta: {
-        title: "城市大脑·资源图层"
+        title: "温州市CIM基础平台"
       },
       component: resolve => require(["page/sourcelayer/sourcelayer"], resolve)
     },
