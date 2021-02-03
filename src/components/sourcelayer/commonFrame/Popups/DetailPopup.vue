@@ -35,6 +35,7 @@
         <div class="extra-tab extra-tab_SP" :class="{active: extraTabActive=='sp'}" @click="doVideoRtmp"></div>
         <div class="extra-tab extra-tab_FX" :class="{active: extraTabActive=='fx'}" @click="doCircleBuffer"></div>
         <div class="extra-tab extra-tab_RKDT" :class="{active: extraTabActive=='rkdt'}" @click="doCircleBuffer"></div>
+        <div class="overview" v-if="forceEntity.fix_data && forceEntity.fix_data['全景地址']" @click="isFrame=forceEntity.fix_data['全景地址']">查看全景>></div>
         <div class="around-people" v-if="buffer && buffer.success">
           <!-- <img src="/static/images/common/frameline@2x.png" /> -->
           <div>
@@ -55,8 +56,8 @@
         <div class="close" @click="showSide=false"></div>
         <div class="tab-list">
           <div class="tab-item active">基本信息</div>
-          <div class="tab-item">周边分析</div>
-          <div class="tab-item">人口动态</div>
+          <!-- <div class="tab-item">周边分析</div>
+          <div class="tab-item">人口动态</div> -->
         </div>
       </div>
       <ul class="info-content">
@@ -71,6 +72,9 @@
         </li>
       </ul>
     </div>
+    <div class="extra-frame" v-if="isFrame">
+      <span @click="isFrame = false">X</span><iframe :src="isFrame" />
+    </div>
   </div>
 </template>
 
@@ -83,7 +87,8 @@ export default {
       buffer: null,
       filterKey: ["永久固定码", "唯一码", "分类代码"],
       showSide: true,
-      extraTabActive: ''
+      extraTabActive: '',
+      isFrame: false
     };
   },
   async mounted() {
@@ -248,6 +253,14 @@ export default {
       background-image: url("/static/images/mode-ico/人口动态选中.png");
     }
   }
+  .overview {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    color: #fff;
+    font-size: 12px;
+    cursor: pointer;
+  }
   // .extra-tab {
   //   width: 6vh;
   //   font-size: 1.6vh;
@@ -367,7 +380,8 @@ export default {
         align-items: center;
         justify-content: center;
         .tab-item {
-          flex: 1;
+          // flex: 1;
+          width: 30%;
           margin-right: 1vh;
           padding: 5px 0 10px 0;
           .bg-image('/static/images/mode-ico/side-tab');
@@ -414,6 +428,34 @@ export default {
           background-color: rgba(42, 203, 264, .15);
         }
       }
+    }
+  }
+  .extra-frame {
+    z-index: 999999;
+    width: 1100px;
+    height: 800px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    iframe {
+      height: 100%;
+      width: 100%;
+    }
+    > span {
+      display: block;
+      height: 20px;
+      width: 20px;
+      cursor: pointer;
+      background: black;
+      color: #fff;
+      font-weight: bold;
+      position: absolute;
+      top: 10px;
+      right: 30px;
+      line-height: 20px;
+      border-radius: 10px;
+      text-align: center;
     }
   }
 }

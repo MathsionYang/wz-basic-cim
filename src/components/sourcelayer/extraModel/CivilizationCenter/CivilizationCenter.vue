@@ -92,6 +92,26 @@ const _AS1206LAYERS_HASH_ = {
   第17层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_17F_1206/config',
   屋顶: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_WD_1206/config',
 };
+const _AS1204LAYERS_HASH_ = {
+  第1层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_1F_1204/config',
+  第2层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_2F_1204/config',
+  第3层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_3F_1204/config',
+  第4层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_4F_1204/config',
+  第5层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_5F_1204/config',
+  第6层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_6F_1204/config',
+  第7层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_7F_1204/config',
+  第8层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_8F_1204/config',
+  第9层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_9F_1204/config',
+  第10层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_10F_1204/config',
+  第11层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_11F_1204/config',
+  第12层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_12F_1204/config',
+  第13层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_13F_1204/config',
+  第14层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_14F_1204/config',
+  第15层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_15F_1204/config',
+  第16层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_16F_1204/config',
+  第17层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_17F_1204/config',
+  屋顶: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_WD_1204/config',
+};
 let handlerPolygon = undefined;
 let handlerBox = undefined;
 let editorBox = undefined;
@@ -109,8 +129,13 @@ export default {
 
       BimTreeData: [
         {
-          label: "AS1206楼层控制",
-          id: 0,
+          label: "土建1206地块楼层控制",
+          id: 1,
+          children: [],
+        },
+        {
+          label: "土建1204地块楼层控制",
+          id: 2,
           children: [],
         },
       ],
@@ -372,46 +397,73 @@ export default {
     },
 
     getTreeData() {
-      let floors = [];
+      let floorsA = [];
       for (let i = 1; i < 18; i++) {
-        floors.push({
+        floorsA.push({
           label: `第${i}层`,
-          id: i,
+          id: `AS1206_${i}`,
         });
       }
-      floors.push({
+      floorsA.push({
         label: '屋顶',
-        id: 'WD',
+        id: 'AS1206_WD',
       })
-      this.BimTreeData[0].children = floors;
+      let floorsB = [];
+      for (let i = 1; i < 18; i++) {
+        floorsB.push({
+          label: `第${i}层`,
+          id: `AS1204_${i}`,
+        });
+      }
+      floorsB.push({
+        label: '屋顶',
+        id: 'AS1204_WD',
+      })
+      this.BimTreeData[0].children = floorsA;
+      this.BimTreeData[1].children = floorsB;
     },
 
     treeHandler(node, checked) {
       console.log('node', node)
       console.log('checked', checked)
-      const _KEY_ = `single_${node.label}`;
-      const layer = window.earth.scene.layers.find(_KEY_);
-      if (checked) {
-        // let ids = this.$refs.tree.getCheckedKeys();
-        console.log(node.label)
-        this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
-        if (layer) {
-          layer.visible = true;
-        } else {
-          let layerUrl = _AS1206LAYERS_HASH_[node.label]
-          window.earth.scene.addS3MTilesLayerByScp(
-            layerUrl,
-            { name: _KEY_ }
-          );
-        }
-      } else {
+      if (!checked) {
         layer && (layer.visible = false);
+        return
+      }
+      let _KEY_
+      let layerUrl
+      if (~node.id.indexOf('1206')) {
+        _KEY_ = `AS1206${node.label}`;
+        layerUrl = _AS1206LAYERS_HASH_[node.label]
+      }
+      if (~node.id.indexOf('1204')) {
+        _KEY_ = `AS1204${node.label}`;
+        layerUrl = _AS1204LAYERS_HASH_[node.label]
+      }
+      const layer = window.earth.scene.layers.find(_KEY_);
+      // let ids = this.$refs.tree.getCheckedKeys();
+      console.log(node.label)
+      this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+      if (layer) {
+        layer.visible = true;
+      } else {
+        console.log('fuck', layerUrl)
+        console.log('fuckb', _KEY_)
+        window.earth.scene.addS3MTilesLayerByScp(
+          layerUrl,
+          { name: _KEY_ }
+        );
       }
     },
 
     closeTreeVisible() {
       Object.keys(_AS1206LAYERS_HASH_).map((key) => {
-        const _KEY_ = `single_${key}`;
+        const _KEY_ = `AS1206${key}`;
+        const layer = window.earth.scene.layers.find(_KEY_);
+        layer && (layer.visible = false);
+      })
+      Object.keys(_AS1204LAYERS_HASH_).map((key) => {
+        const _KEY_ = `AS1204${key}`;
         const layer = window.earth.scene.layers.find(_KEY_);
         layer && (layer.visible = false);
       })
