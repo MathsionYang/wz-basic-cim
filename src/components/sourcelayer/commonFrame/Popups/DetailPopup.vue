@@ -18,24 +18,23 @@
       <a class="leaflet-popup-close-button" href="#" @click="closePopup">×</a>
       <div class="leaflet-popup-content-wrapper">
         <div id="forcePopUpLink" class="leaflet-popup-content">
-          <div class="leaflet-popup-content">
-            <header>
-              {{ forceEntity.name }}
-            </header>
-            <ul class="content-body">
-              <li
-                v-for="(item, key, index) in forceEntity.fix_data"
-                :key="index"
-                v-show="item && !~filterKey.indexOf(key)"
-              >
-                <span>{{ key }}</span>
-                <span>{{ item }}</span>
-              </li>
-            </ul>
+          <div class="toubu">
+            {{ forceEntity.name }}
           </div>
+          <ul class="content-body">
+            <li
+              v-for="(item, key, index) in forceEntity.fix_data"
+              :key="index"
+              v-show="item && !~filterKey.indexOf(key)"
+            >
+              <span>{{ key }}</span>
+              <span>{{ item }}</span>
+            </li>
+          </ul>
         </div>
-        <div class="extra-tab to-rtmp-video" @click="doVideoRtmp">直达现场</div>
-        <div class="extra-tab to-around-people" @click="doCircleBuffer">周边人口</div>
+        <div class="extra-tab_SP" @click="doVideoRtmp"></div>
+        <div class="extra-tab_RK" @click="doCircleBuffer"></div>
+        <div class="extra-tab_RKDT" @click="doCircleBuffer"></div>
         <div class="around-people" v-if="buffer && buffer.success">
           <!-- <img src="/static/images/common/frameline@2x.png" /> -->
           <div>
@@ -103,7 +102,10 @@ export default {
             x:
               pointToWindow.x -
               (($(".leaflet-popup-content-wrapper").width() || 0) * 1.2) / 2,
-            y: pointToWindow.y - ($(".leaflet-popup-content-wrapper").height() || 0) - 90,
+            y:
+              pointToWindow.y -
+              ($(".leaflet-popup-content-wrapper").height() || 0) -
+              90,
           };
         }
       }
@@ -182,23 +184,53 @@ export default {
     box-sizing: border-box;
     padding: 3vh;
   }
-
-  .extra-tab {
-    width: 3vh;
+  .extra-tab_SP {
+    width: 50px;
+    height: 50px;
     font-size: 1.6vh;
-    position: absolute;
-    right: -1.4vh;
-
-    line-height: 1.8vh;
+    -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 1vh 0;
+    padding: 1vh 1vh;
     color: white;
-
+    display: inline-block;
     cursor: pointer;
+    float: left;
+    background-size: 100% 100%;
+    background-image: url("/static/images/mode-ico/现场直达.png");
+    &active {
+      > .extra-tab_SP {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6vh;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 1vh 1vh;
+        color: white;
+        display: inline-block;
+        cursor: pointer;
+        float: left;
+        background-size: 100% 100%;
+        background-image: url("/static/images/mode-ico/现场直达选中.png");
+      }
+    }
+  }
+  .extra-tab {
+    width: 6vh;
+    font-size: 1.6vh;
+    /* position: absolute; */
+    /* right: -1.4vh; */
+    /* line-height: 1.8vh; */
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 1vh 1vh;
+    color: white;
+    display: inline-block;
+    cursor: pointer;
+    float: left;
   }
 
   .to-rtmp-video {
-    top: 4vh;
+    //top: 4vh;
     background-image: linear-gradient(
       to right,
       #4c97e3 0%,
@@ -222,8 +254,8 @@ export default {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    height: 100%;
-    > header {
+    height: 80%;
+    > .toubu {
       height: 2.6vh;
       line-height: 2.6vh;
       box-sizing: border-box;
@@ -231,6 +263,12 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
+      font-size: 22px;
+      font-family: YouSheBiaoTiHei;
+      font-weight: 400;
+      line-height: 29px;
+      color: #ffffff;
+      opacity: 1;
     }
     > .content-body {
       flex: 1;
