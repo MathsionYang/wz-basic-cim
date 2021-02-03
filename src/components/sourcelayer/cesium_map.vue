@@ -30,17 +30,22 @@
       <DetailedModel v-if="showSubFrame == '3d1'" />
       <!-- <CesiumMapVideo v-if="showSubFrame == '3d1'" /> -->
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
-      <TrafficSubwayModel v-if="showSubHubFrame == '3d4'" />
-      <BJSWQModel v-if="showSubHubFrame == '3d5'" />
-      <BJJM v-if="showSubHubFrame == '3d6'" />
-      <CivilizationCenter ref="civilizationcenter"  v-if="showSubFrame == '3d11'" />
-      <Chaogc ref="Chaogc" v-if="showSubFrame == '3d14'" />
-      <Gxgl ref="gxgl" v-if="showSubFrame == '3d15'" />
+      <TrafficSubwayModel ref="trafficSubwayModel" v-if="showgdFrame == '3d4'" />
+      <BJSWQModel ref="bjswqmodel" v-if="showqxsyFrame == '3d5'" />
+      <BJJM ref="bjjm" v-if="showjzFrame == '3d6'" />
+      <CivilizationCenter
+        ref="civilizationcenter"
+        v-if="showsmzxFrame == '3d11'"
+      />
+      <KgBoxAnalyse ref="kgboxanalyse" v-if="showKgFrame == '3d12'" />
+      <Chaogc ref="Chaogc" v-if="showcgcFrame == '3d14'" />
+      <Gxgl ref="gxgl" v-if="showgxFrame == '3d15'" />
+      <Dxkj v-if="showdxFrame == '3d16'" />
       <VideoCircle ref="videoCircle" />
       <RoadLine ref="roadline" />
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
       <BIMinfoFrame ref="biminfoFrame" />
-      <div v-show="!isOverview">
+      <div v-show="true">
         <RtmpVideo />
         <Population />
       </div>
@@ -60,6 +65,8 @@ import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedMode
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
 import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
+import Dxkj from "components/sourcelayer/extraModel/Models/Dxkj";
+import KgBoxAnalyse from "components/sourcelayer/extraModel/Models/KgBoxAnalyse";
 import InfoFrame from "components/sourcelayer/commonFrame/InfoFrame/InfoFrame";
 import MedicalPopup from "components/sourcelayer/commonFrame/Popups/medicalPopup";
 import BayonetPopup from "components/sourcelayer/commonFrame/Popups/bayonetPopup";
@@ -104,6 +111,15 @@ export default {
   data() {
     return {
       showSubFrame: null,
+      showDXFrame: null,
+      showKgFrame: null,
+      showqxsyFrame:null,
+      showjzFrame:null,
+      showgdFrame:null,
+      showgxFrame:null,
+      showdxFrame:null,
+      showsmzxFrame:null,
+      showcgcFrame:null,
       showSubHubFrame: "3d1",
       mapLoaded: false,
       validated: false,
@@ -129,6 +145,8 @@ export default {
     DetailedModel,
     BJSWQModel,
     BJJM,
+    Dxkj,
+    KgBoxAnalyse,
     TrafficSubwayModel,
     InfoFrame,
     MedicalPopup,
@@ -312,6 +330,47 @@ export default {
       this.$bus.$on("cesium-3d-event", ({ value }) => {
         this.showSubFrame = value;
       });
+      //倾斜摄影
+      this.$bus.$off("cesium-3d-qxsy");
+      this.$bus.$on("cesium-3d-qxsy", ({ value }) => {
+        this.showqxsyFrame = value;
+      });
+      //建筑三维
+      this.$bus.$off("cesium-3d-jz");
+      this.$bus.$on("cesium-3d-jz", ({ value }) => {
+        this.showjzFrame = value;
+      });
+      //轨道交通
+      this.$bus.$off("cesium-3d-gd");
+      this.$bus.$on("cesium-3d-gd", ({ value }) => {
+        this.showgdFrame = value;
+      });
+      //管线管廊
+      this.$bus.$off("cesium-3d-gx");
+      this.$bus.$on("cesium-3d-gx", ({ value }) => {
+        this.showgxFrame = value;
+      });
+      //地下空间
+      this.$bus.$off("cesium-3d-dx");
+      this.$bus.$on("cesium-3d-dx", ({ value }) => {
+        this.showdxFrame = value;
+      });
+      //市民中心
+      this.$bus.$off("cesium-3d-smzx");
+      this.$bus.$on("cesium-3d-smzx", ({ value }) => {
+        this.showsmzxFrame = value;
+      });
+      //超高层
+      this.$bus.$off("cesium-3d-cgc");
+      this.$bus.$on("cesium-3d-cgc", ({ value }) => {
+        this.showcgcFrame = value;
+      });
+      //详细规划
+      this.$bus.$off("cesium-3d-kggx");
+      this.$bus.$on("cesium-3d-kggx", ({ value }) => {
+        this.showKgFrame = value;
+      });
+
       this.$bus.$on("cesium-3d-switch", ({ value }) => {
         this.$bus.$emit("cesium-3d-event", { value: !value ? "3d1" : null });
         ServiceUrl.WZBaimo_OBJ.map(({ KEY }) => {
@@ -366,7 +425,7 @@ export default {
       const mapMvt = mapMvtLayerInit("mapMvt", ServiceUrl.YJMVT);
       //  重要地物注记
       //const keyMvt = mapMvtLayerInit("keyMvt", ServiceUrl.KEYMVT);
-      
+
       await mapBJSWQLayerInit("BJImage", ServiceUrl.BJImage);
       //  水面
       // await mapRiverLayerInit("RIVER", ServiceUrl.STATIC_RIVER);

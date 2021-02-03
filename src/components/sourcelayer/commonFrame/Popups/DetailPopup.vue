@@ -36,6 +36,7 @@
         <div class="extra-tab extra-tab_FX" :class="{active: extraTabActive=='fx'}" @click="doCircleBuffer"></div>
         <div class="extra-tab extra-tab_RKDT" :class="{active: extraTabActive=='rkdt'}" @click="doCircleBuffer"></div>
         <div class="overview" v-if="forceEntity.fix_data && forceEntity.fix_data['全景地址']" @click="isFrame=forceEntity.fix_data['全景地址']">查看全景>></div>
+        <div class="overview" v-if="forceEntity.fix_data && forceEntity.fix_data['项目代码']" @click="isFrame='https://wzdjdm.wzcitybrain.com:8888/html/oneMap/projectInfo.html?project_code='+forceEntity.fix_data['项目代码']+'&id='+forceEntity.fix_data['项目编号']">查看全过程信息>></div>
         <div class="around-people" v-if="buffer && buffer.success">
           <!-- <img src="/static/images/common/frameline@2x.png" /> -->
           <div>
@@ -147,7 +148,7 @@ export default {
      * 开专门的缓冲区collection
      */
     doCircleBuffer() {
-      this.extraTabActive = 'rkdt'
+      //this.extraTabActive = 'rkdt'
       this.buffer = this.buffer ? null : {};
       const { name, geometry } = this.forceEntity;
       this.$bus.$emit("cesium-3d-population-circle", {
@@ -165,7 +166,7 @@ export default {
      * @param {object} param0 该医疗点的对象信息
      */
     doVideoRtmp() {
-      this.extraTabActive = 'sp'
+      //this.extraTabActive = 'sp'
       const { geometry, name } = this.forceEntity;
       const { x, y } = geometry;
       this.$bus.$emit("cesium-3d-rtmpFetch", {
