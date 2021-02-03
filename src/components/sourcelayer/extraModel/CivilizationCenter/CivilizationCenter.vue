@@ -72,7 +72,7 @@ const _ABOVEGROUND_HASH_ = {
   Roof: "Roof_table",
   Block: "citizens_table",
 };
-const _LAYERS_HASH_ = {
+const _AS1206LAYERS_HASH_ = {
   第1层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_1F_1206/config',
   第2层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_2F_1206/config',
   第3层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_3F_1206/config',
@@ -109,7 +109,7 @@ export default {
 
       BimTreeData: [
         {
-          label: "楼层控制",
+          label: "AS1206楼层控制",
           id: 1,
           children: [],
         },
@@ -396,7 +396,7 @@ export default {
         if (layer) {
           layer.visible = true;
         } else {
-          let layerUrl = _LAYERS_HASH_[node.label]
+          let layerUrl = _AS1206LAYERS_HASH_[node.label]
           window.earth.scene.addS3MTilesLayerByScp(
             layerUrl,
             { name: _KEY_ }
