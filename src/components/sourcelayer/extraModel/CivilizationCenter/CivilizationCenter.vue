@@ -110,7 +110,7 @@ export default {
       BimTreeData: [
         {
           label: "AS1206楼层控制",
-          id: 1,
+          id: 0,
           children: [],
         },
       ],
@@ -131,6 +131,8 @@ export default {
     //  图层开关
     this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
     this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+    // 清空树
+    this.closeTreeVisible();
   },
   methods: {
     ...mapActions("map", []),
@@ -405,6 +407,14 @@ export default {
       } else {
         layer && (layer.visible = false);
       }
+    },
+
+    closeTreeVisible() {
+      Object.keys(_AS1206LAYERS_HASH_).map((key) => {
+        const _KEY_ = `single_${key}`;
+        const layer = window.earth.scene.layers.find(_KEY_);
+        layer && (layer.visible = false);
+      })
     }
   },
 };
