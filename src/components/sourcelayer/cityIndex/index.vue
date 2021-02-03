@@ -21,6 +21,14 @@
       </div>
     </div>
     <div class="cityIndex-source">
+      <div  style="margin-top: 5vh">
+        <div style="background-image:url('/static/images/mode-ico/区域.png');background-size:100% 100%;width:48px;height:39px;display: inline-block;vertical-align: middle;"></div>
+        <div style="background-image:url('/static/images/mode-ico/箭头.png');background-size:100% 100%;width:6.7px;height:11.68px;display: inline-block;vertical-align: middle;"></div>
+        <div style="background-image:url('/static/images/mode-ico/装饰_1.png');background-size:100% 100%;width:252px;height:3px;"></div>
+        <div style="background-image:url('/static/images/mode-ico/区域icon.png');background-size:100% 100%;width:258.9px;height:471.02px"></div>
+      </div>
+    </div>
+    <div class="cityIndex-source">
       <div v-if="false" style="margin-top: 5vh">
         <component :is="fixForceIndex" />
       </div>

@@ -20,7 +20,7 @@
     <!-- 城市各类指标 -->
     <CityIndex ref="totalTarget" />
     <!-- 搜索框 -->
-    <div v-show="!isOverview"><SearchBox ref="searchBox" /></div>
+    <div v-show="true"><SearchBox ref="searchBox" /></div>
     <!-- 模块切换 -->
     <LayerHub ref="layerHub" v-if="initDataLoaded" />
     <!-- 时间转盘 -->

@@ -8,7 +8,10 @@
 -->
 <template>
   <div class="search-box" v-show="searchBoxVisible">
-    <div class="header">
+    <div style="background-image:url('/static/images/mode-ico/资源选择.png');background-size:100% 100%;width:77px;height:39px;"></div>
+        <div style="background-image:url('/static/images/mode-ico/装饰_1.png');background-size:100% 100%;width:252px;height:3px;"></div>
+    <!-- <div class="header">
+       
       <p class="title">资源选择</p>
       <img
         class="menu"
@@ -16,7 +19,7 @@
         width="59px"
         @click="toogleVisible"
       />
-    </div>
+    </div> -->
     <div class="searchHeader">
       <el-input
         v-model="searchText"

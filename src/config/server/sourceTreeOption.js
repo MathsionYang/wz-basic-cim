@@ -8,7 +8,7 @@
  */
 const SERVER_HOST = "https://ditu.wzcitybrain.com/iserver/services";
 const SW_DATA = "/data-SW_DATA/rest/data";
-const SW_DATA_NAME = "swdata:";
+const SW_DATA_NAME = "erweidata:";
 const SERVER_DEFAULT_DATA = SERVER_HOST + SW_DATA;
 //  行政区
 const TOUR_TOPIC = [
@@ -143,7 +143,13 @@ const BIM_TOPIC = [
   },
 ];
 const JC_TOPIC = [
-  { label: "全景VR数据", dataset: "PublicToilet" }
+  {
+    label: "全景VR数据",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "quanjin"
+  }
 ];
 // 时空基础数据
 const MEDICAL_TOPIC = [
@@ -227,7 +233,7 @@ const MEDICAL_TOPIC = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -236,45 +242,108 @@ const MEDICAL_TOPIC = [
 const GT_TOPIC = [
   {
     label: "国土调查",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/GTDC`,
     type: "image"
   },
 ];
 const DZDC_TOPIC = [
-  { label: "基础地质", dataset: "PublicToilet" },
-  { label: "地质灾害", dataset: "PublicToilet" }
+  {
+    label: "基础地质",
+    type: 'mvt',
+    dataname: ':',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "地质环境",
+    type: 'mvt',
+    dataname: ':',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "地质灾害",
+    type: 'mvt',
+    dataname: ':',
+    url: '',
+    dataset: ""
+  }
 ];
 const GD_TOPIC = [
   {
     label: "耕地资源",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/GDZY`,
     type: "image"
   },
   {
     label: "永久基本农田",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
 ];
 const WATER_TOPIC = [
   {
     label: "水系水文",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/river`,
     type: "image"
   },
-  { label: "水利工程", dataset: "PublicToilet" }
+  {
+    label: "水利工程",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "river_sz"
+  },
+  {
+    label: "防汛抗旱",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  }
+
 ];
 const CITYBJ_TOPIC = [
-  { label: "公用设施类", dataset: "PublicToilet" },
-  { label: "道路交通类", dataset: "PublicToilet" },
-  { label: "市容环境类", dataset: "PublicToilet" },
+  {
+    label: "公用设施类",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "GCLD_GCPTSS"
+  },
+  {
+    label: "道路交通类",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "JMSS_LD"
+  },
+  {
+    label: "市容环境类",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "GCLD_GCPTSS"
+  },
   {
     label: "园林绿化类",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/YLLH_LDXZ`,
     type: "image"
   },
-  { label: "房屋土地类", dataset: "PublicToilet" },
-  { label: "其他设施类", dataset: "PublicToilet" },
+  {
+    label: "房屋土地类",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "其他设施类",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
 ];
 //  资源调查数据
 const EDUCATION_TOPIC = [
@@ -349,28 +418,71 @@ const EDUCATION_TOPIC = [
     })
   },
 ]
-const FR_TOPIC =[
-  { label: "机关", dataset: "PublicToilet" },
-  { label: "事业单位", dataset: "PublicToilet" },
-  { label: "企业", dataset: "PublicToilet" },
-  { label: "社团", dataset: "PublicToilet" },
-];
-const XQD_TOPIC=[
-  { label: "兴趣点", dataset: "PublicToilet" },
-];
-const DMDZ_TOPIC=[
-  { label: "地名地址", dataset: "PublicToilet" },
-];
-const SHH_TOPIC=[
-  { label: "服务大数据", dataset: "PublicToilet" },
-  { label: "城市运行数据", dataset: "PublicToilet" },
+const FR_TOPIC = [
   {
-      label: "控规信息",
-      url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
-      type: "image"
-    }
+    label: "机关",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "POI_JGDW"
+  },
+  {
+    label: "事业单位",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "POI_QSYDW"
+  },
+  {
+    label: "企业",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "社团",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
 ];
-// 规划专题
+const XQD_TOPIC = [
+  {
+    label: "兴趣点",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "POI"
+  },
+];
+const DMDZ_TOPIC = [
+  {
+    label: "地名地址",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "DMDZ_ML"
+  },
+];
+const SHH_TOPIC = [
+  {
+    label: "服务大数据",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "城市运行数据",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+];
+//公共专题
 const BASIC_TOPIC = [
   {
     id: "法人数据",
@@ -430,24 +542,24 @@ const BASIC_TOPIC = [
   },
 
 ];
-const ZYKZJ_TOPIC=[
+const ZYKZJ_TOPIC = [
   {
     label: "生态保护红线",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
   {
     label: "永久基本农田",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
   {
     label: "城镇开发边界",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   }
 ];
-const GTKJGH_TOPIC=[
+const GTKJGH_TOPIC = [
   {
     label: "总体规划",
     url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
@@ -455,30 +567,102 @@ const GTKJGH_TOPIC=[
   },
   {
     label: "详细规划",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
   {
     label: "村庄规划",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `$`,
     type: "image"
   }
 ];
-const ZXGH_TOPIC=[
-  { label: "自然资源行业专项规划", dataset: "PublicToilet" },
-  { label: "环保规划", dataset: "PublicToilet" },
-  { label: "水利规划", dataset: "PublicToilet" },
-  { label: "交通规划", dataset: "PublicToilet" },
-  { label: "历史文化名城保护规划", dataset: "PublicToilet" },
-  { label: "商业服务", dataset: "PublicToilet" },
-  { label: "教育设施", dataset: "PublicToilet" },
-  { label: "体育设施", dataset: "PublicToilet" },
-  { label: "文化设施", dataset: "PublicToilet" },
-  { label: "停车泊位", dataset: "PublicToilet" },
-  { label: "公园绿地", dataset: "PublicToilet" },
-  { label: "养老助残", dataset: "PublicToilet" },
+const ZXGH_TOPIC = [
+  {
+    label: "自然资源行业专项规划",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: ""
+  },
+  {
+    label: "环保规划",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: ""
+  },
+  {
+    label: "水利规划",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: ""
+  },
+  {
+    label: "交通规划",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: ""
+  },
+  {
+    label: "历史文化名城保护规划",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: ""
+  },
+  {
+    label: "商业服务",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_SYFW"
+  },
+  {
+    label: "教育设施",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_XX"
+  },
+  {
+    label: "体育设施",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_TYSS"
+  },
+  {
+    label: "文化设施",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_WHSS"
+  },
+  {
+    label: "停车泊位",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_TCC"
+  },
+  {
+    label: "公园绿地",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_GYLD"
+  },
+  {
+    label: "养老助残",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_YLZC"
+  },
 ];
-const YYGGGH_TOPIC=[
+const YYGGGH_TOPIC = [
   { label: "原主体功能规划", dataset: "PublicToilet" },
   { label: "原城乡规划", dataset: "PublicToilet" },
 ];
@@ -522,7 +706,7 @@ const CULTURE_TOPIC = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -543,7 +727,13 @@ const CULTURE_TOPIC = [
 ];
 
 const GCJSXM_TOPIC=[
-  { label: "集团项目", dataset: "PublicToilet" },
+  {
+    label: "集团项目",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JTXM"
+  },
   { label: "工程项目", dataset: "erweidata:V_TM_PROJECT_P", 
     url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data", type: "mvt",
     withImage: [{
@@ -553,32 +743,123 @@ const GCJSXM_TOPIC=[
   },
 ];
 
-const SZSJJC_TOPIC=[
-  { label: "设备运行监测", dataset: "PublicToilet" },
-  { label: "能耗监测", dataset: "PublicToilet" },
+const SZSJJC_TOPIC = [
+  {
+    label: "设备运行监测",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "能耗监测",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
 ];
-const JZJC_TOPIC=[
-  { label: "城市道路桥梁", dataset: "PublicToilet" },
-  { label: "轨道交通", dataset: "PublicToilet" },
-  { label: "供水", dataset: "PublicToilet" },
-  { label: "排水", dataset: "PublicToilet" },
-  { label: "燃气", dataset: "PublicToilet" },
-  { label: "热力", dataset: "PublicToilet" },
-  { label: "环境卫生", dataset: "PublicToilet" },
-  { label: "道路照明", dataset: "PublicToilet" },
-  { label: "垃圾处理设施", dataset: "PublicToilet" },
-  { label: "附属设施", dataset: "PublicToilet" },
+const JZJC_TOPIC = [
+  {
+    label: "城市道路桥梁",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "轨道交通",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "供水",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "排水",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "V_PS_WATER_QUALITY_MONITOR_P"
+  },
+  {
+    label: "燃气",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "热力",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "环境卫生",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "道路照明",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "垃圾处理设施",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
+  {
+    label: "附属设施",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: ""
+  },
 ];
-const QXJC_TOPIC=[
-  { label: "雨量", dataset: "PublicToilet" },
-  { label: "气温", dataset: "PublicToilet" },
-  { label: "气压", dataset: "PublicToilet" },
-  { label: "湿度", dataset: "PublicToilet" },
+const QXJC_TOPIC = [
+  {
+    label: "雨量",
+    url: `http://10.36.234.83:8090/iserver/services/map-Short_Near_Pr-1/rest/maps/ShortNearQPFClipLC%4010.36.234.85_Weather_RainFall`,
+    type: "image"
+  },
+  {
+    label: "气温",
+    url: ``,
+    type: "image"
+  },
+  {
+    label: "气压",
+    url: ``,
+    type: "image"
+  },
+  {
+    label: "湿度",
+    url: ``,
+    type: "image"
+  },
 
 ];
-const JTJC_TOPIC=[
-{
+const JTJC_TOPIC = [
+  {
     label: "交通卡口",
+    type: 'mvt',
+    dataname: 'swdata:',
+    url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
     dataset: "KaKouDianWei",
     withExtraData: "bayonetList",
     withExtraDataGeometry: "bayonetListWithGeometry",
@@ -587,11 +868,11 @@ const JTJC_TOPIC=[
     hiddenLabel: true
   },
 ];
-const STHJ_TOPIC=[
+const STHJ_TOPIC = [
   { label: "生态监测", dataset: "PublicToilet" },
 ];
 //工程建设项目
-const GCXX_TOPIC=[
+const GCXX_TOPIC = [
   {
     id: "工程建设项目",
     label: "工程建设项目",
@@ -602,13 +883,13 @@ const GCXX_TOPIC=[
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
 ];
 
-const WLGZ_TOPIC=[
+const WLGZ_TOPIC = [
   {
     id: "建筑监测数据",
     label: "建筑监测数据",
@@ -661,7 +942,7 @@ const WLGZ_TOPIC=[
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -701,7 +982,7 @@ export const CESIUM_TREE_OPTION = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -715,7 +996,7 @@ export const CESIUM_TREE_OPTION = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -729,7 +1010,7 @@ export const CESIUM_TREE_OPTION = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -743,7 +1024,7 @@ export const CESIUM_TREE_OPTION = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -757,7 +1038,7 @@ export const CESIUM_TREE_OPTION = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -771,7 +1052,7 @@ export const CESIUM_TREE_OPTION = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   }

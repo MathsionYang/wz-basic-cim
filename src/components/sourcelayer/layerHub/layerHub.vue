@@ -21,7 +21,7 @@
             class="inner-item"
             :class="{
               active: ~forceTrueTopicLabels.indexOf(datas.id),
-              inline: datas.id.length < 6,
+              inline: item.children.length>3
             }"
           >
             <div class="fuhao"></div>
