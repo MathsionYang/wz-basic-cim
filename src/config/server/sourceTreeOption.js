@@ -24,22 +24,22 @@ const TOUR_TOPIC = [
   },
   {
     label: "地级行政区",
-    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_XS_M`,
+    url: ``,
     type: "image"
   },
   {
     label: "县级行政区",
-    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_XZJD_M`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_XS_M`,
     type: "image"
   },
   {
     label: "乡级行政区",
-    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_CSQ`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_XZJD_M`,
     type: "image"
   },
   {
     label: "其他行政区",
-    url: ``,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_CSQ`,
     type: "image"
   },
 ];
@@ -53,7 +53,7 @@ const TRAFFIC_TOPIC = [
   },
   {
     label: "倾斜摄影",
-    componentEvent: "cesium-3d-hub-event",
+    componentEvent: "cesium-3d-qxsy",
     componentKey: "3d5",
     type: 'model'
   },
@@ -81,7 +81,7 @@ const SW_TOPIC = [
   },
   {
     label: "建筑三维模型",
-    componentEvent: "cesium-3d-hub-event",
+    componentEvent: "cesium-3d-jz",
     componentKey: "3d6",
     type: 'model'
   },
@@ -93,20 +93,20 @@ const SW_TOPIC = [
   },
   {
     label: "轨道交通模型",
-    componentEvent: "cesium-3d-hub-event",
+    componentEvent: "cesium-3d-gd",
     componentKey: "3d4",
     type: 'model'
   },
   {
     label: "管线管廊模型",
-    componentEvent: "cesium-3d-event",
+    componentEvent: "cesium-3d-gx",
     componentKey: "3d15",
     type: 'model'
   },
   {
     label: "地下空间模型",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "",
+    componentEvent: "cesium-3d-dx",
+    componentKey: "3d16",
     type: 'model'
   },
   {
@@ -131,13 +131,13 @@ const SW_TOPIC = [
 const BIM_TOPIC = [
   {
     label: "市民中心",
-    componentEvent: "cesium-3d-event",
+    componentEvent: "cesium-3d-smzx",
     componentKey: "3d11",
     type: 'model'
   },
   {
     label: "超高层",
-    componentEvent: "cesium-3d-event",
+    componentEvent: "cesium-3d-cgc",
     componentKey: "3d14",
     type: 'model'
   },
@@ -309,14 +309,14 @@ const CITYBJ_TOPIC = [
     type: 'mvt',
     dataname: 'erweidata:',
     url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
-    dataset: "GCLD_GCPTSS"
+    dataset: "JMSS_LD"
   },
   {
     label: "道路交通类",
     type: 'mvt',
-    dataname: 'erweidata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
-    dataset: "JMSS_LD"
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    dataset: "JCSS_TCC"
   },
   {
     label: "市容环境类",
@@ -413,7 +413,7 @@ const EDUCATION_TOPIC = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },
@@ -567,8 +567,10 @@ const GTKJGH_TOPIC = [
   },
   {
     label: "详细规划",
-    url: ``,
-    type: "image"
+    //componentEvent:"cesium-3d-event",
+    componentEvent: "cesium-3d-kggx",
+    componentKey: "3d12",
+    type: 'model'
   },
   {
     label: "村庄规划",
@@ -731,7 +733,7 @@ const GCJSXM_TOPIC=[
     label: "集团项目",
     type: 'mvt',
     dataname: '172.20.83.196_ersjdata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
     dataset: "JTXM"
   },
   { label: "工程项目",
@@ -896,7 +898,7 @@ const WLGZ_TOPIC = [
   {
     id: "建筑监测数据",
     label: "建筑监测数据",
-    children: JZJC_TOPIC.map(v => {
+    children: SZSJJC_TOPIC.map(v => {
       return {
         ...v,
         id: v.label,
@@ -910,7 +912,7 @@ const WLGZ_TOPIC = [
   {
     id: "市政设施监测数据",
     label: "市政设施监测数据",
-    children: SZSJJC_TOPIC.map(v => {
+    children: JZJC_TOPIC.map(v => {
       return {
         ...v,
         id: v.label,

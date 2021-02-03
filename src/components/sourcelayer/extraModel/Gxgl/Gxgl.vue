@@ -26,6 +26,7 @@ const _UNDERGROUND_HASH_ = {
   WSLINE: "污水管线",
   JSLINE: "给水管线",
   YSLINE: "雨水管线",
+  JSWELL: "雨水井盖",
 };
 let handlerPolygon = undefined;
 import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
@@ -44,7 +45,7 @@ export default {
     this.initScene();
     this.initExcavate();
     this.cameraMove();
-    this.change_Alpha_Value(this.aValue)
+    this.change_Alpha_Value(this.aValue);
   },
   beforeDestroy() {
     //  透明度
@@ -77,7 +78,10 @@ export default {
      * 开挖初始化
      */
     initExcavate() {
-      handlerPolygon = new Cesium.DrawHandler(window.earth, Cesium.DrawMode.Polygon);
+      handlerPolygon = new Cesium.DrawHandler(
+        window.earth,
+        Cesium.DrawMode.Polygon
+      );
       handlerPolygon.activeEvt.addEventListener((isActive) => {
         if (isActive) {
           window.earth.enableCursorStyle = false;
@@ -107,11 +111,14 @@ export default {
           let cartographic = Cesium.Cartographic.fromCartesian(array[i]);
           let longitude = Cesium.Math.toDegrees(cartographic.longitude);
           let latitude = Cesium.Math.toDegrees(cartographic.latitude);
-          if (positions.indexOf(longitude) == -1 && positions.indexOf(latitude) == -1) {
+          if (
+            positions.indexOf(longitude) == -1 &&
+            positions.indexOf(latitude) == -1
+          ) {
             positions.push(longitude, latitude, cartographic.height);
           }
         }
-        console.log('positions', positions)
+        console.log("positions", positions);
         window.earth.scene.globe.removeAllExcavationRegion();
         window.earth.scene.globe.addExcavationRegion({
           name: "excavate",
@@ -206,6 +213,11 @@ export default {
 
 <style lang="less" scoped>
 .civilization-center {
+  z-index: 7;
+  position: absolute;
+  left: 26vw;
+  -webkit-transform: translateX(-50%);
+  top: 10vh;
   padding: 10px;
   background: rgba(11, 20, 35, 0.8);
   border: 1px solid rgba(81, 161, 201, 0.6);

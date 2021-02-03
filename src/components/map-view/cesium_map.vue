@@ -71,6 +71,10 @@ export default {
         this.SetForceBimData([]);
         this.showSubFrame = value;
       });
+      // this.$bus.$off("cesium-3d-kggx");
+      // this.$bus.$on("cesium-3d-kggx", ({ value }) => {
+      //   this.showKgFrame = value;
+      // });
       this.$bus.$off("cesium-3d-maptool");
       this.$bus.$on("cesium-3d-maptool", ({ value }) => {
         this.showSubTool = value;
