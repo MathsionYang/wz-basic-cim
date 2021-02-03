@@ -21,13 +21,15 @@
             class="inner-item"
             :class="{
               active: ~forceTrueTopicLabels.indexOf(datas.id),
-              inline: datas.id.length<6
+              inline: datas.id.length < 6,
             }"
-          >  
+          >
             <div class="fuhao"></div>
-            <span @click="doForceTrueTopicLabels(item.children,datas.id)" class="ring">{{
-              datas.id
-            }}</span>
+            <span
+              @click="doForceTrueTopicLabels(item.children, datas.id)"
+              class="ring"
+              >{{ datas.id }}</span
+            >
           </div>
         </div>
       </div>
@@ -186,8 +188,8 @@ export default {
      * 选中状态
      * @param {string} id
      */
-    doForceTrueTopicLabels(children,id) {
-      console.log("选中状态",children,id)
+    doForceTrueTopicLabels(children, id) {
+      console.log("选中状态", children, id);
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
         let _fttl_ = [...this.forceTrueTopicLabels];
@@ -201,7 +203,7 @@ export default {
         this.SetForceTrueTopicLabelId(label.id);
         this.nodeCheckChange(label, true, true);
       }
-       console.log("数组",this.forceTrueTopicLabels);
+      console.log("数组", this.forceTrueTopicLabels);
     },
     /**
      * POI fetch
@@ -233,7 +235,7 @@ export default {
     },
     nodeCheckChange(node, checked, topicLoad) {
       if (checked) {
-        console.log("点击内容",node)
+        console.log("点击内容", node);
         if (node.type == "mvt" && node.id) {
           console.log("点");
           if (node.id && window.billboardMap[node.id]) {
@@ -246,12 +248,30 @@ export default {
               this.switchSearchBox(node, topicLoad);
             });
           }
+          if (node.withImage) {
+            node.withImage.forEach((item) => {
+              const LAYER = this.tileLayers[item.name];
+              if (LAYER) {
+                LAYER.show = true;
+              } else {
+                this.tileLayers[
+                  item.name
+                ] = window.earth.imageryLayers.addImageryProvider(
+                  new Cesium.SuperMapImageryProvider({
+                    url: item.url,
+                  })
+                );
+                item.alpha && (this.tileLayers[item.name].alpha = item.alpha);
+                // window.earth.imageryLayers.lower(this.tileLayers[item.name]);
+              }
+            });
+          }
         } else if (node.type == "model") {
           node.componentEvent &&
             node.componentKey &&
             this.$bus.$emit(node.componentEvent, { value: node.componentKey });
         } else if (node.type == "image") {
-          console.log("面",node);
+          console.log("面", node);
           const LAYER = this.tileLayers[node.id];
           this.tileLayers[
             node.id
@@ -274,6 +294,12 @@ export default {
         if (node.icon && window.billboardMap[node.id]) {
           window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
           window.labelMap[node.id].setAllLabelsVisible(false);
+        }
+        if (node.withImage) {
+          node.withImage.forEach((item) => {
+            const LAYER = this.tileLayers[item.name];
+            LAYER.show = false;
+          });
         }
         node.componentEvent &&
           this.$bus.$emit(node.componentEvent, { value: null });

@@ -215,6 +215,7 @@ export default {
       // 监听左键点击事件
       handler.setInputAction((e) => {
         const pick = window.earth.scene.pick(e.position);
+        console.log("点击事件", pick);
         if (!pick || !pick.id) return;
         if (typeof pick.id == "object") {
           //  *****[videoCircle]  监控视频点*****

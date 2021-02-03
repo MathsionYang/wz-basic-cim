@@ -544,7 +544,13 @@ const CULTURE_TOPIC = [
 
 const GCJSXM_TOPIC=[
   { label: "集团项目", dataset: "PublicToilet" },
-  { label: "工程项目", dataset: "PublicToilet" },
+  { label: "工程项目", dataset: "erweidata:V_TM_PROJECT_P", 
+    url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data", type: "mvt",
+    withImage: [{
+      name: "ydhx",
+      url: "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/JSGC_DJDM",
+    }]
+  },
 ];
 
 const SZSJJC_TOPIC=[
@@ -596,7 +602,7 @@ const GCXX_TOPIC=[
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataset}`
       };
     })
   },
