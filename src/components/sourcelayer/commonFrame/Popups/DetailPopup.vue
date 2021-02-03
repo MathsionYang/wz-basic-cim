@@ -142,6 +142,7 @@ export default {
      * 开专门的缓冲区collection
      */
     doCircleBuffer() {
+      this.extraTabActive = 'rkdt'
       this.buffer = this.buffer ? null : {};
       const { name, geometry } = this.forceEntity;
       this.$bus.$emit("cesium-3d-population-circle", {
