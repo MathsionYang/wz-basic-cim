@@ -734,8 +734,10 @@ const GCJSXM_TOPIC=[
     url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
     dataset: "JTXM"
   },
-  { label: "工程项目", dataset: "erweidata:V_TM_PROJECT_P", 
-    url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data", type: "mvt",
+  { label: "工程项目",
+    type: "mvt",
+    dataset: "erweidata:V_TM_PROJECT_P", 
+    url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
     withImage: [{
       name: "ydhx",
       url: "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/JSGC_DJDM",
@@ -883,7 +885,8 @@ const GCXX_TOPIC = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
+        // newdataset: `${v.dataname}${v.dataset}`
+        newdataset: `${v.dataname?`${v.dataname}${v.dataset}`:`${v.dataset}`}`
       };
     })
   },
