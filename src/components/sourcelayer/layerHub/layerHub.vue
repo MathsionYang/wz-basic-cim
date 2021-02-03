@@ -187,6 +187,7 @@ export default {
      * @param {string} id
      */
     doForceTrueTopicLabels(children,id) {
+      console.log("选中状态",children,id)
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
         let _fttl_ = [...this.forceTrueTopicLabels];
@@ -232,7 +233,9 @@ export default {
     },
     nodeCheckChange(node, checked, topicLoad) {
       if (checked) {
+        console.log("点击内容",node)
         if (node.type == "mvt" && node.id) {
+          console.log("点");
           if (node.id && window.billboardMap[node.id]) {
             window.billboardMap[node.id]._billboards.map(
               (v) => (v.show = true)

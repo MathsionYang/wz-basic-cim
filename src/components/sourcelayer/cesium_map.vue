@@ -31,8 +31,10 @@
       <!-- <CesiumMapVideo v-if="showSubFrame == '3d1'" /> -->
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
       <TrafficSubwayModel v-if="showSubHubFrame == '3d4'" />
-      <CivilizationCenter ref="civilizationcenter" v-if="showSubFrame == '3d11'"/>
-      <Chaogc ref="Chaogc" v-if="showSubFrame == '3d14'"/>
+      <BJSWQModel v-if="showSubHubFrame == '3d5'" />
+      <BJJM v-if="showSubHubFrame == '3d6'" />
+      <CivilizationCenter ref="civilizationcenter"  v-if="showSubFrame == '3d11'" />
+      <Chaogc ref="Chaogc" v-if="showSubFrame == '3d14'" />
       <Gxgl ref="gxgl" v-if="showSubFrame == '3d15'" />
       <VideoCircle ref="videoCircle" />
       <RoadLine ref="roadline" />
@@ -56,6 +58,8 @@ import CityIndex from "components/sourcelayer/CityIndex/index";
 import Roulette from "components/sourcelayer/roulette/roulette";
 import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedModel";
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
+import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
+import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
 import InfoFrame from "components/sourcelayer/commonFrame/InfoFrame/InfoFrame";
 import MedicalPopup from "components/sourcelayer/commonFrame/Popups/medicalPopup";
 import BayonetPopup from "components/sourcelayer/commonFrame/Popups/bayonetPopup";
@@ -84,6 +88,7 @@ import {
   mapImageLayerInit,
   mapMvtLayerInit,
   mapRiverLayerInit,
+  mapBJSWQLayerInit,
   mapBaimoLayerInit,
   mapRoadLampLayerInit,
   mapRoadLampLayerTurn,
@@ -112,7 +117,7 @@ export default {
     },
   },
   created() {
-    this.forceTreeLabel == "城市总览" && (this.showSubHubFrame = "3d1");
+    // this.forceTreeLabel == "城市总览" && (this.showSubHubFrame = "3d1");
   },
   components: {
     // CesiumMapVideo,
@@ -121,6 +126,8 @@ export default {
     CityIndex,
     Roulette,
     DetailedModel,
+    BJSWQModel,
+    BJJM,
     TrafficSubwayModel,
     InfoFrame,
     MedicalPopup,
@@ -137,7 +144,7 @@ export default {
     BIMinfoFrame,
     Gxgl,
     CivilizationCenter,
-    Chaogc
+    Chaogc,
   },
   created() {
     window.extraHash = {};
@@ -188,9 +195,9 @@ export default {
           this.$refs.tourPointPopup.fixPopup();
         }
         //  *****[indexPoints]  城市总览指标*****
-        // if (this.isOverview && this.$refs.overview.$refs.overviewNow) {
-        //   this.$refs.overview.$refs.overviewNow.doIndexPoints();
-        // }
+        if (this.isOverview && this.$refs.overview.$refs.overviewNow) {
+          this.$refs.overview.$refs.overviewNow.doIndexPoints();
+        }
         //  *****[videoCircle]  事件传递点位*****
         if (this.$refs.videoCircle && this.$refs.videoCircle.shallPop) {
           this.$refs.videoCircle.doPopup();
@@ -202,7 +209,9 @@ export default {
       });
     },
     initHandler() {
-      const handler = new Cesium.ScreenSpaceEventHandler(window.earth.scene.canvas);
+      const handler = new Cesium.ScreenSpaceEventHandler(
+        window.earth.scene.canvas
+      );
       // 监听左键点击事件
       handler.setInputAction((e) => {
         const pick = window.earth.scene.pick(e.position);
@@ -254,7 +263,7 @@ export default {
         if (gx) {
           this.SetForceBimData(_data_);
         }
-      })
+      });
     },
     /**
      * 事件注册
@@ -282,7 +291,7 @@ export default {
           ? (window.imagelayer = mapImageLayerInit(ServiceUrl.SWImage))
           : undefined;
         //  光源显示
-        mapRoadLampLayerTurn(!value ? false : true);
+        //mapRoadLampLayerTurn(!value ? false : true);
         //  河流显示
         window.earth.scene.layers.find("RIVER").visible = !value ? true : false;
         //  历史页面做回调
@@ -312,17 +321,20 @@ export default {
       //  相机位置
       this.cameraMove();
       //  大数据地图
-      window.datalayer = mapImageLayerInit(ServiceUrl.DataImage);
+      window.datalayer = mapImageLayerInit(ServiceUrl.SWImage);
+      //window.datalayer = mapImageLayerInit(ServiceUrl.DataImage);
       //  地图注记
       const mapMvt = mapMvtLayerInit("mapMvt", ServiceUrl.YJMVT);
       //  重要地物注记
-      // const keyMvt = mapMvtLayerInit("keyMvt", ServiceUrl.KEYMVT);
+      //const keyMvt = mapMvtLayerInit("keyMvt", ServiceUrl.KEYMVT);
+      
+      await mapBJSWQLayerInit("BJImage", ServiceUrl.BJImage);
       //  水面
-      await mapRiverLayerInit("RIVER", ServiceUrl.STATIC_RIVER);
+      // await mapRiverLayerInit("RIVER", ServiceUrl.STATIC_RIVER);
       //  白模叠加
-      await mapBaimoLayerInit(ServiceUrl.WZBaimo_OBJ);
+      // await mapBaimoLayerInit(ServiceUrl.WZBaimo_OBJ);
       //  路灯、光源叠加
-      mapRoadLampLayerInit();
+      //mapRoadLampLayerInit();
       //  阴影
       // mapShadowInit();
       //  回调钩子

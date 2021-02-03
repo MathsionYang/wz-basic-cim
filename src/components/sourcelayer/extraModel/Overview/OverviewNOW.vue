@@ -1,5 +1,5 @@
 <template>
-  <div class="overviewNow">
+  <div class="overviewNow" style="display:none">
     <div
       v-for="(item, index) in fixIndexPoints"
       :key="index"

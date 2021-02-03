@@ -14,91 +14,55 @@ const SERVER_DEFAULT_DATA = SERVER_HOST + SW_DATA;
 const TOUR_TOPIC = [
   {
     label: "国家行政区",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
   {
     label: "省级行政区",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
   {
     label: "地级行政区",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_XS_M`,
     type: "image"
   },
   {
     label: "县级行政区",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_XZJD_M`,
     type: "image"
   },
   {
     label: "乡级行政区",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/XZQH_CSQ`,
     type: "image"
   },
   {
     label: "其他行政区",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: ``,
     type: "image"
   },
-  // {
-  //   label: "重点景区", dataset: "JingQu",
-  //   withExtraData: "tourPointList",
-  //   withExtraDataGeometry: "tourPointListWithGeometry",
-  //   saveExtraDataByGeometry: "setTourPointListWithGeometry",
-  //   withExtraKey: "NAME",
-  // },
-  // { label: "星级酒店", dataset: "XingJiJiuDian" },
-  // { label: "精品农家乐", dataset: "温州农家乐" },
-  // { label: "旅游景点", dataset: "永嘉旅游景点地图" },
-  // { label: "温州民宿", dataset: "温州民宿" },
-  // { label: "森林康养基地", dataset: "温州市森林康养基地" },
-  // { label: "夜光经济", dataset: "夜景" },
-  // {
-  //   label: "AAA级景区村",
-  //   dataset: "AAAJiFengJingQuCunZhuang"
-  // },
-  // { label: "A级风景区", dataset: "AJiFengJingQu" },
-  // { label: "其他景点", dataset: "QiTaJingDIan" },
-  // { label: "星级旅行社", dataset: "XingJiLvXingShe" },
-  // { label: "民宿客栈", dataset: "MinSuKeZhan" },
-  // { label: "公厕", dataset: "PublicToilet" }
 ];
-//  交通专题
+//  测绘
 const TRAFFIC_TOPIC = [
   {
     label: "数字正射影像图",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
     label: "倾斜摄影",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "3d5",
     type: 'model'
   },
-  
-  // {
-  //   label: "S1线路",
-  //   componentEvent: "cesium-3d-hub-event",
-  //   componentKey: "3d4",
-  //   type: 'model'
-  // },
-  // {
-  //   label: "S1站点",
-  //   dataset: "T2_WZ_S1_Station_2019",
-  //   withExtraData: "stationList",
-  //   withExtraDataGeometry: "stationListWithGeometry",
-  //   saveExtraDataByGeometry: "setStationListWithGeometry",
-  //   withExtraKey: "NAME",
-  // },
 ];
+//电子地图
 const DZ_TOPIC = [
   {
     label: "政务地图",
-    url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+    url: `http://172.20.83.223:8091/iserver/services/map-agscachev2-YJSGBZBDemD2019CGCS2000/rest/maps/YJ_SG_BZB_DemD_2019_CGCS2000`,
     type: "image"
   },
 ];
@@ -106,25 +70,25 @@ const SW_TOPIC = [
   {
     label: "数字高程模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
     label: "数字地表模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
     label: "建筑三维模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "3d6",
     type: 'model'
   },
   {
     label: "交通三维模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
@@ -142,25 +106,25 @@ const SW_TOPIC = [
   {
     label: "地下空间模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
     label: "场地三维模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
     label: "植被三维模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
   {
     label: "其他三维模型",
     componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentKey: "",
     type: 'model'
   },
 ];
@@ -191,8 +155,8 @@ const MEDICAL_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -205,8 +169,8 @@ const MEDICAL_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -219,8 +183,8 @@ const MEDICAL_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: v.type || "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -233,8 +197,8 @@ const MEDICAL_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: v.type || "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -247,8 +211,8 @@ const MEDICAL_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: v.type || "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -261,8 +225,8 @@ const MEDICAL_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: v.type || "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -322,8 +286,8 @@ const EDUCATION_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -336,8 +300,8 @@ const EDUCATION_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -350,8 +314,8 @@ const EDUCATION_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -364,8 +328,8 @@ const EDUCATION_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -378,8 +342,8 @@ const EDUCATION_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -400,11 +364,11 @@ const DMDZ_TOPIC=[
 const SHH_TOPIC=[
   { label: "服务大数据", dataset: "PublicToilet" },
   { label: "城市运行数据", dataset: "PublicToilet" },
-  // {
-  //     label: "控规信息",
-  //     url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
-  //     type: "image"
-  //   }
+  {
+      label: "控规信息",
+      url: `${SERVER_HOST}/map-KongGui_LuCheng/rest/maps/%E6%8E%A7%E8%A7%84%E4%B8%89%E5%8C%BA20200304%40172.20.83.196_swdata`,
+      type: "image"
+    }
 ];
 // 规划专题
 const BASIC_TOPIC = [
@@ -416,8 +380,8 @@ const BASIC_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -430,8 +394,8 @@ const BASIC_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -444,8 +408,8 @@ const BASIC_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -458,8 +422,8 @@ const BASIC_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -528,8 +492,8 @@ const CULTURE_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -542,8 +506,8 @@ const CULTURE_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -556,8 +520,8 @@ const CULTURE_TOPIC = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -620,6 +584,7 @@ const JTJC_TOPIC=[
 const STHJ_TOPIC=[
   { label: "生态监测", dataset: "PublicToilet" },
 ];
+//工程建设项目
 const GCXX_TOPIC=[
   {
     id: "工程建设项目",
@@ -629,8 +594,8 @@ const GCXX_TOPIC=[
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -646,8 +611,8 @@ const WLGZ_TOPIC=[
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -660,8 +625,8 @@ const WLGZ_TOPIC=[
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -674,8 +639,8 @@ const WLGZ_TOPIC=[
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -688,8 +653,8 @@ const WLGZ_TOPIC=[
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -702,22 +667,13 @@ const WLGZ_TOPIC=[
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
   }
 ];
-
-const CITY_TOPIC = [
-  {
-    label: "城市总览",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d1",
-    type: 'model'
-  },
-]
 
 /**
  * 对应需要额外数据的点位
@@ -730,17 +686,6 @@ export const CESIUM_TREE_EXTRA_DATA_WITH_GEOMETRY = ["medicalListWithGeometry", 
 export const CESIUM_TREE_EXTRA_DATA = ["medicalList", "bayonetList", "stationList", "tourPointList"];
 export const CESIUM_TREE_OPTION = [
   {
-    id: "城市总览",
-    label: "城市总览",
-    children: CITY_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-      };
-    })
-  },
-  {
     id: "时空基础数据",
     label: "时空基础数据",
     children: MEDICAL_TOPIC.map(v => {
@@ -748,8 +693,8 @@ export const CESIUM_TREE_OPTION = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -762,8 +707,8 @@ export const CESIUM_TREE_OPTION = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -776,8 +721,8 @@ export const CESIUM_TREE_OPTION = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -790,8 +735,8 @@ export const CESIUM_TREE_OPTION = [
         ...v,
         id: v.label,
         icon: v.label,
-        url: SERVER_DEFAULT_DATA,
-        type: v.type || "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
@@ -799,17 +744,31 @@ export const CESIUM_TREE_OPTION = [
   {
     id: "公共专题数据",
     label: "公共专题数据",
-    children: [...BASIC_TOPIC].map(v => {
+    children: BASIC_TOPIC.map(v => {
       return {
         ...v,
         id: v.label,
         icon: v.label,
-        url: v.url || SERVER_DEFAULT_DATA,
-        type: v.type || "mvt",
+        url: v.url,
+        type: v.type,
         newdataset: `${SW_DATA_NAME}${v.dataset}`
       };
     })
   },
+  {
+    id: "物联感知数据",
+    label: "物联感知数据",
+    children: WLGZ_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  }
 ];
 export const CESIUM_TREE_TRAFFIC_OPTION = [{
   id: "物联感知数据",

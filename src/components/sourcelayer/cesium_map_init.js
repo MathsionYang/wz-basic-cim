@@ -12,7 +12,7 @@ export const mapConfigInit = () => {
     // window.earth.scene.fxaa = true;
     window.earth.scene.sun.show = true;
     window.earth.scene.bloomEffect.bloomIntensity = 1.05;
-    window.earth.scene.bloomEffect.show = true;
+    window.earth.scene.bloomEffect.show = false;//泛光
     window.earth.imageryLayers.get(0).show = false;
     window.earth.scene.skyAtmosphere.show = false;
     window.earth.scene.globe.baseColor = new Cesium.Color.fromCssColorString(
@@ -42,6 +42,58 @@ export const mapMvtLayerInit = (name, url) => {
     window.earth.scene.addVectorTilesMap({ url, name, viewer: window.earth });
 }
 
+export const mapBJSWQLayerInit = (name,url) => {
+    var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+    getFeatureParam = new SuperMap.REST.FilterParameter({
+      attributeFilter: "SMID=1",
+    });
+    getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters(
+      {
+        queryParameter: getFeatureParam,
+        toIndex: -1,
+        datasetNames: ["172.20.83.196_swdata:" + "cbd_region"],
+      }
+    );
+    getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(
+        url,
+      {
+        eventListeners: {
+          processCompleted: onQueryComplete,
+          processFailed: processFailed,
+        },
+      }
+    );
+    getFeatureBySQLService.processAsync(getFeatureBySQLParams);
+    function onQueryComplete(queryEventArgs) {
+      var selectedFeatures = queryEventArgs.originResult.features;
+      for (var i = 0; i < selectedFeatures.length; i++) {
+        addFeature(selectedFeatures[i]);
+      }
+    }
+    function processFailed(queryEventArgs) {
+    }
+    function getLonLatArray(points) {
+      var point3D = [];
+      points.forEach(function (point) {
+        point3D.push(point.x);
+        point3D.push(point.y);
+      });
+      return point3D;
+    }
+    function addFeature(feature) {
+      var lonLatArr = getLonLatArray(feature.geometry.points);
+      window.earth.entities.add({
+        id: name,
+        name: name,
+        polyline: {
+          positions: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
+          width: 5,
+          material: new Cesium.Color(0 / 255, 255 / 255, 0, 1),
+          classificationType: Cesium.ClassificationType.S3M_TILE, //矢量线贴对象
+        },
+      });
+    }
+}
 /**
  * 水面叠加
  * @param {*} name 
