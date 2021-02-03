@@ -42,7 +42,7 @@ export default {
             ? "pass"
             : "future"
           : "now";
-      this.SetForceTreeLabel("城市总览");
+     // this.SetForceTreeLabel("城市总览");
       setTimeout(() => {
         this.SetForceTime(value);
       }, 500);

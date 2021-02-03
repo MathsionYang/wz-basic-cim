@@ -44,7 +44,6 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("map", ["nightMode", "cameraMode", "forceTime"]),
   },
   watch: {},
   methods: {

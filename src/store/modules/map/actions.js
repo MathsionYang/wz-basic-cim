@@ -214,7 +214,7 @@ export const SetForceTime = ({ commit }, data) => {
   commit(types.SET_FORCE_TIME, data);
 };
 //  设置白天黑夜
-export const SetNightMode = ({ commit }, data) => {
+export const SetNightMode = ({ commit }, data) => {;
   commit(types.SET_NIGHT_MODE, data);
 };
 //  设置相机转动

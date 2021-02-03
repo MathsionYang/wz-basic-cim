@@ -127,6 +127,7 @@ export default {
   width: 40vh;
   height: auto;
   top: 0;
+  display: none;
   left: 12vh;
   cursor: pointer;
   > * {
