@@ -31,17 +31,19 @@
       <!-- <CesiumMapVideo v-if="showSubFrame == '3d1'" /> -->
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
       <TrafficSubwayModel v-if="showSubHubFrame == '3d4'" />
+      <CivilizationCenter ref="civilizationcenter" v-if="showSubFrame == '3d11'"/>
+      <Chaogc ref="Chaogc" v-if="showSubFrame == '3d14'"/>
+      <Gxgl ref="gxgl" v-if="showSubFrame == '3d15'" />
       <VideoCircle ref="videoCircle" />
       <RoadLine ref="roadline" />
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
+      <BIMinfoFrame ref="biminfoFrame" />
       <div v-show="!isOverview">
         <RtmpVideo />
         <Population />
       </div>
     </div>
     <AuthFailPopup ref="authFailPopup" v-if="authFailshallPop" />
-
-    <BIMinfoFrame ref="biminfoFrame" />
   </div>
 </template>
 
@@ -67,7 +69,10 @@ import VideoCircle from "components/sourcelayer/commonFrame/postMessage/videoCir
 import AuthFailPopup from "components/sourcelayer/commonFrame/AuthFailPopup/AuthFailPopup";
 import Overview from "components/sourcelayer/extraModel/Overview/Overview.vue";
 
-import BIMinfoFrame from "components/map-view/commonFrame/BIMinfoFrame";
+import BIMinfoFrame from "components/sourcelayer/commonFrame/BIMinfoFrame/BIMinfoFrame";
+import Gxgl from "components/sourcelayer/extraModel/Gxgl/Gxgl";
+import CivilizationCenter from "components/sourcelayer/extraModel/CivilizationCenter/CivilizationCenter";
+import Chaogc from "components/sourcelayer/extraModel/Chaogc/Chaogc";
 
 import {
   getCurrentExtent,
@@ -129,9 +134,13 @@ export default {
     VideoCircle,
     AuthFailPopup,
     Overview,
-    BIMinfoFrame
+    BIMinfoFrame,
+    Gxgl,
+    CivilizationCenter,
+    Chaogc
   },
   created() {
+    window.extraHash = {};
     //  点位信息 hash
     window.featureMap = {};
     //  点位icon hash

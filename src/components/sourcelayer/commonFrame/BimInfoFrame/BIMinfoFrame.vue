@@ -91,7 +91,7 @@ export default {
       "SetForceBimIDS",
     ]),
     closeBimFrame() {
-      console.log('fuckb')
+      console.log('closeBimFrame')
       this.SetForceBimData([]);
       this.SetForceRoomData([]);
       this.SetForceBimIDS([]);

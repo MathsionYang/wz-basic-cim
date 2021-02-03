@@ -41,3 +41,7 @@ export const cameraMode = state => state.cameraMode;
 export const forceTreeLabel = state => state.forceTreeLabel
 export const forceTrueTopicLabels = state => state.forceTrueTopicLabels;
 export const forceTrueTopicLabelId = state => state.forceTrueTopicLabelId;
+
+export const forceBimData = state => state.forceBimData;
+export const forceRoomData = state => state.forceRoomData;
+export const forceBimIDS = state => state.forceBimIDS;

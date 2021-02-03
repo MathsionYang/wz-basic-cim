@@ -18,10 +18,11 @@
           <div
             v-for="(datas, j) in item.children"
             :key="j"
+            class="inner-item"
             :class="{
-            long: true,
-            active: ~forceTrueTopicLabels.indexOf(datas.id),
-          }"
+              active: ~forceTrueTopicLabels.indexOf(datas.id),
+              inline: datas.id.length<6
+            }"
           >  
             <div class="fuhao"></div>
             <span @click="doForceTrueTopicLabels(item.children,datas.id)" class="ring">{{

@@ -135,8 +135,8 @@ const SW_TOPIC = [
   },
   {
     label: "管线管廊模型",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentEvent: "cesium-3d-event",
+    componentKey: "3d15",
     type: 'model'
   },
   {
@@ -167,14 +167,14 @@ const SW_TOPIC = [
 const BIM_TOPIC = [
   {
     label: "市民中心",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentEvent: "cesium-3d-event",
+    componentKey: "3d11",
     type: 'model'
   },
   {
     label: "超高层",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "3d4",
+    componentEvent: "cesium-3d-event",
+    componentKey: "3d14",
     type: 'model'
   },
 ];

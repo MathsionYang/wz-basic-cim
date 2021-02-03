@@ -20,6 +20,7 @@
     "cnchar": "^2.1.4",
     "echarts": "^4.5.0",
     "element-ui": "^2.13.0",
+    "gcoord": "^0.2.3",
     "good-storage": "^1.1.0",
     "jquery": "^3.4.1",
     "jsonp": "^0.2.1",

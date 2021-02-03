@@ -120,3 +120,32 @@ export const BimSourceURL = {
   UNDERGROUND_SCENE_URL:
     "http://172.20.83.223:8098/iserver/services/3D-GSLINE/rest/realspace"
 };
+
+export const CIVILIZATION_CENTER_URL = {
+  //市民中心地下管线
+  UNDERGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
+  //市民中心地下管线数据
+  UNDERGROUND_DATA: {
+    url: "http://172.20.83.223:8098/iserver/services/data-Pipes/rest/data",
+    dataSourceName: "Pipes_table"
+  },
+  //地上模型
+  ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb7/rest/realspace",
+  //地上模型数据绑定
+  ABOVEGROUND_DATA: {
+    url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
+  },
+  GEOLOGY: "http://172.20.83.223:8098/iserver/services/3D-mongodb-CIMGeology/rest/realspace",
+  GEOLOGY_DATA: {
+    url: "http://172.20.83.223:8098/iserver/services/data-DiZhiTi_table/rest/data",
+    dataSourceName: "地质体_table"
+  }
+} 
+export const CHAO_CENTER_URL = {
+  //地上模型
+  ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb8/rest/realspace",
+  //地上模型数据绑定
+  ABOVEGROUND_DATA: {
+    url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
+  },
+} 
