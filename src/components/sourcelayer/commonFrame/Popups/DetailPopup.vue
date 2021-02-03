@@ -25,16 +25,16 @@
             <li
               v-for="(item, key, index) in forceEntity.fix_data"
               :key="index"
-              v-show="item && !~filterKey.indexOf(key)"
+              v-show="item && !~filterKey.indexOf(key) && index<5"
             >
               <span>{{ key }}</span>
               <span>{{ item }}</span>
             </li>
           </ul>
         </div>
-        <div class="extra-tab_SP" @click="doVideoRtmp"></div>
-        <div class="extra-tab_RK" @click="doCircleBuffer"></div>
-        <div class="extra-tab_RKDT" @click="doCircleBuffer"></div>
+        <div class="extra-tab extra-tab_SP" :class="{active: extraTabActive=='sp'}" @click="doVideoRtmp"></div>
+        <div class="extra-tab extra-tab_FX" :class="{active: extraTabActive=='fx'}" @click="doCircleBuffer"></div>
+        <div class="extra-tab extra-tab_RKDT" :class="{active: extraTabActive=='rkdt'}" @click="doCircleBuffer"></div>
         <div class="around-people" v-if="buffer && buffer.success">
           <!-- <img src="/static/images/common/frameline@2x.png" /> -->
           <div>
@@ -48,6 +48,29 @@
         </div>
       </div>
     </div>
+    <div class="side-info" v-show="showSide">
+      <div class="info-header">
+        <div class="title">信息详情</div>
+        <div class="decorate"></div>
+        <div class="close" @click="showSide=false"></div>
+        <div class="tab-list">
+          <div class="tab-item active">基本信息</div>
+          <div class="tab-item">周边分析</div>
+          <div class="tab-item">人口动态</div>
+        </div>
+      </div>
+      <ul class="info-content">
+        <li
+          class="info-item"
+          v-for="(item, key, index) in forceEntity.fix_data"
+          :key="index"
+          v-show="item && !~filterKey.indexOf(key)"
+        >
+          <span class="key" :title="key">{{ key }}</span>
+          <span class="value" :title="item">{{ item }}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -59,6 +82,8 @@ export default {
       forcePosition: {},
       buffer: null,
       filterKey: ["永久固定码", "唯一码", "分类代码"],
+      showSide: true,
+      extraTabActive: ''
     };
   },
   async mounted() {
@@ -78,6 +103,8 @@ export default {
      *  @param {object} forceEntity 详情点信息
      */
     getForceEntity(forceEntity) {
+      console.log('forceEntity', forceEntity)
+      this.showSide = true
       this.forceEntity = forceEntity;
       this.buffer = null;
       this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
@@ -132,6 +159,7 @@ export default {
      * @param {object} param0 该医疗点的对象信息
      */
     doVideoRtmp() {
+      this.extraTabActive = 'sp'
       const { geometry, name } = this.forceEntity;
       const { x, y } = geometry;
       this.$bus.$emit("cesium-3d-rtmpFetch", {
@@ -184,7 +212,7 @@ export default {
     box-sizing: border-box;
     padding: 3vh;
   }
-  .extra-tab_SP {
+  .extra-tab {
     width: 50px;
     height: 50px;
     font-size: 1.6vh;
@@ -196,38 +224,43 @@ export default {
     cursor: pointer;
     float: left;
     background-size: 100% 100%;
+  }
+  .extra-tab_SP {
+    background-size: 100% 100%;
     background-image: url("/static/images/mode-ico/现场直达.png");
-    &active {
-      > .extra-tab_SP {
-        width: 50px;
-        height: 50px;
-        font-size: 1.6vh;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-        padding: 1vh 1vh;
-        color: white;
-        display: inline-block;
-        cursor: pointer;
-        float: left;
-        background-size: 100% 100%;
-        background-image: url("/static/images/mode-ico/现场直达选中.png");
-      }
+    &.active {
+      background-size: 100% 100%;
+      background-image: url("/static/images/mode-ico/现场直达选中.png");
     }
   }
-  .extra-tab {
-    width: 6vh;
-    font-size: 1.6vh;
-    /* position: absolute; */
-    /* right: -1.4vh; */
-    /* line-height: 1.8vh; */
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 1vh 1vh;
-    color: white;
-    display: inline-block;
-    cursor: pointer;
-    float: left;
+  .extra-tab_FX {
+    background-image: url("/static/images/mode-ico/周边分析.png");
+    &.active {
+      background-size: 100% 100%;
+      background-image: url("/static/images/mode-ico/周边分析选中.png");
+    }
   }
+  .extra-tab_RKDT {
+    background-image: url("/static/images/mode-ico/人口动态.png");
+    &.active {
+      background-size: 100% 100%;
+      background-image: url("/static/images/mode-ico/人口动态选中.png");
+    }
+  }
+  // .extra-tab {
+  //   width: 6vh;
+  //   font-size: 1.6vh;
+  //   /* position: absolute; */
+  //   /* right: -1.4vh; */
+  //   /* line-height: 1.8vh; */
+  //   -webkit-box-sizing: border-box;
+  //   box-sizing: border-box;
+  //   padding: 1vh 1vh;
+  //   color: white;
+  //   display: inline-block;
+  //   cursor: pointer;
+  //   float: left;
+  // }
 
   .to-rtmp-video {
     //top: 4vh;
@@ -294,6 +327,90 @@ export default {
         }
         > span:first-child {
           width: 9vh;
+        }
+      }
+    }
+  }
+
+  .side-info {
+    position: fixed;
+    right: 10px;
+    top: 10vh;
+    width: 34vh;
+    z-index: 99;
+    color: #fff;
+    .info-header {
+      .title {
+        font-family: YouSheBiaoTiHei;
+        color: #fff;
+        font-size: 2vh;
+      }
+      .decorate {
+        margin: 4px 0;
+        width: 100%;
+        height: 0.4vh;
+        .bg-image('/static/images/mode-ico/装饰_1');
+      }
+      .close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .bg-image('/static/images/mode-ico/叉2');
+        cursor: pointer;
+      }
+      .tab-list {
+        padding-right: 2vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .tab-item {
+          flex: 1;
+          margin-right: 1vh;
+          padding: 5px 0 10px 0;
+          .bg-image('/static/images/mode-ico/side-tab');
+          font-family: YouSheBiaoTiHei;
+          font-size: 2vh;
+          text-align: center;
+          &:last-child {
+            margin: 0;
+          }
+          &.active {
+            .bg-image('/static/images/mode-ico/side-tab-sel');
+            color: #FFFF08;
+          }
+        }
+      }
+    }
+    .info-content {
+      margin-top: 1vh;
+      width: 100%;
+      height: 40vh;
+      overflow-y: auto;
+      .bg-image('/static/images/mode-ico/side-bg');
+      .info-item {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 1vh 0;
+        .key {
+          flex: 2;
+          padding: 0 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          border-right: 2px solid #fff;
+        }
+        .value {
+          flex: 4;
+          padding: 0 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        &:nth-child(even) {
+          background-color: rgba(42, 203, 264, .15);
         }
       }
     }
