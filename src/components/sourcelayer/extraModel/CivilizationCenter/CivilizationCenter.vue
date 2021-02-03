@@ -1,31 +1,5 @@
 <template>
   <div class="ThreeDContainer civilization-center" :style="{ width: '400px' }">
-    <!-- <el-divider content-position="left">范围裁剪</el-divider>
-    <div class="civilization-frame">
-      <el-button class="elformbtn" @click="doTailor">开始裁剪</el-button>
-      <el-button class="elformbtn" @click="clearTailor">清除</el-button>
-    </div>
-    <el-divider content-position="left">地表透明度</el-divider>
-    <div class="civilization-frame">
-      <div>透明度：{{ aValue }}%</div>
-      <div class="slider-wrapper" @click.stop>
-        <el-slider
-          @change="change_Alpha_Value"
-          :min="aMin"
-          :max="aMax"
-          v-model="aValue"
-        ></el-slider>
-      </div>
-    </div>
-    <el-divider content-position="left">倾斜开挖</el-divider>
-    <div class="civilization-frame">
-      <el-button class="elformbtn" @click="doExcavate">倾斜开挖</el-button>
-      <el-button class="elformbtn" @click="clearExcavate">清除</el-button>
-    </div>
-    <el-divider content-position="left">停车场</el-divider>
-    <div class="civilization-frame">
-      <el-button class="elformbtn" @click="doFpf">智慧停车系统</el-button>
-    </div> -->
     <div class="bimanalayse tframe">
       <el-form>
         <el-row>
@@ -64,13 +38,51 @@ const _UNDERGROUND_HASH_ = {
   JSLINE: "给水管线",
   YSLINE: "雨水管线",
 };
-const _ABOVEGROUND_HASH_ = {
+const _ABOVEGROUND1_HASH_ = {
   // B2机电: "燃气管线",
   // B1机电: "B1机电_table",
   B2土建: "给水管线",
   B1土建: "B1土建_table",
   Roof: "Roof_table",
-  Block: "citizens_table",
+  // Block: "citizens_table",
+};
+const _ABOVEGROUND2_HASH_ = {
+  AS_1F_1206: "AS_1F_1206",
+  AS_2F_1206: "AS_2F_1206",
+  AS_3F_1206: "AS_3F_1206",
+  AS_4F_1206: "AS_4F_1206",
+  AS_5F_1206: "AS_5F_1206",
+  AS_6F_1206: "AS_6F_1206",
+  AS_7F_1206: "AS_7F_1206",
+  AS_8F_1206: "AS_8F_1206",
+  AS_9F_1206: "AS_9F_1206",
+  AS_10F_1206: "AS_10F_1206",
+  AS_11F_1206: "AS_11F_1206",
+  AS_12F_1206: "AS_12F_1206",
+  AS_13F_1206: "AS_13F_1206",
+  AS_14F_1206: "AS_14F_1206",
+  AS_15F_1206: "AS_15F_1206",
+  AS_16F_1206: "AS_16F_1206",
+  AS_17F_1206: "AS_17F_1206",
+};
+const _ABOVEGROUND3_HASH_ = {
+  AS_1F_1204: "AS_1F_1204",
+  AS_2F_1204: "AS_2F_1204",
+  AS_3F_1204: "AS_3F_1204",
+  AS_4F_1204: "AS_4F_1204",
+  AS_5F_1204: "AS_5F_1204",
+  AS_6F_1204: "AS_6F_1204",
+  AS_7F_1204: "AS_7F_1204",
+  AS_8F_1204: "AS_8F_1204",
+  AS_9F_1204: "AS_9F_1204",
+  AS_10F_1204: "AS_10F_1204",
+  AS_11F_1204: "AS_11F_1204",
+  AS_12F_1204: "AS_12F_1204",
+  AS_13F_1204: "AS_13F_1204",
+  AS_14F_1204: "AS_14F_1204",
+  AS_15F_1204: "AS_15F_1204",
+  AS_16F_1204: "AS_16F_1204",
+  AS_17F_1204: "AS_17F_1204",
 };
 const _AS1206LAYERS_HASH_ = {
   第1层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_1F_1206/config',
@@ -112,21 +124,12 @@ const _AS1204LAYERS_HASH_ = {
   第17层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_17F_1204/config',
   屋顶: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_WD_1204/config',
 };
-let handlerPolygon = undefined;
-let handlerBox = undefined;
-let editorBox = undefined;
-let boxEntity = undefined;
 import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
 import { mapActions } from "vuex";
 export default {
   name: "CivilizationCenter",
   data() {
     return {
-      //  透明度
-      // aMin: 0,
-      // aMax: 100,
-      // aValue: 0,
-
       BimTreeData: [
         {
           label: "土建1206地块楼层控制",
@@ -143,19 +146,16 @@ export default {
   },
   async mounted() {
     this.initScene();
-    // this.initExcavate();
-    // this.initTailor();
     this.cameraMove();
   },
   beforeDestroy() {
     //  透明度
     this.change_Alpha_Value(0);
-    //  句柄销毁
-    // handlerPolygon.clear();
-    // handlerPolygon = undefined;
     //  图层开关
     this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
-    this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+    this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, false);
+    this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, false);
+    this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, false);
     // 清空树
     this.closeTreeVisible();
   },
@@ -167,152 +167,27 @@ export default {
     initScene() {
       if (window.extraHash.civilization) {
         this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, true);
-        this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, true);
+        this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, true);
+        this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, true);
+        this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, true);
       } else {
         const {
-          ABOVEGROUND,
+          ABOVEGROUND1,
+          ABOVEGROUND2,
+          ABOVEGROUND3,
           UNDERGROUND,
           UNDERGROUND_DATA,
-          ABOVEGROUND_DATA,
+          ABOVEGROUND_DATA1,
+          ABOVEGROUND_DATA2,
+          ABOVEGROUND_DATA3,
         } = CIVILIZATION_CENTER_URL;
         this.doGroundInit(_UNDERGROUND_HASH_, UNDERGROUND, UNDERGROUND_DATA);
-        this.doGroundInit(_ABOVEGROUND_HASH_, ABOVEGROUND, ABOVEGROUND_DATA);
+        this.doGroundInit(_ABOVEGROUND1_HASH_, ABOVEGROUND1, ABOVEGROUND_DATA1);
+        this.doGroundInit(_ABOVEGROUND2_HASH_, ABOVEGROUND2, ABOVEGROUND_DATA2);
+        this.doGroundInit(_ABOVEGROUND3_HASH_, ABOVEGROUND3, ABOVEGROUND_DATA3);
       }
       this.getTreeData()
     },
-    // /**
-    //  * 开挖初始化
-    //  */
-    // initExcavate() {
-    //   handlerPolygon = new Cesium.DrawHandler(window.earth, Cesium.DrawMode.Polygon);
-    //   handlerPolygon.activeEvt.addEventListener((isActive) => {
-    //     if (isActive) {
-    //       window.earth.enableCursorStyle = false;
-    //       window.earth._element.style.cursor = "";
-    //       $("body").removeClass("drawCur").addClass("drawCur");
-    //     } else {
-    //       window.earth.enableCursorStyle = true;
-    //       $("body").removeClass("drawCur");
-    //     }
-    //   });
-    //   handlerPolygon.movingEvt.addEventListener((windowPosition) => {
-    //     if (windowPosition.x < 2000 && windowPosition.y < 2000) {
-    //       return;
-    //     }
-    //   });
-    //   handlerPolygon.drawEvt.addEventListener((result) => {
-    //     if (!result.object.positions) {
-    //       handlerPolygon.polygon.show = false;
-    //       handlerPolygon.polyline.show = false;
-    //       handlerPolygon.deactivate();
-    //       handlerPolygon.activate();
-    //       return;
-    //     }
-    //     let array = [].concat(result.object.positions);
-    //     let positions = [];
-    //     for (let i = 0, len = array.length; i < len; i++) {
-    //       let cartographic = Cesium.Cartographic.fromCartesian(array[i]);
-    //       let longitude = Cesium.Math.toDegrees(cartographic.longitude);
-    //       let latitude = Cesium.Math.toDegrees(cartographic.latitude);
-    //       if (positions.indexOf(longitude) == -1 && positions.indexOf(latitude) == -1) {
-    //         positions.push(longitude, latitude, cartographic.height);
-    //       }
-    //     }
-    //     window.earth.scene.globe.removeAllExcavationRegion();
-    //     window.earth.scene.globe.addExcavationRegion({
-    //       name: "excavate",
-    //       position: positions,
-    //       height: 100,
-    //       transparent: false,
-    //     });
-    //     handlerPolygon.polygon.show = false;
-    //     handlerPolygon.polyline.show = false;
-    //     handlerPolygon.deactivate();
-    //     handlerPolygon.activate();
-    //   });
-    // },
-    // initTailor() {
-    //   handlerBox = new Cesium.DrawHandler(window.earth, Cesium.DrawMode.Box);
-    //   handlerBox.drawEvt.addEventListener((e) => {
-    //     boxEntity = e.object;
-    //     var newDim = boxEntity.box.dimensions.getValue();
-    //     var position = boxEntity.position.getValue(0);
-    //     var boxOption = {
-    //       dimensions: newDim,
-    //       position,
-    //       clipMode: "clip_behind_all_plane",
-    //       heading: 0,
-    //     };
-
-    //     //box编辑
-    //     editorBox = new Cesium.BoxEditor(window.earth, boxEntity);
-    //     editorBox.editEvt.addEventListener((e) => {
-    //       boxEntity.box.dimensions = e.dimensions;
-    //       boxEntity.position = e.position;
-    //       boxEntity.orientation = e.orientation;
-    //       this.setClipBox();
-    //     });
-    //     editorBox.distanceDisplayCondition = new Cesium.DistanceDisplayCondition(0, 950);
-    //     editorBox.activate();
-    //     this.setAllLayersClipOptions(boxOption);
-    //     handlerBox.clear();
-    //     handlerBox.deactivate();
-    //   });
-    // },
-    // setClipBox() {
-    //   var newDim = boxEntity.box.dimensions.getValue();
-    //   var position = boxEntity.position.getValue(0);
-    //   var heading = 0;
-    //   if (typeof boxEntity.orientation != "undefined") {
-    //     let rotationM3 = Cesium.Matrix3.fromQuaternion(
-    //       boxEntity.orientation._value,
-    //       new Cesium.Matrix3()
-    //     );
-    //     let localFrame = Cesium.Matrix4.fromRotationTranslation(
-    //       rotationM3,
-    //       Cesium.Cartesian3.ZERO,
-    //       new Cesium.Matrix4()
-    //     );
-    //     let inverse = Cesium.Matrix4.inverse(
-    //       Cesium.Transforms.eastNorthUpToFixedFrame(position),
-    //       new Cesium.Matrix4()
-    //     );
-    //     let hprm = Cesium.Matrix4.multiply(inverse, localFrame, new Cesium.Matrix4());
-    //     var rotation = Cesium.Matrix4.getMatrix3(hprm, new Cesium.Matrix3());
-    //     let hpr = Cesium.HeadingPitchRoll.fromQuaternion(
-    //       Cesium.Quaternion.fromRotationMatrix(rotation)
-    //     );
-    //     heading = hpr.heading;
-    //   }
-    //   var boxOptions = {
-    //     dimensions: newDim,
-    //     position,
-    //     clipMode: "clip_behind_all_plane",
-    //     heading,
-    //   };
-    //   this.setAllLayersClipOptions(boxOptions);
-    // },
-    // setAllLayersClipOptions(boxOptions) {
-    //   Object.keys({ ..._UNDERGROUND_HASH_, ..._ABOVEGROUND_HASH_ }).map((key) => {
-    //     const _KEY_ = `civilization_center_${key}`;
-    //     const layer = window.earth.scene.layers.find(_KEY_);
-    //     layer.setCustomClipBox(boxOptions);
-    //   });
-    // },
-    // doTailor() {
-    //   handlerBox.activate();
-    // },
-    // clearTailor() {
-    //   Object.keys({ ..._UNDERGROUND_HASH_, ..._ABOVEGROUND_HASH_ }).map((key) => {
-    //     const _KEY_ = `civilization_center_${key}`;
-    //     const layer = window.earth.scene.layers.find(_KEY_);
-    //     layer.clearCustomClipBox();
-    //   });
-    //   editorBox.deactivate();
-    //   handlerBox.clear();
-    //   handlerBox.deactivate();
-    //   window.earth.entities.removeAll();
-    // },
     /**
      * 图层控制
      * @param {object} _HASH_ hash
@@ -364,22 +239,6 @@ export default {
     change_Alpha_Value(val) {
       window.earth.scene.globe.globeAlpha = (100 - val) / 100;
     },
-    // doExcavate() {
-    //   handlerPolygon.activate();
-    // },
-    // clearExcavate() {
-    //   handlerPolygon.deactivate();
-    //   window.earth.scene.globe.removeAllExcavationRegion();
-    //   handlerPolygon.polygon.show = false;
-    //   handlerPolygon.polyline.show = false;
-    // },
-    // /**
-    //  * 漫游
-    //  * @param {number} val 地下室B_
-    //  */
-    // doFpf() {
-    //   window.open("http://125.124.19.162:8888");
-    // },
     cameraMove() {
       window.earth.camera.flyTo({
         destination: {
@@ -443,7 +302,8 @@ export default {
       const layer = window.earth.scene.layers.find(_KEY_);
       // let ids = this.$refs.tree.getCheckedKeys();
       console.log(node.label)
-      this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+      this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, false);
+      this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, false);
       if (layer) {
         layer.visible = true;
       } else {

@@ -136,10 +136,24 @@ export const CIVILIZATION_CENTER_URL = {
     dataSourceName: "Pipes_table"
   },
   //地上模型
-  ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb7/rest/realspace",
+  ABOVEGROUND1: "http://172.20.83.223:8098/iserver/services/3D-mongodb7/rest/realspace",
   //地上模型数据绑定
-  ABOVEGROUND_DATA: {
+  ABOVEGROUND_DATA1: {
     url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
+  },
+  //地上模型
+  ABOVEGROUND2: "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace",
+  //地上模型数据绑定
+  ABOVEGROUND_DATA2: {
+    url: "http://172.20.83.223:8098/iserver/services/data-AS_table/rest/data",
+    dataSourceName: "AS_table"
+  },
+  //地上模型
+  ABOVEGROUND3: "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace",
+  //地上模型数据绑定
+  ABOVEGROUND_DATA3: {
+    url: "http://172.20.83.223:8098/iserver/services/data-AS_table/rest/data",
+    dataSourceName: "AS_table"
   },
   GEOLOGY: "http://172.20.83.223:8098/iserver/services/3D-mongodb-CIMGeology/rest/realspace",
   GEOLOGY_DATA: {

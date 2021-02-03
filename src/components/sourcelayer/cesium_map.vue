@@ -96,6 +96,7 @@ import {
 } from "components/sourcelayer/cesium_map_init";
 import { doValidation } from "api/validation/validation";
 import { mapGetters, mapActions } from "vuex";
+import { getIserverFields } from "api/iServerAPI";
 
 const Cesium = window.Cesium;
 
@@ -251,6 +252,7 @@ export default {
         });
         console.log("data", _data_);
         let gx = false;
+        let building = false;
         for (let f = 0; f < _data_.length; f++) {
           if (
             _data_[f].k == "直径" ||
@@ -261,8 +263,44 @@ export default {
             break;
           }
         }
+        for (let i = 0; i < _data_.length; i++) {
+          if (_data_[i].k == "所属楼层") {
+            building = true;
+            break;
+          }
+        }
         if (gx) {
           this.SetForceBimData(_data_);
+        }
+        if (building) {
+          let url = 'http://172.20.83.223:8098/iserver/services/data-AS_table/rest/data'
+          let datasetName = `AS_table:${feature['部件']}`
+          var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+          getFeatureParam = new SuperMap.REST.FilterParameter({
+            // attributeFilter: `SMID <= 1000`,
+            attributeFilter: `ElementID = ${feature['ELEMENTID']}`,
+          });
+          getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
+            queryParameter: getFeatureParam,
+            toIndex: -1,
+            datasetNames: [datasetName],
+          });
+          getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
+            eventListeners: {
+              processCompleted: async (res) => {
+                // const fields = await getIserverFields(url, datasetName);
+                // console.log('fields', fields)
+                // console.log('res', res)
+                let tempObj = res.result.features[0].attributes
+                let detailData = Object.keys(tempObj).map((k) => {
+                  return { k, v: tempObj[k] };
+                });
+                this.SetForceBimData(detailData);
+              },
+              processFailed: (msg) => console.log(msg),
+            },
+          });
+          getFeatureBySQLService.processAsync(getFeatureBySQLParams);
         }
       });
     },
