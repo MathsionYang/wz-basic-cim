@@ -646,7 +646,7 @@ const ZXGH_TOPIC = [
     label: "停车泊位",
     type: 'mvt',
     dataname: '172.20.83.196_ersjdata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-WZKG0728/rest/data',
+    url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
     dataset: "JCSS_TCC"
   },
   {
