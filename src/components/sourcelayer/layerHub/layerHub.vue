@@ -10,7 +10,7 @@
   <div class="bottom-wrapper">
     <div
       class="bottom-layers-container"
-      v-show="forceTreeLabel != '城市总览' && forceTreeTopic.length"
+      v-show="forceTreeLabel != '城市总览' && forceTreeTopic.length&&zk"
     >
       <div v-for="(item, i) in forceTreeTopic" :key="i" class="erji">
         <span class="erjitoubu">{{ item.id }}</span>
@@ -21,7 +21,7 @@
             class="inner-item"
             :class="{
               active: ~forceTrueTopicLabels.indexOf(datas.id),
-              inline: item.children.length>4
+              inline: item.children.length > 4,
             }"
           >
             <div class="fuhao"></div>
@@ -60,7 +60,7 @@
       </swiper>
       <div class="swiper-buttons swiper-button-right"></div> -->
     </div>
-    <div class="bottom-topics-container">
+    <div class="bottom-topics-container" v-show="zk">
       <div
         :class="{
           label: true,
@@ -93,6 +93,9 @@
     <transition name="fade">
       <KgLegend v-if="~forceTrueTopicLabels.indexOf('控规信息')" />
     </transition>
+    <div class="dibu" @click="sousu()">
+      <img src="/static/images/mode-ico/底部.png" />
+    </div>
   </div>
 </template>
 
@@ -121,6 +124,7 @@ export default {
       },
       //  tile layers
       tileLayers: {},
+      zk:true,
     };
   },
   components: { KgLegend },
@@ -150,6 +154,9 @@ export default {
         "SetForceTrueTopicLabelId",
       ],
     ]),
+    sousu(){
+      this.zk = !this.zk;
+    },
     eventRegsiter() {
       /**
        * 事件传递打开对应专题图层
