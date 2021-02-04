@@ -617,29 +617,29 @@ const ZXGH_TOPIC = [
   {
     label: "商业服务",
     type: 'mvt',
-    dataname: '大建大美专项规划:',
-    url: 'http://172.20.83.223:8098/iserver/services/data-DaJianDaMei/rest/data',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "商业设施"
   },
   {
     label: "教育设施",
     type: 'mvt',
-    dataname: '大建大美专项规划:',
-    url: 'http://172.20.83.223:8098/iserver/services/data-DaJianDaMei/rest/data',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "教育设施"
   },
   {
     label: "体育设施",
     type: 'mvt',
-    dataname: '大建大美专项规划:',
-    url: 'http://172.20.83.223:8098/iserver/services/data-DaJianDaMei/rest/data',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "体育设施"
   },
   {
     label: "文化设施",
     type: 'mvt',
-    dataname: '大建大美专项规划:',
-    url: 'http://172.20.83.223:8098/iserver/services/data-DaJianDaMei/rest/data',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "文化设施"
   },
   {
@@ -652,15 +652,15 @@ const ZXGH_TOPIC = [
   {
     label: "公园绿地",
     type: 'mvt',
-    dataname: '大建大美专项规划:',
-    url: 'http://172.20.83.223:8098/iserver/services/data-DaJianDaMei/rest/data',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "绿化设施"
   },
   {
     label: "养老助残",
     type: 'mvt',
-    dataname: '大建大美专项规划:',
-    url: 'http://172.20.83.223:8098/iserver/services/data-DaJianDaMei/rest/data',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "养老设施"
   },
 ];

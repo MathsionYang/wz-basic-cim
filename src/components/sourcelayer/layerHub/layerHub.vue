@@ -10,7 +10,9 @@
   <div class="bottom-wrapper">
     <div
       class="bottom-layers-container"
-      v-show="forceTreeLabel != '城市总览' && forceTreeTopic.length&&zk"
+      v-show="
+        forceTreeLabel != '城市总览' && forceTreeTopic.length && zk && erji
+      "
     >
       <div v-for="(item, i) in forceTreeTopic" :key="i" class="erji">
         <span class="erjitoubu">{{ item.id }}</span>
@@ -26,68 +28,28 @@
           >
             <div class="fuhao"></div>
             <span
-              @click="doForceTrueTopicLabels(item.children, datas.id)"
+              @click="doForceTrueTopicLabels(forceTreeLabel,item.children, datas.id)"
               class="ring"
               >{{ datas.id }}</span
             >
           </div>
         </div>
       </div>
-      <!-- <div class="swiper-buttons swiper-button-left"></div>
-      <swiper ref="mySwiper" class="layers" :options="swiperOptions">
-        <swiper-slide
-          v-for="(item, i) in forceTreeTopic"
-          :key="i"
-          :class="{
-            item: true,
-            active: ~forceTrueTopicLabels.indexOf(item.id),
-          }"
-        >
-          <div>
-            <img
-              :src="`/static/images/hub-ico/${item.icon}@2x.png`"
-              @click="doForceTrueTopicLabels(item.id)"
-            />
-            
-            <div
-              class="rings"
-              v-if="~forceTrueTopicLabels.indexOf(item.id)"
-              @click="doForceTrueTopicLabels(item.id)"
-            />
-            <p>{{ item.id }}</p>
-          </div>
-        </swiper-slide>
-      </swiper>
-      <div class="swiper-buttons swiper-button-right"></div> -->
     </div>
     <div class="bottom-topics-container" v-show="zk">
       <div
         :class="{
           label: true,
-          active: item.id == forceTreeLabel,
+          active: item.id == forceTreeLabel&&erji,
           disabled: item.disabled,
         }"
         v-for="(item, i) in CESIUM_TREE_OPTION"
         :key="i"
-        @click="!item.disabled ? SetForceTreeLabel(item.id) : undefined"
+        @click="yiji(item.id)"
       >
         <div class="imgs"></div>
         <span class="bt">{{ item.label }}</span>
       </div>
-      <!-- <ul class="labels">
-        <li
-          v-for="(item, i) in CESIUM_TREE_OPTION"
-          :key="i"
-          :class="{
-            item: true,
-            active: item.id == forceTreeLabel,
-            disabled: item.disabled,
-          }"
-          @click="!item.disabled ? SetForceTreeLabel(item.id) : undefined"
-        >
-          <i>{{ item.label }}</i>
-        </li>
-      </ul> -->
     </div>
     <!-- extra Components -->
     <transition name="fade">
@@ -124,7 +86,8 @@ export default {
       },
       //  tile layers
       tileLayers: {},
-      zk:true,
+      zk: true,
+      erji: false,
     };
   },
   components: { KgLegend },
@@ -154,7 +117,22 @@ export default {
         "SetForceTrueTopicLabelId",
       ],
     ]),
-    sousu(){
+    yiji(data) {
+      if (window.labels != undefined) {
+        if (window.labels == data) {
+          window.labels = data;
+          this.erji = !this.erji;
+        } else {
+          window.labels = data;
+          this.erji = true;
+        }
+      } else {
+        window.labels = data;
+        this.erji = true;
+      }
+      this.SetForceTreeLabel(data);
+    },
+    sousu() {
       this.zk = !this.zk;
     },
     eventRegsiter() {
@@ -163,7 +141,6 @@ export default {
        */
       this.$bus.$off("check-hub");
       this.$bus.$on("check-hub", ({ key }) => {
-        console.log("默认", key);
         this.SetForceTreeLabel(key);
       });
     },
@@ -180,7 +157,6 @@ export default {
       const Topics = this.CESIUM_TREE_OPTION.filter(
         (v) => v.label == this.forceTreeLabel
       );
-      console.log("图层", Topics);
       this.forceTreeTopic = Topics.length ? Topics[0].children : [];
       if (this.forceTreeTopic.length) {
         // const forceNode = this.forceTreeTopic[0];
@@ -195,8 +171,8 @@ export default {
      * 选中状态
      * @param {string} id
      */
-    doForceTrueTopicLabels(children, id) {
-      console.log("选中状态", children, id);
+    doForceTrueTopicLabels(item,children, id) {
+      console.log("组别",item)
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
         let _fttl_ = [...this.forceTrueTopicLabels];
