@@ -5,7 +5,12 @@
         <el-row>
           <el-col :span="24">
             <el-form-item class="elformbtns">
-              <el-popover placement="top" title="楼层控制" width="300" trigger="click">
+              <el-popover
+                placement="top"
+                title="楼层控制"
+                width="300"
+                trigger="click"
+              >
                 <div class="bim-analyse-tree" v-if="true">
                   <!--楼层控制树-->
                   <el-tree
@@ -85,44 +90,80 @@ const _ABOVEGROUND3_HASH_ = {
   AS_17F_1204: "AS_17F_1204",
 };
 const _AS1206LAYERS_HASH_ = {
-  第1层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_1F_1206/config',
-  第2层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_2F_1206/config',
-  第3层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_3F_1206/config',
-  第4层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_4F_1206/config',
-  第5层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_5F_1206/config',
-  第6层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_6F_1206/config',
-  第7层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_7F_1206/config',
-  第8层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_8F_1206/config',
-  第9层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_9F_1206/config',
-  第10层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_10F_1206/config',
-  第11层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_11F_1206/config',
-  第12层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_12F_1206/config',
-  第13层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_13F_1206/config',
-  第14层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_14F_1206/config',
-  第15层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_15F_1206/config',
-  第16层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_16F_1206/config',
-  第17层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_17F_1206/config',
-  屋顶: 'http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_WD_1206/config',
+  第1层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_1F_1206/config",
+  第2层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_2F_1206/config",
+  第3层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_3F_1206/config",
+  第4层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_4F_1206/config",
+  第5层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_5F_1206/config",
+  第6层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_6F_1206/config",
+  第7层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_7F_1206/config",
+  第8层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_8F_1206/config",
+  第9层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_9F_1206/config",
+  第10层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_10F_1206/config",
+  第11层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_11F_1206/config",
+  第12层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_12F_1206/config",
+  第13层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_13F_1206/config",
+  第14层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_14F_1206/config",
+  第15层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_15F_1206/config",
+  第16层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_16F_1206/config",
+  第17层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_17F_1206/config",
+  屋顶:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace/datas/AS_WD_1206/config",
 };
 const _AS1204LAYERS_HASH_ = {
-  第1层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_1F_1204/config',
-  第2层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_2F_1204/config',
-  第3层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_3F_1204/config',
-  第4层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_4F_1204/config',
-  第5层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_5F_1204/config',
-  第6层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_6F_1204/config',
-  第7层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_7F_1204/config',
-  第8层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_8F_1204/config',
-  第9层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_9F_1204/config',
-  第10层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_10F_1204/config',
-  第11层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_11F_1204/config',
-  第12层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_12F_1204/config',
-  第13层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_13F_1204/config',
-  第14层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_14F_1204/config',
-  第15层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_15F_1204/config',
-  第16层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_16F_1204/config',
-  第17层: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_17F_1204/config',
-  屋顶: 'http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_WD_1204/config',
+  第1层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_1F_1204/config",
+  第2层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_2F_1204/config",
+  第3层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_3F_1204/config",
+  第4层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_4F_1204/config",
+  第5层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_5F_1204/config",
+  第6层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_6F_1204/config",
+  第7层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_7F_1204/config",
+  第8层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_8F_1204/config",
+  第9层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_9F_1204/config",
+  第10层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_10F_1204/config",
+  第11层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_11F_1204/config",
+  第12层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_12F_1204/config",
+  第13层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_13F_1204/config",
+  第14层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_14F_1204/config",
+  第15层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_15F_1204/config",
+  第16层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_16F_1204/config",
+  第17层:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_17F_1204/config",
+  屋顶:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_WD_1204/config",
 };
 import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
 import { mapActions } from "vuex";
@@ -186,7 +227,7 @@ export default {
         this.doGroundInit(_ABOVEGROUND2_HASH_, ABOVEGROUND2, ABOVEGROUND_DATA2);
         this.doGroundInit(_ABOVEGROUND3_HASH_, ABOVEGROUND3, ABOVEGROUND_DATA3);
       }
-      this.getTreeData()
+      this.getTreeData();
     },
     /**
      * 图层控制
@@ -264,9 +305,9 @@ export default {
         });
       }
       floorsA.push({
-        label: '屋顶',
-        id: 'AS1206_WD',
-      })
+        label: "屋顶",
+        id: "AS1206_WD",
+      });
       let floorsB = [];
       for (let i = 1; i < 18; i++) {
         floorsB.push({
@@ -275,44 +316,42 @@ export default {
         });
       }
       floorsB.push({
-        label: '屋顶',
-        id: 'AS1204_WD',
-      })
+        label: "屋顶",
+        id: "AS1204_WD",
+      });
       this.BimTreeData[0].children = floorsA;
       this.BimTreeData[1].children = floorsB;
     },
 
     treeHandler(node, checked) {
-      console.log('node', node)
-      console.log('checked', checked)
-      if (!checked) {
-        layer && (layer.visible = false);
+      console.log("node", node);
+      console.log("checked", checked);
+      let _KEY_;
+      let layerUrl;
+      if (typeof(node.id) != 'string') {
         return
       }
-      let _KEY_
-      let layerUrl
-      if (~node.id.indexOf('1206')) {
+      if (~node.id.indexOf("1206")) {
         _KEY_ = `AS1206${node.label}`;
-        layerUrl = _AS1206LAYERS_HASH_[node.label]
+        layerUrl = _AS1206LAYERS_HASH_[node.label];
       }
-      if (~node.id.indexOf('1204')) {
+      if (~node.id.indexOf("1204")) {
         _KEY_ = `AS1204${node.label}`;
-        layerUrl = _AS1204LAYERS_HASH_[node.label]
+        layerUrl = _AS1204LAYERS_HASH_[node.label];
       }
       const layer = window.earth.scene.layers.find(_KEY_);
-      // let ids = this.$refs.tree.getCheckedKeys();
-      console.log(node.label)
-      this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, false);
-      this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, false);
-      if (layer) {
-        layer.visible = true;
+      if (checked) {
+        console.log(node.label);
+        this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, false);
+        this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, false);
+        if (layer) {
+          layer.visible = true;
+        } else {
+          window.earth.scene.addS3MTilesLayerByScp(layerUrl, { name: _KEY_ });
+        }
       } else {
-        console.log('fuck', layerUrl)
-        console.log('fuckb', _KEY_)
-        window.earth.scene.addS3MTilesLayerByScp(
-          layerUrl,
-          { name: _KEY_ }
-        );
+        layer && (layer.visible = false);
+        return;
       }
     },
 
@@ -321,13 +360,13 @@ export default {
         const _KEY_ = `AS1206${key}`;
         const layer = window.earth.scene.layers.find(_KEY_);
         layer && (layer.visible = false);
-      })
+      });
       Object.keys(_AS1204LAYERS_HASH_).map((key) => {
         const _KEY_ = `AS1204${key}`;
         const layer = window.earth.scene.layers.find(_KEY_);
         layer && (layer.visible = false);
-      })
-    }
+      });
+    },
   },
 };
 </script>
@@ -367,7 +406,7 @@ export default {
   .tframe {
     position: fixed;
     top: 80px !important;
-    bottom: unset!important;
+    bottom: unset !important;
     left: 0;
     right: 40% !important;
     width: 125px;
