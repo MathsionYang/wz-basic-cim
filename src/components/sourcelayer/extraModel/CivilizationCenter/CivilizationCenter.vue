@@ -69,6 +69,7 @@ const _ABOVEGROUND2_HASH_ = {
   AS_15F_1206: "AS_15F_1206",
   AS_16F_1206: "AS_16F_1206",
   AS_17F_1206: "AS_17F_1206",
+  AS_WD_1206: "AS_WD_1206"
 };
 const _ABOVEGROUND3_HASH_ = {
   AS_1F_1204: "AS_1F_1204",
@@ -88,6 +89,7 @@ const _ABOVEGROUND3_HASH_ = {
   AS_15F_1204: "AS_15F_1204",
   AS_16F_1204: "AS_16F_1204",
   AS_17F_1204: "AS_17F_1204",
+  AS_WD_1204: "AS_WD_1204"
 };
 const _AS1206LAYERS_HASH_ = {
   第1层:
@@ -174,12 +176,10 @@ export default {
       BimTreeData: [
         {
           label: "土建1206地块楼层控制",
-          id: 1,
           children: [],
         },
         {
           label: "土建1204地块楼层控制",
-          id: 2,
           children: [],
         },
       ],
@@ -328,14 +328,14 @@ export default {
       console.log("checked", checked);
       let _KEY_;
       let layerUrl;
-      if (typeof(node.id) != 'string') {
+      if (!node.id) {
         return
       }
-      if (~node.id.indexOf("1206")) {
+      if (~node.id.indexOf("AS1206_")) {
         _KEY_ = `AS1206${node.label}`;
         layerUrl = _AS1206LAYERS_HASH_[node.label];
       }
-      if (~node.id.indexOf("1204")) {
+      if (~node.id.indexOf("AS1204_")) {
         _KEY_ = `AS1204${node.label}`;
         layerUrl = _AS1204LAYERS_HASH_[node.label];
       }
