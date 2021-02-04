@@ -28,7 +28,8 @@
         <div style="background-image:url('/static/images/mode-ico/区域icon.png');background-size:100% 100%;width:258.9px;height:471.02px"></div>
       </div>
     </div>
-    <div class="cityIndex-source">
+
+    <!-- <div class="cityIndex-source">
       <div v-if="false" style="margin-top: 5vh">
         <component :is="fixForceIndex" />
       </div>
@@ -36,7 +37,7 @@
         <cityIndexPass />
       </div>
       <scene-switch />
-    </div>
+    </div> -->
   </div>
 </template>
 

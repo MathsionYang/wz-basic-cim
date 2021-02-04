@@ -1,3 +1,88 @@
+
+  .side-info {
+    position: fixed;
+    right: 10px;
+    top: 10vh;
+    width: 34vh;
+    z-index: 99;
+    color: #fff;
+    .info-header {
+      .title {
+        font-family: YouSheBiaoTiHei;
+        color: #fff;
+        font-size: 2vh;
+      }
+      .decorate {
+        margin: 4px 0;
+        width: 100%;
+        height: 0.4vh;
+        .bg-image('/static/images/mode-ico/装饰_1');
+      }
+      .close {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        .bg-image('/static/images/mode-ico/叉2');
+        cursor: pointer;
+      }
+      .tab-list {
+        padding-right: 2vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .tab-item {
+          // flex: 1;
+          width: 30%;
+          margin-right: 1vh;
+          padding: 5px 0 10px 0;
+          .bg-image('/static/images/mode-ico/side-tab');
+          font-family: YouSheBiaoTiHei;
+          font-size: 2vh;
+          text-align: center;
+          &:last-child {
+            margin: 0;
+          }
+          &.active {
+            .bg-image('/static/images/mode-ico/side-tab-sel');
+            color: #FFFF08;
+          }
+        }
+      }
+    }
+    .info-content {
+      margin-top: 1vh;
+      width: 100%;
+      height: 40vh;
+      overflow-y: auto;
+      .bg-image('/static/images/mode-ico/side-bg');
+      .info-item {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        padding: 1vh 0;
+        .key {
+          flex: 2;
+          padding: 0 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          border-right: 2px solid #fff;
+        }
+        .value {
+          flex: 4;
+          padding: 0 5px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+        &:nth-child(even) {
+          background-color: rgba(42, 203, 264, .15);
+        }
+      }
+    }
+  }
 .bimframe {
   position  : fixed;
   //top       : 100px;
