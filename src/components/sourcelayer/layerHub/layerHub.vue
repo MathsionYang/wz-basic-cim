@@ -26,9 +26,12 @@
               inline: item.children.length > 4,
             }"
           >
-            <div class="fuhao"></div>
+            <div :class="datas.url != '' ? 'fuhao' : 'notfuhao'"></div>
             <span
-              @click="doForceTrueTopicLabels(forceTreeLabel,item.children, datas.id)"
+              @click="
+                doForceTrueTopicLabels(forceTreeLabel, item.children, datas.id)
+              "
+              :style="datas.url != '' ? '' : 'color:#b5b5b5'"
               class="ring"
               >{{ datas.id }}</span
             >
@@ -40,7 +43,7 @@
       <div
         :class="{
           label: true,
-          active: item.id == forceTreeLabel&&erji,
+          active: item.id == forceTreeLabel && erji,
           disabled: item.disabled,
         }"
         v-for="(item, i) in CESIUM_TREE_OPTION"
@@ -55,6 +58,13 @@
     <transition name="fade">
       <KgLegend v-if="~forceTrueTopicLabels.indexOf('控规信息')" />
     </transition>
+    <div class="gj">
+      <div>
+        <img src="/static/images/mode-ico/装饰框.png" />
+        <img src="/static/images/mode-ico/工具栏.png" />
+      </div>
+      
+    </div>
     <div class="dibu" @click="sousu()">
       <img src="/static/images/mode-ico/底部.png" />
     </div>
@@ -171,8 +181,8 @@ export default {
      * 选中状态
      * @param {string} id
      */
-    doForceTrueTopicLabels(item,children, id) {
-      console.log("组别",item)
+    doForceTrueTopicLabels(item, children, id) {
+      console.log("组别", id);
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
         let _fttl_ = [...this.forceTrueTopicLabels];

@@ -8,18 +8,23 @@
 -->
 <template>
   <div class="search-box" v-show="searchBoxVisible">
-    <div style="background-image:url('/static/images/mode-ico/资源选择.png');background-size:100% 100%;width:77px;height:39px;"></div>
-        <div style="background-image:url('/static/images/mode-ico/装饰_1.png');background-size:100% 100%;width:252px;height:3px;"></div>
-    <!-- <div class="header">
-       
-      <p class="title">资源选择</p>
-      <img
-        class="menu"
-        :src="searchBoxResult ? menuSelImg : menuImg"
-        width="59px"
-        @click="toogleVisible"
-      />
-    </div> -->
+    <div
+      style="
+        background-image: url('/static/images/mode-ico/资源选择.png');
+        background-size: 100% 100%;
+        width: 77px;
+        height: 39px;
+      "
+    ></div>
+    <div
+      style="
+        background-image: url('/static/images/mode-ico/装饰_1.png');
+        background-size: 100% 100%;
+        width: 252px;
+        height: 3px;
+      "
+    ></div>
+
     <div class="searchHeader">
       <el-input
         v-model="searchText"
@@ -146,7 +151,7 @@ export default {
         // 移动到对应实例位置
         const { x, y } = item.geometry;
         window.earth.camera.flyTo({
-        // window.earth.scene.camera.setView({
+          // window.earth.scene.camera.setView({
           destination: Cesium.Cartesian3.fromDegrees(x, y - 0.005, 450),
           orientation: {
             heading: 0.003336768850279448,

@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       toRight: true,
-      forceTreeLabel:"孪生城市全貌",
+      forceTreeLabel: "孪生城市全貌",
       cameraTimer: undefined,
       heading: 0,
       data: [
@@ -43,14 +43,13 @@ export default {
       ],
     };
   },
-  computed: {
-  },
+  computed: {},
   watch: {},
   methods: {
     ...mapActions("map", ["SetNightMode", "SetCameraMode"]),
-    SetForceTreeLabels(item){
-        this.forceTreeLabel=item;
-    }
+    SetForceTreeLabels(item) {
+      this.forceTreeLabel = item;
+    },
   },
 };
 </script>
@@ -62,7 +61,7 @@ export default {
   z-index: 7;
   height: auto;
   width: auto;
-  left: 25vw;
+  left: 27vw;
   background: linear-gradient(
     180deg,
     #030303 0%,
@@ -76,21 +75,21 @@ export default {
   display: inline-block;
 
   .imgs {
-    height: 2.5vw;
+    height: 5vh;
     opacity: 1;
     z-index: 7;
-    margin-right: 5px;
-    width: 15.8vh;
-    background-size: 100% 100%;
+    width: 8vw;
     border: 0;
+    margin-right: 5px;
+    background-size: 100% 100%;
     background-image: url(/static/images/mode-ico/标题.png);
   }
   &.active {
     > .imgs {
-      height: 2.5vw;
+      height: 5vh;
       opacity: 1;
       z-index: 7;
-      width: 16vh;
+      width: 8vw;
       border: 0;
       margin-right: 5px;
       background-size: 100% 100%;
@@ -106,10 +105,10 @@ export default {
     line-height: 49px;
     bottom: 0;
     left: 0;
-    color: rgb(255, 255, 255);
+    color: #ffffff;
     text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
     opacity: 1;
-    margin: 0.5vh 0vw;
+    margin: 0.7vh 0vw;
     display: block;
     width: 100%;
     text-align: center;
@@ -127,7 +126,7 @@ export default {
       color: #ffff08;
       text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
       opacity: 1;
-      margin: 0.5vh 0vw;
+      margin: 0.7vh 0vw;
       display: block;
       width: 100%;
       text-align: center;

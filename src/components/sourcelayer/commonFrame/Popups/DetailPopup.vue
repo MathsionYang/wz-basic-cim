@@ -17,26 +17,69 @@
     >
       <a class="leaflet-popup-close-button" href="#" @click="closePopup">×</a>
       <div class="leaflet-popup-content-wrapper">
-        <div id="forcePopUpLink" class="leaflet-popup-content">
-          <div class="toubu">
-            {{ forceEntity.name }}
+        <div class="toubu">
+          {{ forceEntity.name }}
+        </div>
+        <div class="zhongbu">
+          <div
+            v-for="(item, key, index) in forceEntity.fix_data"
+            class="liebiao"
+            :key="index"
+            v-show="item && !~filterKey.indexOf(key) && index < 6"
+          >
+            <div style="display:inline-block">{{ key }}:</div>
+            <div style="display:inline-block">{{ item }}</div>
           </div>
-          <ul class="content-body">
+          <!-- <ul class="content-body">
             <li
               v-for="(item, key, index) in forceEntity.fix_data"
               :key="index"
-              v-show="item && !~filterKey.indexOf(key) && index<5"
+              v-show="item && !~filterKey.indexOf(key) && index < 6"
             >
               <span>{{ key }}</span>
               <span>{{ item }}</span>
             </li>
-          </ul>
+          </ul> -->
         </div>
-        <div class="extra-tab extra-tab_SP" :class="{active: extraTabActive=='sp'}" @click="doVideoRtmp"></div>
-        <div class="extra-tab extra-tab_FX" :class="{active: extraTabActive=='fx'}" @click="doCircleBuffer"></div>
-        <div class="extra-tab extra-tab_RKDT" :class="{active: extraTabActive=='rkdt'}" @click="doCircleBuffer"></div>
-        <div class="overview" v-if="forceEntity.fix_data && forceEntity.fix_data['全景地址']" @click="isFrame=forceEntity.fix_data['全景地址']">查看全景>></div>
-        <div class="overview" v-if="forceEntity.fix_data && forceEntity.fix_data['项目代码']" @click="isFrame='https://wzdjdm.wzcitybrain.com:8888/html/oneMap/projectInfo.html?project_code='+forceEntity.fix_data['项目代码']+'&id='+forceEntity.fix_data['项目编号']">查看全过程信息>></div>
+
+        <!-- <div id="forcePopUpLink" class="leaflet-popup-content">
+
+        </div> -->
+        <div
+          class="extra-tab extra-tab_SP"
+          :class="{ active: extraTabActive == 'sp' }"
+          @click="doVideoRtmp"
+        ></div>
+        <div
+          class="extra-tab extra-tab_FX"
+          :class="{ active: extraTabActive == 'fx' }"
+          @click="doCircleBuffer"
+        ></div>
+        <div
+          class="extra-tab extra-tab_RKDT"
+          :class="{ active: extraTabActive == 'rkdt' }"
+          @click="doCircleBuffer"
+        ></div>
+        <div
+          class="overview"
+          v-if="forceEntity.fix_data && forceEntity.fix_data['全景地址']"
+          @click="isFrame = forceEntity.fix_data['全景地址']"
+        >
+          查看全景>>
+        </div>
+        <div
+          class="overview"
+          v-if="forceEntity.fix_data && forceEntity.fix_data['项目代码']"
+          @click="
+            isFrame =
+              'https://wzdjdm.wzcitybrain.com:8888/html/oneMap/projectInfo.html?project_code=' +
+              forceEntity.fix_data['项目代码'] +
+              '&id=' +
+              forceEntity.fix_data['项目编号']
+          "
+        >
+          查看全过程信息>>
+        </div>
         <div class="around-people" v-if="buffer && buffer.success">
           <!-- <img src="/static/images/common/frameline@2x.png" /> -->
           <div>
@@ -54,7 +97,7 @@
       <div class="info-header">
         <div class="title">信息详情</div>
         <div class="decorate"></div>
-        <div class="close" @click="showSide=false"></div>
+        <div class="close" @click="showSide = false"></div>
         <div class="tab-list">
           <div class="tab-item active">基本信息</div>
           <!-- <div class="tab-item">周边分析</div>
@@ -88,8 +131,8 @@ export default {
       buffer: null,
       filterKey: ["永久固定码", "唯一码", "分类代码"],
       showSide: true,
-      extraTabActive: '',
-      isFrame: false
+      extraTabActive: "",
+      isFrame: false,
     };
   },
   async mounted() {
@@ -109,8 +152,8 @@ export default {
      *  @param {object} forceEntity 详情点信息
      */
     getForceEntity(forceEntity) {
-      console.log('forceEntity', forceEntity)
-      this.showSide = true
+      console.log("forceEntity", forceEntity);
+      this.showSide = true;
       this.forceEntity = forceEntity;
       this.buffer = null;
       this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
@@ -218,6 +261,35 @@ export default {
     width: 30vh;
     box-sizing: border-box;
     padding: 3vh;
+    > .toubu {
+      height: 2.6vh;
+      line-height: 2.6vh;
+      box-sizing: border-box;
+      padding-right: 2vh;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 22px;
+      font-family: YouSheBiaoTiHei;
+      font-weight: 400;
+      line-height: 29px;
+      color: #ffffff;
+      opacity: 1;
+    }
+    > .zhongbu {
+      height: 70%;
+      > .liebiao {
+        font-size: 14px;
+        font-family: PingFang SC;
+        font-weight: bold;
+        line-height: 20px;
+        color: #67c9fb;
+        display: inline-block;
+        opacity: 1;
+        float: left;
+        margin-right: 1vh;
+      }
+    }
   }
   .extra-tab {
     width: 50px;
@@ -303,21 +375,7 @@ export default {
     flex-direction: column;
     overflow: hidden;
     height: 80%;
-    > .toubu {
-      height: 2.6vh;
-      line-height: 2.6vh;
-      box-sizing: border-box;
-      padding-right: 2vh;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      font-size: 22px;
-      font-family: YouSheBiaoTiHei;
-      font-weight: 400;
-      line-height: 29px;
-      color: #ffffff;
-      opacity: 1;
-    }
+
     > .content-body {
       flex: 1;
       overflow-y: auto;
@@ -364,7 +422,7 @@ export default {
         margin: 4px 0;
         width: 100%;
         height: 0.4vh;
-        .bg-image('/static/images/mode-ico/装饰_1');
+        .bg-image("/static/images/mode-ico/装饰_1");
       }
       .close {
         width: 20px;
@@ -372,7 +430,7 @@ export default {
         position: absolute;
         top: 0;
         right: 0;
-        .bg-image('/static/images/mode-ico/叉2');
+        .bg-image("/static/images/mode-ico/叉2");
         cursor: pointer;
       }
       .tab-list {
@@ -385,7 +443,7 @@ export default {
           width: 30%;
           margin-right: 1vh;
           padding: 5px 0 10px 0;
-          .bg-image('/static/images/mode-ico/side-tab');
+          .bg-image("/static/images/mode-ico/side-tab");
           font-family: YouSheBiaoTiHei;
           font-size: 2vh;
           text-align: center;
@@ -393,8 +451,8 @@ export default {
             margin: 0;
           }
           &.active {
-            .bg-image('/static/images/mode-ico/side-tab-sel');
-            color: #FFFF08;
+            .bg-image("/static/images/mode-ico/side-tab-sel");
+            color: #ffff08;
           }
         }
       }
@@ -404,7 +462,7 @@ export default {
       width: 100%;
       height: 40vh;
       overflow-y: auto;
-      .bg-image('/static/images/mode-ico/side-bg');
+      .bg-image("/static/images/mode-ico/side-bg");
       .info-item {
         display: flex;
         align-items: center;
@@ -426,7 +484,7 @@ export default {
           text-overflow: ellipsis;
         }
         &:nth-child(even) {
-          background-color: rgba(42, 203, 264, .15);
+          background-color: rgba(42, 203, 264, 0.15);
         }
       }
     }
