@@ -124,7 +124,9 @@ export const BimSourceURL = {
   STATION_DATA_URL:
     "http://172.20.83.223:8098/iserver/services/data-Airport_Station/rest/data",
   UNDERGROUND_SCENE_URL:
-    "http://172.20.83.223:8098/iserver/services/3D-GSLINE/rest/realspace"
+    "http://172.20.83.223:8098/iserver/services/3D-GSLINE/rest/realspace",
+  WZDEM:
+    "http://172.20.83.223:8098/iserver/services/3D-DEM_TT/rest/realspace/datas/2018gddem",
 };
 
 export const CIVILIZATION_CENTER_URL = {

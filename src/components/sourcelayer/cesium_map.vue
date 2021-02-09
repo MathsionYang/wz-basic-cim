@@ -33,14 +33,12 @@
       <TrafficSubwayModel ref="trafficSubwayModel" v-if="showgdFrame == '3d4'" />
       <BJSWQModel ref="bjswqmodel" v-if="showqxsyFrame == '3d5'" />
       <BJJM ref="bjjm" v-if="showjzFrame == '3d6'" />
-      <CivilizationCenter
-        ref="civilizationcenter"
-        v-if="showsmzxFrame == '3d11'"
-      />
+      <CivilizationCenter ref="civilizationcenter"  v-if="showsmzxFrame == '3d11'" />
       <KgBoxAnalyse ref="kgboxanalyse" v-if="showKgFrame == '3d12'" />
       <Chaogc ref="Chaogc" v-if="showcgcFrame == '3d14'" />
       <Gxgl ref="gxgl" v-if="showgxFrame == '3d15'" />
       <Dxkj v-if="showdxFrame == '3d16'" />
+      <WZDem v-if="showDem =='3d17'"/>
       <VideoCircle ref="videoCircle" />
       <RoadLine ref="roadline" />
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
@@ -66,6 +64,7 @@ import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/Traffic
 import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
 import Dxkj from "components/sourcelayer/extraModel/Models/Dxkj";
+import WZDem from "components/sourcelayer/extraModel/Models/WzDem";
 import KgBoxAnalyse from "components/sourcelayer/extraModel/Models/KgBoxAnalyse";
 import InfoFrame from "components/sourcelayer/commonFrame/InfoFrame/InfoFrame";
 import MedicalPopup from "components/sourcelayer/commonFrame/Popups/medicalPopup";
@@ -120,6 +119,7 @@ export default {
       showdxFrame:null,
       showsmzxFrame:null,
       showcgcFrame:null,
+      showDem:null,
       showSubHubFrame: "3d1",
       mapLoaded: false,
       validated: false,
@@ -146,6 +146,7 @@ export default {
     BJSWQModel,
     BJJM,
     Dxkj,
+    WZDem,
     KgBoxAnalyse,
     TrafficSubwayModel,
     InfoFrame,
@@ -370,7 +371,10 @@ export default {
       this.$bus.$on("cesium-3d-kggx", ({ value }) => {
         this.showKgFrame = value;
       });
-
+      this.$bus.$off("cesium-3d-szdb");
+      this.$bus.$on("cesium-3d-szdb",({value}) =>{
+        this.showDem = value;
+      });
       this.$bus.$on("cesium-3d-switch", ({ value }) => {
         this.$bus.$emit("cesium-3d-event", { value: !value ? "3d1" : null });
         ServiceUrl.WZBaimo_OBJ.map(({ KEY }) => {

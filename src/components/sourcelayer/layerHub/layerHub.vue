@@ -60,10 +60,42 @@
     </transition>
     <div class="gj">
       <div>
-        <img src="/static/images/mode-ico/装饰框.png" />
-        <img src="/static/images/mode-ico/工具栏.png" />
+        <img
+          src="/static/images/mode-ico/装饰框.png"
+          style="position: relative; top: 0; left: 0"
+        />
+        <img
+          src="/static/images/mode-ico/工具栏.png"
+          style="position: absolute; top: 0.7vh; right: 0.7vw"
+        />
       </div>
-      
+    </div>
+    <div class="gjl">
+      <img
+        src="/static/images/mode-ico/框@2x.png"
+        style="position: relative; top: 0; left: 0; width: 16vw"
+      />
+      <div style="position: absolute; top: 0.7vh; right: 0.7vw">
+        <div style="margin-right: 3vw; margin-top: 3vh">
+          <div
+            v-for="(item, index) in gjldata"
+            :key="index"
+            style="display: inline-block"
+          >
+            <img :src="checkgj==item.label?item.imgs:item.img" alt="" @click="gjl(item.label)"/>
+          </div>
+          <!-- <img src="/static/images/mode-ico/视角切换.png" />
+          <img src="/static/images/mode-ico/剖切.png" />
+          <img src="/static/images/mode-ico/长度测量.png" />
+          <img src="/static/images/mode-ico/面积测量.png" />
+          <img src="/static/images/mode-ico/分屏.png" />
+          <img src="/static/images/mode-ico/日照分析.png" />
+          <img src="/static/images/mode-ico/天际线分析.png" />
+          <img src="/static/images/mode-ico/通视分析.png" />
+          <img src="/static/images/mode-ico/视野分析.png" />
+          <img src="/static/images/mode-ico/清除.png" /> -->
+        </div>
+      </div>
     </div>
     <div class="dibu" @click="sousu()">
       <img src="/static/images/mode-ico/底部.png" />
@@ -98,6 +130,59 @@ export default {
       tileLayers: {},
       zk: true,
       erji: false,
+      checkgj:[],
+      gjldata: [
+        {
+          imgs: "/static/images/mode-ico/视角切换选中框.png",
+          img: "/static/images/mode-ico/视角切换.png",
+          label: "视角切换",
+        },
+        {
+          imgs: "/static/images/mode-ico/剖切选中框.png",
+          img: "/static/images/mode-ico/剖切.png",
+          label: "剖切",
+        },
+        {
+          imgs: "/static/images/mode-ico/长度测量选中框.png",
+          img: "/static/images/mode-ico/长度测量.png",
+          label: "长度测量",
+        },
+        {
+          imgs: "/static/images/mode-ico/面积测量选中框.png",
+          img: "/static/images/mode-ico/面积测量.png",
+          label: "面积测量",
+        },
+        {
+          imgs: "/static/images/mode-ico/分屏选中框.png",
+          img: "/static/images/mode-ico/分屏.png",
+          label: "分屏",
+        },
+        {
+          imgs: "/static/images/mode-ico/日照分析选中框.png",
+          img: "/static/images/mode-ico/日照分析.png",
+          label: "日照分析",
+        },
+        {
+          imgs: "/static/images/mode-ico/天际线选中框.png",
+          img: "/static/images/mode-ico/天际线分析.png",
+          label: "天际线分析",
+        },
+        {
+          imgs: "/static/images/mode-ico/通视分析选中框.png",
+          img: "/static/images/mode-ico/通视分析.png",
+          label: "通视分析",
+        },
+        {
+          imgs: "/static/images/mode-ico/视野分析选中框.png",
+          img: "/static/images/mode-ico/视野分析.png",
+          label: "视野分析",
+        },
+        {
+          imgs: "/static/images/mode-ico/清除.png",
+          img: "/static/images/mode-ico/清除.png",
+          label: "清除",
+        },
+      ],
     };
   },
   components: { KgLegend },
@@ -141,6 +226,9 @@ export default {
         this.erji = true;
       }
       this.SetForceTreeLabel(data);
+    },
+    gjl(data){
+      this.checkgj = data;
     },
     sousu() {
       this.zk = !this.zk;

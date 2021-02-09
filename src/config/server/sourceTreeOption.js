@@ -69,18 +69,30 @@ const DZ_TOPIC = [
   },
 ];
 const SW_TOPIC = [
+  // {
+  //   label: "数字高程模型",
+  //   componentEvent: "cesium-3d-hub-event",
+  //   componentKey: "",
+  //   url: '',
+  //   type: 'model'
+  // },
   {
     label: "数字高程模型",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "",
-    url: '',
-    type: 'model'
+    url: `http://172.20.83.223:8098/iserver/services/map-mongodb/rest/maps/DSMmap`,
+    type: "image"
   },
   {
     label: "数字地表模型",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "",
-    url: '',
+    componentEvent: "cesium-3d-szdb",
+    componentKey: "3d17",
+    url: 'true',
+    type: 'model'
+  },
+  {
+    label: "简易模型",
+    componentEvent: "cesium-3d-bm",
+    componentKey: "3d18",
+    url: 'true',
     type: 'model'
   },
   {
