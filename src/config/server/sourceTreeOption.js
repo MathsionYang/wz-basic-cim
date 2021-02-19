@@ -1035,6 +1035,13 @@ const WLGZ_TOPIC = [
   }
 ];
 
+const AROUND_ANALYSE_TOPIC = [
+  { label: "医疗场所", resourceType: "medical_care" },
+  { label: "消防站", resourceType: "fire_station" },
+  { label: "消防栓", resourceType: "fire_hydrant" },
+  { label: "交通卡口", resourceType: "bayonet" }
+]
+
 /**
  * 对应需要额外数据的点位
  */
@@ -1144,3 +1151,15 @@ export const CESIUM_TREE_TRAFFIC_OPTION = [{
     };
   })
 }]
+
+export const CESIUM_TREE_AROUND_ANALYSE_OPTION = {
+  id: "周边查询",
+  label: "周边查询",
+  children: AROUND_ANALYSE_TOPIC.map(v => {
+    return {
+      ...v,
+      id: v.label,
+      icon: v.label,
+    };
+  })
+}

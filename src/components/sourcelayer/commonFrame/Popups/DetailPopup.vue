@@ -53,7 +53,7 @@
         <div
           class="extra-tab extra-tab_FX"
           :class="{ active: extraTabActive == 'fx' }"
-          @click="doCircleBuffer"
+          @click="doAroundSourceAnalyse"
         ></div>
         <div
           class="extra-tab extra-tab_RKDT"
@@ -129,7 +129,7 @@ export default {
       forceEntity: {},
       forcePosition: {},
       buffer: null,
-      filterKey: ["永久固定码", "唯一码", "分类代码"],
+      filterKey: ["永久固定码", "唯一码", "分类代码", "全景地址"],
       showSide: true,
       extraTabActive: "",
       isFrame: false,
@@ -203,7 +203,6 @@ export default {
         },
       });
     },
-
     /**
      * 仅传参数给RtmpVideo组件,不参与后续功能
      * @param {object} param0 该医疗点的对象信息
@@ -216,6 +215,14 @@ export default {
         shortname: name,
         geometry: { lng: x, lat: y },
       });
+    },
+    /**
+     * 周边分析跳转
+     */
+    doAroundSourceAnalyse() {
+      const { geometry } = this.forceEntity;
+      const { x, y } = geometry;
+      this.$bus.$emit("cesium-3d-around-analyse-pick", { lng: x, lat: y });
     },
     closePopup() {
       this.forcePosition = {};

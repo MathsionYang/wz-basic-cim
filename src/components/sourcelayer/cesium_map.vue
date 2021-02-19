@@ -43,6 +43,7 @@
       <RoadLine ref="roadline" />
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
       <BIMinfoFrame ref="biminfoFrame" />
+      <AroundSourceAnalyse ref="aroundSourceAnalyse" />
       <div v-show="true">
         <RtmpVideo />
         <Population />
@@ -60,6 +61,7 @@ import SearchBox from "components/sourcelayer/layerHub/searchBox";
 import CityIndex from "components/sourcelayer/CityIndex/index";
 import Roulette from "components/sourcelayer/roulette/roulette";
 import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedModel";
+import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceAnalyse/AroundSourceAnalyse";
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
 import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
@@ -165,6 +167,7 @@ export default {
     Gxgl,
     CivilizationCenter,
     Chaogc,
+    AroundSourceAnalyse
   },
   created() {
     window.extraHash = {};

@@ -258,6 +258,9 @@ export default {
                     dataSourceName: _HASH_[key],
                   }),
             });
+            layer.datasetInfo().then((result) => {
+              console.log('result', result)
+            })
           });
         }
         //  做全局标识，不保存图层指针了

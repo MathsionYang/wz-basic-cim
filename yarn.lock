@@ -4876,6 +4876,11 @@ functional-red-black-tree@^1.0.1:
   resolved "https://registry.npm.taobao.org/functional-red-black-tree/download/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
+gcoord@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npm.taobao.org/gcoord/download/gcoord-0.3.0.tgz#71f502f8d2306f92eec9ab372151699c3fac3f70"
+  integrity sha1-cfUC+NIwb5Luyas3IVFpnD+sP3A=
+
 geojson-equality@0.1.6:
   version "0.1.6"
   resolved "https://registry.npm.taobao.org/geojson-equality/download/geojson-equality-0.1.6.tgz#a171374ef043e5d4797995840bae4648e0752d72"
@@ -7905,6 +7910,11 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.npm.taobao.org/qs/download/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha1-QdwaAV49WB8WIXdr4xr7KHapsbw=
+
+qs@^6.9.6:
+  version "6.9.6"
+  resolved "https://registry.npm.taobao.org/qs/download/qs-6.9.6.tgz?cache=0&sync_timestamp=1610598227383&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fqs%2Fdownload%2Fqs-6.9.6.tgz#26ed3c8243a431b2924aca84cc90471f35d5a0ee"
+  integrity sha1-Ju08gkOkMbKSSsqEzJBHHzXVoO4=
 
 qs@~6.5.2:
   version "6.5.2"
