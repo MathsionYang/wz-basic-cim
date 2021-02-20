@@ -97,6 +97,7 @@ export default {
       selectSourceLayer: [],
       aroundOption,
       aroundSourceAnalyseList: [],
+      locationBillboard: undefined,
       navigateLine: undefined,
       carModel: undefined,
     };
@@ -169,10 +170,13 @@ export default {
       this.selectSourceLayer = [];
       this.aroundSourceAnalyseList = [];
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
+      this.locationBillboard && window.earth.entities.remove(this.locationBillboard);
     },
     navigate(item) {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
+      this.locationBillboard && window.earth.entities.remove(this.locationBillboard);
       console.log("item", item);
+      let originPosition = Cesium.Cartesian3.fromDegrees(+item.lng, +item.lat, 4);
       let destinationGCJ02 = gcoord.transform([this.forceEntity.lng.toFixed(6), this.forceEntity.lat.toFixed(6)], gcoord.WGS84, gcoord.GCJ02);
       let originGCJ02 = gcoord.transform([Number(item.lng).toFixed(6), Number(item.lat).toFixed(6)], gcoord.WGS84, gcoord.GCJ02);
       $.ajax({
@@ -209,17 +213,25 @@ export default {
               );
               positionsWGS84 = positionsWGS84.concat(coordWGS84);
             }
+            this.locationBillboard = window.earth.entities.add({
+              name: '目的地',
+              position: originPosition,
+              billboard: {
+                image: `/static/images/map-ico/location.png`,
+                width: 34,
+                height: 35,
+              },
+            })
             this.navigateLine = window.earth.entities.add({
-              //加载线路到三维球
               name: "navigateLine",
               polyline: {
                 positions: Cesium.Cartesian3.fromDegreesArray(positionsWGS84),
                 width: 6,
-                material: Cesium.Color.GREEN,
+                material: Cesium.Color.RED.withAlpha(1),
                 clampToGround: true,
               },
             });
-            // window.earth.flyTo(greenLine);
+            // window.earth.flyTo(this.navigateLine);
             if (item.resourceName == '消防站') {
               this.carMove(this.navigateLine)
             }
