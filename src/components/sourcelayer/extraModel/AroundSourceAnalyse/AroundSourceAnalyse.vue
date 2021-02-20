@@ -220,7 +220,9 @@ export default {
               },
             });
             // window.earth.flyTo(greenLine);
-            this.carMove(this.navigateLine)
+            if (item.resourceName == '消防站') {
+              this.carMove(this.navigateLine)
+            }
           }
         },
         // error: function () {
