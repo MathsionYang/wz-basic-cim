@@ -1,5 +1,5 @@
 <template>
-  <div class="ThreeDContainer civilization-center" :style="{ width: '400px' }">
+  <div class="ThreeDContainer civilization-center">
     <div class="bimanalayse tframe">
       <el-form>
         <el-row>
@@ -376,8 +376,8 @@ export default {
 
 <style lang="less" scoped>
 .civilization-center {
-  padding: 10px;
-  background: rgba(11, 20, 35, 0.8);
+  //padding: 10px;
+  //background: rgba(11, 20, 35, 0.8);
   border: 1px solid rgba(81, 161, 201, 0.6);
   .el-divider--horizontal {
     margin: 8px 0;

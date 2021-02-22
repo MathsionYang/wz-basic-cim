@@ -1,18 +1,13 @@
 <template>
-  <div class="WzDem"></div>
+  <div class="SZGC"></div>
 </template>
 
 <script>
 const Cesium = window.Cesium;
 import { BimSourceURL } from "config/server/mapConfig";
-const LAYERS = [{ name: "WZDEM", url: BimSourceURL.WZDEM }];
+const LAYERS = [{ name: "SZGC", url: BimSourceURL.SZGC }];
 export default {
-  name: "WzDem",
-  data() {
-    return {
-      db: null,
-    };
-  },
+  name: "SZGC",
   async mounted() {
     this.initBimScene();
     this.eventRegsiter();
@@ -37,13 +32,6 @@ export default {
           }
         ));
       });
-      this.db = window.earth.imageryLayers.addImageryProvider(
-        new Cesium.SuperMapImageryProvider({
-          url:
-            "http://172.20.83.223:8098/iserver/services/map-mongodb/rest/maps/DSMmap",
-          name: "db",
-        })
-      );
     },
     //  相机移动
     cameraMove() {
@@ -63,11 +51,10 @@ export default {
     //  关闭地表地形模型模块
     closeTrafficSubwayModel() {
       this.clearTrafficSubwayModel();
-      this.$bus.$emit("cesium-3d-szdb", { value: null });
+      this.$bus.$emit("cesium-3d-szgc", { value: null });
     },
     //  清除地表地形模型模块
     clearTrafficSubwayModel() {
-      window.earth.imageryLayers.remove(this.db);
       LAYERS.map((v) => {
         var ellipsoidProvider = new Cesium.EllipsoidTerrainProvider();
         window.earth.terrainProvider = ellipsoidProvider;

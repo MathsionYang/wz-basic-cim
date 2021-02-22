@@ -7,39 +7,33 @@
  * @FilePath: \wzsjjt-bd-visual\src\components\map-view\basicTools\CesiumMapTool.vue
 -->
 <template>
-  <div class="ThreeDContainer" :style="{width:'680px'}">
-    <div class="cesiummaptool tframe">
-      <el-form label-width="100px" :rules="toolTypeRules">
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="测量工具" prop="toolType">
-              <el-select
-                v-model="toolType"
-                popper-class="select-option"
-                placeholder="测量类型"
-                size="small"
-                @change="changeMapType($event)"
-              >
-                <el-option
-                  v-for="item in toolTypes"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="16">
-            <el-form-item class="elformbtns">
-              <el-button class="elformbtn" @click="gaugeDistance">测距</el-button>
-              <el-button class="elformbtn" @click="gaugeArea">测面</el-button>
-              <el-button class="elformbtn" @click="gaugeHeight">测高</el-button>
-              <el-button class="elformbtn" @click="clearGauge">清除</el-button>
-              <el-button class="elformbtn" @click="closeGauge">关闭</el-button>
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
+  <div class="ThreeDContainercl">
+    <div style="background-color: rgba(5, 41, 110, 0.78)">
+      <img src="/static/images/mode-ico/通用框装饰.png" />
+    </div>
+
+    <div
+      class="cesiummaptool tframe"
+      style="background-color: rgba(5, 41, 110, 0.78);padding-top:7px"
+    >
+      <div>
+        <div class="gjllabelcl">测量工具</div>
+        <div class="buttons" @click="gaugeDistance">
+          <span class="bt">测距</span>
+        </div>
+        <div class="buttons" @click="gaugeArea">
+          <span class="bt">测面</span>
+        </div>
+        <div class="buttons" @click="gaugeHeight">
+          <span class="bt">测高</span>
+        </div>
+        <div class="buttons" @click="clearGauge">
+          <span class="bt">清除</span>
+        </div>
+        <div class="buttons" @click="closeGauge">
+          <span class="bt">关闭</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -201,3 +195,103 @@ export default {
   },
 };
 </script>
+<style>
+.ThreeDContainercl {
+  position: absolute;
+  z-index: 7;
+  top: 16vh;
+  left: 22vw;
+  border-top: 10px solid transparent;
+  border-right: 30px solid transparent;
+  border-left: 33px solid transparent;
+  border-bottom: 30px solid transparent;
+  border: 5px 20px 5px 5px;
+  -o-border-image: url(/static/images/mode-ico/通用框.png) 30 30 round;
+  border-image: url(/static/images/mode-ico/通用框.png) 10 30 30 30 round;
+}
+.gjllabelcl {
+  font-size: 18px;
+  font-family: YouSheBiaoTiHei;
+  font-weight: 400;
+  line-height: 17px;
+  color: #ffffff;
+  letter-spacing: 10px;
+  opacity: 1;
+  display: inline-block;
+}
+.gjllabels {
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 4px;
+  width: 7vw;
+  display: inline-block;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 37px;
+  opacity: 1;
+}
+.divcolor {
+  width: 1vw;
+  height: 2vh;
+  margin-right: 0.5vw;
+  background-color: green;
+  display: inline-block;
+  vertical-align: middle;
+}
+.divcolors {
+  background-color: red;
+  width: 1vw;
+  height: 2vh;
+  display: inline-block;
+  vertical-align: middle;
+}
+.buttons {
+  height: 2vw;
+  opacity: 1;
+  z-index: 7;
+  margin-right: 10px;
+  margin-top: 5px;
+  width: 10vh;
+  background-size: 100% 100%;
+  border: 0;
+  display: inline-block;
+  background-image: url(/static/images/mode-ico/工具栏按钮.png);
+}
+.buttons:hover {
+  height: 2vw;
+  opacity: 1;
+  z-index: 7;
+  margin-right: 10px;
+  margin-top: 5px;
+  width: 10vh;
+  background-size: 100% 100%;
+  border: 0;
+  display: inline-block;
+  background-image: url(/static/images/mode-ico/工具栏按钮选中.png);
+}
+
+.bt {
+  font-size: 18px;
+  font-family: YouSheBiaoTiHei;
+  color: rgb(255, 255, 255);
+  text-shadow: rgb(4 36 39 / 40%) 0px 2px 4px;
+  opacity: 1;
+  margin: 0.5vh 0vw;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.bt:hover {
+  font-size: 18px;
+  font-family: YouSheBiaoTiHei;
+  color: #ffff08;
+  text-shadow: rgb(4 36 39 / 40%) 0px 2px 4px;
+  opacity: 1;
+  margin: 0.5vh 0vw;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+</style>

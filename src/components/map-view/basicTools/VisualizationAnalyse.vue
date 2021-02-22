@@ -7,19 +7,29 @@
  * @FilePath: \wzsjjt-bd-visual\src\components\map-view\basicTools\VisualizationAnalyse.vue
 -->
 <template>
-  <div class="ThreeDContainer" :style="{width:'400px'}">
-    <div class="visualizationanalyse tframe">
-      <el-form label-width="100px">
-        <el-row>
-          <el-col :span="24">
-            <el-form-item label="可视域分析" class="elformbtns">
-              <el-button class="elformbtn" @click="startVisualize">开始</el-button>
-              <el-button class="elformbtn" @click="clearVisualize">清除</el-button>
-              <el-button class="elformbtn" @click="closeVisualize">关闭</el-button>
-            </el-form-item>
-          </el-col>
-        </el-row>
-      </el-form>
+  <div class="ThreeDContainerts">
+    <div
+      class="visualizationanalyse tframe"
+      style="background-color: rgba(5, 41, 110, 0.78)"
+    >
+      <div>
+        <div class="gjllabel">视野分析</div>
+        <div class="gjllabels">可见区域颜色</div>
+        <div class="divcolor"></div>
+        <div class="gjllabels">不可见区域颜色</div>
+        <div class="divcolors"></div>
+        <br />
+        <div class="buttons" @click="startVisualize">
+          <span class="bt">开始</span>
+        </div>
+        <div class="buttons" @click="clearVisualize">
+          <span class="bt">清除</span>
+        </div>
+        <div class="buttons" @click="closeVisualize">
+          <span class="bt">关闭</span>
+        </div>
+      </div>
+     
     </div>
   </div>
 </template>
@@ -57,7 +67,7 @@ export default {
   },
   beforeDestroy() {
     this.pointHandler = undefined;
-    this.handler.destroy()
+    this.handler.destroy();
     this.viewshed3D && this.viewshed3D.destroy();
     this.viewPosition = undefined;
     this.viewer = undefined;
@@ -141,3 +151,108 @@ export default {
   },
 };
 </script>
+<style>
+.ThreeDContainerts {
+  position: absolute;
+  z-index: 7;
+  top: 16vh;
+  left: 22vw;
+  border: 27px solid transparent;
+  -moz-border-image: url("/static/images/mode-ico/通用框.png") 30 30 round; /* Old Firefox */
+  -webkit-border-image: url("/static/images/mode-ico/通用框.png") 30 30 round; /* Safari and Chrome */
+  -o-border-image: url("/static/images/mode-ico/通用框.png") 30 30 round; /* Opera */
+  border-image: url("/static/images/mode-ico/通用框_1.png") 30 30 round;
+}
+.gjllabel {
+  font-size: 18px;
+  font-family: YouSheBiaoTiHei;
+  font-weight: 400;
+  line-height: 17px;
+  color: #ffffff;
+  letter-spacing: 10px;
+  opacity: 1;
+}
+.gjllabels {
+  font-size: 14px;
+  color: #ffffff;
+  letter-spacing: 4px;
+  width: 7vw;
+  display: inline-block;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 37px;
+  opacity: 1;
+}
+.divcolor {
+  width: 1vw;
+  height: 2vh;
+  margin-right: 0.5vw;
+  background-color: green;
+  display: inline-block;
+  vertical-align: middle;
+}
+.divcolors {
+  background-color: red;
+  width: 1vw;
+  height: 2vh;
+  display: inline-block;
+  vertical-align: middle;
+}
+.buttons {
+  height: 2vw;
+  opacity: 1;
+  z-index: 7;
+  margin-right: 10px;
+  margin-top: 5px;
+  width: 10vh;
+  background-size: 100% 100%;
+  border: 0;
+  display: inline-block;
+  background-image: url(/static/images/mode-ico/工具栏按钮.png);
+}
+.buttons:hover {
+  height: 2vw;
+  opacity: 1;
+  z-index: 7;
+  margin-right: 10px;
+  margin-top: 5px;
+  width: 10vh;
+  background-size: 100% 100%;
+  border: 0;
+  display: inline-block;
+  background-image: url(/static/images/mode-ico/工具栏按钮选中.png);
+}
+
+.bt {
+  font-size: 18px;
+  font-family: YouSheBiaoTiHei;
+  color: rgb(255, 255, 255);
+  text-shadow: rgb(4 36 39 / 40%) 0px 2px 4px;
+  opacity: 1;
+  margin: 0.5vh 0vw;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.bt:hover {
+  font-size: 18px;
+  font-family: YouSheBiaoTiHei;
+  color: #ffff08;
+  text-shadow: rgb(4 36 39 / 40%) 0px 2px 4px;
+  opacity: 1;
+  margin: 0.5vh 0vw;
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.el-form:nth-child(1) {
+  padding: 0px 0px 0px 0px !important;
+}
+.el-tag.el-tag--success {
+  width: 160px;
+  margin-top: 5px;
+}
+</style>

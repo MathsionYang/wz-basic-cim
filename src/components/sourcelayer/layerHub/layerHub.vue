@@ -62,38 +62,31 @@
       <div>
         <img
           src="/static/images/mode-ico/装饰框.png"
-          style="position: relative; top: 0; left: 0"
+          class="zsk"
+          @click="gjlclick()"
         />
         <img
           src="/static/images/mode-ico/工具栏.png"
-          style="position: absolute; top: 0.7vh; right: 0.7vw"
+          class="gjls"
+          @click="gjlclick()"
         />
       </div>
     </div>
-    <div class="gjl">
-      <img
-        src="/static/images/mode-ico/框@2x.png"
-        style="position: relative; top: 0; left: 0; width: 16vw"
-      />
-      <div style="position: absolute; top: 0.7vh; right: 0.7vw">
-        <div style="margin-right: 3vw; margin-top: 3vh">
+    <div class="gjl" :class="showgjl == true ? 'active' : ''">
+      <img src="/static/images/mode-ico/框@2x.png" class="gjlk" />
+      <div class="gjla">
+        <div class="gjlb">
           <div
             v-for="(item, index) in gjldata"
             :key="index"
             style="display: inline-block"
           >
-            <img :src="checkgj==item.label?item.imgs:item.img" alt="" @click="gjl(item.label)"/>
+            <img
+              :src="checkgj == item.label ? item.imgs : item.img"
+              alt=""
+              @click="gjl(item)"
+            />
           </div>
-          <!-- <img src="/static/images/mode-ico/视角切换.png" />
-          <img src="/static/images/mode-ico/剖切.png" />
-          <img src="/static/images/mode-ico/长度测量.png" />
-          <img src="/static/images/mode-ico/面积测量.png" />
-          <img src="/static/images/mode-ico/分屏.png" />
-          <img src="/static/images/mode-ico/日照分析.png" />
-          <img src="/static/images/mode-ico/天际线分析.png" />
-          <img src="/static/images/mode-ico/通视分析.png" />
-          <img src="/static/images/mode-ico/视野分析.png" />
-          <img src="/static/images/mode-ico/清除.png" /> -->
         </div>
       </div>
     </div>
@@ -130,7 +123,8 @@ export default {
       tileLayers: {},
       zk: true,
       erji: false,
-      checkgj:[],
+      showgjl: false,
+      checkgj: [],
       gjldata: [
         {
           imgs: "/static/images/mode-ico/视角切换选中框.png",
@@ -227,8 +221,13 @@ export default {
       }
       this.SetForceTreeLabel(data);
     },
-    gjl(data){
-      this.checkgj = data;
+    gjlclick() {
+      this.showgjl = !this.showgjl;
+    },
+    gjl(data) {
+      this.checkgj = data.label;
+      window.gjlclickdata = data.label;
+      this.$bus.$emit("cesium-3d-maptool",data);
     },
     sousu() {
       this.zk = !this.zk;

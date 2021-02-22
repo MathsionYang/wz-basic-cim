@@ -1,11 +1,5 @@
 <template>
-  <div class="ThreeDContainer civilization-center" :style="{ width: '400px' }">
-    <el-divider content-position="left">范围裁剪</el-divider>
-    <div class="civilization-frame">
-      <el-button class="elformbtn" @click="doTailor">开始裁剪</el-button>
-      <el-button class="elformbtn" @click="clearTailor">清除</el-button>
-    </div>
-  </div>
+
 </template>
 
 <script>

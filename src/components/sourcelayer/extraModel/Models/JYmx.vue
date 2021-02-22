@@ -1,14 +1,14 @@
 <template>
-  <div class="BjjmModels"></div>
+  <div class="JYmxModels"></div>
 </template>
 
 <script>
 const Cesium = window.Cesium;
-import { ExtraSourceURL } from "config/server/mapConfig";
+import { ServiceUrl } from "config/server/mapConfig";
 import { mapGetters, mapActions } from "vuex";
-const LAYERS = [{ name: "BJJM", url: ExtraSourceURL.BJJM }];
+const LAYERS = [{ name: "WZBaimo", url: ServiceUrl.WZBaimo }];
 export default {
-  name: "BjjmModels",
+  name: "JYmxModels",
   async mounted() {
     this.initBimScene();
     this.eventRegsiter();
@@ -36,7 +36,6 @@ export default {
             name: v.name,
           });
         });
-
       }
     },
     //  相机移动
@@ -54,12 +53,12 @@ export default {
         },
       });
     },
-    //  关闭倾斜摄影模块
+    //  关闭白模模块
     closeTrafficSubwayModel() {
       this.clearTrafficSubwayModel();
-      this.$bus.$emit("cesium-3d-hub-event", { value: null });
+      this.$bus.$emit("cesium-3d-bm", { value: null });
     },
-    //  清除BIM模块
+    //  清除白模模块
     clearTrafficSubwayModel() {
       LAYERS.map((v) => {
         const V_LAYER = window.earth.scene.layers.find(v.name);

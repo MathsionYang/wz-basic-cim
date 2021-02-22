@@ -30,15 +30,34 @@
       <DetailedModel v-if="showSubFrame == '3d1'" />
       <!-- <CesiumMapVideo v-if="showSubFrame == '3d1'" /> -->
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
-      <TrafficSubwayModel ref="trafficSubwayModel" v-if="showgdFrame == '3d4'" />
+      <TrafficSubwayModel
+        ref="trafficSubwayModel"
+        v-if="showgdFrame == '3d4'"
+      />
       <BJSWQModel ref="bjswqmodel" v-if="showqxsyFrame == '3d5'" />
       <BJJM ref="bjjm" v-if="showjzFrame == '3d6'" />
-      <CivilizationCenter ref="civilizationcenter"  v-if="showsmzxFrame == '3d11'" />
+      <CivilizationCenter
+        ref="civilizationcenter"
+        v-if="showsmzxFrame == '3d11'"
+      />
       <KgBoxAnalyse ref="kgboxanalyse" v-if="showKgFrame == '3d12'" />
       <Chaogc ref="Chaogc" v-if="showcgcFrame == '3d14'" />
       <Gxgl ref="gxgl" v-if="showgxFrame == '3d15'" />
       <Dxkj v-if="showdxFrame == '3d16'" />
-      <WZDem v-if="showDem =='3d17'"/>
+      <WZDem v-if="showDem == '3d17'" />
+      <SZgc v-if="showSZGC == '3d18'" />
+      <JYmx v-if="showJYmx == '3d19'" />
+
+      <CesiumMapTool ref="cesiummaptool" v-if="showSubTool == '长度测量'" />
+      <VisualizationAnalyse
+        ref="visualizationanalyse"
+        v-if="showSubTool == '视野分析'"
+      />
+      <Sightline ref="sightline" v-if="showSubTool == '通视分析'" />
+      <TJXline ref="tjxline" v-if="showSubTool == '天际线分析'" />
+      <RZFx ref="rzfx" v-if="showSubTool == '日照分析'"/>
+      <Pq ref="pq" v-if="showSubTool =='剖切'"/>
+
       <VideoCircle ref="videoCircle" />
       <RoadLine ref="roadline" />
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
@@ -67,6 +86,8 @@ import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue"
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
 import Dxkj from "components/sourcelayer/extraModel/Models/Dxkj";
 import WZDem from "components/sourcelayer/extraModel/Models/WzDem";
+import SZgc from "components/sourcelayer/extraModel/Models/SZgc";
+import JYmx from "components/sourcelayer/extraModel/Models/JYmx";
 import KgBoxAnalyse from "components/sourcelayer/extraModel/Models/KgBoxAnalyse";
 import InfoFrame from "components/sourcelayer/commonFrame/InfoFrame/InfoFrame";
 import MedicalPopup from "components/sourcelayer/commonFrame/Popups/medicalPopup";
@@ -80,6 +101,13 @@ import RoadLine from "components/sourcelayer/extraModel/PolylineTrailLink/RoadLi
 import VideoCircle from "components/sourcelayer/commonFrame/postMessage/videoCircle";
 import AuthFailPopup from "components/sourcelayer/commonFrame/AuthFailPopup/AuthFailPopup";
 import Overview from "components/sourcelayer/extraModel/Overview/Overview.vue";
+
+import CesiumMapTool from "components/map-view/basicTools/CesiumMapTool";
+import Sightline from "components/map-view/basicTools/Sightline";
+import VisualizationAnalyse from "components/map-view/basicTools/VisualizationAnalyse";
+import TJXline from "components/map-view/basicTools/TJXline";
+import RZFx from "components/map-view/basicTools/RZFX";
+import Pq from "components/map-view/basicTools/PQ";
 
 import BIMinfoFrame from "components/sourcelayer/commonFrame/BIMinfoFrame/BIMinfoFrame";
 import Gxgl from "components/sourcelayer/extraModel/Gxgl/Gxgl";
@@ -114,14 +142,17 @@ export default {
       showSubFrame: null,
       showDXFrame: null,
       showKgFrame: null,
-      showqxsyFrame:null,
-      showjzFrame:null,
-      showgdFrame:null,
-      showgxFrame:null,
-      showdxFrame:null,
-      showsmzxFrame:null,
-      showcgcFrame:null,
-      showDem:null,
+      showqxsyFrame: null,
+      showjzFrame: null,
+      showgdFrame: null,
+      showgxFrame: null,
+      showdxFrame: null,
+      showsmzxFrame: null,
+      showcgcFrame: null,
+      showSubTool: null,
+      showSZGC: null,
+      showDem: null,
+      showJYmx: null,
       showSubHubFrame: "3d1",
       mapLoaded: false,
       validated: false,
@@ -149,6 +180,8 @@ export default {
     BJJM,
     Dxkj,
     WZDem,
+    SZgc,
+    JYmx,
     KgBoxAnalyse,
     TrafficSubwayModel,
     InfoFrame,
@@ -167,7 +200,13 @@ export default {
     Gxgl,
     CivilizationCenter,
     Chaogc,
-    AroundSourceAnalyse
+    AroundSourceAnalyse,
+    CesiumMapTool,
+    Sightline,
+    VisualizationAnalyse,
+    TJXline,
+    RZFx,
+    Pq,
   },
   created() {
     window.extraHash = {};
@@ -295,33 +334,37 @@ export default {
           this.SetForceBimData(_data_);
         }
         if (building) {
-          let url = 'http://172.20.83.223:8098/iserver/services/data-AS_table/rest/data'
-          let datasetName = `AS_table:${feature['部件']}`
+          let url =
+            "http://172.20.83.223:8098/iserver/services/data-AS_table/rest/data";
+          let datasetName = `AS_table:${feature["部件"]}`;
           var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
           getFeatureParam = new SuperMap.REST.FilterParameter({
             // attributeFilter: `SMID <= 1000`,
-            attributeFilter: `ElementID = ${feature['ELEMENTID']}`,
+            attributeFilter: `ElementID = ${feature["ELEMENTID"]}`,
           });
           getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
             queryParameter: getFeatureParam,
             toIndex: -1,
             datasetNames: [datasetName],
           });
-          getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
-            eventListeners: {
-              processCompleted: async (res) => {
-                // const fields = await getIserverFields(url, datasetName);
-                // console.log('fields', fields)
-                // console.log('res', res)
-                let tempObj = res.result.features[0].attributes
-                let detailData = Object.keys(tempObj).map((k) => {
-                  return { k, v: tempObj[k] };
-                });
-                this.SetForceBimData(detailData);
+          getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(
+            url,
+            {
+              eventListeners: {
+                processCompleted: async (res) => {
+                  // const fields = await getIserverFields(url, datasetName);
+                  // console.log('fields', fields)
+                  // console.log('res', res)
+                  let tempObj = res.result.features[0].attributes;
+                  let detailData = Object.keys(tempObj).map((k) => {
+                    return { k, v: tempObj[k] };
+                  });
+                  this.SetForceBimData(detailData);
+                },
+                processFailed: (msg) => console.log(msg),
               },
-              processFailed: (msg) => console.log(msg),
-            },
-          });
+            }
+          );
           getFeatureBySQLService.processAsync(getFeatureBySQLParams);
         }
       });
@@ -374,9 +417,27 @@ export default {
       this.$bus.$on("cesium-3d-kggx", ({ value }) => {
         this.showKgFrame = value;
       });
+      //数字高程
+      this.$bus.$off("cesium-3d-szgc");
+      this.$bus.$on("cesium-3d-szgc", ({ value }) => {
+        this.showSZGC = value;
+      });
+      //数字地表
       this.$bus.$off("cesium-3d-szdb");
-      this.$bus.$on("cesium-3d-szdb",({value}) =>{
+      this.$bus.$on("cesium-3d-szdb", ({ value }) => {
         this.showDem = value;
+      });
+      //简易模型
+      this.$bus.$off("cesium-3d-bm");
+      this.$bus.$on("cesium-3d-bm", ({ value }) => {
+        console.log("简易模型", value);
+        this.showJYmx = value;
+      });
+      //工具栏
+      this.$bus.$off("cesium-3d-maptool");
+      this.$bus.$on("cesium-3d-maptool", ({ label }) => {
+        console.log("工具栏点击", label);
+        this.showSubTool = label;
       });
       this.$bus.$on("cesium-3d-switch", ({ value }) => {
         this.$bus.$emit("cesium-3d-event", { value: !value ? "3d1" : null });
@@ -396,7 +457,7 @@ export default {
           ? (window.imagelayer = mapImageLayerInit(ServiceUrl.SWImage))
           : undefined;
         //  光源显示
-        //mapRoadLampLayerTurn(!value ? false : true);
+        mapRoadLampLayerTurn(!value ? false : true);
         //  河流显示
         window.earth.scene.layers.find("RIVER").visible = !value ? true : false;
         //  历史页面做回调
@@ -415,7 +476,7 @@ export default {
         infoBox: false,
         selectionIndicator: false,
         // timeline:true,
-        shadows: false,
+        shadows: true,
         // contextOptions: {
         //   maxDrawingBufferWidth: 15360,
         //   maxDrawingBufferHeight: 4320,
@@ -432,8 +493,8 @@ export default {
       const mapMvt = mapMvtLayerInit("mapMvt", ServiceUrl.YJMVT);
       //  重要地物注记
       //const keyMvt = mapMvtLayerInit("keyMvt", ServiceUrl.KEYMVT);
-
       await mapBJSWQLayerInit("BJImage", ServiceUrl.BJImage);
+
       //  水面
       // await mapRiverLayerInit("RIVER", ServiceUrl.STATIC_RIVER);
       //  白模叠加

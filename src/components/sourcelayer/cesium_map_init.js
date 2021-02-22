@@ -10,11 +10,11 @@ export const mapConfigInit = () => {
     // window.earth.scene.debugShowFramesPerSecond = true;
     window.earth.clock.currentTime.secondsOfDay = 51830.97475229357
     // window.earth.scene.fxaa = true;
-    window.earth.scene.sun.show = true;
+    //window.earth.scene.sun.show = true;
     window.earth.scene.bloomEffect.bloomIntensity = 1.05;
     window.earth.scene.bloomEffect.show = false;//泛光
     window.earth.imageryLayers.get(0).show = false;
-    window.earth.scene.skyAtmosphere.show = false;
+    window.earth.scene.skyAtmosphere.show = true;
     window.earth.scene.globe.baseColor = new Cesium.Color.fromCssColorString(
         "rgba(13,24,45, 1)"
     );

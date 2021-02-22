@@ -106,7 +106,7 @@ export const ExtraSourceURL = {
   S1:
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-S1/rest/realspace/datas/S1/config",
   BJSWQ:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb-binjiangshangwuqu/rest/realspace/datas/binjiangshangwuqu/config",
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   BJJM:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/max_cim_sample/config",  
 };
@@ -125,8 +125,10 @@ export const BimSourceURL = {
     "http://172.20.83.223:8098/iserver/services/data-Airport_Station/rest/data",
   UNDERGROUND_SCENE_URL:
     "http://172.20.83.223:8098/iserver/services/3D-GSLINE/rest/realspace",
-  WZDEM:
+  SZGC:
     "http://172.20.83.223:8098/iserver/services/3D-DEM_TT/rest/realspace/datas/2018gddem",
+  WZDEM:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb-DSMDEM/rest/realspace/datas/DSM_DEM",
 };
 
 export const CIVILIZATION_CENTER_URL = {
