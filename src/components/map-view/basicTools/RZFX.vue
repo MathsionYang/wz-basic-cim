@@ -100,6 +100,7 @@ export default {
   },
   methods: {
     sunlight() {
+      window.earth.shadows =true;  
       this.shadowQuery = new Cesium.ShadowQueryPoints(window.earth.scene);
       var layers = window.earth.scene.layers;
       for (let i = 0; i < layers.layerQueue.length; i++) {
@@ -153,21 +154,7 @@ export default {
       }, 20);
     },
     clear() {
-      window.earth.entities.removeAll();
-      var layers = window.earth.scene.layers;
-      for (let i = 0; i < layers.layerQueue.length; i++) {
-        layers.layerQueue[i].selectEnabled = true;
-        layers.layerQueue[i].shadowType = 0;
-      }
-      try {
-        this.shadowQuery.qureyRegion({
-          position: [0, 0],
-          bottom: 0,
-          extend: 0,
-        });
-      } catch (error) {
-          
-      }
+      window.earth.shadows =false;  
     },
     close() {
       this.clear();
