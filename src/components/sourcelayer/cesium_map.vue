@@ -55,8 +55,8 @@
       />
       <Sightline ref="sightline" v-if="showSubTool == '通视分析'" />
       <TJXline ref="tjxline" v-if="showSubTool == '天际线分析'" />
-      <RZFx ref="rzfx" v-if="showSubTool == '日照分析'"/>
-      <Pq ref="pq" v-if="showSubTool =='剖切'"/>
+      <RZFx ref="rzfx" v-if="showSubTool == '日照分析'" />
+      <Pq ref="pq" v-if="showSubTool == '剖切'" />
 
       <VideoCircle ref="videoCircle" />
       <RoadLine ref="roadline" />
@@ -158,6 +158,7 @@ export default {
       validated: false,
       isInfoFrame: false,
       authFailshallPop: false,
+      ispartsclick: false,
     };
   },
   computed: {
@@ -270,6 +271,116 @@ export default {
         }
       });
     },
+    sqlQuery(SQL) {
+      var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+      getFeatureParam = new SuperMap.REST.FilterParameter({
+        attributeFilter: SQL,
+      });
+      getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
+        queryParameter: getFeatureParam,
+        toIndex: -1,
+        datasetNames: ["CIM_2D:" + "JZ_2D_buffer"], // 本例中“户型面”为数据源名称，“专题户型面2D”为楼层面相应的数据集名称
+      });
+      var url =
+        "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data"; // 数据服务地址
+      getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
+        eventListeners: {
+          processCompleted: async (queryEventArgs) => {
+            console.log("新分层", queryEventArgs);
+            if (window.lastHouseEntity) {
+              window.earth.entities.remove(window.lastHouseEntity);
+              window.lastHouseEntity = null;
+            }
+            if (queryEventArgs.originResult.features.length != 0) {
+              var selectedFeature = queryEventArgs.originResult.features[0]; //选中楼层的楼层面信息对象
+              var Feacturedata = {};
+              for (let a = 0; a < selectedFeature.fieldNames.length; a++) {
+                Feacturedata[selectedFeature.fieldNames[a]] =
+                  selectedFeature.fieldValues[a];
+              }
+              const datas = Object.keys(Feacturedata).map((k) => {
+                return { k, v: Feacturedata[k] };
+              });
+              var fangwu = "";
+              //var fangwu = datas.concat(window.jingmo);
+              if (!selectedFeature.geometry.points) {
+                return;
+              }
+              var bottomHeight = Number(
+                selectedFeature.fieldValues[
+                  selectedFeature.fieldNames.indexOf("BOTTOMATTITUDE")
+                ]
+              ); // 底部高程
+              var extrudeHeight = Number(
+                selectedFeature.fieldValues[
+                  selectedFeature.fieldNames.indexOf("HEIGHT")
+                ]
+              ); // 层高（拉伸高度）
+              Cesium.GroundPrimitive.bottomAltitude = bottomHeight; // 矢量面贴对象的底部高程
+              Cesium.GroundPrimitive.extrudeHeight = extrudeHeight; // 矢量面贴对象的拉伸高度
+              var points3D = []; // [经度, 纬度, 经度, 纬度, ...]的形式，存放楼层面上的点坐标
+              for (var pt of selectedFeature.geometry.points) {
+                points3D.push(pt.x, pt.y);
+              }
+              if (!window.ispartsclick) {
+                window.lastHouseEntity = window.earth.entities.add({
+                  polygon: {
+                    hierarchy: Cesium.Cartesian3.fromDegreesArray(points3D),
+                    material: getColorRamp([0.0, 0.8], true),
+                  },
+                  classificationType: Cesium.ClassificationType.S3M_TILE, // 贴在S3M模型表面
+                });
+              } else {
+                if (window.lastHouseEntity) {
+                  window.earth.entities.remove(window.lastHouseEntity);
+                  window.lastHouseEntity = null;
+                }
+              }
+
+              function getColorRamp(elevationRamp) {
+                var ramp = document.createElement("canvas");
+                ramp.width = 1;
+                ramp.height = 100;
+                var ctx = ramp.getContext("2d");
+                var values = elevationRamp;
+                var grd = ctx.createLinearGradient(0, 0, 100, 50);
+                grd.addColorStop(values[0], "#E84929"); //black
+                grd.addColorStop(values[1], "#FFFF08"); //blue
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, 1, 100);
+                return ramp;
+              }
+              let url =
+                "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data";
+              let newdataset = "CIM_2D:JZ_2D_buffer";
+              const fields = await getIserverFields(url, newdataset);
+              const fieldHash = {};
+              fields.map(({ name, caption }) => {
+                const reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+                reg.test(caption)
+                  ? (fieldHash[name.toLowerCase()] = caption)
+                  : undefined;
+              });
+              let tempObj = queryEventArgs.result.features[0].attributes;
+              const fixAttributes = {};
+              for (let v in tempObj) {
+                const V = v.toLowerCase();
+                fieldHash[V] ? (fixAttributes[fieldHash[V]] = tempObj[v]) : undefined;
+              }
+              console.log("别名组", fixAttributes);
+
+              let detailData = Object.keys(fixAttributes).map((k) => {
+                return { k, v: fixAttributes[k] };
+              });
+              console.log("源数据",detailData)
+              this.SetForceBimData(detailData);
+            }
+          }, // 查询成功时的回调函数
+          processFailed: (msg) => console.log("查询失败分层分户", msg), // 查询失败时的回调函数
+        },
+      });
+      getFeatureBySQLService.processAsync(getFeatureBySQLParams);
+    },
     initHandler() {
       const handler = new Cesium.ScreenSpaceEventHandler(
         window.earth.scene.canvas
@@ -277,7 +388,9 @@ export default {
       // 监听左键点击事件
       handler.setInputAction((e) => {
         const pick = window.earth.scene.pick(e.position);
-        console.log("点击事件", pick);
+        const position = window.earth.scene.pickPosition(e.position);
+        window.position = position;
+        console.log("点击pick.id", pick.id);
         if (!pick || !pick.id) return;
         if (typeof pick.id == "object") {
           //  *****[videoCircle]  监控视频点*****
@@ -295,6 +408,7 @@ export default {
           }
         } else if (typeof pick.id == "string") {
           const [_TYPE_, _SMID_, _NODEID_] = pick.id.split("@");
+          console.log("参数", window.featureMap);
           //  *****[detailPopup]  资源详情点*****
           if (~["label", "billboard"].indexOf(_TYPE_)) {
             this.$refs.detailPopup.getForceEntity({
@@ -302,13 +416,21 @@ export default {
               position: pick.primitive.position,
               _NODEID_
             });
+          } else {
+            var cartographic = Cesium.Cartographic.fromCartesian(position);
+            var longitude = Cesium.Math.toDegrees(cartographic.longitude);
+            var latitude = Cesium.Math.toDegrees(cartographic.latitude);
+            var height = cartographic.height;
+            if (window.lastHouseEntity == undefined) {
+              window.lastHouseEntity = null;
+            }
+            var sqls = `BottomAttitude < ${height} and ${height} < (BottomAttitude + Height) and ${longitude} > SmSdriW and ${longitude} < SmSdriE and ${latitude} > SmSdriS and ${latitude} < SmSdriN`;
+            this.sqlQuery(sqls);
           }
         }
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
-
       // 模型点击事件
       window.earth.pickEvent.addEventListener((feature) => {
-        console.log("pickEvent", feature);
         const _data_ = Object.keys(feature).map((k) => {
           return { k, v: feature[k] };
         });
@@ -334,13 +456,12 @@ export default {
         if (gx) {
           this.SetForceBimData(_data_);
         }
-        if (building) {
+        if (building && window.ispartsclick) {
           let url =
             "http://172.20.83.223:8098/iserver/services/data-AS_table/rest/data";
           let datasetName = `AS_table:${feature["部件"]}`;
           var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
           getFeatureParam = new SuperMap.REST.FilterParameter({
-            // attributeFilter: `SMID <= 1000`,
             attributeFilter: `ElementID = ${feature["ELEMENTID"]}`,
           });
           getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
@@ -353,9 +474,7 @@ export default {
             {
               eventListeners: {
                 processCompleted: async (res) => {
-                  // const fields = await getIserverFields(url, datasetName);
-                  // console.log('fields', fields)
-                  // console.log('res', res)
+                  console.log("数据", res);
                   let tempObj = res.result.features[0].attributes;
                   let detailData = Object.keys(tempObj).map((k) => {
                     return { k, v: tempObj[k] };
@@ -374,6 +493,7 @@ export default {
      * 事件注册
      */
     eventRegsiter() {
+      window.ispartsclick = false;
       this.$bus.$off("cesium-3d-event");
       this.$bus.$on("cesium-3d-event", ({ value }) => {
         this.showSubFrame = value;

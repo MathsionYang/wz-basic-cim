@@ -186,13 +186,10 @@ export default {
       this.$bus.$off("cesium-3d-around-analyse-pick");
       this.$bus.$on("cesium-3d-around-analyse-pick", (forceEntity) => {
         this.forceEntity = forceEntity;
-        console.log("forceEntity!!!", forceEntity);
         this.initAroundOption();
         if (forceEntity.type == "source") {
-          console.log(555)
           this.fetchSourceAround(forceEntity);
         } else {
-          console.log(666)
           this.fetchEventSourceAround(forceEntity);
         }
       });
@@ -212,6 +209,7 @@ export default {
       this.aroundOption
         .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
         .map(async ({ label, value }) => {
+          console.log("value",value);
           const { data } = await getAroundSourceAnalyse({
             resourceType: value,
             lng,
@@ -346,7 +344,6 @@ export default {
     },
     // 选择类型
     itemClick(item) {
-      console.log("item", item);
       this.selectedSourceObj = item;
     },
     // 路线规划
@@ -354,7 +351,6 @@ export default {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
-      console.log("item", item);
       let originPosition = Cesium.Cartesian3.fromDegrees(
         +item.lng,
         +item.lat,

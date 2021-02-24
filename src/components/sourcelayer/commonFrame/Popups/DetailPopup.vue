@@ -98,11 +98,9 @@
         <div class="title">信息详情</div>
         <div class="decorate"></div>
         <div class="close" @click="showSide = false"></div>
-        <div class="tab-list">
+        <!-- <div class="tab-list">
           <div class="tab-item active">基本信息</div>
-          <!-- <div class="tab-item">周边分析</div>
-          <div class="tab-item">人口动态</div> -->
-        </div>
+        </div> -->
       </div>
       <ul class="info-content">
         <li
@@ -223,10 +221,7 @@ export default {
      */
     doAroundSourceAnalyse() {
       // this.showSide = false
-      console.log('doAroundSourceAnalyse', this.forceEntity)
       const { geometry } = this.forceEntity;
-      // const { x, y } = geometry;
-      // this.$bus.$emit("cesium-3d-around-analyse-pick", { lng: x, lat: y });
       let type = this.forceEntity._NODEID_.includes("eventLayer_") ? 'event' : 'source'
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
