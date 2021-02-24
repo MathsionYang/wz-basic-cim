@@ -98,11 +98,9 @@
         <div class="title">信息详情</div>
         <div class="decorate"></div>
         <div class="close" @click="showSide = false"></div>
-        <div class="tab-list">
+        <!-- <div class="tab-list">
           <div class="tab-item active">基本信息</div>
-          <!-- <div class="tab-item">周边分析</div>
-          <div class="tab-item">人口动态</div> -->
-        </div>
+        </div> -->
       </div>
       <ul class="info-content">
         <li

@@ -137,12 +137,14 @@ export default {
       aroundOption
         .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
         .map(async ({ label, value }) => {
+          console.log("value",value);
           const { data } = await getAroundSourceAnalyse({
             resourceType: value,
             lng,
             lat,
             distance,
           });
+          console.log("data",data)
           const sourceAnalyseResult = { title: label, key: value, list: data };
           aroundSourceAnalyseList.push(sourceAnalyseResult);
           //  周边分析画点

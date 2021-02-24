@@ -79,7 +79,9 @@ export const fixTreeWithExtra = (gArr, eObj, node, context) => {
  * @param {function} fn 回调
  */
 export const treeDrawTool = (context, { result }, node, fields = [], fn) => {
+  console.log("别名",context,result,node,fields,fn)
   const fieldHash = fixFieldsByArr(fields);
+  console.log("别名2",fieldHash)
   // const poiEntityCollection = new Cesium.CustomDataSource(node.id);
   // window.earth.dataSources.add(poiEntityCollection).then(datasource => {
   //   window.entityMap[node.id] = datasource;

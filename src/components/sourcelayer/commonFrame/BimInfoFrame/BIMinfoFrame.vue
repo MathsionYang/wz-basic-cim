@@ -4,10 +4,11 @@
     <div class="info-header">
       <div class="title">信息详情</div>
       <div class="decorate"></div>
+      <div class="parts" :class="{active: partsclick == true}" @click="ispartsclick()" ></div>
       <div class="close" @click="closeBimFrame()"></div>
-      <div class="tab-list">
+      <!-- <div class="tab-list">
         <div class="tab-item active">基本信息</div>
-      </div>
+      </div> -->
     </div>
     <ul class="info-content">
       <li
@@ -32,6 +33,7 @@ export default {
     return {
       filterKey: ["永久固定码", "唯一码", "分类代码"],
       activeTab: "bim",
+      partsclick:false,
     };
   },
   beforeDestroy() {
@@ -67,8 +69,13 @@ export default {
       "SetForceRoomData",
       "SetForceBimIDS",
     ]),
+    ispartsclick(){
+      window.ispartsclick=!window.ispartsclick;
+      this.partsclick = window.ispartsclick;
+    },
     closeBimFrame() {
-      console.log("closeBimFrame");
+      window.ispartsclick = false;
+      this.partsclick = false;
       this.SetForceBimData([]);
       this.SetForceRoomData([]);
       this.SetForceBimIDS([]);
