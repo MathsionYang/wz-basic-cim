@@ -300,6 +300,7 @@ export default {
             this.$refs.detailPopup.getForceEntity({
               ...window.featureMap[_NODEID_][_SMID_],
               position: pick.primitive.position,
+              _NODEID_
             });
           }
         }

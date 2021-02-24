@@ -248,3 +248,8 @@ export const SetForceRoomData = function ({ commit }, data) {
 export const SetForceBimIDS = function ({ commit }, data) {
   commit(types.SET_FORCE_BIM_IDS, data);
 };
+
+//  设置图层模式
+export const SetIsSourceLayer = ({ commit }, data) => {
+  commit(types.SET_IS_SOURCE_LAYER, data);
+};

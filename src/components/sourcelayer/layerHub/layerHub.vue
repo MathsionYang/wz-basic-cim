@@ -90,6 +90,10 @@
         </div>
       </div>
     </div>
+    <div class="layer-btn event" @click="doForceEventTopicLabels('eventLayer_fire')">
+      <img class="event" src="/static/images/layer-ico/eventFire.png" />
+      <img class="mark" :class="{ breath: !isSourceLayer }" src="/static/images/layer-ico/mark.png" />
+    </div>
     <div class="dibu" @click="sousu()">
       <img src="/static/images/mode-ico/底部.png" />
     </div>
@@ -101,7 +105,9 @@ import { mapGetters, mapActions } from "vuex";
 import KgLegend from "./components/KgLegend";
 import { treeDrawTool, fixTreeWithExtra } from "./TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
-import { CESIUM_TREE_OPTION } from "config/server/sourceTreeOption";
+import { CESIUM_TREE_OPTION, CESIUM_TREE_EVENT_OPTION } from "config/server/sourceTreeOption";
+import { getEventData } from "api/cityBrainAPI";
+
 const Cesium = window.Cesium;
 
 export default {
@@ -110,7 +116,9 @@ export default {
     return {
       //  底部树
       CESIUM_TREE_OPTION,
+      CESIUM_TREE_EVENT_OPTION,
       forceTreeTopic: [],
+      forceTreeEventTopic: [],
       //  资源选中层
       swiperOptions: {
         slidesPerView: 8,
@@ -177,11 +185,12 @@ export default {
           label: "清除",
         },
       ],
+      isEventLayerOpen: false
     };
   },
   components: { KgLegend },
   computed: {
-    ...mapGetters("map", ["forceTreeLabel", "forceTrueTopicLabels"]),
+    ...mapGetters("map", ["forceTreeLabel", "forceTrueTopicLabels", "isSourceLayer", "forceTreeEventLabel"]),
   },
   watch: {
     forceTreeLabel(n) {
@@ -204,6 +213,7 @@ export default {
         "SetForceTreeLabel",
         "SetForceTrueTopicLabels",
         "SetForceTrueTopicLabelId",
+        "SetIsSourceLayer"
       ],
     ]),
     yiji(data) {
@@ -246,6 +256,7 @@ export default {
      * 默认选中二级菜单第一个点
      */
     initForceTreeTopic() {
+      console.log('initForceTreeTopic', this.forceTreeTopic)
       //  清除旧图层
       this.forceTreeTopic
         .filter((v) => ~this.forceTrueTopicLabels.indexOf(v.id))
@@ -281,7 +292,7 @@ export default {
           ...new Set(this.forceTrueTopicLabels.concat([label.id])),
         ]);
         this.SetForceTrueTopicLabelId(label.id);
-        this.nodeCheckChange(label, true, true);
+        this.nodeCheckChange(label, true);
       }
       console.log("数组", this.forceTrueTopicLabels);
     },
@@ -313,7 +324,22 @@ export default {
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
-    nodeCheckChange(node, checked, topicLoad) {
+    async getAPIFeature(node, fn) {
+      let res = await getEventData(node.event);
+      let features = [];
+      res.data.forEach((item) => {
+        features.push({
+          attributes: { NAME: item.title, SMID: item.id },
+          geometry: {
+            x: +item.eventCoordinate.split(",")[0],
+            y: +item.eventCoordinate.split(",")[1],
+          },
+        });
+      });
+      treeDrawTool(this, { result: { features } }, node);
+      fn && fn();
+    },
+    nodeCheckChange(node, checked) {
       if (checked) {
         console.log("点击内容", node);
         if (node.type == "mvt" && node.id) {
@@ -324,9 +350,15 @@ export default {
             );
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
-            this.getPOIPickedFeature(node, () => {
-              this.switchSearchBox(node, topicLoad);
-            });
+            if (this.isSourceLayer) {
+              this.getPOIPickedFeature(node, () => {
+                this.switchSearchBox(node);
+              });
+            } else {
+              this.getAPIFeature(node, () => {
+                this.switchSearchBox(node);
+              });
+            }
           }
           if (node.withImage) {
             node.withImage.forEach((item) => {
@@ -362,7 +394,7 @@ export default {
             })
           );
         }
-        this.switchSearchBox(node, topicLoad);
+        this.switchSearchBox(node);
         //  有相机视角配置 -> 跳视角
         node.camera && window.earth.scene.camera.setView(node.camera);
       } else {
@@ -386,12 +418,28 @@ export default {
       }
     },
     //  先只显示医疗
-    switchSearchBox(node, topicLoad) {
+    switchSearchBox(node) {
       this.$bus.$emit("cesium-3d-switch-searchBox", {
         shall: node.type == "mvt" && node.id ? true : false,
         node,
       });
     },
+    //  开启消防图层
+    doForceEventTopicLabels(id) {
+      this.isEventLayerOpen = !this.isEventLayerOpen
+      this.SetIsSourceLayer(!this.isEventLayerOpen);
+      const Topics = this.CESIUM_TREE_EVENT_OPTION.filter(
+        (v) => v.label == this.forceTreeEventLabel
+      );
+      this.forceTreeEventTopic = Topics.length ? Topics[0].children : [];
+      const label = this.forceTreeEventTopic.filter((v) => v.id == id)[0];
+      console.log('label!!!', label)
+      if (this.isEventLayerOpen) {
+        this.nodeCheckChange(label, true);
+      } else {
+        this.nodeCheckChange(label, false);
+      }
+    }
   },
 };
 </script>

@@ -50,9 +50,12 @@ const state = {
   forceTreeLabel: "城市总览",
   forceTrueTopicLabels: [],
   forceTrueTopicLabelId: "",
+  forceTreeEventLabel: "事件专题",
   // bim
   forceBimData: [],
   forceRoomData: [],
   forceBimIDS: [],
+  //  图层模式
+  isSourceLayer: true
 };
 export default state;

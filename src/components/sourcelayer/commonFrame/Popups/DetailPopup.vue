@@ -130,7 +130,7 @@ export default {
       forcePosition: {},
       buffer: null,
       filterKey: ["永久固定码", "唯一码", "分类代码", "全景地址"],
-      showSide: true,
+      showSide: false,
       extraTabActive: "",
       isFrame: false,
     };
@@ -153,11 +153,13 @@ export default {
      */
     getForceEntity(forceEntity) {
       console.log("forceEntity", forceEntity);
-      this.showSide = true;
       this.forceEntity = forceEntity;
-      this.buffer = null;
-      this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
-      this.$bus.$emit("cesium-3d-rtmpFetch-cb");
+      if (!forceEntity._NODEID_.includes("eventLayer_")) {
+        this.showSide = true;
+        this.buffer = null;
+        this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
+        this.$bus.$emit("cesium-3d-rtmpFetch-cb");
+      }
     },
     /**
      *  框体移动
@@ -220,9 +222,13 @@ export default {
      * 周边分析跳转
      */
     doAroundSourceAnalyse() {
+      // this.showSide = false
+      console.log('doAroundSourceAnalyse', this.forceEntity)
       const { geometry } = this.forceEntity;
-      const { x, y } = geometry;
-      this.$bus.$emit("cesium-3d-around-analyse-pick", { lng: x, lat: y });
+      // const { x, y } = geometry;
+      // this.$bus.$emit("cesium-3d-around-analyse-pick", { lng: x, lat: y });
+      let type = this.forceEntity._NODEID_.includes("eventLayer_") ? 'event' : 'source'
+      this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
       this.forcePosition = {};
@@ -230,6 +236,7 @@ export default {
       this.buffer = null;
       this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
       this.$bus.$emit("cesium-3d-rtmpFetch-cb");
+      this.$parent.$refs.aroundSourceAnalyse.closeAroundSourceAnalyse()
     },
   },
 };
@@ -467,7 +474,7 @@ export default {
     .info-content {
       margin-top: 1vh;
       width: 100%;
-      height: 40vh;
+      max-height: 30vh;
       overflow-y: auto;
       .bg-image("/static/images/mode-ico/side-bg");
       .info-item {

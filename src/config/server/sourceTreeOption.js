@@ -1030,12 +1030,69 @@ const WLGZ_TOPIC = [
   }
 ];
 
-const AROUND_ANALYSE_TOPIC = [
+const EVENT_AROUND_ANALYSE_TOPIC = [
   { label: "医疗场所", resourceType: "medical_care" },
   { label: "消防站", resourceType: "fire_station" },
   { label: "消防栓", resourceType: "fire_hydrant" },
   { label: "交通卡口", resourceType: "bayonet" }
 ]
+
+const AROUND_ANALYSE_TOPIC = [
+  {
+    label: "商业服务",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "商业设施"
+  },
+  {
+    label: "教育设施",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "教育设施"
+  },
+  {
+    label: "体育设施",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "体育设施"
+  },
+  {
+    label: "文化设施",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "文化设施"
+  },
+  {
+    label: "停车泊位",
+    type: 'mvt',
+    dataname: '172.20.83.196_ersjdata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
+    dataset: "JCSS_TCC"
+  },
+  {
+    label: "公园绿地",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "绿化设施"
+  },
+  {
+    label: "养老助残",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "养老设施"
+  },
+]
+
+//  事件专题
+const EVENT_TOPIC = [
+  { label: "消防火灾事件", event: "eventLayer_fire" },
+];
 
 /**
  * 对应需要额外数据的点位
@@ -1147,6 +1204,18 @@ export const CESIUM_TREE_TRAFFIC_OPTION = [{
   })
 }]
 
+export const CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION = {
+  id: "周边查询",
+  label: "周边查询",
+  children: EVENT_AROUND_ANALYSE_TOPIC.map(v => {
+    return {
+      ...v,
+      id: v.label,
+      icon: v.label,
+    };
+  })
+}
+
 export const CESIUM_TREE_AROUND_ANALYSE_OPTION = {
   id: "周边查询",
   label: "周边查询",
@@ -1155,6 +1224,21 @@ export const CESIUM_TREE_AROUND_ANALYSE_OPTION = {
       ...v,
       id: v.label,
       icon: v.label,
+      newdataset: `${v.dataname}${v.dataset}`
     };
   })
 }
+
+export const CESIUM_TREE_EVENT_OPTION = [{
+  id: "事件专题",
+  label: "事件专题",
+  children: EVENT_TOPIC.map(v => {
+    return {
+      ...v,
+      id: v.event,
+      icon: v.label,
+      url: SERVER_DEFAULT_DATA,
+      type: v.type || "mvt",
+    };
+  })
+}]

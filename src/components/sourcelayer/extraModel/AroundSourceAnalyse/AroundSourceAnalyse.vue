@@ -1,16 +1,16 @@
 <template>
   <div class="around-source-analyse" v-show="forceEntity">
-    <span class="header"
-      >周边分析
-      <i class="around-source-close" @click="closeAroundSourceAnalyse">x</i>
-    </span>
+    <div class="header">
+      <div class="title">周边分析</div>
+      <div class="decorate"></div>
+      <i class="around-source-close" @click="closeAroundSourceAnalyse"></i>
+    </div>
     <div class="around-source-pick">
       <el-select
         class="around-source-select-source"
         v-model="selectSourceLayer"
         multiple
         collapse-tags
-        :clearable="true"
         placeholder="请选择"
         @change="sourceUpdateHandler"
       >
@@ -34,7 +34,7 @@
         />
       </el-select>
     </div>
-    <div class="around-source-list">
+    <!-- <div class="around-source-list">
       <el-collapse accordion>
         <el-collapse-item
           v-for="(item, index) in aroundSourceAnalyseList"
@@ -63,30 +63,93 @@
           </div>
         </el-collapse-item>
       </el-collapse>
+    </div> -->
+    <div class="around-source-list">
+      <div
+        class="around-source-item"
+        v-for="(item, index) in aroundSourceAnalyseList"
+        :key="index"
+        @click="itemClick(item)"
+      >
+        <img
+          class="around-source-list-icon"
+          :src="
+            selectedSourceObj.title == item.title
+              ? `/static/images/aroundSource/${item.title}选中@2x.png`
+              : `/static/images/aroundSource/${item.title}@2x.png`
+          "
+        />
+      </div>
     </div>
+    <ul
+      class="around-source-list-single"
+      v-if="
+        forceEntity &&
+        forceEntity.type == 'event' &&
+        aroundSourceAnalyseList.length
+      "
+    >
+      <li
+        class="around-source-list-item"
+        v-for="(item, index) in selectedSourceObj.list"
+        :key="index"
+        @click="navigate(item)"
+      >
+        <img
+          class="single-location"
+          src="/static/images/common/location2.png"
+        />
+        <span class="name">{{ item.resourceName }}</span>
+        <span class="single-distance">{{ (+item.distance).toFixed(2) }}米</span>
+      </li>
+      <p class="no-data" v-if="!selectedSourceObj.list.length">暂无数据</p>
+    </ul>
+    <ul
+      class="around-source-list-single"
+      v-if="
+        forceEntity &&
+        forceEntity.type == 'source' &&
+        aroundSourceAnalyseList.length
+      "
+    >
+      <li
+        class="around-source-list-item"
+        v-for="(item, index) in selectedSourceObj.list"
+        :key="index"
+      >
+        <img
+          class="single-location"
+          src="/static/images/common/location2.png"
+        />
+        <span class="name">{{ item.attributes.NAME }}</span>
+        <span class="single-distance">{{ (+item.distance).toFixed(2) }}米</span>
+      </li>
+      <p class="no-data" v-if="!selectedSourceObj.list.length">暂无数据</p>
+    </ul>
   </div>
 </template>
 
 <script>
 import gcoord from "gcoord";
 import { mapGetters } from "vuex";
-import { CESIUM_TREE_AROUND_ANALYSE_OPTION } from "config/server/sourceTreeOption";
+import { treeDrawTool } from "../../layerHub/TreeDrawTool";
+import {
+  CESIUM_TREE_AROUND_ANALYSE_OPTION,
+  CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION,
+} from "config/server/sourceTreeOption";
 import {
   aroundSourceAnalyseDraw,
   initPrimitivesCollection,
+  hideVisible,
   aroundSourceAnalyseCircle,
 } from "./AroundSourceAnalyseDraw";
 import { getAroundSourceAnalyse } from "@/api/layerServerAPI";
-const aroundOption = CESIUM_TREE_AROUND_ANALYSE_OPTION.children.map(
-  ({ label, resourceType }) => {
-    return { value: resourceType, label };
-  }
-);
+import { arrayCompareWithParam } from "common/js/util";
+
 export default {
   name: "aroundSourceAnalyse",
   data() {
     return {
-      // forceEntity: { lng: 120.654218, lat: 28.016064 },
       forceEntity: undefined,
       distance: 250,
       distanceOption: [
@@ -95,46 +158,58 @@ export default {
         { value: 1000, label: "1000m" },
       ],
       selectSourceLayer: [],
-      aroundOption,
+      aroundOption: [],
       aroundSourceAnalyseList: [],
       locationBillboard: undefined,
       navigateLine: undefined,
       carModel: undefined,
+      selectedSourceObj: {
+        title: "",
+        key: "",
+        list: [],
+      },
     };
   },
   props: ["force"],
   computed: {
     ...mapGetters("map", []),
   },
-  created() {
-    this.initSelectSourceLayer();
-  },
+  // created() {
+  //   this.initSelectSourceLayer();
+  // },
   mounted() {
     this.eventRegsiter();
-    // this.fetchSourceAround(this.forceEntity);
   },
   beforeDestroy() {},
   methods: {
     eventRegsiter() {
       this.$bus.$off("cesium-3d-around-analyse-pick");
       this.$bus.$on("cesium-3d-around-analyse-pick", (forceEntity) => {
-        this.initSelectSourceLayer();
         this.forceEntity = forceEntity;
-        this.fetchSourceAround(forceEntity);
+        console.log("forceEntity!!!", forceEntity);
+        this.initAroundOption();
+        if (forceEntity.type == "source") {
+          console.log(555)
+          this.fetchSourceAround(forceEntity);
+        } else {
+          console.log(666)
+          this.fetchEventSourceAround(forceEntity);
+        }
       });
     },
     /**
      * 获取周边分析圈,执行周边分析
      * @param {object} forceEntity 分析点
      */
-    fetchSourceAround(forceEntity) {
-      const { lng, lat } = forceEntity;
+    fetchEventSourceAround(forceEntity) {
+      const lng = forceEntity.geometry.x;
+      const lat = forceEntity.geometry.y;
       const distance = this.distance;
       const aroundSourceAnalyseList = [];
       //  统一清除 circle label icon
-      aroundOption.map(({ value }) => initPrimitivesCollection(value));
+      this.aroundOption.map(({ value }) => initPrimitivesCollection(value));
       //  周边分析
-      aroundOption
+      this.aroundOption
         .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
         .map(async ({ label, value }) => {
           const { data } = await getAroundSourceAnalyse({
@@ -143,7 +218,14 @@ export default {
             lat,
             distance,
           });
-          const sourceAnalyseResult = { title: label, key: value, list: data };
+          const sourceAnalyseResult = {
+            title: label,
+            key: value,
+            list: data.sort(arrayCompareWithParam("distance")),
+          };
+          if (!aroundSourceAnalyseList.length) {
+            this.selectedSourceObj = sourceAnalyseResult;
+          }
           aroundSourceAnalyseList.push(sourceAnalyseResult);
           //  周边分析画点
           aroundSourceAnalyseDraw(sourceAnalyseResult);
@@ -152,40 +234,154 @@ export default {
       aroundSourceAnalyseCircle(lng, lat, distance);
       this.aroundSourceAnalyseList = aroundSourceAnalyseList;
     },
+    fetchSourceAround(forceEntity) {
+      const lng = forceEntity.geometry.x;
+      const lat = forceEntity.geometry.y;
+      const distance = this.distance;
+      const aroundSourceAnalyseList = [];
+
+      this.aroundOption.forEach((item) => hideVisible(item));
+      this.aroundOption
+        .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
+        .forEach((item) => {
+          let getFeatureParameter, getFeatureService;
+          getFeatureParameter = new SuperMap.REST.GetFeaturesByBufferParameters(
+            {
+              // 缓冲距离单位疑似十万米！！！图形单位米！！！
+              bufferDistance: this.distance / 100000,
+              toIndex: -1,
+              datasetNames: [`${item.newdataset}`],
+              returnContent: true,
+              geometry: this.forceEntity.geometry,
+            }
+          );
+          getFeatureService = new SuperMap.REST.GetFeaturesByBufferService(
+            item.url,
+            {
+              eventListeners: {
+                processCompleted: async (res) => {
+                  if (
+                    res.result &&
+                    res.result.features &&
+                    res.result.features.length
+                  ) {
+                    treeDrawTool(this, res, item);
+
+                    //  求距离
+                    let geodesic = new Cesium.EllipsoidGeodesic();
+                    let startCartographic = Cesium.Cartographic.fromDegrees(
+                      this.forceEntity.geometry.x,
+                      this.forceEntity.geometry.y
+                    );
+                    res.result.features.map((v) => {
+                      let endCartographic = Cesium.Cartographic.fromDegrees(
+                        v.geometry.x,
+                        v.geometry.y
+                      );
+                      geodesic.setEndPoints(startCartographic, endCartographic);
+                      let distance = geodesic.surfaceDistance;
+                      return Object.assign(v, { distance: distance });
+                    });
+                  }
+                  const sourceAnalyseResult = {
+                    title: item.label,
+                    key: item.value,
+                    list: res.result.features.sort(
+                      arrayCompareWithParam("distance")
+                    ),
+                  };
+                  if (!aroundSourceAnalyseList.length) {
+                    this.selectedSourceObj = sourceAnalyseResult;
+                  }
+                  aroundSourceAnalyseList.push(sourceAnalyseResult);
+                },
+                processFailed: (msg) => console.log(msg),
+              },
+            }
+          );
+          getFeatureService.processAsync(getFeatureParameter);
+        });
+      aroundSourceAnalyseCircle(lng, lat, distance);
+      this.aroundSourceAnalyseList = aroundSourceAnalyseList;
+    },
+    initAroundOption() {
+      if (this.forceEntity && this.forceEntity.type == "source") {
+        this.aroundOption = CESIUM_TREE_AROUND_ANALYSE_OPTION.children.map(
+          (item) => {
+            return { ...item, value: item.id };
+          }
+        );
+      } else {
+        this.aroundOption = CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION.children.map(
+          ({ label, resourceType }) => {
+            return { value: resourceType, label };
+          }
+        );
+      }
+      this.initSelectSourceLayer();
+    },
     initSelectSourceLayer() {
-      this.selectSourceLayer = aroundOption.map((v) => v.value);
+      this.selectSourceLayer = this.aroundOption.map((v) => v.value);
     },
     //  重新分析
     sourceUpdateHandler() {
+      // this.fetchEventSourceAround(this.forceEntity);
       this.fetchSourceAround(this.forceEntity);
     },
     //  重新分析
     distanceUpdateHandler() {
+      // this.fetchEventSourceAround(this.forceEntity);
       this.fetchSourceAround(this.forceEntity);
     },
     //  关闭周边分析
     closeAroundSourceAnalyse() {
-      aroundOption.map(({ value }) => initPrimitivesCollection(value));
+      this.aroundOption.map(({ value }) => initPrimitivesCollection(value));
+      this.aroundOption.forEach((item) => hideVisible(item));
       this.forceEntity = undefined;
       this.selectSourceLayer = [];
       this.aroundSourceAnalyseList = [];
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
-      this.locationBillboard && window.earth.entities.remove(this.locationBillboard);
+      this.locationBillboard &&
+        window.earth.entities.remove(this.locationBillboard);
     },
+    // 选择类型
+    itemClick(item) {
+      console.log("item", item);
+      this.selectedSourceObj = item;
+    },
+    // 路线规划
     navigate(item) {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
-      this.locationBillboard && window.earth.entities.remove(this.locationBillboard);
+      this.locationBillboard &&
+        window.earth.entities.remove(this.locationBillboard);
       console.log("item", item);
-      let originPosition = Cesium.Cartesian3.fromDegrees(+item.lng, +item.lat, 4);
-      let destinationGCJ02 = gcoord.transform([this.forceEntity.lng.toFixed(6), this.forceEntity.lat.toFixed(6)], gcoord.WGS84, gcoord.GCJ02);
-      let originGCJ02 = gcoord.transform([Number(item.lng).toFixed(6), Number(item.lat).toFixed(6)], gcoord.WGS84, gcoord.GCJ02);
+      let originPosition = Cesium.Cartesian3.fromDegrees(
+        +item.lng,
+        +item.lat,
+        4
+      );
+      let destinationGCJ02 = gcoord.transform(
+        [
+          this.forceEntity.geometry.x.toFixed(6),
+          this.forceEntity.geometry.y.toFixed(6),
+        ],
+        gcoord.WGS84,
+        gcoord.GCJ02
+      );
+      let originGCJ02 = gcoord.transform(
+        [Number(item.lng).toFixed(6), Number(item.lat).toFixed(6)],
+        gcoord.WGS84,
+        gcoord.GCJ02
+      );
       $.ajax({
         url: "https://restapi.amap.com/v3/direction/driving",
         dataType: "json",
         async: true,
         data: {
           origin: `${originGCJ02[0].toFixed(6)},${originGCJ02[1].toFixed(6)}`,
-          destination: `${destinationGCJ02[0].toFixed(6)},${destinationGCJ02[1].toFixed(6)}`,
+          destination: `${destinationGCJ02[0].toFixed(
+            6
+          )},${destinationGCJ02[1].toFixed(6)}`,
           key: "81b836fbf5c7523ea1d5ef934b87603f",
         },
         success: (data) => {
@@ -214,14 +410,14 @@ export default {
               positionsWGS84 = positionsWGS84.concat(coordWGS84);
             }
             this.locationBillboard = window.earth.entities.add({
-              name: '目的地',
+              name: "目的地",
               position: originPosition,
               billboard: {
                 image: `/static/images/map-ico/location.png`,
                 width: 34,
                 height: 35,
               },
-            })
+            });
             this.navigateLine = window.earth.entities.add({
               name: "navigateLine",
               polyline: {
@@ -232,8 +428,8 @@ export default {
               },
             });
             // window.earth.flyTo(this.navigateLine);
-            if (item.resourceName == '消防站') {
-              this.carMove(this.navigateLine)
+            if (item.resourceName == "消防站") {
+              this.carMove(this.navigateLine);
             }
           }
         },
@@ -283,7 +479,7 @@ export default {
         this.carModel = null;
       }
       this.carModel = window.earth.entities.add({
-        name: 'carModel',
+        name: "carModel",
         position: property,
         orientation: new Cesium.VelocityOrientationProperty(property),
         model: {

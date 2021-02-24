@@ -127,7 +127,7 @@ export const treeDrawTool = (context, { result }, node, fields = [], fn) => {
       position
     });
     !node.hiddenLabel && window.billboardMap[node.id].add({
-      id: `billboard@${item.attributes.SMID}@${node.icon}`,
+      id: `billboard@${item.attributes.SMID}@${node.id}`,
       image: `/static/images/map-ico/${node.icon}.png`,
       width: 34,
       height: 34,

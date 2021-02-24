@@ -75,6 +75,24 @@
     }
   }
 
+  .layer-btn {
+    position: absolute;
+    right: 19vw;
+    bottom: 0;
+    .event {
+      width: 7vh;
+    }
+    .mark {
+      position: absolute;
+      top: 0;
+      right: -0.6vh;
+      width: 2vh;
+      &.breath {
+        animation: breath 1s infinite linear;
+      }
+    }
+  }
+
   .dibu {
     position: absolute;
     text-align: center;
@@ -451,4 +469,10 @@
       }
     }
   }
+}
+
+@keyframes breath {
+  from { opacity: 0.1; }
+  50%  { opacity: 1; }
+  to   { opacity: 0.1; }
 }

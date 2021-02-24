@@ -83,6 +83,15 @@ export const initPrimitivesCollection = (key) => {
     );
     window.featureMap[KEY] = {};
 }
+
+export const hideVisible = (node) => {
+    window.earth.entities.removeById(_ENTITY_ID_);
+    if (node.icon && window.billboardMap[node.id]) {
+        window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
+        window.labelMap[node.id].setAllLabelsVisible(false);
+    }
+}
+
 /**
  * 全局数据赋值
  * @param {string} KEY

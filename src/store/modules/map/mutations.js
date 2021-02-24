@@ -113,6 +113,9 @@ const mutations = {
   [types.SET_FORCE_BIM_IDS](state, data) {
     state.forceBimIDS = data;
   },
+  [types.SET_IS_SOURCE_LAYER](state, data) {
+    state.isSourceLayer = data;
+  },
 };
 
 export default mutations;
