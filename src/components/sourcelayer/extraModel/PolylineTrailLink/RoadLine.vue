@@ -23,6 +23,7 @@ export default {
   },
   async mounted() {
     this.eventRegsiter();
+    this.createEntityCollection()
     // this.drawWall();
     this.addDynamicLine();
     // this.addHaloLine();
@@ -36,6 +37,11 @@ export default {
       this.$bus.$on("cesium-3d-switch", ({ value }) => {
         this.changeSkyBox(!value ? "day" : "night");
       });
+    },
+    // 创建datasource
+    createEntityCollection() {
+      const polylineEntityCollection = new Cesium.CustomDataSource("polyline");
+      window.earth.dataSources.add(polylineEntityCollection);
     },
     /**
      * 切换天空盒子
@@ -122,7 +128,8 @@ export default {
       );
     },
     drawPolyline(linePoints) {
-      window.earth.entities.add({
+      const datasource = window.earth.dataSources.getByName("polyline")[0];
+      const polylineEntity = new Cesium.Entity({
         name: "PolylineTrail",
         polyline: {
           positions: Cesium.Cartesian3.fromDegreesArrayHeights(linePoints),
@@ -133,6 +140,13 @@ export default {
           ),
         },
       });
+      datasource.entities.add(polylineEntity);
+    },
+    doPolylineTrailVisible(boolean) {
+      const datasource = window.earth.dataSources.getByName("polyline")[0];
+      datasource.entities.values.forEach(item => {
+        item.show = boolean
+      })
     },
     drawWall() {
       let alp = 1,

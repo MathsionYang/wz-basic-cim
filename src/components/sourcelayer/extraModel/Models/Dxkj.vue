@@ -1,13 +1,22 @@
 <template>
-  <div class="ThreeDContainer geology-analyse" :style="{ width: '300px' }">
-    <div>透明度：{{ aValue }}%</div>
-    <div class="slider-wrapper" @click.stop>
-      <el-slider
-        @change="change_Alpha_Value"
-        :min="aMin"
-        :max="aMax"
-        v-model="aValue"
-      ></el-slider>
+  <div>
+    <div class="ThreeDContainer geology-analyse" :style="{ width: '300px' }">
+      <div>透明度：{{ aValue }}%</div>
+      <div class="slider-wrapper" @click.stop>
+        <el-slider
+          @change="change_Alpha_Value"
+          :min="aMin"
+          :max="aMax"
+          v-model="aValue"
+        ></el-slider>
+      </div>
+    </div>
+    <div class="legend-popup"
+      :style="{
+        transform: `translate3d(${forcePosition.x}px,${forcePosition.y}px, 0)`,
+      }"
+    >
+      <img src="/static/images/common/地质体图例.png" />
     </div>
   </div>
 </template>
@@ -19,7 +28,7 @@ const _ABOVEGROUND_HASH_ = {
   B1土建: "B1土建_table",
 };
 const _GEOLOGY_HASH_ = {
-  CIM_Geology: "地质体7",
+  CIM_Geology: "地质体",
 };
 export default {
   name: "Dxkj",
@@ -29,17 +38,21 @@ export default {
       aMin: 0,
       aMax: 100,
       aValue: 75,
+      position: Cesium.Cartesian3.fromDegrees(120.7281, 28.0100, 4),
+      forcePosition: {}
     };
   },
   async mounted() {
+    this.$parent.$refs.roadline.doPolylineTrailVisible(false)
     this.initBimScene();
     this.cameraMove();
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
+    this.$parent.$refs.roadline.doPolylineTrailVisible(true)
     this.change_Alpha_Value(0);
     this.doCivilizationCenterVisible(_GEOLOGY_HASH_, false);
-    this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+    // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
   },
   methods: {
     ...mapActions("map", []),
@@ -47,16 +60,16 @@ export default {
     initBimScene() {
       if (window.extraHash.geology) {
         this.doCivilizationCenterVisible(_GEOLOGY_HASH_, true);
-        this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, true);
+        // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, true);
       } else {
         const {
           GEOLOGY,
-          ABOVEGROUND,
-          ABOVEGROUND_DATA,
+          // ABOVEGROUND,
+          // ABOVEGROUND_DATA,
           GEOLOGY_DATA,
         } = CIVILIZATION_CENTER_URL;
-        this.doGroundInit(_ABOVEGROUND_HASH_, ABOVEGROUND, ABOVEGROUND_DATA);
         this.doGroundInit(_GEOLOGY_HASH_, GEOLOGY, GEOLOGY_DATA);
+        // this.doGroundInit(_ABOVEGROUND_HASH_, ABOVEGROUND, ABOVEGROUND_DATA);
       }
     },
     /**
@@ -88,6 +101,9 @@ export default {
                     dataSourceName: _HASH_[key],
                   }),
             });
+            layer.datasetInfo().then((result) => {
+              console.log('result', result)
+            })
           });
         }
         //  做全局标识，不保存图层指针了
@@ -112,8 +128,8 @@ export default {
     cameraMove() {
       window.earth.camera.flyTo({
         destination: {
-          x: -2877159.4295731103,
-          y: 4841534.134246617,
+          x: -2877358.4295731103,
+          y: 4841134.134246617,
           z: 2994874.2246890087,
         },
         orientation: {
@@ -123,6 +139,18 @@ export default {
         },
         maximumHeight: 450,
       });
+    },
+    renderForceEntity() {
+      const pointToWindow = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+        window.earth.scene,
+        this.position
+      );
+      if (
+        this.forcePosition.x !== pointToWindow.x ||
+        this.forcePosition.y !== pointToWindow.y
+      ) {
+        this.forcePosition = pointToWindow;
+      }
     },
   },
 };
@@ -153,5 +181,11 @@ export default {
       flex: 1;
     }
   }
+}
+.legend-popup {
+  top: 5vh;
+  left: 0;
+  position: absolute;
+  z-index: 2;
 }
 </style>

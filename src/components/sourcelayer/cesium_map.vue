@@ -43,7 +43,7 @@
       <KgBoxAnalyse ref="kgboxanalyse" v-if="showKgFrame == '3d12'" />
       <Chaogc ref="Chaogc" v-if="showcgcFrame == '3d14'" />
       <Gxgl ref="gxgl" v-if="showgxFrame == '3d15'" />
-      <Dxkj v-if="showdxFrame == '3d16'" />
+      <Dxkj ref="dxkj" v-if="showdxFrame == '3d16'" />
       <WZDem v-if="showDem == '3d17'" />
       <SZgc v-if="showSZGC == '3d18'" />
       <JYmx v-if="showJYmx == '3d19'" />
@@ -269,6 +269,10 @@ export default {
         if (this.$refs.detailPopup) {
           this.$refs.detailPopup.renderForceEntity();
         }
+        //  *****[dxkj]  地下图例*****
+        if (this.$refs.dxkj) {
+          this.$refs.dxkj.renderForceEntity();
+        }
       });
     },
     sqlQuery(SQL) {
@@ -390,7 +394,7 @@ export default {
         const pick = window.earth.scene.pick(e.position);
         const position = window.earth.scene.pickPosition(e.position);
         window.position = position;
-        console.log("点击pick.id", pick.id);
+        console.log("点击pick.id", pick);
         if (!pick || !pick.id) return;
         if (typeof pick.id == "object") {
           //  *****[videoCircle]  监控视频点*****
@@ -431,6 +435,7 @@ export default {
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
       // 模型点击事件
       window.earth.pickEvent.addEventListener((feature) => {
+        console.log('abc!!!')
         const _data_ = Object.keys(feature).map((k) => {
           return { k, v: feature[k] };
         });
