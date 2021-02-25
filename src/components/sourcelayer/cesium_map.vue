@@ -36,6 +36,7 @@
       />
       <BJSWQModel ref="bjswqmodel" v-if="showqxsyFrame == '3d5'" />
       <BJJM ref="bjjm" v-if="showjzFrame == '3d6'" />
+      <OUHAI ref="ouhai" v-if="showouhaiFrame == '3d20'" />
       <CivilizationCenter
         ref="civilizationcenter"
         v-if="showsmzxFrame == '3d11'"
@@ -84,6 +85,7 @@ import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceA
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
 import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
+import OUHAI from "components/sourcelayer/extraModel/Models/OuhaiModel";
 import Dxkj from "components/sourcelayer/extraModel/Models/Dxkj";
 import WZDem from "components/sourcelayer/extraModel/Models/WzDem";
 import SZgc from "components/sourcelayer/extraModel/Models/SZgc";
@@ -144,6 +146,7 @@ export default {
       showKgFrame: null,
       showqxsyFrame: null,
       showjzFrame: null,
+      showouhaiFrame: null,
       showgdFrame: null,
       showgxFrame: null,
       showdxFrame: null,
@@ -179,6 +182,7 @@ export default {
     DetailedModel,
     BJSWQModel,
     BJJM,
+    OUHAI,
     Dxkj,
     WZDem,
     SZgc,
@@ -435,7 +439,6 @@ export default {
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
       // 模型点击事件
       window.earth.pickEvent.addEventListener((feature) => {
-        console.log('abc!!!')
         const _data_ = Object.keys(feature).map((k) => {
           return { k, v: feature[k] };
         });
@@ -512,6 +515,11 @@ export default {
       this.$bus.$off("cesium-3d-jz");
       this.$bus.$on("cesium-3d-jz", ({ value }) => {
         this.showjzFrame = value;
+      });
+      //建筑三维
+      this.$bus.$off("cesium-3d-ouhai");
+      this.$bus.$on("cesium-3d-ouhai", ({ value }) => {
+        this.showouhaiFrame = value;
       });
       //轨道交通
       this.$bus.$off("cesium-3d-gd");

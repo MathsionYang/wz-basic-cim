@@ -11,22 +11,24 @@ export const aroundSourceAnalyseDraw = ({ key, list, title }) => {
         list.map((v) => {
             const position = Cesium.Cartesian3.fromDegrees(+v.lng, +v.lat, 4);
             initFeatureMap(KEY, v);
-            window.labelMap[KEY].add({
-                id: `label@${v.resourceName}@${KEY}`,
-                text: v.resourceName,
-                fillColor: Cesium.Color.WHITE,
-                outlineColor: Cesium.Color.BLACK,
-                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                font: "8px",
-                scale: 1,
-                outlineWidth: 4,
-                showBackground: true,
-                backgroundColor: Cesium.Color(0.165, 0.165, 0.165, 0.1),
-                distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 2000),
-                pixelOffset: new Cesium.Cartesian2(0, -20),
-                disableDepthTestDistance: Number.POSITIVE_INFINITY,
-                position,
-            });
+            if (v.resourceName != '消防栓') {
+                window.labelMap[KEY].add({
+                    id: `label@${v.resourceName}@${KEY}`,
+                    text: v.resourceName,
+                    fillColor: Cesium.Color.WHITE,
+                    outlineColor: Cesium.Color.BLACK,
+                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                    font: "8px",
+                    scale: 1,
+                    outlineWidth: 4,
+                    showBackground: true,
+                    backgroundColor: Cesium.Color(0.165, 0.165, 0.165, 0.1),
+                    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 2000),
+                    pixelOffset: new Cesium.Cartesian2(0, -20),
+                    disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                    position,
+                });
+            }
             window.billboardMap[KEY].add({
                 id: `billboard@${v.resourceName}@${KEY}`,
                 image: `/static/images/map-ico/${title}.png`,

@@ -91,6 +91,13 @@ const SW_TOPIC = [
     type: 'model'
   },
   {
+    label: "三维精细模型",
+    componentEvent: "cesium-3d-ouhai",
+    componentKey: "3d20",
+    url: 'true',
+    type: 'model'
+  },
+  {
     label: "建筑三维模型",
     componentEvent: "cesium-3d-jz",
     componentKey: "3d6",

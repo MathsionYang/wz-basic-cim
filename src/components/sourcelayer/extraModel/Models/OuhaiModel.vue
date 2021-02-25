@@ -1,14 +1,14 @@
 <template>
-  <div class="JYmxModels"></div>
+  <div class="OuhaiModel"></div>
 </template>
 
 <script>
 const Cesium = window.Cesium;
-import { ServiceUrl } from "config/server/mapConfig";
+import { ExtraSourceURL } from "config/server/mapConfig";
 import { mapGetters, mapActions } from "vuex";
-const LAYERS = [{ name: "WZBaimo", url: ServiceUrl.WZBaimo }];
+const LAYERS = [{ name: "OuhaiModel", url: ExtraSourceURL.OUHAI }];
 export default {
-  name: "JYmxModels",
+  name: "OuhaiModel",
   async mounted() {
     this.initBimScene();
     this.eventRegsiter();
@@ -36,29 +36,32 @@ export default {
             name: v.name,
           });
         });
+
       }
     },
     //  相机移动
-    // cameraMove() {
-    //   window.earth.camera.flyTo({
-    //     destination: {
-    //       x: -2879361.2453708444,
-    //       y: 4842957.116771699,
-    //       z: 2993404.3775209677,
-    //     },
-    //     orientation: {
-    //       heading: 5.9232943303067405,
-    //       pitch: -0.574668319401269,
-    //       roll: 0,
-    //     },
-    //   });
-    // },
-    //  关闭白模模块
+    cameraMove() {
+      let position = Cesium.Cartesian3.fromDegrees(120.6124, 27.9594, 800)
+      console.log('position!!!', position)
+      window.earth.camera.flyTo({
+        destination: {
+          x: position.x,
+          y: position.y,
+          z: position.z,
+        },
+        orientation: {
+          heading: 6.2332943303067405,
+          pitch: -0.574668319401269,
+          roll: 0,
+        },
+      });
+    },
+    //  关闭倾斜摄影模块
     closeTrafficSubwayModel() {
       this.clearTrafficSubwayModel();
-      this.$bus.$emit("cesium-3d-bm", { value: null });
+      this.$bus.$emit("cesium-3d-hub-event", { value: null });
     },
-    //  清除白模模块
+    //  清除BIM模块
     clearTrafficSubwayModel() {
       LAYERS.map((v) => {
         const V_LAYER = window.earth.scene.layers.find(v.name);

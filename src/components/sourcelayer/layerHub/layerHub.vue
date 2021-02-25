@@ -92,7 +92,7 @@
     </div>
     <div class="layer-btn event" @click="doForceEventTopicLabels('eventLayer_fire')">
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
-      <img class="mark" :class="{ breath: !isSourceLayer }" src="/static/images/layer-ico/mark.png" />
+      <img class="mark" :class="{ breath: isEventLayerOpen }" src="/static/images/layer-ico/mark.png" />
     </div>
     <div class="dibu" @click="sousu()">
       <img src="/static/images/mode-ico/底部.png" />
@@ -190,7 +190,7 @@ export default {
   },
   components: { KgLegend },
   computed: {
-    ...mapGetters("map", ["forceTreeLabel", "forceTrueTopicLabels", "isSourceLayer", "forceTreeEventLabel"]),
+    ...mapGetters("map", ["forceTreeLabel", "forceTrueTopicLabels", /*"isSourceLayer"*/, "forceTreeEventLabel"]),
   },
   watch: {
     forceTreeLabel(n) {
@@ -213,7 +213,7 @@ export default {
         "SetForceTreeLabel",
         "SetForceTrueTopicLabels",
         "SetForceTrueTopicLabelId",
-        "SetIsSourceLayer"
+        // "SetIsSourceLayer"
       ],
     ]),
     yiji(data) {
@@ -280,14 +280,19 @@ export default {
      * @param {string} id
      */
     doForceTrueTopicLabels(item, children, id) {
+      console.log('item', item)
+      console.log('children', children)
+      console.log('id', id)
       console.log("组别", id);
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
+        console.log(111)
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
         this.SetForceTrueTopicLabels(_fttl_);
         this.nodeCheckChange(label, false);
       } else {
+        console.log(222)
         this.SetForceTrueTopicLabels([
           ...new Set(this.forceTrueTopicLabels.concat([label.id])),
         ]);
@@ -339,7 +344,7 @@ export default {
       treeDrawTool(this, { result: { features } }, node);
       fn && fn();
     },
-    nodeCheckChange(node, checked) {
+    nodeCheckChange(node, checked, type='source') {
       if (checked) {
         console.log("点击内容", node);
         if (node.type == "mvt" && node.id) {
@@ -350,7 +355,7 @@ export default {
             );
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
-            if (this.isSourceLayer) {
+            if (type == 'source') {
               this.getPOIPickedFeature(node, () => {
                 this.switchSearchBox(node);
               });
@@ -427,7 +432,7 @@ export default {
     //  开启消防图层
     doForceEventTopicLabels(id) {
       this.isEventLayerOpen = !this.isEventLayerOpen
-      this.SetIsSourceLayer(!this.isEventLayerOpen);
+      // this.SetIsSourceLayer(!this.isEventLayerOpen);
       const Topics = this.CESIUM_TREE_EVENT_OPTION.filter(
         (v) => v.label == this.forceTreeEventLabel
       );
@@ -435,9 +440,9 @@ export default {
       const label = this.forceTreeEventTopic.filter((v) => v.id == id)[0];
       console.log('label!!!', label)
       if (this.isEventLayerOpen) {
-        this.nodeCheckChange(label, true);
+        this.nodeCheckChange(label, true, 'event');
       } else {
-        this.nodeCheckChange(label, false);
+        this.nodeCheckChange(label, false, 'event');
       }
     }
   },

@@ -108,7 +108,9 @@ export const ExtraSourceURL = {
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   BJJM:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/max_cim_sample/config",  
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/max_cim_sample/config",
+  OUHAI:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxouhaiqufu/rest/realspace/datas/max_ouhai_qufu/config"
 };
 
 

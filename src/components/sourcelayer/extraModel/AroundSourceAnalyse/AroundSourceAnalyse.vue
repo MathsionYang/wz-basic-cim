@@ -34,36 +34,6 @@
         />
       </el-select>
     </div>
-    <!-- <div class="around-source-list">
-      <el-collapse accordion>
-        <el-collapse-item
-          v-for="(item, index) in aroundSourceAnalyseList"
-          :key="index"
-        >
-          <template slot="title">
-            <img
-              class="around-source-list-icon"
-              :src="`/static/images/map-ico/${item.title}.png`"
-            /><span>{{ `${item.title} (${item.list.length})` }}</span>
-          </template>
-          <div
-            class="around-source-list-single"
-            v-for="(value, subIndex) in item.list"
-            :key="subIndex"
-            @click="navigate(value)"
-          >
-            <img
-              class="single-location"
-              src="/static/images/common/location.png"
-            />
-            <span>{{ value.resourceName }}</span>
-            <span class="single-distance"
-              >{{ (+value.distance).toFixed(2) }}米</span
-            >
-          </div>
-        </el-collapse-item>
-      </el-collapse>
-    </div> -->
     <div class="around-source-list">
       <div
         class="around-source-item"
@@ -134,6 +104,7 @@ import gcoord from "gcoord";
 import { mapGetters } from "vuex";
 import { treeDrawTool } from "../../layerHub/TreeDrawTool";
 import {
+  CESIUM_TREE_TRAFFIC_OPTION,
   CESIUM_TREE_AROUND_ANALYSE_OPTION,
   CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION,
 } from "config/server/sourceTreeOption";
@@ -187,11 +158,15 @@ export default {
       this.$bus.$on("cesium-3d-around-analyse-pick", (forceEntity) => {
         this.forceEntity = forceEntity;
         this.initAroundOption();
-        if (forceEntity.type == "source") {
-          this.fetchSourceAround(forceEntity);
+        if (this.forceEntity.type == "source") {
+          this.fetchSourceAround(this.forceEntity);
         } else {
-          this.fetchEventSourceAround(forceEntity);
+          this.fetchEventSourceAround(this.forceEntity);
         }
+        //  打开交通卡口图层
+        // const Topic = CESIUM_TREE_TRAFFIC_OPTION[0].children.filter(item => item.label == '交通监测数据')
+        // const children = Topic[0].children
+        // this.$parent.$refs.layerHub.doForceTrueTopicLabels(CESIUM_TREE_TRAFFIC_OPTION[0].label, children, children[0].id)
       });
     },
     /**
@@ -209,17 +184,22 @@ export default {
       this.aroundOption
         .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
         .map(async ({ label, value }) => {
-          console.log("value",value);
           const { data } = await getAroundSourceAnalyse({
             resourceType: value,
             lng,
             lat,
             distance,
           });
+          let list
+          if (value == 'fire_hydrant') {
+            list = data.slice(0, 20).sort(arrayCompareWithParam("distance"))
+          } else {
+            list = data.sort(arrayCompareWithParam("distance"))
+          }
           const sourceAnalyseResult = {
             title: label,
             key: value,
-            list: data.sort(arrayCompareWithParam("distance")),
+            list
           };
           if (!aroundSourceAnalyseList.length) {
             this.selectedSourceObj = sourceAnalyseResult;
@@ -323,13 +303,19 @@ export default {
     },
     //  重新分析
     sourceUpdateHandler() {
-      // this.fetchEventSourceAround(this.forceEntity);
-      this.fetchSourceAround(this.forceEntity);
+      if (this.forceEntity.type == "source") {
+        this.fetchSourceAround(this.forceEntity);
+      } else {
+        this.fetchEventSourceAround(this.forceEntity);
+      }
     },
     //  重新分析
     distanceUpdateHandler() {
-      // this.fetchEventSourceAround(this.forceEntity);
-      this.fetchSourceAround(this.forceEntity);
+      if (this.forceEntity.type == "source") {
+        this.fetchSourceAround(this.forceEntity);
+      } else {
+        this.fetchEventSourceAround(this.forceEntity);
+      }
     },
     //  关闭周边分析
     closeAroundSourceAnalyse() {
@@ -341,6 +327,7 @@ export default {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
+      // this.$parent.$refs.layerHub.doForceTrueTopicLabels(CESIUM_TREE_TRAFFIC_OPTION[0].label, children, children[0].id)
     },
     // 选择类型
     itemClick(item) {
@@ -424,7 +411,7 @@ export default {
               },
             });
             // window.earth.flyTo(this.navigateLine);
-            if (item.resourceName == "消防站") {
+            if (item.resourceType == 'fire_station') {
               this.carMove(this.navigateLine);
             }
           }
