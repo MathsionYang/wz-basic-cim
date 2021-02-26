@@ -248,6 +248,7 @@ export default {
           Cesium.when(promise, async () => {
             const { url, dataSourceName } = _DATA_;
             const layer = window.earth.scene.layers.find(_KEY_);
+            //layer.orderIndependentTranslucency=false,
             layer.setQueryParameter({
               url,
               isMerge: true,

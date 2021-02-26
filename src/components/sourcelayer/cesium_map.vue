@@ -330,7 +330,14 @@ export default {
               for (var pt of selectedFeature.geometry.points) {
                 points3D.push(pt.x, pt.y);
               }
-              if (!window.ispartsclick) {
+              console.log("aa",points3D);
+              if (
+                window.ispartsclick &&
+                queryEventArgs.result.features[0].data.NAME.indexOf(
+                  "市民中心"
+                ) > -1
+              ) {
+              } else {
                 window.lastHouseEntity = window.earth.entities.add({
                   polygon: {
                     hierarchy: Cesium.Cartesian3.fromDegreesArray(points3D),
@@ -338,11 +345,6 @@ export default {
                   },
                   classificationType: Cesium.ClassificationType.S3M_TILE, // 贴在S3M模型表面
                 });
-              } else {
-                if (window.lastHouseEntity) {
-                  window.earth.entities.remove(window.lastHouseEntity);
-                  window.lastHouseEntity = null;
-                }
               }
 
               function getColorRamp(elevationRamp) {
@@ -352,8 +354,8 @@ export default {
                 var ctx = ramp.getContext("2d");
                 var values = elevationRamp;
                 var grd = ctx.createLinearGradient(0, 0, 100, 50);
-                grd.addColorStop(values[0], "#E84929"); //black
-                grd.addColorStop(values[1], "#FFFF08"); //blue
+                grd.addColorStop(values[0], "#E84929"); 
+                grd.addColorStop(values[1], "#FFFF08"); 
                 ctx.fillStyle = grd;
                 ctx.fillRect(0, 0, 1, 100);
                 return ramp;
@@ -373,14 +375,13 @@ export default {
               const fixAttributes = {};
               for (let v in tempObj) {
                 const V = v.toLowerCase();
-                fieldHash[V] ? (fixAttributes[fieldHash[V]] = tempObj[v]) : undefined;
+                fieldHash[V]
+                  ? (fixAttributes[fieldHash[V]] = tempObj[v])
+                  : undefined;
               }
-              console.log("别名组", fixAttributes);
-
               let detailData = Object.keys(fixAttributes).map((k) => {
                 return { k, v: fixAttributes[k] };
               });
-              console.log("源数据",detailData)
               this.SetForceBimData(detailData);
             }
           }, // 查询成功时的回调函数
@@ -416,13 +417,13 @@ export default {
           }
         } else if (typeof pick.id == "string") {
           const [_TYPE_, _SMID_, _NODEID_] = pick.id.split("@");
-          console.log("参数", window.featureMap);
+          console.log("参数", pick);
           //  *****[detailPopup]  资源详情点*****
           if (~["label", "billboard"].indexOf(_TYPE_)) {
             this.$refs.detailPopup.getForceEntity({
               ...window.featureMap[_NODEID_][_SMID_],
               position: pick.primitive.position,
-              _NODEID_
+              _NODEID_,
             });
           } else {
             var cartographic = Cesium.Cartographic.fromCartesian(position);
@@ -432,8 +433,19 @@ export default {
             if (window.lastHouseEntity == undefined) {
               window.lastHouseEntity = null;
             }
-            var sqls = `BottomAttitude < ${height} and ${height} < (BottomAttitude + Height) and ${longitude} > SmSdriW and ${longitude} < SmSdriE and ${latitude} > SmSdriS and ${latitude} < SmSdriN`;
-            this.sqlQuery(sqls);
+            if (
+              (pick.primitive.name.indexOf("civilization_center_") > -1 ||
+                pick.primitive.name.indexOf("chaogc_") > -1) &
+              window.ispartsclick
+            ) {
+              if (window.lastHouseEntity) {
+                window.earth.entities.remove(window.lastHouseEntity);
+                window.lastHouseEntity = null;
+              }
+            } else {
+              var sqls = `BottomAttitude < ${height} and ${height} < (BottomAttitude + Height) and ${longitude} > SmSdriW and ${longitude} < SmSdriE and ${latitude} > SmSdriS and ${latitude} < SmSdriN`;
+              this.sqlQuery(sqls);
+            }
           }
         }
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
@@ -616,6 +628,8 @@ export default {
         //   maxDrawingBufferHeight: 4320,
         // },
       });
+      window.layersdata = [];//初始设置图层控制
+      window.checkedkey = [];//初始设置默认选中图层
       //  地图配置
       mapConfigInit();
       //  相机位置
