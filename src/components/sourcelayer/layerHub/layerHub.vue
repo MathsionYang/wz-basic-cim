@@ -90,7 +90,10 @@
         </div>
       </div>
     </div>
-    <div class="layer-btn event" @click="doForceEventTopicLabels('eventLayer_fire')">
+    <div
+      class="layer-btn event"
+      @click="doForceEventTopicLabels('eventLayer_fire')"
+    >
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
       <img class="mark" :class="{ breath: isEventLayerOpen }" src="/static/images/layer-ico/mark.png" />
     </div>
@@ -105,7 +108,10 @@ import { mapGetters, mapActions } from "vuex";
 import KgLegend from "./components/KgLegend";
 import { treeDrawTool, fixTreeWithExtra } from "./TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
-import { CESIUM_TREE_OPTION, CESIUM_TREE_EVENT_OPTION } from "config/server/sourceTreeOption";
+import {
+  CESIUM_TREE_OPTION,
+  CESIUM_TREE_EVENT_OPTION,
+} from "config/server/sourceTreeOption";
 import { getEventData } from "api/cityBrainAPI";
 
 const Cesium = window.Cesium;
@@ -185,7 +191,8 @@ export default {
           label: "清除",
         },
       ],
-      isEventLayerOpen: false
+      isEventLayerOpen: false,
+      layerdatas: "",
     };
   },
   components: { KgLegend },
@@ -237,7 +244,7 @@ export default {
     gjl(data) {
       this.checkgj = data.label;
       window.gjlclickdata = data.label;
-      this.$bus.$emit("cesium-3d-maptool",data);
+      this.$bus.$emit("cesium-3d-maptool", data);
     },
     sousu() {
       this.zk = !this.zk;
@@ -256,7 +263,7 @@ export default {
      * 默认选中二级菜单第一个点
      */
     initForceTreeTopic() {
-      console.log('initForceTreeTopic', this.forceTreeTopic)
+      console.log("initForceTreeTopic", this.forceTreeTopic);
       //  清除旧图层
       this.forceTreeTopic
         .filter((v) => ~this.forceTrueTopicLabels.indexOf(v.id))
@@ -365,6 +372,7 @@ export default {
               });
             }
           }
+          //用地红线展示
           if (node.withImage) {
             node.withImage.forEach((item) => {
               const LAYER = this.tileLayers[item.name];
@@ -383,6 +391,24 @@ export default {
               }
             });
           }
+          //多图层展示
+          if (node.moreurl) {
+            for (let i = 0; i < node.moreurl.length; i++) {
+              this.getPOIPickedFeature(node.moreurl[i], () => {
+                this.switchSearchBox(node.moreurl[i]);
+              });
+              window.checkedkey.push(node.moreurl[i].id);
+            }
+            this.layerdatas = {
+              label: node.label,
+              id: node.id,
+              children: node.moreurl,
+            };
+          } else {
+            window.checkedkey.push(node.id); //单图层数据存储到已选择数组中
+            this.layerdatas = { label: node.label, id: node.id };
+          }
+          window.layersdata.push(this.layerdatas);
         } else if (node.type == "model") {
           node.componentEvent &&
             node.componentKey &&
@@ -411,6 +437,42 @@ export default {
         if (node.icon && window.billboardMap[node.id]) {
           window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
           window.labelMap[node.id].setAllLabelsVisible(false);
+          //清除已选择图层内容
+          for (var i = 0; i < window.layersdata.length; i++) {
+            if (window.layersdata[i].id == node.id) {
+              window.layersdata.splice(i, 1);
+            }
+          }
+         //清除图例
+          for (let a = 0; a < window.checkedkey.length; a++) {
+            if (window.checkedkey[a] == node.id) {
+              window.checkedkey.splice(a, 1);
+            }
+          }
+        }
+        if (node.moreurl) {
+          //隐藏图层
+          for (let i = 0; i < node.moreurl.length; i++) {
+            window.billboardMap[node.moreurl[i].id]._billboards.map(
+              (v) => (v.show = false)
+            );
+            window.labelMap[node.moreurl[i].id].setAllLabelsVisible(false);
+          }
+          //清除已选择图层内容
+          for (var i = 0; i < window.layersdata.length; i++) {
+            if (window.layersdata[i].id == node.id) {
+              window.layersdata.splice(i, 1);
+            }
+          }
+          //清除图例
+          for (let a = 0; a < window.checkedkey.length; a++) {
+            for (let b = 0; b < node.moreurl.length; b++) {
+              if (window.checkedkey[a] == node.moreurl[b].id) {
+                window.checkedkey.splice(a, 1);
+              }
+            }
+          }
+          
         }
         if (node.withImage) {
           node.withImage.forEach((item) => {
@@ -438,13 +500,13 @@ export default {
       );
       this.forceTreeEventTopic = Topics.length ? Topics[0].children : [];
       const label = this.forceTreeEventTopic.filter((v) => v.id == id)[0];
-      console.log('label!!!', label)
+      console.log("label!!!", label);
       if (this.isEventLayerOpen) {
         this.nodeCheckChange(label, true, 'event');
       } else {
         this.nodeCheckChange(label, false, 'event');
       }
-    }
+    },
   },
 };
 </script>

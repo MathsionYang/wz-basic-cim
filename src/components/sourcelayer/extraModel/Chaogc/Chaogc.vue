@@ -50,6 +50,11 @@ export default {
       // 修改
       if (window.extraHash.chaogc) {
         this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, true);
+        Object.keys({ ..._ABOVEGROUND_HASH_ }).map((key) => {
+        const _KEY_ = `chaogc_${key}`;
+        const layer = window.earth.scene.layers.find(_KEY_);
+        //layer.orderIndependentTranslucency=false;
+      });
       } else {
         const {
           ABOVEGROUND,
@@ -174,6 +179,7 @@ export default {
       Object.keys({ ..._ABOVEGROUND_HASH_ }).map((key) => {
         const _KEY_ = `chaogc_${key}`;
         const layer = window.earth.scene.layers.find(_KEY_);
+        layer.orderIndependentTranslucency=false,
         layer.setCustomClipBox(boxOptions);
       });
     },

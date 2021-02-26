@@ -7,68 +7,94 @@
  * @FilePath: \wz-city-culture-tour\src\components\sourcelayer\treeTool\searchBox.vue
 -->
 <template>
-  <div class="search-box" v-show="searchBoxVisible">
-    <div
-      style="
-        background-image: url('/static/images/mode-ico/资源选择.png');
-        background-size: 100% 100%;
-        width: 77px;
-        height: 39px;
-      "
-    ></div>
-    <div
-      style="
-        background-image: url('/static/images/mode-ico/装饰_1.png');
-        background-size: 100% 100%;
-        width: 252px;
-        height: 3px;
-      "
-    ></div>
+  <div>
+    <div class="search-box" v-show="searchBoxVisible">
+      <!-- <img src="/static/images/mode-ico/资源选择_未选中.png" class="ziyuan"/>
+     <img src="/static/images/mode-ico/图层控制_未选中.png"/> -->
+      <div
+        class="ziyuan"
+        :class="{ active: layerclick == true }"
+        @click="layerclicks()"
+      ></div>
+      <div
+        class="tuceng"
+        :class="{ active: layerclick == false }"
+        @click="layerclicks()"
+      ></div>
+      <div class="zst"></div>
 
-    <div class="searchHeader">
-      <el-input
-        v-model="searchText"
-        class="searchFilterInput"
-        :placeholder="`附近的${forceTrueTopicLabelId}有哪些？`"
-        size="small"
-        @keyup.enter.native="searchFilter"
-      />
-      <div class="button-container">
-        <div class="button-item">
-          <i class="icon-common icon-clear" @click="searchClear"></i>
-        </div>
-        <div class="button-item">
-          <i class="icon-common icon-search" @click="searchFilter"></i>
+      <div class="searchHeader" v-show="layerclick == true">
+        <el-input
+          v-model="searchText"
+          class="searchFilterInput"
+          :placeholder="`附近的${forceTrueTopicLabelId}有哪些？`"
+          size="small"
+          @keyup.enter.native="searchFilter"
+        />
+        <div class="button-container">
+          <div class="button-item">
+            <i class="icon-common icon-clear" @click="searchClear"></i>
+          </div>
+          <div class="button-item">
+            <i class="icon-common icon-search" @click="searchFilter"></i>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="result-wrapper" v-show="searchBoxResult">
-      <ul class="result-list">
-        <li
-          class="result-item"
-          :class="{
-            checked: ~hospitalChecked.indexOf(item.name),
-          }"
-          v-for="(item, i) in extraSearchList"
-          :key="`sitem-${i}`"
-        >
-          <div class="left">
-            <div class="address">
-              <i class="icon-position"></i>
-              <p class="name">
-                {{ item.name }}
-              </p>
+      <div
+        class="result-wrapper"
+        v-show="searchBoxResult && layerclick == true"
+      >
+        <ul class="result-list">
+          <li
+            class="result-item"
+            :class="{
+              checked: ~hospitalChecked.indexOf(item.name),
+            }"
+            v-for="(item, i) in extraSearchList"
+            :key="`sitem-${i}`"
+          >
+            <div class="left">
+              <div class="address">
+                <i class="icon-position"></i>
+                <p class="name">
+                  {{ item.name }}
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="right">
-            <input
-              type="checkbox"
-              :checked="hospitalChecked.indexOf(item.name) >= 0"
-              @click="checkedOne(item)"
-            />
-          </div>
-        </li>
-      </ul>
+            <div class="right">
+              <input
+                type="checkbox"
+                :checked="hospitalChecked.indexOf(item.name) >= 0"
+                @click="checkedOne(item)"
+              />
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="layerTreeContainer" v-show="!layerclick">
+        <el-tree
+          ref="tree"
+          :data="layerdata"
+          show-checkbox
+          node-key="id"
+          :default-checked-keys="checkedkeys"
+          :filter-node-method="filterNode"
+          default-expand-all
+          @check-change="checkChange"
+        >
+          <span class="custom-tree-node" slot-scope="{ node }">
+            <span>{{ node.label }}</span>
+          </span>
+        </el-tree>
+      </div>
+    </div>
+    <div class="tulibackground" v-show="checkedkeys != ''">
+      <div class="bjs">
+        <div v-for="(item, i) in checkedkeys" :key="i">
+          <img :src="'/static/images/map-ico/' + item + '.png'" class="imgs" />
+          <label class="labels">{{ item }}</label>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -95,6 +121,9 @@ export default {
       hospitalChecked: [],
       menuImg: "/static/images/common/menu-un.png",
       menuSelImg: "/static/images/common/menu-sel.png",
+      layerclick: true,
+      layerdata: [],
+      checkedkeys: [],
     };
   },
   computed: {
@@ -114,10 +143,57 @@ export default {
         this.searchBoxVisible = shall;
         this.forceNode = node || {};
         shall ? this.searchFilter() : undefined;
+        this.layerdata = window.layersdata;
+        this.checkedkeys = window.checkedkey;
+        console.log("dd", this.checkedkeys);
+        this.$nextTick(() => {
+          this.$refs.tree.setCheckedKeys(this.checkedkeys); //
+        });
       });
     },
     toogleVisible() {
       this.searchBoxResult = !this.searchBoxResult;
+    },
+    filterNode(value, data) {
+      return !value ? true : data.label.indexOf(value) !== -1;
+    },
+    checkChange(node, checked, c) {
+      if (checked) {
+        if (node.children == undefined) {
+          if (window.checkedkey.indexOf(node.id) == -1) {
+            //添加对应图例
+            window.checkedkey.push(node.id);
+            this.checkedkeys = window.checkedkey;
+            this.$nextTick(() => {
+              this.$refs.tree.setCheckedKeys(this.checkedkeys); 
+            });
+            //显示对应图层
+            window.billboardMap[node.id]._billboards.map(
+              (v) => (v.show = true)
+            );
+            window.labelMap[node.id].setAllLabelsVisible(true);
+          }
+        }
+      } else {
+        if (node.children == undefined) {
+          //删除对应图例
+          for (var i = 0; i < window.checkedkey.length; i++) {
+            if (window.checkedkey[i] == node.id) {
+              window.checkedkey.splice(i, 1);
+            }
+          }
+          this.checkedkeys = window.checkedkey;
+          this.$nextTick(() => {
+            this.$refs.tree.setCheckedKeys(this.checkedkeys);
+          });
+          //隐藏对应图层
+          window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
+          window.labelMap[node.id].setAllLabelsVisible(false);
+        }
+      }
+    },
+    layerclicks() {
+      this.layerclick = !this.layerclick;
     },
     searchClear() {
       this.searchText = "";
@@ -137,6 +213,8 @@ export default {
       this.extraSearchList = this.searchText
         ? allSearchList.filter((item) => ~item.name.indexOf(this.searchText))
         : allSearchList;
+      //this.layerdata = window.layersdata;
+      //console.log("aaa", this.layerdata);
     },
     checkedOne(item) {
       this.$bus.$emit("cesium-3d-detail-pop-clear");

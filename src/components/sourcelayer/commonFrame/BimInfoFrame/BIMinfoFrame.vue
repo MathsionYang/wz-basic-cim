@@ -4,7 +4,11 @@
     <div class="info-header">
       <div class="title">信息详情</div>
       <div class="decorate"></div>
-      <div class="parts" :class="{active: partsclick == true}" @click="ispartsclick()" ></div>
+      <div
+        class="parts"
+        :class="{ active: partsclick == true }"
+        @click="ispartsclick()"
+      ></div>
       <div class="close" @click="closeBimFrame()"></div>
       <!-- <div class="tab-list">
         <div class="tab-item active">基本信息</div>
@@ -33,7 +37,7 @@ export default {
     return {
       filterKey: ["永久固定码", "唯一码", "分类代码"],
       activeTab: "bim",
-      partsclick:false,
+      partsclick: false,
     };
   },
   beforeDestroy() {
@@ -69,9 +73,13 @@ export default {
       "SetForceRoomData",
       "SetForceBimIDS",
     ]),
-    ispartsclick(){
-      window.ispartsclick=!window.ispartsclick;
+    ispartsclick() {
+      window.ispartsclick = !window.ispartsclick;
       this.partsclick = window.ispartsclick;
+      if (window.lastHouseEntity) {
+        window.earth.entities.remove(window.lastHouseEntity);
+        window.lastHouseEntity = null;
+      }
     },
     closeBimFrame() {
       window.ispartsclick = false;
