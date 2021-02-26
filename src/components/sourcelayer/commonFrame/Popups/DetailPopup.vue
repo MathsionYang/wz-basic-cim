@@ -157,6 +157,8 @@ export default {
         this.buffer = null;
         this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
         this.$bus.$emit("cesium-3d-rtmpFetch-cb");
+      } else {
+        this.showSide = false;
       }
     },
     /**

@@ -11,6 +11,7 @@
     <div class="tbjb">
       <img src="/static/images/mode-ico/icon.png" class="tb" />
       <img src="/static/images/mode-ico/温州市CIM基础平台.png" class="xmname" />
+      <!-- <img src="/static/images/mode-ico/瓯海三维地图平台.png" class="xmname" /> -->
       <div class="line"></div>
       <Switchlabel />
       <img src="/static/images/mode-ico/装饰.png" class="zs" />

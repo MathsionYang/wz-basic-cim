@@ -35,6 +35,16 @@
       </el-select>
     </div>
     <div class="around-source-list">
+      <div class="around-source-item" @click="toggleKakou">
+        <img
+          class="around-source-list-icon"
+          :src="
+            kakouSelected
+              ? `/static/images/aroundSource/交通卡口选中@2x.png`
+              : `/static/images/aroundSource/交通卡口@2x.png`
+          "
+        />
+      </div>
       <div
         class="around-source-item"
         v-for="(item, index) in aroundSourceAnalyseList"
@@ -53,45 +63,23 @@
     </div>
     <ul
       class="around-source-list-single"
-      v-if="
-        forceEntity &&
-        forceEntity.type == 'event' &&
-        aroundSourceAnalyseList.length
-      "
+      v-if="forceEntity && aroundSourceAnalyseList.length"
     >
       <li
         class="around-source-list-item"
         v-for="(item, index) in selectedSourceObj.list"
         :key="index"
-        @click="navigate(item)"
+        @click="navigate(item, forceEntity.type)"
       >
         <img
           class="single-location"
           src="/static/images/common/location2.png"
         />
-        <span class="name">{{ item.resourceName }}</span>
-        <span class="single-distance">{{ (+item.distance).toFixed(2) }}米</span>
-      </li>
-      <p class="no-data" v-if="!selectedSourceObj.list.length">暂无数据</p>
-    </ul>
-    <ul
-      class="around-source-list-single"
-      v-if="
-        forceEntity &&
-        forceEntity.type == 'source' &&
-        aroundSourceAnalyseList.length
-      "
-    >
-      <li
-        class="around-source-list-item"
-        v-for="(item, index) in selectedSourceObj.list"
-        :key="index"
-      >
-        <img
-          class="single-location"
-          src="/static/images/common/location2.png"
-        />
-        <span class="name">{{ item.attributes.NAME }}</span>
+        <span class="name">{{
+          forceEntity.type == "source"
+            ? item.attributes.NAME
+            : item.resourceName
+        }}</span>
         <span class="single-distance">{{ (+item.distance).toFixed(2) }}米</span>
       </li>
       <p class="no-data" v-if="!selectedSourceObj.list.length">暂无数据</p>
@@ -139,6 +127,7 @@ export default {
         key: "",
         list: [],
       },
+      kakouSelected: false
     };
   },
   props: ["force"],
@@ -163,10 +152,7 @@ export default {
         } else {
           this.fetchEventSourceAround(this.forceEntity);
         }
-        //  打开交通卡口图层
-        // const Topic = CESIUM_TREE_TRAFFIC_OPTION[0].children.filter(item => item.label == '交通监测数据')
-        // const children = Topic[0].children
-        // this.$parent.$refs.layerHub.doForceTrueTopicLabels(CESIUM_TREE_TRAFFIC_OPTION[0].label, children, children[0].id)
+        this.toggleKakou()
       });
     },
     /**
@@ -190,16 +176,16 @@ export default {
             lat,
             distance,
           });
-          let list
-          if (value == 'fire_hydrant') {
-            list = data.slice(0, 20).sort(arrayCompareWithParam("distance"))
+          let list;
+          if (value == "fire_hydrant") {
+            list = data.slice(0, 20).sort(arrayCompareWithParam("distance"));
           } else {
-            list = data.sort(arrayCompareWithParam("distance"))
+            list = data.sort(arrayCompareWithParam("distance"));
           }
           const sourceAnalyseResult = {
             title: label,
             key: value,
-            list
+            list,
           };
           if (!aroundSourceAnalyseList.length) {
             this.selectedSourceObj = sourceAnalyseResult;
@@ -301,6 +287,18 @@ export default {
     initSelectSourceLayer() {
       this.selectSourceLayer = this.aroundOption.map((v) => v.value);
     },
+    //  切换交通卡口图层
+    toggleKakou() {
+      this.kakouSelected = !this.kakouSelected
+      const topic = CESIUM_TREE_TRAFFIC_OPTION[0].children.filter(
+        (item) => item.label == "交通监测数据"
+      )
+      this.$parent.$refs.layerHub.doForceTrueTopicLabels(
+        CESIUM_TREE_TRAFFIC_OPTION[0].label,
+        topic[0].children,
+        topic[0].children[0].id
+      );
+    },
     //  重新分析
     sourceUpdateHandler() {
       if (this.forceEntity.type == "source") {
@@ -327,99 +325,101 @@ export default {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
-      // this.$parent.$refs.layerHub.doForceTrueTopicLabels(CESIUM_TREE_TRAFFIC_OPTION[0].label, children, children[0].id)
+      this.kakouSelected && this.toggleKakou()
     },
     // 选择类型
     itemClick(item) {
       this.selectedSourceObj = item;
     },
     // 路线规划
-    navigate(item) {
-      this.navigateLine && window.earth.entities.remove(this.navigateLine);
-      this.locationBillboard &&
-        window.earth.entities.remove(this.locationBillboard);
-      let originPosition = Cesium.Cartesian3.fromDegrees(
-        +item.lng,
-        +item.lat,
-        4
-      );
-      let destinationGCJ02 = gcoord.transform(
-        [
-          this.forceEntity.geometry.x.toFixed(6),
-          this.forceEntity.geometry.y.toFixed(6),
-        ],
-        gcoord.WGS84,
-        gcoord.GCJ02
-      );
-      let originGCJ02 = gcoord.transform(
-        [Number(item.lng).toFixed(6), Number(item.lat).toFixed(6)],
-        gcoord.WGS84,
-        gcoord.GCJ02
-      );
-      $.ajax({
-        url: "https://restapi.amap.com/v3/direction/driving",
-        dataType: "json",
-        async: true,
-        data: {
-          origin: `${originGCJ02[0].toFixed(6)},${originGCJ02[1].toFixed(6)}`,
-          destination: `${destinationGCJ02[0].toFixed(
-            6
-          )},${destinationGCJ02[1].toFixed(6)}`,
-          key: "81b836fbf5c7523ea1d5ef934b87603f",
-        },
-        success: (data) => {
-          console.log("data", data);
-          if (data.status < 1) {
-          } else {
-            let result = data.route;
-            let paths = result.paths[0].steps;
-            let positions = [];
-            for (let index = 0; index < paths.length; index++) {
-              const path = paths[index];
-              let polyline = path.polyline;
-              let polylinePoints = polyline.split(/[,]|;/);
-              positions = positions.concat(polylinePoints);
+    navigate(item, type) {
+      if (type == "event") {
+        this.navigateLine && window.earth.entities.remove(this.navigateLine);
+        this.locationBillboard &&
+          window.earth.entities.remove(this.locationBillboard);
+        let originPosition = Cesium.Cartesian3.fromDegrees(
+          +item.lng,
+          +item.lat,
+          4
+        );
+        let destinationGCJ02 = gcoord.transform(
+          [
+            this.forceEntity.geometry.x.toFixed(6),
+            this.forceEntity.geometry.y.toFixed(6),
+          ],
+          gcoord.WGS84,
+          gcoord.GCJ02
+        );
+        let originGCJ02 = gcoord.transform(
+          [Number(item.lng).toFixed(6), Number(item.lat).toFixed(6)],
+          gcoord.WGS84,
+          gcoord.GCJ02
+        );
+        $.ajax({
+          url: "https://restapi.amap.com/v3/direction/driving",
+          dataType: "json",
+          async: true,
+          data: {
+            origin: `${originGCJ02[0].toFixed(6)},${originGCJ02[1].toFixed(6)}`,
+            destination: `${destinationGCJ02[0].toFixed(
+              6
+            )},${destinationGCJ02[1].toFixed(6)}`,
+            key: "81b836fbf5c7523ea1d5ef934b87603f",
+          },
+          success: (data) => {
+            console.log("data", data);
+            if (data.status < 1) {
+            } else {
+              let result = data.route;
+              let paths = result.paths[0].steps;
+              let positions = [];
+              for (let index = 0; index < paths.length; index++) {
+                const path = paths[index];
+                let polyline = path.polyline;
+                let polylinePoints = polyline.split(/[,]|;/);
+                positions = positions.concat(polylinePoints);
+              }
+              positions = positions.map(Number);
+              let positionsWGS84 = [];
+              for (let index = 0; index < positions.length - 1; index += 2) {
+                const pos = positions[index];
+                const pos2 = positions[index + 1];
+                let coordWGS84 = gcoord.transform(
+                  [pos, pos2],
+                  gcoord.GCJ02,
+                  gcoord.WGS84
+                );
+                positionsWGS84 = positionsWGS84.concat(coordWGS84);
+              }
+              this.locationBillboard = window.earth.entities.add({
+                name: "目的地",
+                position: originPosition,
+                billboard: {
+                  image: `/static/images/map-ico/location.png`,
+                  width: 34,
+                  height: 35,
+                },
+              });
+              this.navigateLine = window.earth.entities.add({
+                name: "navigateLine",
+                polyline: {
+                  positions: Cesium.Cartesian3.fromDegreesArray(positionsWGS84),
+                  width: 6,
+                  material: Cesium.Color.RED.withAlpha(1),
+                  clampToGround: true,
+                },
+              });
+              // window.earth.flyTo(this.navigateLine);
+              if (item.resourceType == "fire_station") {
+                this.carMove(this.navigateLine);
+              }
             }
-            positions = positions.map(Number);
-            let positionsWGS84 = [];
-            for (let index = 0; index < positions.length - 1; index += 2) {
-              const pos = positions[index];
-              const pos2 = positions[index + 1];
-              let coordWGS84 = gcoord.transform(
-                [pos, pos2],
-                gcoord.GCJ02,
-                gcoord.WGS84
-              );
-              positionsWGS84 = positionsWGS84.concat(coordWGS84);
-            }
-            this.locationBillboard = window.earth.entities.add({
-              name: "目的地",
-              position: originPosition,
-              billboard: {
-                image: `/static/images/map-ico/location.png`,
-                width: 34,
-                height: 35,
-              },
-            });
-            this.navigateLine = window.earth.entities.add({
-              name: "navigateLine",
-              polyline: {
-                positions: Cesium.Cartesian3.fromDegreesArray(positionsWGS84),
-                width: 6,
-                material: Cesium.Color.RED.withAlpha(1),
-                clampToGround: true,
-              },
-            });
-            // window.earth.flyTo(this.navigateLine);
-            if (item.resourceType == 'fire_station') {
-              this.carMove(this.navigateLine);
-            }
-          }
-        },
-        // error: function () {
-        //   callback(null);
-        // },
-      });
+          },
+          // error: function () {
+          //   callback(null);
+          // },
+        });
+      }
     },
     carMove(lineEntity) {
       if (!lineEntity) return;

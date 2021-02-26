@@ -90,13 +90,13 @@ const SW_TOPIC = [
     url: 'true',
     type: 'model'
   },
-  {
-    label: "三维精细模型",
-    componentEvent: "cesium-3d-ouhai",
-    componentKey: "3d20",
-    url: 'true',
-    type: 'model'
-  },
+  // {
+  //   label: "三维精细模型",
+  //   componentEvent: "cesium-3d-ouhai",
+  //   componentKey: "3d20",
+  //   url: 'true',
+  //   type: 'model'
+  // },
   {
     label: "建筑三维模型",
     componentEvent: "cesium-3d-jz",
@@ -372,6 +372,38 @@ const CITYBJ_TOPIC = [
     url: '',
     dataset: ""
   },
+  // {
+  //   label: "医疗场所",
+  //   type: 'mvt',
+  //   dataname: 'swdata:',
+  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
+  //   dataset: "JZJZNL_YLJH_JHCS",
+  //   withExtraData: "medicalList",
+  //   withExtraDataGeometry: "medicalListWithGeometry",
+  //   saveExtraDataByGeometry: "setMedicalListWithGeometry",
+  //   withExtraKey: "SHORTNAME",
+  // },
+  // {
+  //   label: "幼儿园",
+  //   type: 'mvt',
+  //   dataname: 'swdata:',
+  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
+  //   dataset: "NurserySchool"
+  // },
+  // {
+  //   label: "小学",
+  //   type: 'mvt',
+  //   dataname: 'swdata:',
+  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
+  //   dataset: "PrimarySchool"
+  // },
+  // {
+  //   label: "初中",
+  //   type: 'mvt',
+  //   dataname: 'swdata:',
+  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
+  //   dataset: "JuniorHighSchool"
+  // },
 ];
 //  资源调查数据
 const EDUCATION_TOPIC = [
@@ -913,6 +945,7 @@ const JTJC_TOPIC = [
     hiddenLabel: true
   },
 ];
+
 const STHJ_TOPIC = [
   {
     label: "生态监测",
@@ -1041,7 +1074,7 @@ const EVENT_AROUND_ANALYSE_TOPIC = [
   { label: "医疗场所", resourceType: "medical_care" },
   { label: "消防站", resourceType: "fire_station" },
   { label: "消防栓", resourceType: "fire_hydrant" },
-  { label: "交通卡口", resourceType: "bayonet" }
+  // { label: "交通卡口", resourceType: "bayonet" }
 ]
 
 const AROUND_ANALYSE_TOPIC = [
