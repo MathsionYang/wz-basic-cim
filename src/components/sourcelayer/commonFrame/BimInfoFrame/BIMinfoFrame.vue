@@ -75,6 +75,21 @@ export default {
     ]),
     ispartsclick() {
       window.ispartsclick = !window.ispartsclick;
+      console.log("部件",window.ispartsclick)
+      if (window.ispartsclick) {
+        for (let i = 0; i < window.earth.scene.layers.layerQueue.length; i++) {
+          if (
+            window.earth.scene.layers.layerQueue[i].name.indexOf(
+              "ivilization_center"
+            ) > -1 ||
+            window.earth.scene.layers.layerQueue[i].name.indexOf("chao") > -1
+          ) {
+            window.earth.scene.layers.layerQueue[
+              i
+            ].orderIndependentTranslucency = true;
+          }
+        }
+      }
       this.partsclick = window.ispartsclick;
       if (window.lastHouseEntity) {
         window.earth.entities.remove(window.lastHouseEntity);

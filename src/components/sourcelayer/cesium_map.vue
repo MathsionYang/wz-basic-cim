@@ -306,11 +306,7 @@ export default {
                 Feacturedata[selectedFeature.fieldNames[a]] =
                   selectedFeature.fieldValues[a];
               }
-              const datas = Object.keys(Feacturedata).map((k) => {
-                return { k, v: Feacturedata[k] };
-              });
-              var fangwu = "";
-              //var fangwu = datas.concat(window.jingmo);
+
               if (!selectedFeature.geometry.points) {
                 return;
               }
@@ -330,7 +326,6 @@ export default {
               for (var pt of selectedFeature.geometry.points) {
                 points3D.push(pt.x, pt.y);
               }
-              console.log("aa",points3D);
               if (
                 window.ispartsclick &&
                 queryEventArgs.result.features[0].data.NAME.indexOf(
@@ -338,6 +333,50 @@ export default {
                 ) > -1
               ) {
               } else {
+                if (
+                  queryEventArgs.result.features[0].data.NAME.indexOf(
+                    "市民中心"
+                  ) > -1
+                ) {
+                  for (
+                    let i = 0;
+                    i < window.earth.scene.layers.layerQueue.length;
+                    i++
+                  ) {
+                    if (
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "ivilization_center"
+                      ) > -1 ||
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "chao"
+                      ) > -1
+                    ) {
+                      window.earth.scene.layers.layerQueue[
+                        i
+                      ].orderIndependentTranslucency = false;
+                    }
+                  }
+                } else {
+                  for (
+                    let i = 0;
+                    i < window.earth.scene.layers.layerQueue.length;
+                    i++
+                  ) {
+                    if (
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "ivilization_center"
+                      ) > -1 ||
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "chao"
+                      ) > -1
+                    ) {
+                      window.earth.scene.layers.layerQueue[
+                        i
+                      ].orderIndependentTranslucency = true;
+                    }
+                  }
+                }
+
                 window.lastHouseEntity = window.earth.entities.add({
                   polygon: {
                     hierarchy: Cesium.Cartesian3.fromDegreesArray(points3D),
@@ -354,8 +393,8 @@ export default {
                 var ctx = ramp.getContext("2d");
                 var values = elevationRamp;
                 var grd = ctx.createLinearGradient(0, 0, 100, 50);
-                grd.addColorStop(values[0], "#E84929"); 
-                grd.addColorStop(values[1], "#FFFF08"); 
+                grd.addColorStop(values[0], "#E84929");
+                grd.addColorStop(values[1], "#FFFF08");
                 ctx.fillStyle = grd;
                 ctx.fillRect(0, 0, 1, 100);
                 return ramp;
@@ -628,8 +667,8 @@ export default {
         //   maxDrawingBufferHeight: 4320,
         // },
       });
-      window.layersdata = [];//初始设置图层控制
-      window.checkedkey = [];//初始设置默认选中图层
+      window.layersdata = []; //初始设置图层控制
+      window.checkedkey = []; //初始设置默认选中图层
       //  地图配置
       mapConfigInit();
       //  相机位置

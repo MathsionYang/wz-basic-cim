@@ -76,17 +76,14 @@
       <img src="/static/images/mode-ico/框@2x.png" class="gjlk" />
       <div class="gjla">
         <div class="gjlb">
-          <div
-            v-for="(item, index) in gjldata"
-            :key="index"
-            style="display: inline-block"
-          >
             <img
               :src="checkgj == item.label ? item.imgs : item.img"
+              v-for="(item, index) in gjldata"
+              :key="index"
+              class="gjltb"
               alt=""
               @click="gjl(item)"
             />
-          </div>
         </div>
       </div>
     </div>
@@ -95,7 +92,11 @@
       @click="doForceEventTopicLabels('消防火灾事件')"
     >
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
-      <img class="mark" :class="{ breath: isEventLayerOpen }" src="/static/images/layer-ico/mark.png" />
+      <img
+        class="mark"
+        :class="{ breath: isEventLayerOpen }"
+        src="/static/images/layer-ico/mark.png"
+      />
     </div>
     <div class="dibu" @click="sousu()">
       <img src="/static/images/mode-ico/底部.png" />
@@ -197,7 +198,12 @@ export default {
   },
   components: { KgLegend },
   computed: {
-    ...mapGetters("map", ["forceTreeLabel", "forceTrueTopicLabels", /*"isSourceLayer"*/, "forceTreeEventLabel"]),
+    ...mapGetters("map", [
+      "forceTreeLabel",
+      "forceTrueTopicLabels" /*"isSourceLayer"*/,
+      ,
+      "forceTreeEventLabel",
+    ]),
   },
   watch: {
     forceTreeLabel(n) {
@@ -287,14 +293,19 @@ export default {
      * @param {string} id
      */
     doForceTrueTopicLabels(item, children, id) {
+      console.log("item", item);
+      console.log("children", children);
+      console.log("id", id);
       console.log("组别", id);
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
+        console.log(111);
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
         this.SetForceTrueTopicLabels(_fttl_);
         this.nodeCheckChange(label, false);
       } else {
+        console.log(222);
         this.SetForceTrueTopicLabels([
           ...new Set(this.forceTrueTopicLabels.concat([label.id])),
         ]);
@@ -346,7 +357,7 @@ export default {
       treeDrawTool(this, { result: { features } }, node);
       fn && fn();
     },
-    nodeCheckChange(node, checked, type='source') {
+    nodeCheckChange(node, checked, type = "source") {
       if (checked) {
         console.log("点击内容", node);
         if (node.type == "mvt" && node.id) {
@@ -357,7 +368,7 @@ export default {
             );
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
-            if (type == 'source') {
+            if (type == "source") {
               this.getPOIPickedFeature(node, () => {
                 this.switchSearchBox(node);
               });
@@ -438,7 +449,7 @@ export default {
               window.layersdata.splice(i, 1);
             }
           }
-         //清除图例
+          //清除图例
           for (let a = 0; a < window.checkedkey.length; a++) {
             if (window.checkedkey[a] == node.id) {
               window.checkedkey.splice(a, 1);
@@ -467,7 +478,6 @@ export default {
               }
             }
           }
-          
         }
         if (node.withImage) {
           node.withImage.forEach((item) => {
@@ -488,7 +498,7 @@ export default {
     },
     //  开启消防图层
     doForceEventTopicLabels(id) {
-      this.isEventLayerOpen = !this.isEventLayerOpen
+      this.isEventLayerOpen = !this.isEventLayerOpen;
       // this.SetIsSourceLayer(!this.isEventLayerOpen);
       const Topics = this.CESIUM_TREE_EVENT_OPTION.filter(
         (v) => v.label == this.forceTreeEventLabel
@@ -497,9 +507,9 @@ export default {
       const label = this.forceTreeEventTopic.filter((v) => v.id == id)[0];
       console.log("label!!!", label);
       if (this.isEventLayerOpen) {
-        this.nodeCheckChange(label, true, 'event');
+        this.nodeCheckChange(label, true, "event");
       } else {
-        this.nodeCheckChange(label, false, 'event');
+        this.nodeCheckChange(label, false, "event");
       }
     },
   },
