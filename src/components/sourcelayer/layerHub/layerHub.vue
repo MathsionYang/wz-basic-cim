@@ -92,7 +92,7 @@
     </div>
     <div
       class="layer-btn event"
-      @click="doForceEventTopicLabels('eventLayer_fire')"
+      @click="doForceEventTopicLabels('消防火灾事件')"
     >
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
       <img class="mark" :class="{ breath: isEventLayerOpen }" src="/static/images/layer-ico/mark.png" />

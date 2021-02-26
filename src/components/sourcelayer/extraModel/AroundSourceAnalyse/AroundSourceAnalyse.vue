@@ -35,7 +35,7 @@
       </el-select>
     </div>
     <div class="around-source-list">
-      <div class="around-source-item" @click="toggleKakou">
+      <div class="around-source-item" @click="toggleKakou" v-show="forceEntity && forceEntity.type == 'event'">
         <img
           class="around-source-list-icon"
           :src="
@@ -127,7 +127,7 @@ export default {
         key: "",
         list: [],
       },
-      kakouSelected: false
+      kakouSelected: false,
     };
   },
   props: ["force"],
@@ -151,8 +151,8 @@ export default {
           this.fetchSourceAround(this.forceEntity);
         } else {
           this.fetchEventSourceAround(this.forceEntity);
+          this.toggleKakou();
         }
-        this.toggleKakou()
       });
     },
     /**
@@ -289,10 +289,10 @@ export default {
     },
     //  切换交通卡口图层
     toggleKakou() {
-      this.kakouSelected = !this.kakouSelected
+      this.kakouSelected = !this.kakouSelected;
       const topic = CESIUM_TREE_TRAFFIC_OPTION[0].children.filter(
         (item) => item.label == "交通监测数据"
-      )
+      );
       this.$parent.$refs.layerHub.doForceTrueTopicLabels(
         CESIUM_TREE_TRAFFIC_OPTION[0].label,
         topic[0].children,
@@ -325,7 +325,7 @@ export default {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
-      this.kakouSelected && this.toggleKakou()
+      this.kakouSelected && this.toggleKakou();
     },
     // 选择类型
     itemClick(item) {
@@ -333,7 +333,11 @@ export default {
     },
     // 路线规划
     navigate(item, type) {
+      let x
+      let y
       if (type == "event") {
+        x = item.lng;
+        y = item.lat;
         this.navigateLine && window.earth.entities.remove(this.navigateLine);
         this.locationBillboard &&
           window.earth.entities.remove(this.locationBillboard);
@@ -419,7 +423,20 @@ export default {
           //   callback(null);
           // },
         });
+      } else {
+        x = item.geometry.x;
+        y = item.geometry.y;
       }
+      console.log('item!!!', item)
+      window.earth.camera.flyTo({
+        destination: Cesium.Cartesian3.fromDegrees(+x, +y - 0.005, 450),
+        orientation: {
+          heading: 0.003336768850279448,
+          pitch: -0.5808830390057418,
+          roll: 0.0,
+        },
+        maximumHeight: 450,
+      });
     },
     carMove(lineEntity) {
       if (!lineEntity) return;

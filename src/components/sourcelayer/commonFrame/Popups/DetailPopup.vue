@@ -152,7 +152,7 @@ export default {
     getForceEntity(forceEntity) {
       console.log("forceEntity", forceEntity);
       this.forceEntity = forceEntity;
-      if (!forceEntity._NODEID_.includes("eventLayer_")) {
+      if (!forceEntity._NODEID_.includes("事件")) {
         this.showSide = true;
         this.buffer = null;
         this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
@@ -224,7 +224,7 @@ export default {
     doAroundSourceAnalyse() {
       // this.showSide = false
       const { geometry } = this.forceEntity;
-      let type = this.forceEntity._NODEID_.includes("eventLayer_") ? 'event' : 'source'
+      let type = this.forceEntity._NODEID_.includes("事件") ? 'event' : 'source'
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
