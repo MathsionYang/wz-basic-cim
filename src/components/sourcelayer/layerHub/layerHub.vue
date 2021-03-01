@@ -92,7 +92,7 @@
     </div>
     <div
       class="layer-btn event"
-      @click="doForceEventTopicLabels('消防火灾事件')"
+      @click="doForceEventTopicLabels('消防事件')"
     >
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
       <img class="mark" :class="{ breath: isEventLayerOpen }" src="/static/images/layer-ico/mark.png" />
@@ -495,7 +495,6 @@ export default {
       );
       this.forceTreeEventTopic = Topics.length ? Topics[0].children : [];
       const label = this.forceTreeEventTopic.filter((v) => v.id == id)[0];
-      console.log("label!!!", label);
       if (this.isEventLayerOpen) {
         this.nodeCheckChange(label, true, 'event');
       } else {

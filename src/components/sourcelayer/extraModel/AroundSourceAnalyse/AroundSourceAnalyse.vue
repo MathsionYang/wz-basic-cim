@@ -176,12 +176,13 @@ export default {
             lat,
             distance,
           });
-          let list;
-          if (value == "fire_hydrant") {
-            list = data.slice(0, 20).sort(arrayCompareWithParam("distance"));
-          } else {
-            list = data.sort(arrayCompareWithParam("distance"));
-          }
+          // let list;
+          // if (value == "fire_hydrant") {
+          //   list = data.slice(0, 20).sort(arrayCompareWithParam("distance"));
+          // } else {
+          //   list = data.sort(arrayCompareWithParam("distance"));
+          // }
+          let list = data.slice(0, 20).sort(arrayCompareWithParam("distance"));
           const sourceAnalyseResult = {
             title: label,
             key: value,

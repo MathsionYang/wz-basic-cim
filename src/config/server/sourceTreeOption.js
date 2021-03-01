@@ -1286,7 +1286,7 @@ const AROUND_ANALYSE_TOPIC = [
 
 //  事件专题
 const EVENT_TOPIC = [
-  { label: "消防火灾事件", event: "eventLayer_fire" },
+  { label: "消防事件", event: "eventLayer_fire" },
 ];
 
 /**
