@@ -11,7 +11,7 @@
     position: absolute;
     text-align: center;
     z-index: 7;
-    right: 2vw;
+    right: 1vw;
     bottom: 1.5vh;
 
     .zsk {
@@ -43,24 +43,24 @@
     position: absolute;
     text-align: center;
     z-index: 7;
-    right: 4vw;
-    bottom: 0vh;
+    right: 3vw;
+    bottom: -1vh;
     display: none;
 
     &.active {
       position: absolute;
       text-align: center;
       z-index: 7;
-      right: 4vw;
-      bottom: 0vh;
-      display:inline;
+      right: 3vw;
+      bottom: -1vh;
+      display: inline;
     }
 
     .gjlk {
       position: relative;
       top: 0;
       left: 0;
-      width: 16vw
+      width: 19vw
     }
 
     .gjla {
@@ -70,23 +70,32 @@
 
       .gjlb {
         margin-right: 3vw;
-        margin-top: 3vh
+        margin-top: 4vh;
+
+        .gjltb {
+          display: inline-block;
+          width: 2.7vw;
+          height: 5vh;
+        }
       }
     }
   }
 
   .layer-btn {
     position: absolute;
-    right: 19vw;
+    right: 22vw;
     bottom: 0;
+
     .event {
-      width: 7vh;
+      width: 6vh;
     }
+
     .mark {
       position: absolute;
       top: 0;
       right: -0.6vh;
       width: 2vh;
+
       &.breath {
         animation: breath 1s infinite linear;
       }
@@ -472,7 +481,15 @@
 }
 
 @keyframes breath {
-  from { opacity: 0.1; }
-  50%  { opacity: 1; }
-  to   { opacity: 0.1; }
+  from {
+    opacity: 0.1;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.1;
+  }
 }
