@@ -340,9 +340,12 @@ export default {
     async getAPIFeature(node, fn) {
       let res = await getEventData(node.event);
       let features = [];
-      res.data.forEach((item) => {
+      res.forEach((item) => {
         features.push({
-          attributes: { NAME: item.title, SMID: item.id },
+          attributes: {
+            ...item,
+            ...{ NAME: item.title, SMID: item.innerEventId },
+          },
           geometry: {
             x: +item.eventCoordinate.split(",")[0],
             y: +item.eventCoordinate.split(",")[1],

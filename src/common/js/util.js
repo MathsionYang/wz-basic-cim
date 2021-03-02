@@ -2,8 +2,8 @@
  * 返回日期
  * @returns {string}
  */
-export function getDate() {
-  var myDate = new Date()
+export function getDate(date) {
+  var myDate = date || new Date()
   // 获取当前年
   var year = myDate.getFullYear()
   // 获取当前月

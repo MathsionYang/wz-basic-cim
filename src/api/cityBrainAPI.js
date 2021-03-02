@@ -17,10 +17,10 @@ instance.defaults.method = "get";
  * @param {*} url
  * @param {*} data
  */
-const getAxios = (code = "", data = {}) => {
+const getAxios = (code = "", data = {}, method = "POST") => {
   return instance.request({
     url: "",
-    params: { params: JSON.stringify(data), code, systype: 1 }
+    params: { params: JSON.stringify(data), code, systype: 1, method }
   }).then(res => {
     return res.data ? Promise.resolve(JSON.parse(res.data.result)) : Promise.reject(res);
   });
