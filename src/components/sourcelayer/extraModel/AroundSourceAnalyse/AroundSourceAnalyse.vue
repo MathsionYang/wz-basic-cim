@@ -35,6 +35,17 @@
       </el-select>
     </div>
     <div class="around-source-list">
+      <div class="around-source-item" @click="toggleXFZ" v-show="forceEntity && forceEntity.type == 'event'">
+        <img
+          class="around-source-list-icon"
+          :src="
+            xfzSelected
+              ? `/static/images/aroundSource/消防站选中@2x.png`
+              : `/static/images/aroundSource/消防站@2x.png`
+          "
+        />
+        <div v-show="xfzSelected" class="around-source-list-shine"></div>
+      </div>
       <div class="around-source-item" @click="toggleKakou" v-show="forceEntity && forceEntity.type == 'event'">
         <img
           class="around-source-list-icon"
@@ -44,6 +55,7 @@
               : `/static/images/aroundSource/交通卡口@2x.png`
           "
         />
+        <div v-show="kakouSelected" class="around-source-list-shine"></div>
       </div>
       <div
         class="around-source-item"
@@ -59,6 +71,7 @@
               : `/static/images/aroundSource/${item.title}@2x.png`
           "
         />
+        <div v-show="selectedSourceObj.title == item.title" class="around-source-list-shine"></div>
       </div>
     </div>
     <ul
@@ -93,6 +106,7 @@ import { mapGetters } from "vuex";
 import { treeDrawTool } from "../../layerHub/TreeDrawTool";
 import {
   CESIUM_TREE_TRAFFIC_OPTION,
+  CESIUM_TREE_EMERGENCY_OPTION,
   CESIUM_TREE_AROUND_ANALYSE_OPTION,
   CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION,
 } from "config/server/sourceTreeOption";
@@ -110,7 +124,7 @@ export default {
   data() {
     return {
       forceEntity: undefined,
-      distance: 250,
+      distance: 1000,
       distanceOption: [
         { value: 250, label: "250m" },
         { value: 500, label: "500m" },
@@ -128,6 +142,7 @@ export default {
         list: [],
       },
       kakouSelected: false,
+      xfzSelected: false,
     };
   },
   props: ["force"],
@@ -152,6 +167,7 @@ export default {
         } else {
           this.fetchEventSourceAround(this.forceEntity);
           this.toggleKakou();
+          this.toggleXFZ();
         }
       });
     },
@@ -182,7 +198,7 @@ export default {
           // } else {
           //   list = data.sort(arrayCompareWithParam("distance"));
           // }
-          let list = data.slice(0, 20).sort(arrayCompareWithParam("distance"));
+          let list = data.sort(arrayCompareWithParam("distance")).slice(0, 20);
           const sourceAnalyseResult = {
             title: label,
             key: value,
@@ -300,6 +316,16 @@ export default {
         topic[0].children[0].id
       );
     },
+    //  切换消防站图层
+    toggleXFZ() {
+      this.xfzSelected = !this.xfzSelected;
+      const topic = CESIUM_TREE_EMERGENCY_OPTION
+      this.$parent.$refs.layerHub.doForceTrueTopicLabels(
+        CESIUM_TREE_TRAFFIC_OPTION[0].label,
+        topic[0].children,
+        topic[0].children[0].id
+      );
+    },
     //  重新分析
     sourceUpdateHandler() {
       if (this.forceEntity.type == "source") {
@@ -327,6 +353,7 @@ export default {
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
       this.kakouSelected && this.toggleKakou();
+      this.xfzSelected && this.toggleXFZ();
     },
     // 选择类型
     itemClick(item) {

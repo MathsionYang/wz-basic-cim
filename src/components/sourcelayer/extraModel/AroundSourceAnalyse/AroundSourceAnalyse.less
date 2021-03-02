@@ -127,10 +127,25 @@
         flex-wrap: wrap;
         .around-source-item {
             // flex: 1;
+            position: relative;
             width: 25%;
             text-align: center;
             .around-source-list-icon {
                 width: 60%;
+            }
+            .around-source-list-shine {
+                content: "";
+                width: 5vh;
+                height: 5vh;
+                display: block;
+                position: absolute;
+                top: 0vh;
+                left: 50%;
+                transform: translateX(-50%);
+                opacity: 0.6;
+                background-image: url(/static/images/aroundSource/shine.gif);
+                background-size: 100% 100%;
+                pointer-events: auto;
             }
         }
     }

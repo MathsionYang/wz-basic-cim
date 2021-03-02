@@ -1100,7 +1100,10 @@ const JTJC_TOPIC = [
     hiddenLabel: true
   },
 ];
-
+//  应急专题
+const EMERGENCY_TOPIC = [
+  { label: "消防站", dataname: 'swdata:', dataset: "JZJZNL_XFJYNL_XFZ" },
+];
 const STHJ_TOPIC = [
   {
     label: "生态监测",
@@ -1227,7 +1230,7 @@ const WLGZ_TOPIC = [
 
 const EVENT_AROUND_ANALYSE_TOPIC = [
   { label: "医疗场所", resourceType: "medical_care" },
-  { label: "消防站", resourceType: "fire_station" },
+  // { label: "消防站", resourceType: "fire_station" },
   { label: "消防栓", resourceType: "fire_hydrant" },
   // { label: "交通卡口", resourceType: "bayonet" }
 ]
@@ -1302,92 +1305,105 @@ export const CESIUM_TREE_OPTION = [
   {
     id: "时空基础数据",
     label: "时空基础数据",
-    children: MEDICAL_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-        url: v.url,
-        type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
-      };
-    })
+    children: MEDICAL_TOPIC
+    // children: MEDICAL_TOPIC.map(v => {
+    //   return {
+    //     ...v,
+    //     id: v.label,
+    //     icon: v.label,
+    //     url: v.url,
+    //     type: v.type,
+    //     newdataset: `${v.dataname}${v.dataset}`
+    //   };
+    // })
   },
   {
     id: "资源调查数据",
     label: "资源调查数据",
-    children: EDUCATION_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-        url: v.url,
-        type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
-      };
-    })
+    children: EDUCATION_TOPIC
+    // children: EDUCATION_TOPIC.map(v => {
+    //   return {
+    //     ...v,
+    //     id: v.label,
+    //     icon: v.label,
+    //     url: v.url,
+    //     type: v.type,
+    //     newdataset: `${v.dataname}${v.dataset}`
+    //   };
+    // })
   },
   {
     id: "规划管控数据",
     label: "规划管控数据",
-    children: CULTURE_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-        url: v.url,
-        type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
-      };
-    })
+    children: CULTURE_TOPIC
+    // children: CULTURE_TOPIC.map(v => {
+    //   return {
+    //     ...v,
+    //     id: v.label,
+    //     icon: v.label,
+    //     url: v.url,
+    //     type: v.type,
+    //     newdataset: `${v.dataname}${v.dataset}`
+    //   };
+    // })
   },
   {
     id: "工程建设项目数据",
     label: "工程建设项目数据",
-    children: GCXX_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-        url: v.url,
-        type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
-      };
-    })
+    children: GCXX_TOPIC
+    // children: GCXX_TOPIC.map(v => {
+    //   return {
+    //     ...v,
+    //     id: v.label,
+    //     icon: v.label,
+    //     url: v.url,
+    //     type: v.type,
+    //     newdataset: `${v.dataname}${v.dataset}`
+    //   };
+    // })
   },
   {
     id: "公共专题数据",
     label: "公共专题数据",
-    children: BASIC_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-        url: v.url,
-        type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
-      };
-    })
+    children: BASIC_TOPIC
+    // children: BASIC_TOPIC.map(v => {
+    //   return {
+    //     ...v,
+    //     id: v.label,
+    //     icon: v.label,
+    //     url: v.url,
+    //     type: v.type,
+    //     newdataset: `${v.dataname}${v.dataset}`
+    //   };
+    // })
   },
   {
     id: "物联感知数据",
     label: "物联感知数据",
-    children: WLGZ_TOPIC.map(v => {
-      return {
-        ...v,
-        id: v.label,
-        icon: v.label,
-        url: v.url,
-        type: v.type,
-        newdataset: `${v.dataname}${v.dataset}`
-      };
-    })
+    children: WLGZ_TOPIC
+    // children: WLGZ_TOPIC.map(v => {
+    //   return {
+    //     ...v,
+    //     id: v.label,
+    //     icon: v.label,
+    //     url: v.url,
+    //     type: v.type,
+    //     newdataset: `${v.dataname}${v.dataset}`
+    //   };
+    // })
   }
 ];
+
 export const CESIUM_TREE_TRAFFIC_OPTION = [{
   id: "物联感知数据",
   label: "物联感知数据",
-  children: WLGZ_TOPIC.map(v => {
+  children: WLGZ_TOPIC
+}]
+
+export const CESIUM_TREE_EMERGENCY_OPTION = [{
+  id: "应急专题",
+  label: "应急专题",
+  children: EMERGENCY_TOPIC.map(v => {
     return {
       ...v,
       id: v.label,

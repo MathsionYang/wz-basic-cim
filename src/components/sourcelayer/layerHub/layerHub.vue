@@ -293,19 +293,14 @@ export default {
      * @param {string} id
      */
     doForceTrueTopicLabels(item, children, id) {
-      console.log("item", item);
-      console.log("children", children);
-      console.log("id", id);
       console.log("组别", id);
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
-        console.log(111);
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
         this.SetForceTrueTopicLabels(_fttl_);
         this.nodeCheckChange(label, false);
       } else {
-        console.log(222);
         this.SetForceTrueTopicLabels([
           ...new Set(this.forceTrueTopicLabels.concat([label.id])),
         ]);
