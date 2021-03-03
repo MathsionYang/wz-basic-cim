@@ -107,7 +107,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import KgLegend from "./components/KgLegend";
-import { treeDrawTool, fixTreeWithExtra } from "./TreeDrawTool";
+import { treeDrawTool, treeDrawEventTool } from "./TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
 import {
   CESIUM_TREE_OPTION,
@@ -357,7 +357,7 @@ export default {
           },
         });
       });
-      treeDrawTool(this, { result: { features } }, node);
+      treeDrawEventTool(this, { result: { features } }, node);
       fn && fn();
     },
     nodeCheckChange(node, checked, type = "source") {

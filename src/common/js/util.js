@@ -17,6 +17,14 @@ export function getDate(date) {
   return year + '-' + conver(month) + '-' + conver(date) + ' ' + conver(h) + ':' + conver(m) + ':' + conver(s)
 }
 
+/**
+ * 是否一天之内
+ * @param {*} eventTime 
+ */
+export function isDayOff(eventTime) {
+  return (+new Date() - +new Date(eventTime)) < 24 * 3600 * 1000;
+}
+
 function conver(s) {
   return s < 10 ? '0' + s : s
 }

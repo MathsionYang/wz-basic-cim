@@ -411,38 +411,6 @@ const CITYBJ_TOPIC = [
     url: '',
     dataset: ""
   },
-  // {
-  //   label: "医疗场所",
-  //   type: 'mvt',
-  //   dataname: 'swdata:',
-  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
-  //   dataset: "JZJZNL_YLJH_JHCS",
-  //   withExtraData: "medicalList",
-  //   withExtraDataGeometry: "medicalListWithGeometry",
-  //   saveExtraDataByGeometry: "setMedicalListWithGeometry",
-  //   withExtraKey: "SHORTNAME",
-  // },
-  // {
-  //   label: "幼儿园",
-  //   type: 'mvt',
-  //   dataname: 'swdata:',
-  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
-  //   dataset: "NurserySchool"
-  // },
-  // {
-  //   label: "小学",
-  //   type: 'mvt',
-  //   dataname: 'swdata:',
-  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
-  //   dataset: "PrimarySchool"
-  // },
-  // {
-  //   label: "初中",
-  //   type: 'mvt',
-  //   dataname: 'swdata:',
-  //   url: 'https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data',
-  //   dataset: "JuniorHighSchool"
-  // },
 ];
 //  资源调查数据
 const EDUCATION_TOPIC = [
@@ -1237,10 +1205,10 @@ const WLGZ_TOPIC = [
 ];
 
 const EVENT_AROUND_ANALYSE_TOPIC = [
-  { label: "医疗场所", resourceType: "medical_care" },
-  // { label: "消防站", resourceType: "fire_station" },
-  { label: "消防栓", resourceType: "fire_hydrant" },
-  // { label: "交通卡口", resourceType: "bayonet" }
+  { label: "医疗场所", resourceType: "medical_care", dataname: "swdata:", dataset: "JZJZNL_YLJH_JHCS", },
+  { label: "消防站", resourceType: "fire_station", dataname: "swdata:", dataset: "JZJZNL_XFJYNL_XFZ" },
+  { label: "消防栓", resourceType: "fire_hydrant", dataname: "swdata:", dataset: "JZJZNL_XFJYNL_XFS" },
+  { label: "交通卡口", resourceType: "bayonet", dataname: "swdata:", dataset: "KaKouDianWei" }
 ]
 
 const AROUND_ANALYSE_TOPIC = [
@@ -1431,6 +1399,8 @@ export const CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION = {
       ...v,
       id: v.label,
       icon: v.label,
+      url: SERVER_DEFAULT_DATA,
+      newdataset: `${v.dataname}${v.dataset}`
     };
   })
 }
@@ -1443,6 +1413,7 @@ export const CESIUM_TREE_AROUND_ANALYSE_OPTION = {
       ...v,
       id: v.label,
       icon: v.label,
+      url: SERVER_DEFAULT_DATA,
       newdataset: `${v.dataname}${v.dataset}`
     };
   })

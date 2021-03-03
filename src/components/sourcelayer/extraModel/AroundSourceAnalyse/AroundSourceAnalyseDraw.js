@@ -5,32 +5,31 @@ const _ENTITY_ID_ = "aroundSourceAnalyseCircle";
  * 地图画点
  * @param {*} param0 
  */
-export const aroundSourceAnalyseDraw = ({ key, list, title }) => {
+export const aroundSourceAnalyseDraw = ({ key, list, title, dataset }) => {
     const KEY = `${_COLLECTION_KEY_}_${key}`;
     list.length &&
         list.map((v) => {
             const position = Cesium.Cartesian3.fromDegrees(+v.lng, +v.lat, 4);
-            initFeatureMap(KEY, v);
-            if (v.resourceName != '消防栓') {
-                window.labelMap[KEY].add({
-                    id: `label@${v.resourceName}@${KEY}`,
-                    text: v.resourceName,
-                    fillColor: Cesium.Color.WHITE,
-                    outlineColor: Cesium.Color.BLACK,
-                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                    font: "8px",
-                    scale: 1,
-                    outlineWidth: 4,
-                    showBackground: true,
-                    backgroundColor: Cesium.Color(0.165, 0.165, 0.165, 0.1),
-                    distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 2000),
-                    pixelOffset: new Cesium.Cartesian2(0, -20),
-                    disableDepthTestDistance: Number.POSITIVE_INFINITY,
-                    position,
-                });
-            }
+            const smid = v.originalData.fieldValues[0]
+            initFeatureMap(dataset, KEY, v, smid);
+            window.labelMap[KEY].add({
+                id: `label@${smid}@${KEY}@location`,
+                text: v.resourceName,
+                fillColor: Cesium.Color.WHITE,
+                outlineColor: Cesium.Color.BLACK,
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                font: "8px",
+                scale: 1,
+                outlineWidth: 4,
+                showBackground: true,
+                backgroundColor: Cesium.Color(0.165, 0.165, 0.165, 0.1),
+                distanceDisplayCondition: new Cesium.DistanceDisplayCondition(0, 2000),
+                pixelOffset: new Cesium.Cartesian2(0, -20),
+                disableDepthTestDistance: Number.POSITIVE_INFINITY,
+                position,
+            });
             window.billboardMap[KEY].add({
-                id: `billboard@${v.resourceName}@${KEY}`,
+                id: `billboard@${smid}@${KEY}@location`,
                 image: `/static/images/map-ico/${title}.png`,
                 width: 26,
                 height: 26,
@@ -86,6 +85,7 @@ export const initPrimitivesCollection = (key) => {
     window.featureMap[KEY] = {};
 }
 
+//  隐藏资源周边分析
 export const hideVisible = (node) => {
     window.earth.entities.removeById(_ENTITY_ID_);
     if (node.icon && window.billboardMap[node.id]) {
@@ -99,20 +99,21 @@ export const hideVisible = (node) => {
  * @param {string} KEY
  * @param {object} data
  */
-const initFeatureMap = async (KEY, data) => {
-    // const fields = await getIserverFields(url, newdataset);
-    // const fieldHash = fixFieldsByArr(fields);
+const initFeatureMap = async ({ url, newdataset }, KEY, data, smid) => {
+    const fields = await getIserverFields(url, newdataset);
+    const fieldHash = fixFieldsByArr(fields);
     const attributes = doObjFromArr(data.originalData);
     const name = data.resourceName;
-    window.featureMap[KEY][name] = {
+    window.featureMap[KEY][smid] = {
         name,
+        smid,
         geometry: {
             x: +data.lng,
             y: +data.lat,
         },
         attributes,
-        // fix_data: fixAttributesByOrigin(attributes, fieldHash),
-        fix_data: attributes,
+        fix_data: fixAttributesByOrigin(attributes, fieldHash),
+        // fix_data: attributes,
         dataSet: "",
     };
 }

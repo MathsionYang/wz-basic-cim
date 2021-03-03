@@ -35,7 +35,7 @@
       </el-select>
     </div>
     <div class="around-source-list">
-      <div class="around-source-item" @click="toggleXFZ" v-show="forceEntity && forceEntity.type == 'event'">
+      <!-- <div class="around-source-item" @click="toggleXFZ" v-show="forceEntity && forceEntity.type == 'event'">
         <img
           class="around-source-list-icon"
           :src="
@@ -56,7 +56,7 @@
           "
         />
         <div v-show="kakouSelected" class="around-source-list-shine"></div>
-      </div>
+      </div> -->
       <div
         class="around-source-item"
         v-for="(item, index) in aroundSourceAnalyseList"
@@ -105,8 +105,8 @@ import gcoord from "gcoord";
 import { mapGetters } from "vuex";
 import { treeDrawTool } from "../../layerHub/TreeDrawTool";
 import {
-  CESIUM_TREE_TRAFFIC_OPTION,
-  CESIUM_TREE_EMERGENCY_OPTION,
+  // CESIUM_TREE_TRAFFIC_OPTION,
+  // CESIUM_TREE_EMERGENCY_OPTION,
   CESIUM_TREE_AROUND_ANALYSE_OPTION,
   CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION,
 } from "config/server/sourceTreeOption";
@@ -141,8 +141,8 @@ export default {
         key: "",
         list: [],
       },
-      kakouSelected: false,
-      xfzSelected: false,
+      // kakouSelected: false,
+      // xfzSelected: false,
     };
   },
   props: ["force"],
@@ -166,8 +166,8 @@ export default {
           this.fetchSourceAround(this.forceEntity);
         } else {
           this.fetchEventSourceAround(this.forceEntity);
-          this.toggleKakou();
-          this.toggleXFZ();
+          // this.toggleKakou();
+          // this.toggleXFZ();
         }
       });
     },
@@ -203,6 +203,9 @@ export default {
             title: label,
             key: value,
             list,
+            dataset: CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION.children.filter(
+              ({ resourceType }) => resourceType == value
+            )[0],
           };
           if (!aroundSourceAnalyseList.length) {
             this.selectedSourceObj = sourceAnalyseResult;
@@ -305,27 +308,27 @@ export default {
       this.selectSourceLayer = this.aroundOption.map((v) => v.value);
     },
     //  切换交通卡口图层
-    toggleKakou() {
-      this.kakouSelected = !this.kakouSelected;
-      const topic = CESIUM_TREE_TRAFFIC_OPTION[0].children.filter(
-        (item) => item.label == "交通监测数据"
-      );
-      this.$parent.$refs.layerHub.doForceTrueTopicLabels(
-        CESIUM_TREE_TRAFFIC_OPTION[0].label,
-        topic[0].children,
-        topic[0].children[0].id
-      );
-    },
-    //  切换消防站图层
-    toggleXFZ() {
-      this.xfzSelected = !this.xfzSelected;
-      const topic = CESIUM_TREE_EMERGENCY_OPTION
-      this.$parent.$refs.layerHub.doForceTrueTopicLabels(
-        CESIUM_TREE_TRAFFIC_OPTION[0].label,
-        topic[0].children,
-        topic[0].children[0].id
-      );
-    },
+    // toggleKakou() {
+    //   this.kakouSelected = !this.kakouSelected;
+    //   const topic = CESIUM_TREE_TRAFFIC_OPTION[0].children.filter(
+    //     (item) => item.label == "交通监测数据"
+    //   );
+    //   this.$parent.$refs.layerHub.doForceTrueTopicLabels(
+    //     CESIUM_TREE_TRAFFIC_OPTION[0].label,
+    //     topic[0].children,
+    //     topic[0].children[0].id
+    //   );
+    // },
+    // //  切换消防站图层
+    // toggleXFZ() {
+    //   this.xfzSelected = !this.xfzSelected;
+    //   const topic = CESIUM_TREE_EMERGENCY_OPTION
+    //   this.$parent.$refs.layerHub.doForceTrueTopicLabels(
+    //     CESIUM_TREE_TRAFFIC_OPTION[0].label,
+    //     topic[0].children,
+    //     topic[0].children[0].id
+    //   );
+    // },
     //  重新分析
     sourceUpdateHandler() {
       if (this.forceEntity.type == "source") {
@@ -352,8 +355,8 @@ export default {
       this.navigateLine && window.earth.entities.remove(this.navigateLine);
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
-      this.kakouSelected && this.toggleKakou();
-      this.xfzSelected && this.toggleXFZ();
+      // this.kakouSelected && this.toggleKakou();
+      // this.xfzSelected && this.toggleXFZ();
     },
     // 选择类型
     itemClick(item) {
@@ -436,8 +439,8 @@ export default {
                 name: "navigateLine",
                 polyline: {
                   positions: Cesium.Cartesian3.fromDegreesArray(positionsWGS84),
-                  width: 6,
-                  material: Cesium.Color.RED.withAlpha(1),
+                  width: 12,
+                  material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.RED),
                   clampToGround: true,
                 },
               });

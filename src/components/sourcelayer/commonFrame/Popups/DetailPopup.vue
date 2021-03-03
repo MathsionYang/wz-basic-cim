@@ -1395,7 +1395,7 @@ ul li {
         color: #67c9fb;
         display: inline-block;
         opacity: 1;
-        float: left;
+        // float: left;
         margin-right: 1vh;
       }
     }

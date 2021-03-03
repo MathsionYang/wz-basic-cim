@@ -473,7 +473,7 @@ export default {
         } else if (typeof pick.id == "string") {
           const [_TYPE_, _SMID_, _NODEID_] = pick.id.split("@");
           //  *****[detailPopup]  资源详情点*****
-          if (~["label", "billboard"].indexOf(_TYPE_)) {
+          if (~["label", "billboard", "eventLayer_billboard"].indexOf(_TYPE_)) {
             this.$refs.detailPopup.getForceEntity({
               ...window.featureMap[_NODEID_][_SMID_],
               position: pick.primitive.position,
