@@ -30,6 +30,9 @@
       <DetailedModel v-if="showSubFrame == '3d1'" />
       <!-- <CesiumMapVideo v-if="showSubFrame == '3d1'" /> -->
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
+
+      <Ljxq ref="ljxq" v-if="showLjxq == '3d2'" />
+
       <TrafficSubwayModel
         ref="trafficSubwayModel"
         v-if="showgdFrame == '3d4'"
@@ -80,6 +83,7 @@ import LayerHub from "components/sourcelayer/layerHub/layerHub";
 import SearchBox from "components/sourcelayer/layerHub/searchBox";
 import CityIndex from "components/sourcelayer/CityIndex/index";
 import Roulette from "components/sourcelayer/roulette/roulette";
+import Ljxq from "components/sourcelayer/extraModel/Ljxq/Ljxq";
 import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedModel";
 import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceAnalyse/AroundSourceAnalyse";
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
@@ -144,6 +148,7 @@ export default {
       showSubFrame: null,
       showDXFrame: null,
       showKgFrame: null,
+      showLjxq: null,
       showqxsyFrame: null,
       showjzFrame: null,
       showouhaiFrame: null,
@@ -182,6 +187,7 @@ export default {
     DetailedModel,
     BJSWQModel,
     BJJM,
+    Ljxq,
     OUHAI,
     Dxkj,
     WZDem,
@@ -440,6 +446,16 @@ export default {
         window.position = position;
         console.log("点击pick.id", pick);
         if (!pick || !pick.id) return;
+        // var cartographic = Cesium.Cartographic.fromCartesian(position);
+        // var longitude = Cesium.Math.toDegrees(cartographic.longitude);
+        // var latitude = Cesium.Math.toDegrees(cartographic.latitude);
+        // var height = cartographic.height;
+        // if (window.lastHouseEntity == undefined) {
+        //   window.lastHouseEntity = null;
+        // }
+        // var sqls = `BottomAttitude < ${height} and ${height} < (BottomAttitude + Height) and ${longitude} > SmSdriW and ${longitude} < SmSdriE and ${latitude} > SmSdriS and ${latitude} < SmSdriN`;
+        // this.sqlQuery(sqls);
+
         if (typeof pick.id == "object") {
           //  *****[videoCircle]  监控视频点*****
           if (pick.id.id && ~pick.id.id.indexOf("videopoint_")) {
@@ -456,7 +472,6 @@ export default {
           }
         } else if (typeof pick.id == "string") {
           const [_TYPE_, _SMID_, _NODEID_] = pick.id.split("@");
-          console.log("参数", pick);
           //  *****[detailPopup]  资源详情点*****
           if (~["label", "billboard"].indexOf(_TYPE_)) {
             this.$refs.detailPopup.getForceEntity({
@@ -566,6 +581,11 @@ export default {
       this.$bus.$off("cesium-3d-jz");
       this.$bus.$on("cesium-3d-jz", ({ value }) => {
         this.showjzFrame = value;
+      });
+      //老旧小区
+      this.$bus.$off("cesium-3d-ljxq");
+      this.$bus.$on("cesium-3d-ljxq", ({ value }) => {
+        this.showLjxq = value;
       });
       //建筑三维
       this.$bus.$off("cesium-3d-ouhai");
@@ -680,7 +700,7 @@ export default {
       const mapMvt = mapMvtLayerInit("mapMvt", ServiceUrl.YJMVT);
       //  重要地物注记
       //const keyMvt = mapMvtLayerInit("keyMvt", ServiceUrl.KEYMVT);
-      await mapBJSWQLayerInit("BJImage", ServiceUrl.BJImage);
+      await mapBJSWQLayerInit("BJImage", ServiceUrl.BJImage,"172.20.83.196_swdata:cbd_region");
 
       //  水面
       // await mapRiverLayerInit("RIVER", ServiceUrl.STATIC_RIVER);

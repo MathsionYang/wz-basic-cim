@@ -75,7 +75,7 @@ export default {
   display: inline-block;
 
   .imgs {
-    height: 5vh;
+    height: 2.7vw;
     opacity: 1;
     z-index: 7;
     width: 8vw;
@@ -86,7 +86,7 @@ export default {
   }
   &.active {
     > .imgs {
-      height: 5vh;
+      height: 2.7vw;
       opacity: 1;
       z-index: 7;
       width: 8vw;
@@ -108,7 +108,7 @@ export default {
     color: #ffffff;
     text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
     opacity: 1;
-    margin: 0.7vh 0vw;
+    margin: 0.6vh 0vw;
     display: block;
     width: 100%;
     text-align: center;
@@ -126,7 +126,7 @@ export default {
       color: #ffff08;
       text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
       opacity: 1;
-      margin: 0.7vh 0vw;
+      margin: 0.6vh 0vw;
       display: block;
       width: 100%;
       text-align: center;

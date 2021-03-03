@@ -61,9 +61,11 @@ export const ServiceUrl = {
   //  大数据底图
   DataImage:
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DSJCGS2000SW/rest/realspace/datas/DSJ_CGS2000_SW",
-  // 全市域地形
+  // BCD矢量面
   BJImage:
     "http://172.20.83.223:8098/iserver/services/data-SW_DATA/rest/data",
+  LJxqImage:
+    "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",  
   YJDem:
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DEMLC/rest/realspace/datas/DEM_LC",
   // mvt矢量服务
@@ -110,7 +112,9 @@ export const ExtraSourceURL = {
   BJJM:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/max_cim_sample/config",
   OUHAI:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxouhaiqufu/rest/realspace/datas/max_ouhai_qufu/config"
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxouhaiqufu/rest/realspace/datas/max_ouhai_qufu/config",
+  LJxq:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimpuxieshi/rest/realspace/datas/max_cim_puxieshi/config",  
 };
 
 
