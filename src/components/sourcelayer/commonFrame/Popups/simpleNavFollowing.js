@@ -3,8 +3,7 @@
  *  创建于20180000     最后修改20201231
  *  v1.0.2            --rebuild
  */
-
-var simpleNavFollow = function (opts) {
+export function simpleNavFollow (opts) {
     //设置默认参数
     var opt = {
         parentElement: "",

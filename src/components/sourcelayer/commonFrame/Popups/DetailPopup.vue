@@ -117,7 +117,7 @@
     <div class="extra-frame" v-if="isFrame">
       <span @click="isFrame = false">X</span><iframe :src="isFrame" />
     </div>
-    <div class="container" v-if="isLJ">
+    <div class="container" v-show="isLJ">
       <ul id="nav">
         <li><a href="javascript:;" class="snf-nav active">page1</a></li>
         <li><a href="javascript:;" class="snf-nav">page2</a></li>
@@ -754,61 +754,9 @@
     </div>
   </div>
 </template>
-<script type="text/javascript" src="./simpleNavFollowing.js"></script>
 <script>
-jQuery(document).ready(function () {
-  var snf = simpleNavFollow({
-    parentElement: "#main", //内容类的父元素
-    nav: ".snf-nav", //导航类
-    page: ".snf-page", //内容类
-    leaveTop: 0, //离父类距离
-    initTo: 1, //初始跳转
-    animation: 400, //动画时间
-    followCallBack: function (index) {
-      $("#enterIndex").text(index + 1);
-    },
-    navCallBack: function (index) {
-      $("#clickIndex").text(index + 1);
-    },
-  });
-  $("#destroy").click(function () {
-    snf.destroyed();
-  });
-  $("#clickToggle").click(function () {
-    if (snf.getStopState.nav()) {
-      snf.stopCallBack.nav(false);
-    } else {
-      snf.stopCallBack.nav(true);
-    }
-  });
-  $("#enterToggle").click(function () {
-    if (snf.getStopState.follow()) {
-      snf.stopCallBack.follow(false);
-    } else {
-      snf.stopCallBack.follow();
-    }
-  });
-  $("#init").click(function () {
-    if (snf.destroyed) {
-      snf.destroyed();
-    }
-    snf = simpleNavFollow({
-      parentElement: "#main", //内容类的父元素
-      nav: ".snf-nav", //导航类
-      page: ".snf-page", //内容类
-      leaveTop: 0, //离父元素距离
-      initTo: 1, //初始跳转
-      animation: 400, //动画时间
-      followCallBack: function (index) {
-        $("#enterIndex").text(index + 1);
-      },
-      navCallBack: function (index) {
-        $("#clickIndex").text(index + 1);
-      },
-    });
-  });
-});
-import $ from "jquery";
+import { simpleNavFollow } from "./simpleNavFollowing";
+
 export default {
   data() {
     return {
@@ -820,7 +768,7 @@ export default {
       extraTabActive: "",
       isFrame: false,
       isSelected: "",
-      isLJ:false
+      isLJ: false,
     };
   },
   async mounted() {
@@ -828,44 +776,54 @@ export default {
   },
   methods: {
     // 防抖
-    debounce(func, wait, immediate) {
-      var timeout, args, context, timestamp, result;
-      var later = function () {
-        // 据上一次触发时间间隔
-        var last = new Date() - timestamp;
-        // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
-        if (last < wait && last > 0) {
-          timeout = setTimeout(later, wait - last);
-        } else {
-          timeout = null;
-          // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-          if (!immediate) {
-            result = func.apply(context, args);
-            if (!timeout) context = args = null;
-          }
-        }
-      };
+    // debounce(func, wait, immediate) {
+    //   var timeout, args, context, timestamp, result;
+    //   var later = function () {
+    //     // 据上一次触发时间间隔
+    //     var last = new Date() - timestamp;
+    //     // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
+    //     if (last < wait && last > 0) {
+    //       timeout = setTimeout(later, wait - last);
+    //     } else {
+    //       timeout = null;
+    //       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+    //       if (!immediate) {
+    //         result = func.apply(context, args);
+    //         if (!timeout) context = args = null;
+    //       }
+    //     }
+    //   };
 
-      return function () {
-        context = this;
-        args = arguments;
-        timestamp = new Date();
-        var callNow = immediate && !timeout;
-        // 如果延时不存在，重新设定延时
-        if (!timeout) timeout = setTimeout(later, wait);
-        if (callNow) {
-          result = func.apply(context, args);
-          context = args = null;
-        }
+    //   return function () {
+    //     context = this;
+    //     args = arguments;
+    //     timestamp = new Date();
+    //     var callNow = immediate && !timeout;
+    //     // 如果延时不存在，重新设定延时
+    //     if (!timeout) timeout = setTimeout(later, wait);
+    //     if (callNow) {
+    //       result = func.apply(context, args);
+    //       context = args = null;
+    //     }
 
-        return result;
-      };
-    },
-    navClick(e) {
-      console.log("lieb", e);
-      var scrollBox1 = document.querySelector(".container");
-      scrollBox1.scrollTo(0, [...e.target.id].pop() * 500);
-      this.isSelected = e.target.id + "-selected";
+    //     return result;
+    //   };
+    // },
+    // navClick(e) {
+    //   console.log("lieb", e);
+    //   var scrollBox1 = document.querySelector(".container");
+    //   scrollBox1.scrollTo(0, [...e.target.id].pop() * 500);
+    //   this.isSelected = e.target.id + "-selected";
+    // },
+    bindHandler() {
+      var snf = simpleNavFollow({
+        parentElement: "#main", //内容类的父元素
+        nav: ".snf-nav", //导航类
+        page: ".snf-page", //内容类
+        leaveTop: 0, //离父类距离
+        initTo: 0, //初始跳转
+        animation: 400, //动画时间
+      });
     },
     eventRegsiter() {
       this.$bus.$on("cesium-3d-around-people", ({ id, result }) => {
@@ -882,12 +840,15 @@ export default {
     getForceEntity(forceEntity) {
       console.log("forceEntity", forceEntity);
       this.forceEntity = forceEntity;
-      if (!forceEntity._NODEID_.includes("事件")&&!forceEntity._NODEID_.includes("老旧小区")) {
+      if (
+        !forceEntity._NODEID_.includes("事件") &&
+        !forceEntity._NODEID_.includes("老旧小区")
+      ) {
         this.showSide = true;
         this.buffer = null;
         this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
         this.$bus.$emit("cesium-3d-rtmpFetch-cb");
-      }else if(forceEntity._NODEID_.includes("老旧小区")){
+      } else if (forceEntity._NODEID_.includes("老旧小区")) {
         this.isLJ = true;
       } else {
         this.showSide = false;
@@ -970,6 +931,15 @@ export default {
       // this.$parent.$refs.aroundSourceAnalyse.closeAroundSourceAnalyse()
     },
   },
+  watch: {
+    isLJ(val) {
+      if (val) {
+        setTimeout(() => {
+          this.bindHandler()
+        }, 200)
+      }
+    }
+  }
 };
 </script>
 
