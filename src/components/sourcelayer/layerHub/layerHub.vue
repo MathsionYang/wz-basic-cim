@@ -249,8 +249,13 @@ export default {
     },
     gjl(data) {
       this.checkgj = data.label;
+      console.log("this.checkgj",this.checkgj)
       window.gjlclickdata = data.label;
       this.$bus.$emit("cesium-3d-maptool", data);
+       this.$bus.$off("cesium-3d-imgs");
+      this.$bus.$on("cesium-3d-imgs", ({ value }) => {
+        this.checkgj = value;
+      });
     },
     sousu() {
       this.zk = !this.zk;
@@ -367,6 +372,7 @@ export default {
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
             if (type == "source") {
+              console.log('node',node)
               this.getPOIPickedFeature(node, () => {
                 this.switchSearchBox(node);
               });

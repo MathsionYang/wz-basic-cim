@@ -27,8 +27,8 @@
             :key="index"
             v-show="item && !~filterKey.indexOf(key) && index < 6"
           >
-            <div style="display:inline-block">{{ key }}:</div>
-            <div style="display:inline-block">{{ item }}</div>
+            <div style="display: inline-block">{{ key }}:</div>
+            <div style="display: inline-block">{{ item }}</div>
           </div>
           <!-- <ul class="content-body">
             <li
@@ -117,10 +117,698 @@
     <div class="extra-frame" v-if="isFrame">
       <span @click="isFrame = false">X</span><iframe :src="isFrame" />
     </div>
+    <div class="container" v-if="isLJ">
+      <ul id="nav">
+        <li><a href="javascript:;" class="snf-nav active">page1</a></li>
+        <li><a href="javascript:;" class="snf-nav">page2</a></li>
+        <li><a href="javascript:;" class="snf-nav">page3</a></li>
+        <li><a href="javascript:;" class="snf-nav">page4</a></li>
+      </ul>
+      <span @click="isFrame = false">X</span>
+      <div class="ljxqlabel">
+        <div id="main">
+          <div class="snf-page">
+            <table class="hovertable">
+              <tr>
+                <td class="table1">项目名称</td>
+                <td class="table2" colspan="3">
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">项目编号</td>
+                <td class="table3">温州市兴元建筑施工图审查咨询有限公司</td>
+                <td class="table1">施工许可证号</td>
+                <td class="table3">项目 1C</td>
+              </tr>
+
+              <tr>
+                <td class="table1">项目所在地</td>
+                <td class="table3">1783485486</td>
+                <td class="table1">工程类型</td>
+                <td class="table3">工程类型</td>
+              </tr>
+
+              <tr>
+                <td class="table1">工程用途</td>
+                <td class="table3">项目 1C</td>
+                <td class="table1">工程状态</td>
+                <td class="table3">1783485486</td>
+              </tr>
+
+              <tr>
+                <td class="table1">项目经理</td>
+                <td class="table3">项目经理</td>
+                <td class="table1">设计经理</td>
+                <td class="table3">项目 1C</td>
+              </tr>
+              <tr>
+                <td class="table1">施工经理</td>
+                <td class="table3">1783485486</td>
+                <td class="table1">发包形式</td>
+                <td class="table3">发包形式</td>
+              </tr>
+              <tr>
+                <td class="table1">投资额</td>
+                <td class="table3">项目 1C</td>
+                <td class="table1">投资性质</td>
+                <td class="table3">1783485486</td>
+              </tr>
+            </table>
+          </div>
+          <div class="snf-page">
+            <table class="hovertable">
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目名称
+                </td>
+                <td
+                  class="table2"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                  colspan="3"
+                >
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目编号
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  施工许可证号
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目所在地
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程类型
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  工程类型
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程用途
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程状态
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目经理
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  设计经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  施工经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  发包形式
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  发包形式
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  投资额
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  投资性质
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="snf-page">
+            <table class="hovertable">
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目名称
+                </td>
+                <td
+                  class="table2"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                  colspan="3"
+                >
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目编号
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  施工许可证号
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目所在地
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程类型
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  工程类型
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程用途
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程状态
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目经理
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  设计经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  施工经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  发包形式
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  发包形式
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  投资额
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  投资性质
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+              </tr>
+            </table>
+          </div>
+          <div class="snf-page">
+            <table class="hovertable">
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目名称
+                </td>
+                <td
+                  class="table2"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                  colspan="3"
+                >
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目编号
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  温州市兴元建筑施工图审查咨询有限公司
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  施工许可证号
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目所在地
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程类型
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  工程类型
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程用途
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  工程状态
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+              </tr>
+
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  项目经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目经理
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  设计经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  施工经理
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  发包形式
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  发包形式
+                </td>
+              </tr>
+              <tr>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  投资额
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  项目 1C
+                </td>
+                <td
+                  class="table1"
+                  onmouseout="this.style.backgroundColor='#a2c4fa';"
+                >
+                  投资性质
+                </td>
+                <td
+                  class="table3"
+                  onmouseover="this.style.backgroundColor='#4085f4';"
+                  onmouseout="this.style.backgroundColor='#bdd5fc';"
+                >
+                  1783485486
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
+<script type="text/javascript" src="./simpleNavFollowing.js"></script>
 <script>
+jQuery(document).ready(function () {
+  var snf = simpleNavFollow({
+    parentElement: "#main", //内容类的父元素
+    nav: ".snf-nav", //导航类
+    page: ".snf-page", //内容类
+    leaveTop: 0, //离父类距离
+    initTo: 1, //初始跳转
+    animation: 400, //动画时间
+    followCallBack: function (index) {
+      $("#enterIndex").text(index + 1);
+    },
+    navCallBack: function (index) {
+      $("#clickIndex").text(index + 1);
+    },
+  });
+  $("#destroy").click(function () {
+    snf.destroyed();
+  });
+  $("#clickToggle").click(function () {
+    if (snf.getStopState.nav()) {
+      snf.stopCallBack.nav(false);
+    } else {
+      snf.stopCallBack.nav(true);
+    }
+  });
+  $("#enterToggle").click(function () {
+    if (snf.getStopState.follow()) {
+      snf.stopCallBack.follow(false);
+    } else {
+      snf.stopCallBack.follow();
+    }
+  });
+  $("#init").click(function () {
+    if (snf.destroyed) {
+      snf.destroyed();
+    }
+    snf = simpleNavFollow({
+      parentElement: "#main", //内容类的父元素
+      nav: ".snf-nav", //导航类
+      page: ".snf-page", //内容类
+      leaveTop: 0, //离父元素距离
+      initTo: 1, //初始跳转
+      animation: 400, //动画时间
+      followCallBack: function (index) {
+        $("#enterIndex").text(index + 1);
+      },
+      navCallBack: function (index) {
+        $("#clickIndex").text(index + 1);
+      },
+    });
+  });
+});
+import $ from "jquery";
 export default {
   data() {
     return {
@@ -131,12 +819,54 @@ export default {
       showSide: false,
       extraTabActive: "",
       isFrame: false,
+      isSelected: "",
+      isLJ:false
     };
   },
   async mounted() {
     this.eventRegsiter();
   },
   methods: {
+    // 防抖
+    debounce(func, wait, immediate) {
+      var timeout, args, context, timestamp, result;
+      var later = function () {
+        // 据上一次触发时间间隔
+        var last = new Date() - timestamp;
+        // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
+        if (last < wait && last > 0) {
+          timeout = setTimeout(later, wait - last);
+        } else {
+          timeout = null;
+          // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
+          if (!immediate) {
+            result = func.apply(context, args);
+            if (!timeout) context = args = null;
+          }
+        }
+      };
+
+      return function () {
+        context = this;
+        args = arguments;
+        timestamp = new Date();
+        var callNow = immediate && !timeout;
+        // 如果延时不存在，重新设定延时
+        if (!timeout) timeout = setTimeout(later, wait);
+        if (callNow) {
+          result = func.apply(context, args);
+          context = args = null;
+        }
+
+        return result;
+      };
+    },
+    navClick(e) {
+      console.log("lieb", e);
+      var scrollBox1 = document.querySelector(".container");
+      scrollBox1.scrollTo(0, [...e.target.id].pop() * 500);
+      this.isSelected = e.target.id + "-selected";
+    },
     eventRegsiter() {
       this.$bus.$on("cesium-3d-around-people", ({ id, result }) => {
         this.buffer = result;
@@ -152,11 +882,13 @@ export default {
     getForceEntity(forceEntity) {
       console.log("forceEntity", forceEntity);
       this.forceEntity = forceEntity;
-      if (!forceEntity._NODEID_.includes("事件")) {
+      if (!forceEntity._NODEID_.includes("事件")&&!forceEntity._NODEID_.includes("老旧小区")) {
         this.showSide = true;
         this.buffer = null;
         this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
         this.$bus.$emit("cesium-3d-rtmpFetch-cb");
+      }else if(forceEntity._NODEID_.includes("老旧小区")){
+        this.isLJ = true;
       } else {
         this.showSide = false;
       }
@@ -224,7 +956,9 @@ export default {
     doAroundSourceAnalyse() {
       // this.showSide = false
       const { geometry } = this.forceEntity;
-      let type = this.forceEntity._NODEID_.includes("事件") ? 'event' : 'source'
+      let type = this.forceEntity._NODEID_.includes("事件")
+        ? "event"
+        : "source";
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
@@ -241,20 +975,414 @@ export default {
 
 <style lang="less" scoped>
 @import url("./aroundPeople.less");
+
+.table1 {
+  width: 14%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 0.2rem;
+  background-image: url(/static/images/mode-ico/tb.png);
+  background-size: 100% 100%;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: bold;
+  line-height: 20px;
+  color: #ffffff;
+  opacity: 1;
+}
+.table2 {
+  width: 42%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 0.2rem;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 1;
+}
+.table3 {
+  width: 42%;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 0.2rem;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 1;
+}
+table.hovertable {
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  color: #333333;
+  // border-width: 1px;
+  // border-color: #999999;
+  // border-collapse: collapse;
+  background-size: 100% 100%;
+  background-image: url(/static/images/mode-ico/bg@2x.png);
+}
+table.hovertable th {
+  // border-width: 1px;
+  // padding: 8px;
+  // border-style: solid;
+  // border-color: #a9c6c9;
+}
+table.hovertable tr {
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #4eda8e;
+  height: 4vh;
+}
+table.hovertable td {
+  // border-width: 1px;
+  // padding: 8px;
+  // border-style: solid;
+  // border-color: #a9c6c9;
+}
+.table-boxs {
+  margin-bottom: 0.3rem;
+  border-top: 0.01rem solid #0d5978;
+  border-left: 0.01rem solid #0d5978;
+  overflow: hidden;
+  &.no-line {
+    border-top: none;
+  }
+  .item1 {
+    position: relative;
+    float: left;
+    width: 50%;
+    .key1 {
+      color: #000000;
+      background: #f5f7fa;
+      width: 1.2rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #2c5a73;
+      font-size: 0.16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 0.05rem;
+    }
+    .value1 {
+      color: #000000;
+      width: 100%;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #024364;
+      padding: 0 0.1rem 0 1.3rem;
+      display: block;
+      font-size: 0.16rem;
+      font-weight: 400;
+      .no-wrap();
+    }
+  }
+  .item2 {
+    position: relative;
+    float: left;
+    width: 28%;
+    .key2 {
+      color: #000000;
+      background: #f5f7fa;
+      width: 1.2rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #2c5a73;
+      font-size: 0.16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 0.05rem;
+    }
+    .value2 {
+      color: rgb(0, 0, 0);
+      width: 2.1rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #024364;
+      padding: 0 0.1rem 0 1.3rem;
+      display: block;
+      font-size: 0.16rem;
+      font-weight: 400;
+      .no-wrap();
+    }
+  }
+  .item3 {
+    position: relative;
+    float: left;
+    width: 22%;
+    .key3 {
+      color: #000000;
+      background: #f5f7fa;
+      width: 1.2rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #2c5a73;
+      font-size: 0.16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 0.05rem;
+    }
+    .value3 {
+      color: rgb(0, 0, 0);
+      width: 1.48rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #024364;
+      padding: 0 0.1rem 0 0.3rem;
+      display: block;
+      font-size: 0.16rem;
+      font-weight: 400;
+      .no-wrap();
+    }
+  }
+  .item4 {
+    position: relative;
+    float: left;
+    width: 100%;
+    .key4 {
+      color: #000000;
+      background: #f5f7fa;
+      width: 1.2rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #2c5a73;
+      font-size: 0.16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 0.05rem;
+    }
+    .value4 {
+      color: rgb(0, 0, 0);
+      width: 6.73rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #024364;
+      padding: 0 0.1rem 0 1.3rem;
+      display: block;
+      font-size: 0.16rem;
+      font-weight: 400;
+      .no-wrap();
+    }
+  }
+  .item5 {
+    position: relative;
+    float: left;
+    width: 66%;
+    .key5 {
+      color: #000000;
+      background: #f5f7fa;
+      width: 1.2rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #2c5a73;
+      font-size: 0.16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 0.05rem;
+    }
+    .value5 {
+      color: #000000;
+      width: 100%;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #024364;
+      padding: 0 0.1rem 0 1.3rem;
+      display: block;
+      font-size: 0.16rem;
+      font-weight: 400;
+      .no-wrap();
+    }
+  }
+  .item6 {
+    position: relative;
+    float: left;
+    width: 33%;
+    .key6 {
+      color: #000000;
+      background: #f5f7fa;
+      width: 1.2rem;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      text-align: center;
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #2c5a73;
+      font-size: 0.16rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      padding: 0 0.05rem;
+    }
+    .value6 {
+      color: #000000;
+      width: 100%;
+      height: 0.32rem;
+      line-height: 0.32rem;
+      border-right: 0.01rem solid #024364;
+      border-bottom: 0.01rem solid #024364;
+      padding: 0 0.1rem 0 1.3rem;
+      display: block;
+      font-size: 0.16rem;
+      font-weight: 400;
+      .no-wrap();
+    }
+  }
+}
+.ljxqlabel {
+  background-image: url(/static/images/mode-ico/大框@2x.png);
+  background-size: 100% 100%;
+  height: 67vh;
+  position: fixed;
+  z-index: 99;
+  right: 10px;
+  top: 10vh;
+  width: 25vw;
+}
+
+ul li {
+  list-style: none;
+}
+
+#main {
+  height: 58vh;
+  overflow: auto;
+  margin-top: 3vh;
+  margin-left: 1vw;
+  position: relative;
+  margin-right: 1vw;
+}
+
+.snf-page {
+  height: 500px;
+  margin-bottom: 1vh;
+}
+
+.snf-page:nth-child(2n) {
+  background: #e1e1e1;
+}
+
+.btns {
+  position: fixed;
+  width: 1000px;
+  top: 0;
+  left: 50%;
+  margin-left: -500px;
+  text-align: center;
+  z-index: 10;
+}
+
+.btns a {
+  display: inline-block;
+}
+
+li {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  outline: 0;
+}
+#nav {
+  top: 20vh;
+  left: 20px;
+  margin-top: -140px;
+  display: inline-block;
+  vertical-align: middle;
+  z-index: 99;
+  position: fixed;
+}
+
+ul li {
+  list-style: none;
+}
+
+#nav a {
+  display: block;
+  position: relative;
+  width: 98px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  background-color: #eee;
+  color: #333;
+  border-left: 2px solid transparent;
+  cursor: pointer;
+}
+
+#nav a:hover {
+  width: 98px;
+  border-left: 2px solid #4b59ff;
+}
+
+#nav a p {
+  position: relative;
+  z-index: 3;
+}
+
+#nav a.active {
+  background-color: #4b59ff;
+  color: #fff;
+}
+
 #forcePopUp {
   .leaflet-popup {
-    top: 0;
+    top: -8vh;
     left: 0;
     position: absolute;
-    text-align: center;
+    background-image: url(/static/images/common/框.png);
+    background-size: 100% 100%;
   }
 
   .leaflet-popup-close-button {
     position: absolute;
-    top: 2vh;
-    right: 3vh;
+    top: 0.5vh;
+    right: 1vw;
     text-align: center;
-    width: 2vh;
+    width: 1vw;
     height: 2vh;
     font: 2.2vh/2vh Tahoma, Verdana, sans-serif;
     color: #fff;
@@ -265,30 +1393,30 @@ export default {
   }
 
   .leaflet-popup-content-wrapper {
-    background-image: url("/static/images/common/框.png");
-    background-size: 100% 100%;
-    text-align: center;
-    height: 27vh;
-    width: 30vh;
-    box-sizing: border-box;
-    padding: 3vh;
+    //text-align: center;
+    //height: 19vh;
+    width: 16vw;
+    //box-sizing: border-box;
+    //padding: 3vh;
+    padding-bottom: 4vh;
+    padding-left: 1vw;
     > .toubu {
-      height: 2.6vh;
-      line-height: 2.6vh;
+      height: 4vh;
+      line-height: 5vh;
       box-sizing: border-box;
-      padding-right: 2vh;
+      padding-right: 1vw;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
       font-size: 22px;
       font-family: YouSheBiaoTiHei;
       font-weight: 400;
-      line-height: 29px;
+      //line-height: 29px;
       color: #ffffff;
       opacity: 1;
     }
     > .zhongbu {
-      height: 70%;
+      //height: 70%;
       > .liebiao {
         font-size: 14px;
         font-family: PingFang SC;
@@ -308,11 +1436,12 @@ export default {
     font-size: 1.6vh;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 1vh 1vh;
+    padding: 1vh 0.5vw;
     color: white;
     display: inline-block;
     cursor: pointer;
     float: left;
+    margin: 1vh 0;
     background-size: 100% 100%;
   }
   .extra-tab_SP {

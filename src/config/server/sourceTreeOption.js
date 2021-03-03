@@ -973,6 +973,14 @@ const GCJSXM_TOPIC = [
       url: "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/JSGC_DJDM",
     }]
   },
+  {
+    label: "老旧小区",
+    componentEvent: "cesium-3d-ljxq",
+    componentKey: "3d2",
+    url: 'true',
+    type: 'model'
+  },
+
 ];
 
 const SZSJJC_TOPIC = [

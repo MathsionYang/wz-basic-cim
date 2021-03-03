@@ -1,5 +1,5 @@
 <template>
-  <div class="ThreeDContainer">
+  <div class="ThreeDContainer" v-drag>
     <div
       class="sightline tframe"
       style="background-color: rgba(5, 41, 110, 0.78)"
@@ -171,6 +171,35 @@ export default {
     sightlineClose() {
       this.sightlineClear();
       this.$bus.$emit("cesium-3d-maptool", { value: null });
+      this.$bus.$emit("cesium-3d-imgs", { value: "清除" });
+    },
+  },
+  directives: {
+    drag: {
+      // 指令的定义
+      bind: function (el) {
+        let odiv = el; //获取当前元素
+        el.onmousedown = (e) => {
+          //算出鼠标相对元素的位置
+          let disX = e.clientX - odiv.offsetLeft;
+          let disY = e.clientY - odiv.offsetTop;
+          let left = "";
+          let top = "";
+          document.onmousemove = (e) => {
+            //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
+            left = e.clientX - disX;
+            top = e.clientY - disY;
+            //绑定元素位置到positionX和positionY上面
+            //移动当前元素
+            odiv.style.left = left + "px";
+            odiv.style.top = top + "px";
+          };
+          document.onmouseup = (e) => {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      },
     },
   },
 };

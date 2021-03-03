@@ -42,16 +42,16 @@ export const mapMvtLayerInit = (name, url) => {
     window.earth.scene.addVectorTilesMap({ url, name, viewer: window.earth });
 }
 
-export const mapBJSWQLayerInit = (name,url) => {
+export const mapBJSWQLayerInit = (name,url,datanames) => {
     var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
     getFeatureParam = new SuperMap.REST.FilterParameter({
-      attributeFilter: "SMID=1",
+      attributeFilter: "SMID>0",
     });
     getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters(
       {
         queryParameter: getFeatureParam,
         toIndex: -1,
-        datasetNames: ["172.20.83.196_swdata:" + "cbd_region"],
+        datasetNames: [datanames],
       }
     );
     getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(
@@ -66,6 +66,7 @@ export const mapBJSWQLayerInit = (name,url) => {
     getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     function onQueryComplete(queryEventArgs) {
       var selectedFeatures = queryEventArgs.originResult.features;
+      console.log("1111",selectedFeatures);
       for (var i = 0; i < selectedFeatures.length; i++) {
         addFeature(selectedFeatures[i]);
       }
@@ -80,7 +81,8 @@ export const mapBJSWQLayerInit = (name,url) => {
       });
       return point3D;
     }
-    function addFeature(feature) {
+    function addFeature(feature,) {
+        console.log("faea",feature)
       var lonLatArr = getLonLatArray(feature.geometry.points);
       window.earth.entities.add({
         id: name,

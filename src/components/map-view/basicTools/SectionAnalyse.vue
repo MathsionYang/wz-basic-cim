@@ -7,15 +7,21 @@
  * @FilePath: \wzsjjt-bd-visual\src\components\map-view\basicTools\SectionAnalyse.vue
 -->
 <template>
-  <div class="ThreeDContainer" :style="{width:'400px'}">
+  <div class="ThreeDContainer" :style="{ width: '400px' }">
     <div class="sectionanalyse tframe">
       <el-form label-width="100px">
         <el-row>
           <el-col :span="24">
             <el-form-item label="剖面分析" class="elformbtns">
-              <el-button class="elformbtn" @click="startVisualize">开始</el-button>
-              <el-button class="elformbtn" @click="clearVisualize">清除</el-button>
-              <el-button class="elformbtn" @click="closeVisualize">关闭</el-button>
+              <el-button class="elformbtn" @click="startVisualize"
+                >开始</el-button
+              >
+              <el-button class="elformbtn" @click="clearVisualize"
+                >清除</el-button
+              >
+              <el-button class="elformbtn" @click="closeVisualize"
+                >关闭</el-button
+              >
             </el-form-item>
           </el-col>
         </el-row>
@@ -38,7 +44,7 @@ export default {
     handler: undefined,
     profile: undefined,
     tooltip: undefined,
-    viewer: undefined
+    viewer: undefined,
   },
   created() {
     this.viewer = window.earth;
@@ -55,7 +61,7 @@ export default {
   },
   beforeDestroy() {
     this.handlerLine.destroy();
-    this.handler.destroy()
+    this.handler.destroy();
     this.profile = undefined;
     this.tooltip = undefined;
     this.viewer = undefined;
@@ -65,26 +71,24 @@ export default {
     //  事件绑定
     eventRegsiter() {
       const that = this;
-      that.handlerLine.activeEvt.addEventListener(function(isActive) {
+      that.handlerLine.activeEvt.addEventListener(function (isActive) {
         if (isActive == true) {
           that.viewer.enableCursorStyle = false;
           that.viewer._element.style.cursor = "";
-          $("body")
-            .removeClass("drawCur")
-            .addClass("drawCur");
+          $("body").removeClass("drawCur").addClass("drawCur");
         } else {
           that.viewer.enableCursorStyle = true;
           $("body").removeClass("drawCur");
         }
       });
-      that.handlerLine.movingEvt.addEventListener(function(windowPosition) {
+      that.handlerLine.movingEvt.addEventListener(function (windowPosition) {
         if (that.handlerLine.isDrawing) {
           that.tooltip.showAt(windowPosition, "<p>右键单击结束绘制</p>");
         } else {
           that.tooltip.showAt(windowPosition, "<p>点击绘制第一个点</p>");
         }
       });
-      that.handlerLine.drawEvt.addEventListener(function(result) {
+      that.handlerLine.drawEvt.addEventListener(function (result) {
         that.tooltip.setVisible(false);
         var line = result.object;
         var startPoint = line._positions[0];
@@ -105,7 +109,7 @@ export default {
         that.profile.extendHeight = 40;
 
         //分析完毕的回调函数
-        that.profile.getBuffer(function(buffer) {
+        that.profile.getBuffer(function (buffer) {
           var canvas = document.getElementById("pro");
           canvas.height = that.profile._textureHeight;
           canvas.width = that.profile._textureWidth;
@@ -134,7 +138,7 @@ export default {
       } else {
         that.handlerLine.activate();
         //由于剖面分析只能绘制直线，此处绘制时单击两次就触发结束事件
-        that.handler.setInputAction(function(e) {
+        that.handler.setInputAction(function (e) {
           if (that.handlerLine.polyline._actualPositions.length == 2) {
             var result = {};
             result.object = that.handlerLine.polyline;
@@ -151,13 +155,14 @@ export default {
     closeVisualize() {
       this.clearVisualize();
       this.$bus.$emit("cesium-3d-maptool", { value: null });
+      this.$bus.$emit("cesium-3d-imgs", { value: "清除" });
     },
     //  清除分析结果
     clearVisualize() {
       this.handlerLine && this.handlerLine.clear();
     },
     createTooltip(frameDiv) {
-      var tooltip = function(frameDiv) {
+      var tooltip = function (frameDiv) {
         var div = document.createElement("DIV");
         div.className = "twipsy right";
         var arrow = document.createElement("DIV");
@@ -172,14 +177,14 @@ export default {
         // add to frame div and display coordinates
         frameDiv.appendChild(div);
         var that = this;
-        div.onmousemove = function(evt) {
+        div.onmousemove = function (evt) {
           that.showAt({ x: evt.clientX, y: evt.clientY }, that.message);
         };
       };
-      tooltip.prototype.setVisible = function(visible) {
+      tooltip.prototype.setVisible = function (visible) {
         this._div.style.display = visible ? "block" : "none";
       };
-      tooltip.prototype.showAt = function(position, message) {
+      tooltip.prototype.showAt = function (position, message) {
         if (position && message) {
           this.setVisible(true);
           this._title.innerHTML = message;
@@ -189,7 +194,7 @@ export default {
         }
       };
       return new tooltip(frameDiv);
-    }
-  }
+    },
+  },
 };
 </script>
