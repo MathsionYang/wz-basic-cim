@@ -1,6 +1,7 @@
 import { getIserverFields } from "api/iServerAPI";
 const _COLLECTION_KEY_ = "eventAround";
-const _ENTITY_ID_ = "aroundSourceAnalyseCircle";
+// const _ENTITY_ID_ = "aroundSourceAnalyseCircle";
+
 /**
  * 地图画点
  * @param {*} param0 
@@ -46,6 +47,7 @@ export const aroundSourceAnalyseDraw = ({ key, list, title, dataset }) => {
  * @param {*} distance 
  */
 export const aroundSourceAnalyseCircle = (lng, lat, distance) => {
+    const datasource = window.earth.dataSources.getByName("around")[0];
     const circleEntity = new Cesium.Entity({
         position: Cesium.Cartesian3.fromDegrees(lng, lat, 0),
         ellipse: {
@@ -57,10 +59,16 @@ export const aroundSourceAnalyseCircle = (lng, lat, distance) => {
             outlineWidth: 3,
             outlineColor: Cesium.Color.WHITE,
         },
-        name: _ENTITY_ID_,
-        id: _ENTITY_ID_,
+        // name: _ENTITY_ID_,
+        // id: _ENTITY_ID_,
     });
-    window.earth.entities.add(circleEntity);
+    // window.earth.entities.add(circleEntity);
+    datasource.entities.add(circleEntity);
+}
+
+export const removeAroundSourceAnalyseCircle = () => {
+    const datasource = window.earth.dataSources.getByName("around")[0];
+    datasource.entities.removeAll();
 }
 
 /**
@@ -69,7 +77,7 @@ export const aroundSourceAnalyseCircle = (lng, lat, distance) => {
 */
 export const initPrimitivesCollection = (key) => {
     //  去圆 重复去
-    window.earth.entities.removeById(_ENTITY_ID_);
+    // window.earth.entities.removeById(_ENTITY_ID_);
     const KEY = `${_COLLECTION_KEY_}_${key}`;
     //  若选择的图层存在，清点，清图层
     if (window.billboardMap[KEY]) {
@@ -87,7 +95,7 @@ export const initPrimitivesCollection = (key) => {
 
 //  隐藏资源周边分析
 export const hideVisible = (node) => {
-    window.earth.entities.removeById(_ENTITY_ID_);
+    // window.earth.entities.removeById(_ENTITY_ID_);
     if (node.icon && window.billboardMap[node.id]) {
         window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
         window.labelMap[node.id].setAllLabelsVisible(false);

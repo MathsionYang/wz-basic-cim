@@ -1413,7 +1413,6 @@ export const CESIUM_TREE_AROUND_ANALYSE_OPTION = {
       ...v,
       id: v.label,
       icon: v.label,
-      url: SERVER_DEFAULT_DATA,
       newdataset: `${v.dataname}${v.dataset}`
     };
   })
