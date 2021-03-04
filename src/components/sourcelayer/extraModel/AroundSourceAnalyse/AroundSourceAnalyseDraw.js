@@ -64,11 +64,28 @@ export const aroundSourceAnalyseCircle = (lng, lat, distance) => {
     });
     // window.earth.entities.add(circleEntity);
     datasource.entities.add(circleEntity);
+
+    window.labelMap["pathRoute_analyse_labels"].add({
+        // id: "pathRoute_analyse_center",
+        text: distance.toFixed(2) + ' 米',
+        fillColor: Cesium.Color.WHITE,
+        outlineColor: Cesium.Color.BLACK,
+        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+        font: "10px",
+        scale: 1,
+        outlineWidth: 4,
+        showBackground: true,
+        backgroundColor: Cesium.Color(0.165, 0.165, 0.165, 0.1),
+        pixelOffset: new Cesium.Cartesian2(0, -30),
+        disableDepthTestDistance: Number.POSITIVE_INFINITY,
+        position: Cesium.Cartesian3.fromDegrees(lng+(distance/100000), lat, 20),
+    });
 }
 
 export const removeAroundSourceAnalyseCircle = () => {
     const datasource = window.earth.dataSources.getByName("around")[0];
     datasource.entities.removeAll();
+    window.labelMap["pathRoute_analyse_labels"].removeAll();
 }
 
 /**

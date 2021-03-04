@@ -159,10 +159,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0.8vh 0;
+            padding: 0.8vh;
             color: #fff;
             .single-location {
-                margin: 0 10px;
                 width: 20px;
             }
             .index {
@@ -171,7 +170,7 @@
                 text-align: center;
             }
             .name {
-                flex: 6;
+                flex: 4;
                 padding: 0 5px;
                 overflow: hidden;
                 white-space: nowrap;
@@ -185,6 +184,9 @@
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
+            }
+            .navigate {
+                cursor: pointer;
             }
             &:nth-child(even) {
                 background-color: rgba(42, 203, 264, 0.15);

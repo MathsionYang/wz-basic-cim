@@ -64,7 +64,6 @@
         class="around-source-list-item"
         v-for="(item, index) in selectedSourceObj.list"
         :key="index"
-        @click="navigate(item, forceEntity.type)"
       >
         <!-- <img
           class="single-location"
@@ -77,6 +76,7 @@
             : item.resourceName
         }}</span>
         <span class="single-distance">{{ (+item.distance).toFixed(2) }}米</span>
+        <span class="navigate" @click="navigate(item, forceEntity.type)">导航</span>
       </li>
       <p class="no-data" v-if="!selectedSourceObj.list.length">暂无数据</p>
     </ul>
@@ -305,6 +305,9 @@ export default {
         "around"
       );
       window.earth.dataSources.add(AroundCircleEntityCollection);
+      window.labelMap["pathRoute_analyse_labels"] = window.earth.scene.primitives.add(
+        new Cesium.LabelCollection()
+      );
       const lng = this.forceEntity.geometry.x;
       const lat = this.forceEntity.geometry.y;
       aroundSourceAnalyseCircle(lng, lat, 250);
