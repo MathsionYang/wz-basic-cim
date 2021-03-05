@@ -1,34 +1,23 @@
 <template>
-  <div>
-    <div class="ThreeDContainer geology-analyse" :style="{ width: '300px' }">
-      <div>透明度：{{ aValue }}%</div>
-      <div class="slider-wrapper" @click.stop>
-        <el-slider
-          @change="change_Alpha_Value"
-          :min="aMin"
-          :max="aMax"
-          v-model="aValue"
-        ></el-slider>
-      </div>
-    </div>
-    <div class="legend-popup"
-      :style="{
-        transform: `translate3d(${forcePosition.x}px,${forcePosition.y}px, 0)`,
-      }"
-    >
-      <img src="/static/images/common/地质体图例.png" />
+  <div class="ThreeDContainer dxkj-analyse" :style="{ width: '300px' }">
+    <div>透明度：{{ aValue }}%</div>
+    <div class="slider-wrapper" @click.stop>
+      <el-slider
+        @change="change_Alpha_Value"
+        :min="aMin"
+        :max="aMax"
+        v-model="aValue"
+      ></el-slider>
     </div>
   </div>
 </template>
 <script>
 import { mapActions } from "vuex";
 import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
-const _ABOVEGROUND_HASH_ = {
+const _ABOVEGROUND1_HASH_ = {
   B2土建: "给水管线",
   B1土建: "B1土建_table",
-};
-const _GEOLOGY_HASH_ = {
-  CIM_Geology: "地质体",
+  Roof: "Roof_table",
 };
 export default {
   name: "Dxkj",
@@ -38,38 +27,31 @@ export default {
       aMin: 0,
       aMax: 100,
       aValue: 75,
-      position: Cesium.Cartesian3.fromDegrees(120.7281, 28.0100, 4),
-      forcePosition: {}
     };
   },
   async mounted() {
     this.$parent.$refs.roadline.doPolylineTrailVisible(false)
-    this.initBimScene();
+    this.initScene();
     this.cameraMove();
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
     this.$parent.$refs.roadline.doPolylineTrailVisible(true)
     this.change_Alpha_Value(0);
-    this.doCivilizationCenterVisible(_GEOLOGY_HASH_, false);
-    // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+    this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, false);
   },
   methods: {
     ...mapActions("map", []),
-    //  初始化BIM场景
-    initBimScene() {
-      if (window.extraHash.geology) {
-        this.doCivilizationCenterVisible(_GEOLOGY_HASH_, true);
-        // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, true);
+    //  场景初始化
+    initScene() {
+      if (window.extraHash.dxkj) {
+        this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, true);
       } else {
         const {
-          GEOLOGY,
-          // ABOVEGROUND,
-          // ABOVEGROUND_DATA,
-          GEOLOGY_DATA,
+          ABOVEGROUND1,
+          ABOVEGROUND_DATA1
         } = CIVILIZATION_CENTER_URL;
-        this.doGroundInit(_GEOLOGY_HASH_, GEOLOGY, GEOLOGY_DATA);
-        // this.doGroundInit(_ABOVEGROUND_HASH_, ABOVEGROUND, ABOVEGROUND_DATA);
+        this.doGroundInit(_ABOVEGROUND1_HASH_, ABOVEGROUND1, ABOVEGROUND_DATA1);
       }
     },
     /**
@@ -102,12 +84,12 @@ export default {
                   }),
             });
             layer.datasetInfo().then((result) => {
-              console.log('result', result)
+              // console.log('result', result)
             })
           });
         }
         //  做全局标识，不保存图层指针了
-        window.extraHash.geology = true;
+        window.extraHash.dxkj = true;
       });
     },
     /**
@@ -128,9 +110,9 @@ export default {
     cameraMove() {
       window.earth.camera.flyTo({
         destination: {
-          x: -2877358.4295731103,
-          y: 4841134.134246617,
-          z: 2994874.2246890087,
+          x: -2876906.002533756,
+          y: 4841075.198844643,
+          z: 2995213.4453336787,
         },
         orientation: {
           heading: 0.003336768850279448,
@@ -140,24 +122,12 @@ export default {
         maximumHeight: 450,
       });
     },
-    renderForceEntity() {
-      const pointToWindow = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
-        window.earth.scene,
-        this.position
-      );
-      if (
-        this.forcePosition.x !== pointToWindow.x ||
-        this.forcePosition.y !== pointToWindow.y
-      ) {
-        this.forcePosition = pointToWindow;
-      }
-    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.geology-analyse {
+.dxkj-analyse {
   z-index: 7;
   position: absolute;
   left: 26vw;
@@ -181,11 +151,5 @@ export default {
       flex: 1;
     }
   }
-}
-.legend-popup {
-  top: 5vh;
-  left: 0;
-  position: absolute;
-  z-index: 2;
 }
 </style>

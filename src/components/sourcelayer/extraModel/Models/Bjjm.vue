@@ -10,7 +10,7 @@ const LAYERS = [{ name: "BJJM", url: ExtraSourceURL.BJJM }];
 export default {
   name: "BjjmModels",
   async mounted() {
-    this.initBimScene();
+    // this.initBimScene();
     this.eventRegsiter();
     this.cameraMove();
   },

@@ -515,6 +515,33 @@ export default {
           }
         }
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
+
+      // 监听鼠标滚轮事件
+      handler.setInputAction((wheelment) => {
+        let cameraHeight = window.earth.camera.positionCartographic.height;
+        //  很近时关闭气泡框,避免卡死
+        if (cameraHeight <= 100) {
+          if (this.$refs.medicalPopup) {
+            this.$refs.medicalPopup.closePopup();
+          }
+          if (this.$refs.bayonetPopup) {
+            this.$refs.bayonetPopup.closePopup();
+          }
+          if (this.$refs.LjxqPopup) {
+            this.$refs.LjxqPopup.closePopup();
+          }
+          if (this.$refs.stationPopup) {
+            this.$refs.stationPopup.closePopup();
+          }
+          if (this.$refs.tourPointPopup) {
+            this.$refs.tourPointPopup.closePopup();
+          }
+          if (this.$refs.detailPopup) {
+            this.$refs.detailPopup.closePopup();
+          }
+        }
+      }, Cesium.ScreenSpaceEventType.WHEEL);
+
       // 模型点击事件
       window.earth.pickEvent.addEventListener((feature) => {
         const _data_ = Object.keys(feature).map((k) => {

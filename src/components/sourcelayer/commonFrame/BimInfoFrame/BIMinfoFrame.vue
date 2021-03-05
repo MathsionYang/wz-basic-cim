@@ -21,8 +21,8 @@
         :key="index"
         v-show="item"
       >
-        <span class="key" :title="key">{{ item.k }}</span>
-        <span class="value" :title="item">{{ item.v }}</span>
+        <span class="key" :title="item.k">{{ item.k }}</span>
+        <span class="value" :title="item.v">{{ item.v }}</span>
       </li>
     </ul>
   </div>

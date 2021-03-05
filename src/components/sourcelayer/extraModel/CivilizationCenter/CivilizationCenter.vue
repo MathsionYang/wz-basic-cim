@@ -19,8 +19,6 @@
                     show-checkbox
                     node-key="id"
                     ref="tree"
-                    :default-expanded-keys="['all']"
-                    :default-checked-keys="['all']"
                     @check-change="treeHandler"
                   />
                 </div>
@@ -37,6 +35,9 @@
 </template>
 
 <script>
+import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
+import { mapActions } from "vuex";
+
 const _UNDERGROUND_HASH_ = {
   RQLINE: "燃气管线",
   WSLINE: "污水管线",
@@ -52,46 +53,46 @@ const _ABOVEGROUND1_HASH_ = {
   // Block: "citizens_table",
 };
 const _ABOVEGROUND2_HASH_ = {
-  AS_1F_1206: "AS_1F_1206",
-  AS_2F_1206: "AS_2F_1206",
-  AS_3F_1206: "AS_3F_1206",
-  AS_4F_1206: "AS_4F_1206",
-  AS_5F_1206: "AS_5F_1206",
-  AS_6F_1206: "AS_6F_1206",
-  AS_7F_1206: "AS_7F_1206",
-  AS_8F_1206: "AS_8F_1206",
-  AS_9F_1206: "AS_9F_1206",
-  AS_10F_1206: "AS_10F_1206",
-  AS_11F_1206: "AS_11F_1206",
-  AS_12F_1206: "AS_12F_1206",
-  AS_13F_1206: "AS_13F_1206",
-  AS_14F_1206: "AS_14F_1206",
-  AS_15F_1206: "AS_15F_1206",
-  AS_16F_1206: "AS_16F_1206",
-  AS_17F_1206: "AS_17F_1206",
-  AS_WD_1206: "AS_WD_1206",
+  第1层: "AS_1F_1206",
+  第2层: "AS_2F_1206",
+  第3层: "AS_3F_1206",
+  第4层: "AS_4F_1206",
+  第5层: "AS_5F_1206",
+  第6层: "AS_6F_1206",
+  第7层: "AS_7F_1206",
+  第8层: "AS_8F_1206",
+  第9层: "AS_9F_1206",
+  第10层: "AS_10F_1206",
+  第11层: "AS_11F_1206",
+  第12层: "AS_12F_1206",
+  第13层: "AS_13F_1206",
+  第14层: "AS_14F_1206",
+  第15层: "AS_15F_1206",
+  第16层: "AS_16F_1206",
+  第17层: "AS_17F_1206",
+  屋顶: "AS_WD_1206",
   
 };
 const _ABOVEGROUND3_HASH_ = {
-  AS_1F_1204: "AS_1F_1204",
-  AS_2F_1204: "AS_2F_1204",
-  AS_3F_1204: "AS_3F_1204",
-  AS_4F_1204: "AS_4F_1204",
-  AS_5F_1204: "AS_5F_1204",
-  AS_6F_1204: "AS_6F_1204",
-  AS_7F_1204: "AS_7F_1204",
-  AS_8F_1204: "AS_8F_1204",
-  AS_9F_1204: "AS_9F_1204",
-  AS_10F_1204: "AS_10F_1204",
-  AS_11F_1204: "AS_11F_1204",
-  AS_12F_1204: "AS_12F_1204",
-  AS_13F_1204: "AS_13F_1204",
-  AS_14F_1204: "AS_14F_1204",
-  AS_15F_1204: "AS_15F_1204",
-  AS_16F_1204: "AS_16F_1204",
-  AS_17F_1204: "AS_17F_1204",
-  AS_WD_1204: "AS_WD_1204",
-  AS_WALL_1204:"AS_WALL_1204",
+  第1层: "AS_1F_1204",
+  第2层: "AS_2F_1204",
+  第3层: "AS_3F_1204",
+  第4层: "AS_4F_1204",
+  第5层: "AS_5F_1204",
+  第6层: "AS_6F_1204",
+  第7层: "AS_7F_1204",
+  第8层: "AS_8F_1204",
+  第9层: "AS_9F_1204",
+  第10层: "AS_10F_1204",
+  第11层: "AS_11F_1204",
+  第12层: "AS_12F_1204",
+  第13层: "AS_13F_1204",
+  第14层: "AS_14F_1204",
+  第15层: "AS_15F_1204",
+  第16层: "AS_16F_1204",
+  第17层: "AS_17F_1204",
+  屋顶: "AS_WD_1204",
+  墙:"AS_WALL_1204",
 };
 const _AS1206LAYERS_HASH_ = {
   第1层:
@@ -168,19 +169,22 @@ const _AS1204LAYERS_HASH_ = {
     "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_17F_1204/config",
   屋顶:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_WD_1204/config",
+  墙:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb10/rest/realspace/datas/AS_WALL_1204/config"
 };
-import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
-import { mapActions } from "vuex";
+
 export default {
   name: "CivilizationCenter",
   data() {
     return {
       BimTreeData: [
         {
+          id: "AS1206",
           label: "土建1206地块楼层控制",
           children: [],
         },
         {
+          id: "AS1204",
           label: "土建1204地块楼层控制",
           children: [],
         },
@@ -195,8 +199,8 @@ export default {
     //  透明度
     this.change_Alpha_Value(0);
     //  图层开关
-    this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
-    this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, false);
+    // this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
+    // this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, false);
     this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, false);
     this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, false);
     // 清空树
@@ -209,8 +213,8 @@ export default {
      */
     initScene() {
       if (window.extraHash.civilization) {
-        this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, true);
-        this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, true);
+        // this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, true);
+        // this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, true);
         this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, true);
         this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, true);
       } else {
@@ -224,8 +228,8 @@ export default {
           ABOVEGROUND_DATA2,
           ABOVEGROUND_DATA3,
         } = CIVILIZATION_CENTER_URL;
-        this.doGroundInit(_UNDERGROUND_HASH_, UNDERGROUND, UNDERGROUND_DATA);
-        this.doGroundInit(_ABOVEGROUND1_HASH_, ABOVEGROUND1, ABOVEGROUND_DATA1);
+        // this.doGroundInit(_UNDERGROUND_HASH_, UNDERGROUND, UNDERGROUND_DATA);
+        // this.doGroundInit(_ABOVEGROUND1_HASH_, ABOVEGROUND1, ABOVEGROUND_DATA1);
         this.doGroundInit(_ABOVEGROUND2_HASH_, ABOVEGROUND2, ABOVEGROUND_DATA2);
         this.doGroundInit(_ABOVEGROUND3_HASH_, ABOVEGROUND3, ABOVEGROUND_DATA3);
       }
@@ -239,9 +243,14 @@ export default {
      */
     doGroundInit(_HASH_, _SCENE_URL_, _DATA_) {
       Object.keys(_HASH_).map((key) => {
-        const _KEY_ = `civilization_center_${key}`;
+        let _KEY_
+        if (~_HASH_[key].indexOf("1206")) {
+          _KEY_ = `civilization_center_AS1206${key}`;
+        } else {
+          _KEY_ = `civilization_center_AS1204${key}`;
+        }
         const promise = window.earth.scene.addS3MTilesLayerByScp(
-          `${_SCENE_URL_}/datas/${key}/config`,
+          `${_SCENE_URL_}/datas/${_HASH_[key]}/config`,
           { name: _KEY_ }
         );
         if (_DATA_) {
@@ -262,7 +271,7 @@ export default {
                   }),
             });
             layer.datasetInfo().then((result) => {
-              console.log('result', result)
+              // console.log('result', result)
             })
           });
         }
@@ -277,7 +286,12 @@ export default {
      */
     doCivilizationCenterVisible(_HASH_, boolean) {
       Object.keys(_HASH_).map((key) => {
-        const _KEY_ = `civilization_center_${key}`;
+        let _KEY_
+        if (~_HASH_[key].indexOf("1206")) {
+          _KEY_ = `civilization_center_AS1206${key}`;
+        } else {
+          _KEY_ = `civilization_center_AS1204${key}`;
+        }
         const layer = window.earth.scene.layers.find(_KEY_);
         layer.visible = boolean;
       });
@@ -304,29 +318,24 @@ export default {
 
     getTreeData() {
       let floorsA = [];
-      for (let i = 1; i < 18; i++) {
-        floorsA.push({
-          label: `第${i}层`,
-          id: `AS1206_${i}`,
-        });
-      }
-      floorsA.push({
-        label: "屋顶",
-        id: "AS1206_WD",
-      });
       let floorsB = [];
-      for (let i = 1; i < 18; i++) {
+      Object.keys(_AS1206LAYERS_HASH_).map((key) => {
+        floorsA.push({
+          label: key,
+          id: `AS1206_${key}`,
+        })
+      })
+      Object.keys(_AS1204LAYERS_HASH_).map((key) => {
         floorsB.push({
-          label: `第${i}层`,
-          id: `AS1204_${i}`,
-        });
-      }
-      floorsB.push({
-        label: "屋顶",
-        id: "AS1204_WD",
-      });
+          label: key,
+          id: `AS1204_${key}`,
+        })
+      })
       this.BimTreeData[0].children = floorsA;
       this.BimTreeData[1].children = floorsB;
+      this.$nextTick(() => {
+        this.$refs.tree.setCheckedKeys(['AS1206', 'AS1204']);
+      })
     },
 
     treeHandler(node, checked) {
@@ -334,30 +343,28 @@ export default {
       console.log("checked", checked);
       let _KEY_;
       let layerUrl;
-      if (!node.id) {
-        return
-      }
-      if (~node.id.indexOf("AS1206_")) {
-        _KEY_ = `AS1206${node.label}`;
-        layerUrl = _AS1206LAYERS_HASH_[node.label];
-      }
-      if (~node.id.indexOf("AS1204_")) {
-        _KEY_ = `AS1204${node.label}`;
-        layerUrl = _AS1204LAYERS_HASH_[node.label];
-      }
-      const layer = window.earth.scene.layers.find(_KEY_);
-      if (checked) {
-        console.log(node.label);
-        this.doCivilizationCenterVisible(_ABOVEGROUND2_HASH_, false);
-        this.doCivilizationCenterVisible(_ABOVEGROUND3_HASH_, false);
-        if (layer) {
-          layer.visible = true;
+      if (!node.children) {
+        if (~node.id.indexOf("AS1206_")) {
+          _KEY_ = `civilization_center_AS1206${node.label}`;
+          layerUrl = _AS1206LAYERS_HASH_[node.label];
+        }
+        if (~node.id.indexOf("AS1204_")) {
+          _KEY_ = `civilization_center_AS1204${node.label}`;
+          layerUrl = _AS1204LAYERS_HASH_[node.label];
+        }
+        const layer = window.earth.scene.layers.find(_KEY_);
+        if (checked) {
+          if (layer) {
+            layer.visible = true;
+          } else {
+            window.earth.scene.addS3MTilesLayerByScp(layerUrl, { name: _KEY_ });
+          }
         } else {
-          window.earth.scene.addS3MTilesLayerByScp(layerUrl, { name: _KEY_ });
+          layer && (layer.visible = false);
+          return;
         }
       } else {
-        layer && (layer.visible = false);
-        return;
+
       }
     },
 
