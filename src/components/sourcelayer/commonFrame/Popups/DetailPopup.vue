@@ -7,10 +7,11 @@
  * @FilePath: \wz-city-culture-tour\src\components\sourcelayer\commonFrame\DetailPopup\DetailPopup.vue
 -->
 <template>
-  <div id="forcePopUp" v-show="forcePosition.x && forcePosition.y">
+  <div id="forcePopUp">
     <div
       id="forcePopUpContent"
       class="leaflet-popup"
+      v-show="forcePosition.x && forcePosition.y"
       :style="{
         transform: `translate3d(${forcePosition.x}px,${forcePosition.y}px, 0)`,
       }"
@@ -114,214 +115,217 @@
     <div class="extra-frame" v-if="isFrame">
       <span @click="isFrame = false">X</span><iframe :src="isFrame" />
     </div>
-
-    <div class="ljxqlabels" v-if="isld">
-      <div class="closes"></div>
-      <div id="mains">
-        <div class="snf-pages">
-          <div class="titles">建筑基本信息</div>
+    <div class="container" v-if="isld">
+      <div class="fhj" @click="fh"></div>
+      <div class="closes" @click="closePopup"></div>
+      <div class="ljxqlabel">
+        <div id="mains">
+          <div class="titles">小区楼栋基本信息</div>
           <div class="decorates"></div>
-          <table class="hovertable">
-            <tr>
-              <td class="table1">楼幢名称</td>
-              <td class="table2" colspan="3">蒲鞋市新村59号楼</td>
-            </tr>
+          <div class="snf-pages">
+            <div class="titless">建筑基本信息</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table1">楼幢名称</td>
+                <td class="table2" colspan="3">蒲鞋市新村59号楼</td>
+              </tr>
 
-            <tr>
-              <td class="table1">性质</td>
-              <td class="table3">{{ forceEntity.fix_data["性质"] }}</td>
-              <td class="table1">面积</td>
-              <td class="table3">1000平方米</td>
-            </tr>
-            <tr>
-              <td class="table1">住宅</td>
-              <td class="table3">{{ forceEntity.fix_data["住宅"] }}</td>
-              <td class="table1">商业</td>
-              <td class="table3">{{ forceEntity.fix_data["商业"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">建成时间</td>
-              <td class="table3">{{ forceEntity.fix_data["建成时间"] }}</td>
-              <td class="table1">层数</td>
-              <td class="table3">{{ forceEntity.fix_data["层数"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">结构形式</td>
-              <td class="table3">{{ forceEntity.fix_data["结构形式"] }}</td>
-              <td class="table1">产权归属</td>
-              <td class="table3">{{ forceEntity.fix_data["产权归属"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">需要拆改</td>
-              <td class="table3">否</td>
-              <td class="table1">拆改形式</td>
-              <td class="table3">无</td>
-            </tr>
+              <tr>
+                <td class="table1">性质</td>
+                <td class="table3">{{ forceEntity.fix_data["性质"] }}</td>
+                <td class="table1">面积</td>
+                <td class="table3">1000平方米</td>
+              </tr>
+              <tr>
+                <td class="table1">住宅</td>
+                <td class="table3">{{ forceEntity.fix_data["住宅"] }}</td>
+                <td class="table1">商业</td>
+                <td class="table3">{{ forceEntity.fix_data["商业"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">建成时间</td>
+                <td class="table3">{{ forceEntity.fix_data["建成时间"] }}</td>
+                <td class="table1">层数</td>
+                <td class="table3">{{ forceEntity.fix_data["层数"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">结构形式</td>
+                <td class="table3">{{ forceEntity.fix_data["结构形式"] }}</td>
+                <td class="table1">产权归属</td>
+                <td class="table3">{{ forceEntity.fix_data["产权归属"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">需要拆改</td>
+                <td class="table3">否</td>
+                <td class="table1">拆改形式</td>
+                <td class="table3">无</td>
+              </tr>
 
-            <tr>
-              <td class="table1">是否有加装电梯</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["否有加装电梯"] }}
-              </td>
-              <td class="table1">是否有平改坡</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["是否有平改坡"] }}
-              </td>
-            </tr>
-            <tr>
-              <td class="table1">违章情况</td>
-              <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
-              <td class="table1">有否单元门</td>
-              <td class="table3">有</td>
-            </tr>
-            <tr>
-              <td class="table1">雨棚</td>
-              <td class="table3">5</td>
-              <td class="table1">窗罩</td>
-              <td class="table3">7</td>
-            </tr>
-            <tr>
-              <td class="table1">空调机位置</td>
-              <td class="table3">窗台下</td>
-              <td class="table1">可再生能源使用</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["可再生能源使用"] }}
-              </td>
-            </tr>
-          </table>
-          <div class="titles">改造调查情况</div>
-          <div class="decorates"></div>
-          <table class="hovertable">
-            <tr>
-              <td class="table1">小区是否存在存量房</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["小区是否存在存量房"] }}
-              </td>
-              <td class="table1">是否有闲置车棚车库</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["是否有闲置车棚车库"] }}
-              </td>
-            </tr>
+              <tr>
+                <td class="table1">是否有加装电梯</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["否有加装电梯"] }}
+                </td>
+                <td class="table1">是否有平改坡</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有平改坡"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">违章情况</td>
+                <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
+                <td class="table1">有否单元门</td>
+                <td class="table3">有</td>
+              </tr>
+              <tr>
+                <td class="table1">雨棚</td>
+                <td class="table3">5</td>
+                <td class="table1">窗罩</td>
+                <td class="table3">7</td>
+              </tr>
+              <tr>
+                <td class="table1">空调机位置</td>
+                <td class="table3">窗台下</td>
+                <td class="table1">可再生能源使用</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["可再生能源使用"] }}
+                </td>
+              </tr>
+            </table>
+            <div class="titles">改造调查情况</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table1">小区是否存在存量房</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["小区是否存在存量房"] }}
+                </td>
+                <td class="table1">是否有闲置车棚车库</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有闲置车棚车库"] }}
+                </td>
+              </tr>
 
-            <tr>
-              <td class="table1">其他配套</td>
-              <td class="table3">{{ forceEntity.fix_data["其他配套"] }}</td>
-              <td class="table1">是否有物业</td>
-              <td class="table3">{{ forceEntity.fix_data["是否有物业"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">是否经过鉴定</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["是否经过鉴定"] }}
-              </td>
-              <td class="table1">是否有危房</td>
-              <td class="table3">{{ forceEntity.fix_data["是否有危房"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">是否需要拆除</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["是否需要拆除"] }}
-              </td>
-              <td class="table1">是否有加装电梯</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["是否有加装电梯"] }}
-              </td>
-            </tr>
-            <tr>
-              <td class="table1">是否有平改坡</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["是否有平改坡"] }}
-              </td>
-              <td class="table1">违章情况</td>
-              <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">是否有过综合整治</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["近是否有过综合整治"] }}
-              </td>
-              <td class="table1">住户数</td>
-              <td class="table3">{{ forceEntity.fix_data["住户数"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">年龄组成</td>
-              <td class="table3">{{ forceEntity.fix_data["年龄组成"] }}</td>
-              <td class="table1">居民改造意愿</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["居民改造意愿"] }}
-              </td>
-            </tr>
-            <tr>
-              <td class="table1">历史文化资源</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["历史文化资源"] }}
-              </td>
-              <td class="table1">小区特色</td>
-              <td class="table3">{{ forceEntity.fix_data["小区特色"] }}</td>
-            </tr>
-            <tr>
-              <td class="table1">机动车数量</td>
-              <td class="table3">{{ forceEntity.fix_data["机动车数量"] }}</td>
-              <td class="table1">非机动车数量</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["非机动车数量"] }}
-              </td>
-            </tr>
-            <tr>
-              <td class="table1">可再生能源使用</td>
-              <td class="table3">
-                {{ forceEntity.fix_data["可再生能源使用"] }}
-              </td>
-              <td class="table1"></td>
-              <td class="table3">{{ forceEntity.fix_data[""] }}</td>
-            </tr>
-          </table>
-        </div>
-        <div class="snf-pages">
-          <div class="titless">小区楼层信息</div>
-          <div class="decoratess"></div>
-          <table class="hovertable">
-            <tr>
-              <td class="table4">1F</td>
-              <td class="table4" @click="lcclick('2')">2F</td>
-              <td class="table4" @click="lcclick('3')">3F</td>
-              <td class="table4" @click="lcclick('4')">4F</td>
-            </tr>
-          </table>
-        </div>
-        <div class="snf-pages" v-if="lsdata != ''">
-          <div class="titless">小区楼室信息</div>
-          <div class="decoratess"></div>
-          <table class="hovertable">
-            <tr>
-              <td class="table4" @click="lsclick(lsdata + '01')">
-                {{ lsdata + "01" }}
-              </td>
-              <td class="table4" @click="lsclick(lsdata + '02')">
-                {{ lsdata + "02" }}
-              </td>
-              <td class="table4" @click="lsclick(lsdata + '03')">
-                {{ lsdata + "03" }}
-              </td>
-              <td class="table4" @click="lsclick(lsdata + '04')">
-                {{ lsdata + "04" }}
-              </td>
-            </tr>
-            <tr>
-              <td class="table4" @click="lsclick(lsdata + '05')">
-                {{ lsdata + "05" }}
-              </td>
-              <td class="table4" @click="lsclick(lsdata + '06')">
-                {{ lsdata + "06" }}
-              </td>
-              <td class="table4"></td>
-              <td class="table4"></td>
-            </tr>
-          </table>
+              <tr>
+                <td class="table1">其他配套</td>
+                <td class="table3">{{ forceEntity.fix_data["其他配套"] }}</td>
+                <td class="table1">是否有物业</td>
+                <td class="table3">{{ forceEntity.fix_data["是否有物业"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">是否经过鉴定</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否经过鉴定"] }}
+                </td>
+                <td class="table1">是否有危房</td>
+                <td class="table3">{{ forceEntity.fix_data["是否有危房"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">是否需要拆除</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否需要拆除"] }}
+                </td>
+                <td class="table1">是否有加装电梯</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有加装电梯"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">是否有平改坡</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有平改坡"] }}
+                </td>
+                <td class="table1">违章情况</td>
+                <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">是否有过综合整治</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["近是否有过综合整治"] }}
+                </td>
+                <td class="table1">住户数</td>
+                <td class="table3">{{ forceEntity.fix_data["住户数"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">年龄组成</td>
+                <td class="table3">{{ forceEntity.fix_data["年龄组成"] }}</td>
+                <td class="table1">居民改造意愿</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["居民改造意愿"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">历史文化资源</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["历史文化资源"] }}
+                </td>
+                <td class="table1">小区特色</td>
+                <td class="table3">{{ forceEntity.fix_data["小区特色"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">机动车数量</td>
+                <td class="table3">{{ forceEntity.fix_data["机动车数量"] }}</td>
+                <td class="table1">非机动车数量</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["非机动车数量"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">可再生能源使用</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["可再生能源使用"] }}
+                </td>
+                <td class="table1"></td>
+                <td class="table3">{{ forceEntity.fix_data[""] }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="snf-pages">
+            <div class="titless">小区楼层信息</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table4">1F</td>
+                <td class="table4" @click="lcclick('2')">2F</td>
+                <td class="table4" @click="lcclick('3')">3F</td>
+                <td class="table4" @click="lcclick('4')">4F</td>
+              </tr>
+            </table>
+          </div>
+          <div class="snf-pages" v-if="lsdata != ''">
+            <div class="titless">小区楼室信息</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table4" @click="lsclick(lsdata + '01')">
+                  {{ lsdata + "01" }}
+                </td>
+                <td class="table4" @click="lsclick(lsdata + '02')">
+                  {{ lsdata + "02" }}
+                </td>
+                <td class="table4" @click="lsclick(lsdata + '03')">
+                  {{ lsdata + "03" }}
+                </td>
+                <td class="table4" @click="lsclick(lsdata + '04')">
+                  {{ lsdata + "04" }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table4" @click="lsclick(lsdata + '05')">
+                  {{ lsdata + "05" }}
+                </td>
+                <td class="table4" @click="lsclick(lsdata + '06')">
+                  {{ lsdata + "06" }}
+                </td>
+                <td class="table4"></td>
+                <td class="table4"></td>
+              </tr>
+            </table>
+          </div>
         </div>
       </div>
     </div>
-
     <div class="container" v-if="isLJ">
       <div id="nav">
         <div class="snf-nav active"><span class="lqwz">小区基本信息</span></div>
@@ -329,7 +333,7 @@
         <div class="snf-nav"><span class="lqwz">市政基本信息</span></div>
         <div class="snf-nav"><span class="lqwz">景观绿化基本信息</span></div>
       </div>
-      <div class="closes"></div>
+      <div class="closes" @click="closePopup"></div>
       <div class="ljxqlabel">
         <div id="main">
           <div class="snf-page">
@@ -499,100 +503,130 @@
             </table>
           </div>
           <div class="snf-page">
+            <div class="titles">市政基本信息</div>
+            <div class="decorates"></div>
             <table class="hovertable">
               <tr>
-                <td class="table1">项目名称</td>
-                <td class="table2" colspan="3">
-                  温州市兴元建筑施工图审查咨询有限公司
+                <td class="table1">是否人车分流</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否人车分流"] }}
+                </td>
+                <td class="table1">道路交通标识和标线</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["道路交通标识和标线"] }}
+                </td>
+              </tr>
+
+              <tr>
+                <td class="table1">消防车、救护车可否通行</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["消防车、救护车可否通行"] }}
+                </td>
+                <td class="table1">路面材料</td>
+                <td class="table3">{{ forceEntity.fix_data["路面材料"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">破损情况</td>
+                <td class="table3">{{ forceEntity.fix_data["破损情况"] }}</td>
+                <td class="table1">地面停车位</td>
+                <td class="table3">{{ forceEntity.fix_data["地面停车位"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">地下停车位</td>
+                <td class="table3">{{ forceEntity.fix_data["地下停车位"] }}</td>
+                <td class="table1">电动车充电设施</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["电动车充电设施"] }}
                 </td>
               </tr>
               <tr>
-                <td class="table1">项目编号</td>
-                <td class="table3">温州市兴元建筑施工图审查咨询有限公司</td>
-                <td class="table1">施工许可证号</td>
-                <td class="table3">项目 1C</td>
-              </tr>
-
-              <tr>
-                <td class="table1">项目所在地</td>
-                <td class="table3">1783485486</td>
-                <td class="table1">工程类型</td>
-                <td class="table3">工程类型</td>
-              </tr>
-
-              <tr>
-                <td class="table1">工程用途</td>
-                <td class="table3">项目 1C</td>
-                <td class="table1">工程状态</td>
-                <td class="table3">1783485486</td>
-              </tr>
-
-              <tr>
-                <td class="table1">项目经理</td>
-                <td class="table3">项目经理</td>
-                <td class="table1">设计经理</td>
-                <td class="table3">项目 1C</td>
+                <td class="table1">雨污水排放</td>
+                <td class="table3">{{ forceEntity.fix_data["雨污水排放"] }}</td>
+                <td class="table1">井盖</td>
+                <td class="table3">{{ forceEntity.fix_data["井盖"] }}</td>
               </tr>
               <tr>
-                <td class="table1">施工经理</td>
-                <td class="table3">1783485486</td>
-                <td class="table1">发包形式</td>
-                <td class="table3">发包形式</td>
+                <td class="table1">垃圾分类</td>
+                <td class="table3">{{ forceEntity.fix_data["垃圾分类"] }}</td>
+                <td class="table1">垃圾屋</td>
+                <td class="table3">{{ forceEntity.fix_data["垃圾屋"] }}</td>
               </tr>
               <tr>
-                <td class="table1">投资额</td>
-                <td class="table3">项目 1C</td>
-                <td class="table1">投资性质</td>
-                <td class="table3">1783485486</td>
+                <td class="table1">室外照明</td>
+                <td class="table3">{{ forceEntity.fix_data["室外照明"] }}</td>
+                <td class="table1">管线落地情况</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data[" 管线落地情况"] }}
+                </td>
               </tr>
             </table>
           </div>
-          <div class="snf-page" style="height: 1100px">
+          <div class="snf-page" style="height: 67vh">
+            <div class="titles">景观绿化基本信息</div>
+            <div class="decorates"></div>
             <table class="hovertable">
               <tr>
-                <td class="table1">项目名称</td>
-                <td class="table2" colspan="3">
-                  温州市兴元建筑施工图审查咨询有限公司
+                <td class="table1">绿地面积</td>
+                <td class="table3">{{ forceEntity.fix_data["绿地面积"] }}</td>
+                <td class="table1">绿地率</td>
+                <td class="table3">{{ forceEntity.fix_data["绿地率"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">有无保护古树</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["有无保护古树"] }}
+                </td>
+                <td class="table1">大乔木</td>
+                <td class="table3">{{ forceEntity.fix_data["大乔木"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">灌木面积</td>
+                <td class="table3">{{ forceEntity.fix_data[" 灌木面积"] }}</td>
+                <td class="table1">草皮面积</td>
+                <td class="table3">{{ forceEntity.fix_data["草皮面积"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">植草砖</td>
+                <td class="table3">{{ forceEntity.fix_data["植草砖"] }}</td>
+                <td class="table1">居民利用绿地</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["居民利用绿地"] }}
                 </td>
               </tr>
               <tr>
-                <td class="table1">项目编号</td>
-                <td class="table3">温州市兴元建筑施工图审查咨询有限公司</td>
-                <td class="table1">施工许可证号</td>
-                <td class="table3">项目 1C</td>
-              </tr>
-
-              <tr>
-                <td class="table1">项目所在地</td>
-                <td class="table3">1783485486</td>
-                <td class="table1">工程类型</td>
-                <td class="table3">工程类型</td>
-              </tr>
-
-              <tr>
-                <td class="table1">工程用途</td>
-                <td class="table3">项目 1C</td>
-                <td class="table1">工程状态</td>
-                <td class="table3">1783485486</td>
-              </tr>
-
-              <tr>
-                <td class="table1">项目经理</td>
-                <td class="table3">项目经理</td>
-                <td class="table1">设计经理</td>
-                <td class="table3">项目 1C</td>
+                <td class="table1">树池材质</td>
+                <td class="table3">{{ forceEntity.fix_data["树池材质"] }}</td>
+                <td class="table1">景观小品</td>
+                <td class="table3">{{ forceEntity.fix_data["景观小品"] }}</td>
               </tr>
               <tr>
-                <td class="table1">施工经理</td>
-                <td class="table3">1783485486</td>
-                <td class="table1">发包形式</td>
-                <td class="table3">发包形式</td>
+                <td class="table1">休息座椅</td>
+                <td class="table3">25座</td>
+                <td class="table1">围墙</td>
+                <td class="table3">{{ forceEntity.fix_data["围墙"] }}</td>
               </tr>
               <tr>
-                <td class="table1">投资额</td>
-                <td class="table3">项目 1C</td>
-                <td class="table1">投资性质</td>
-                <td class="table3">1783485486</td>
+                <td class="table1">活动场地</td>
+                <td class="table3">{{ forceEntity.fix_data["活动场地"] }}</td>
+                <td class="table1">海绵设施</td>
+                <td class="table3">{{ forceEntity.fix_data["海绵设施"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">屋顶绿化</td>
+                <td class="table3">{{ forceEntity.fix_data["屋顶绿化"] }}</td>
+                <td class="table1">垂直绿化</td>
+                <td class="table3">{{ forceEntity.fix_data["垂直绿化"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">景观水体</td>
+                <td class="table3">{{ forceEntity.fix_data["景观水体"] }}</td>
+                <td class="table1"></td>
+                <td class="table3"></td>
               </tr>
             </table>
           </div>
@@ -688,15 +722,41 @@ export default {
     },
     //选择楼栋
     ldclick(data) {
-      var sqls = "NAME= '蒲鞋市新村" + data + "号楼'";
+      //相机视角移动
+      window.earth.camera.flyTo({
+        destination: {
+          x: -2872556.8010957814,
+          y: 4843598.135541798,
+          z: 2995082.209321462,
+        },
+        orientation: {
+          heading: 0.08452214613176423,
+          pitch: -0.6963175946906643,
+          roll: 0,
+        },
+      });
+      //关闭59号楼
       const V_LAYER = window.earth.scene.layers.find("Ljxq");
       V_LAYER.setOnlyObjsVisible([348], false);
-      window.earth.scene.addS3MTilesLayerByScp(
-        "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E5%8F%B7%E6%A5%BC/config",
-        {
-          name: "蒲鞋市新村59号楼",
+      //判断59楼新精模是否加载过
+      const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+      if (V_ld) {
+        V_ld.visible = true;
+        //现将所有部件显示
+        const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+        for (let i = 0; i < this.LCdata.length; i++) {
+          Lj.setOnlyObjsVisible(this.LCdata[i], true);
         }
-      );
+      } else {
+        window.earth.scene.addS3MTilesLayerByScp(
+          "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E5%8F%B7%E6%A5%BC/config",
+          {
+            name: "蒲鞋市新村59号楼",
+          }
+        );
+      }
+      //覆盖面高亮
+      var sqls = "NAME= '蒲鞋市新村" + data + "号楼'";
       var node = {
         newdataset: "erweidata:蒲鞋市59栋",
         url:
@@ -707,19 +767,34 @@ export default {
     },
     //选择层数
     lcclick(data) {
+      //相机视角移动
+      window.earth.camera.flyTo({
+        destination: {
+          x: -2872523.3970611463,
+          y: 4843511.355584916,
+          z: 2995221.392416414,
+        },
+        orientation: {
+          heading: 0.023851433491184793,
+          pitch: -1.551835556648097,
+          roll: 0,
+        },
+      });
       this.lsdata = data;
+      //移除覆盖面高亮
       if (window.lastHouseEntity) {
         window.earth.entities.remove(window.lastHouseEntity);
         window.lastHouseEntity = null;
       }
+      //现将所有部件显示
       const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       for (let i = 0; i < this.LCdata.length; i++) {
         Lj.setOnlyObjsVisible(this.LCdata[i], true);
       }
       var yblc = this.LCdata[parseInt(data) - 1];
-      Lj.brightness = 0.5;
-      Lj.setOnlyObjsVisible(yblc, false);
-      Lj.setOnlyObjsVisible(this.Lb, true);
+      Lj.brightness = 0.5; //图层亮度调节
+      Lj.setOnlyObjsVisible(yblc, false); //隐藏非选中层部件
+      Lj.setOnlyObjsVisible(this.Lb, true); //显示外立面部件
     },
     //选择户室
     lsclick(data) {
@@ -978,6 +1053,26 @@ export default {
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
+    //返回键
+    fh() {
+      console.log("相机参数1", window.earth.scene.camera.position);
+      console.log("相机参数2", window.earth.scene.camera.heading);
+      console.log("相机参数3", window.earth.scene.camera.pitch);
+      console.log("相机参数4", window.earth.scene.camera.roll);
+      this.isld = false; //关闭楼栋信息
+      this.isLJ = true; //开启小区信息
+      //关闭覆盖面
+      if (window.lastHouseEntity) {
+        window.earth.entities.remove(window.lastHouseEntity);
+        window.lastHouseEntity = null;
+      }
+      //关闭59号楼精模
+      const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+      V_ld.visible = false;
+      //打开原59号楼精模
+      const V_LAYER = window.earth.scene.layers.find("Ljxq");
+      V_LAYER.setOnlyObjsVisible([348], true);
+    },
     /**
      *  详情点赋值
      *  @param {object} forceEntity 详情点信息
@@ -1068,13 +1163,27 @@ export default {
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
-      console.log("关闭");
       this.isLJ = false;
+      this.isld = false;
       this.forcePosition = {};
       this.forceEntity = {};
       this.buffer = null;
       this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
       this.$bus.$emit("cesium-3d-rtmpFetch-cb");
+      const V_LAYER = window.earth.scene.layers.find("Ljxq");
+      if (V_LAYER) {
+        V_LAYER.setOnlyObjsVisible([348], true);
+      }
+      //判断59楼新精模是否加载过
+      const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+      if (V_ld) {
+        V_ld.visible = false;
+        //现将所有部件显示
+        const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+        for (let i = 0; i < this.LCdata.length; i++) {
+          Lj.setOnlyObjsVisible(this.LCdata[i], false);
+        }
+      }
       // this.$parent.$refs.aroundSourceAnalyse.closeAroundSourceAnalyse()
     },
   },
@@ -1189,13 +1298,24 @@ table.hovertable td {
   width: 25vw;
 }
 .closes {
-  width: 1vw;
-  height: 2vh;
+  width: 2vw;
+  height: 4vh;
   background: url(/static/images/mode-ico/叉2.png) no-repeat center;
   background-size: 100% 100%;
   z-index: 99;
   top: 10.5vh;
   right: 2vw;
+  z-index: 100;
+  position: fixed;
+}
+.fhj {
+  width: 2vw;
+  height: 4vh;
+  background: url(/static/images/mode-ico/返回键.png) no-repeat center;
+  background-size: 100% 100%;
+  z-index: 99;
+  top: 10.5vh;
+  right: 4vw;
   z-index: 100;
   position: fixed;
 }
@@ -1214,7 +1334,7 @@ ul li {
 #mains {
   height: 58vh;
   overflow: auto;
-  margin-top: 3vh;
+  margin-top: 4vh;
   margin-left: 1vw;
   position: relative;
   margin-right: 1vw;

@@ -11,7 +11,8 @@
         ></el-slider>
       </div>
     </div>
-    <div class="legend-popup"
+    <div
+      class="legend-popup"
       :style="{
         transform: `translate3d(${forcePosition.x}px,${forcePosition.y}px, 0)`,
       }"
@@ -38,18 +39,18 @@ export default {
       aMin: 0,
       aMax: 100,
       aValue: 75,
-      position: Cesium.Cartesian3.fromDegrees(120.7281, 28.0100, 4),
-      forcePosition: {}
+      position: Cesium.Cartesian3.fromDegrees(120.7281, 28.01, 4),
+      forcePosition: {},
     };
   },
   async mounted() {
-    this.$parent.$refs.roadline.doPolylineTrailVisible(false)
+    this.$parent.$refs.roadline.doPolylineTrailVisible(false);
     this.initBimScene();
     this.cameraMove();
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
-    this.$parent.$refs.roadline.doPolylineTrailVisible(true)
+    this.$parent.$refs.roadline.doPolylineTrailVisible(true);
     this.change_Alpha_Value(0);
     this.doCivilizationCenterVisible(_GEOLOGY_HASH_, false);
     // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
@@ -81,31 +82,53 @@ export default {
     doGroundInit(_HASH_, _SCENE_URL_, _DATA_) {
       Object.keys(_HASH_).map((key) => {
         const _KEY_ = `geology_${key}`;
-        const promise = window.earth.scene.addS3MTilesLayerByScp(
-          `${_SCENE_URL_}/datas/${key}/config`,
-          { name: _KEY_ }
+        var solidModelsProfile = new Cesium.SolidModelsProfile(
+          window.earth.scene
         );
-        if (_DATA_) {
-          Cesium.when(promise, async () => {
-            const { url, dataSourceName } = _DATA_;
-            const layer = window.earth.scene.layers.find(_KEY_);
-            layer.setQueryParameter({
-              url,
-              isMerge: true,
-              ...(dataSourceName
-                ? {
-                    dataSourceName,
-                    dataSetName: _HASH_[key],
-                  }
-                : {
-                    dataSourceName: _HASH_[key],
-                  }),
+        var models = [];
+        var modelUrls = [
+          //"http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip_dig"
+          //"http://www.supermapol.com/realspace/services/data-dizhiti/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93/datasets/Layer1/features/1.stream",
+           "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip/features/1.stream",
+        ];
+        function showModel() {
+          console.log("aqada");
+            var models = [];
+            // 也可以不设置纹理，设置颜色
+            models.push({
+                id: 1,
+                model: modelUrls[0],
             });
-            layer.datasetInfo().then((result) => {
-              console.log('result', result)
-            })
-          });
+            solidModelsProfile.addModels(models);
         }
+
+        showModel();
+
+        // const promise = window.earth.scene.addS3MTilesLayerByScp(
+        //   `${_SCENE_URL_}/datas/${key}/config`,
+        //   { name: _KEY_ }
+        // );
+        // if (_DATA_) {
+        //   Cesium.when(promise, async () => {
+        //     const { url, dataSourceName } = _DATA_;
+        //     const layer = window.earth.scene.layers.find(_KEY_);
+        //     layer.setQueryParameter({
+        //       url,
+        //       isMerge: true,
+        //       ...(dataSourceName
+        //         ? {
+        //             dataSourceName,
+        //             dataSetName: _HASH_[key],
+        //           }
+        //         : {
+        //             dataSourceName: _HASH_[key],
+        //           }),
+        //     });
+        //     layer.datasetInfo().then((result) => {
+        //       console.log('result', result)
+        //     })
+        //   });
+        // }
         //  做全局标识，不保存图层指针了
         window.extraHash.geology = true;
       });
