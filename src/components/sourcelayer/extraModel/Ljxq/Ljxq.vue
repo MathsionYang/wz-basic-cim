@@ -15,6 +15,25 @@ import { getIserverFields } from "api/iServerAPI";
 const LAYERS = [{ name: "Ljxq", url: ExtraSourceURL.LJxq }];
 export default {
   name: "LjxqModels",
+  data() {
+    return {
+      node: {
+        label: "老旧小区",
+        type: "mvt",
+        dataset: "old_ommunity_point",
+        dataname: "erweidata:",
+        icon: "老旧小区",
+        id: "老旧小区",
+        newdataset: "erweidata:old_ommunity_point",
+        url:
+          "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
+        withExtraData: "LjxqPopup",
+        withExtraDataGeometry: "LjxqListWithGeometry",
+        saveExtraDataByGeometry: "setLjxqListWithGeometry",
+        withExtraKey: "LJXQ",
+      },
+    };
+  },
   async mounted() {
     this.initBimScene();
     this.eventRegsiter();
@@ -36,6 +55,17 @@ export default {
         LAYERS.map((v) => {
           const V_LAYER = window.earth.scene.layers.find(v.name);
           V_LAYER.visible = true;
+          var fwm = window.earth.entities.values;
+          for (let i = 0; i < fwm.length; i++) {
+            if (fwm[i].id != "滨江CBD") {
+              fwm[i].show = true;
+            }
+          }
+          window.billboardMap[this.node.id]._billboards.map(
+            (v) => (v.show = true)
+          );
+          window.labelMap[this.node.id].setAllLabelsVisible(true);
+          this.switchSearchBox(this.node);
         });
       } else {
         const PROMISES = LAYERS.map((v) => {
@@ -43,47 +73,17 @@ export default {
             name: v.name,
           });
         });
+        //范围面
+        mapBJSWQLayerInit(
+          "LJxqImage",
+          ServiceUrl.LJxqImage,
+          "erweidata:old_ommunity"
+        );
+        //小区点位
+        this.getPOIPickedFeature(this.node, () => {
+          this.switchSearchBox(this.node);
+        });
       }
-      //范围面
-      mapBJSWQLayerInit(
-        "LJxqImage",
-        ServiceUrl.LJxqImage,
-        "erweidata:old_ommunity"
-      );
-      //小区点位
-      var node = {
-        label: "老旧小区",
-        type: "mvt",
-        dataset: "old_ommunity_point",
-        dataname: "erweidata:",
-        icon: "老旧小区",
-        id: "老旧小区",
-        newdataset: "erweidata:old_ommunity_point",
-        url:
-          "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
-        withExtraData: "LjxqPopup",
-        withExtraDataGeometry: "LjxqListWithGeometry",
-        saveExtraDataByGeometry: "setLjxqListWithGeometry",
-        withExtraKey: "LJXQ",
-      };
-      //   var node = {
-      //     dataname: "swdata:",
-      //     dataset: "JZJZNL_YLJH_JHCS",
-      //     icon: "老旧小区",
-      //     id: "老旧小区",
-      //     label: "医疗场所",
-      //     newdataset: "swdata:JZJZNL_YLJH_JHCS",
-      //     type: "mvt",
-      //     url:
-      //       "https://ditu.wzcitybrain.com/iserver/services/data-SW_DATA/rest/data",
-      //     withExtraData: "LjxqPopup",
-      //     withExtraDataGeometry: "medicalListWithGeometry",
-      //     saveExtraDataByGeometry: "setMedicalListWithGeometry",
-      //     withExtraKey: "SHORTNAME",
-      //   };
-      this.getPOIPickedFeature(node, () => {
-        this.switchSearchBox(node);
-      });
     },
     switchSearchBox(node) {
       this.$bus.$emit("cesium-3d-switch-searchBox", {
@@ -95,7 +95,6 @@ export default {
       const { newdataset, url } = node;
       var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
       getFeatureParam = new SuperMap.REST.FilterParameter({
-        // attributeFilter: `SMID <= 1000`,
         attributeFilter: `SMID >= 0`,
       });
       getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
@@ -129,18 +128,33 @@ export default {
         },
       });
     },
-    //  关闭倾斜摄影模块
+    //  关闭
     closeTrafficSubwayModel() {
       this.clearTrafficSubwayModel();
       this.$bus.$emit("cesium-3d-hub-event", { value: null });
     },
-    //  清除BIM模块
+    //  清除
     clearTrafficSubwayModel() {
+                
       const V_LAYER = window.earth.scene.layers.find(LAYERS[0].name);
       V_LAYER.setOnlyObjsVisible([348], true);
       V_LAYER.visible = false;
       const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
-      Lj.visible = false;
+      if (Lj) {
+        Lj.visible = false;
+      }
+      //隐藏小区点位
+      window.billboardMap[this.node.id]._billboards.map(
+        (v) => (v.show = false)
+      );
+      window.labelMap[this.node.id].setAllLabelsVisible(false);
+      //隐藏小区覆盖面
+      var fwm = window.earth.entities.values;
+      for (let i = 0; i < fwm.length; i++) {
+        if (fwm[i].id != "滨江CBD") {
+          fwm[i].show = false;
+        }
+      }
     },
   },
 };
