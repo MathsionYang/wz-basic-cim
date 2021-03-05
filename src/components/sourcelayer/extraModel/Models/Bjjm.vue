@@ -36,7 +36,6 @@ export default {
             name: v.name,
           });
         });
-
       }
     },
     //  相机移动

@@ -372,11 +372,12 @@ export default {
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
             if (type == "source") {
-              console.log('node',node)
+              console.log('node1',node)
               this.getPOIPickedFeature(node, () => {
                 this.switchSearchBox(node);
               });
             } else {
+               console.log('node2',node)
               this.getAPIFeature(node, () => {
                 this.switchSearchBox(node);
               });

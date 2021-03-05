@@ -110,14 +110,17 @@ export default {
       });
     },
     fixPopup() {
+       //console.log("交通卡口",window.entityMapGeometry);
       if (
         !window.entityMapGeometry ||
         !window.entityMapGeometry["交通卡口"] ||
         !~this.forceTrueTopicLabels.indexOf("交通卡口")
       ) {
+        //console.log("交通卡口",window.entityMapGeometry["交通卡口"],~this.forceTrueTopicLabels.indexOf("交通卡口"));
         this.doPopup([]);
       } else {
         const bayonetList = this.bayonetList;
+        //console.log("交通卡",bayonetList);
         if (bayonetList && Object.keys(bayonetList).length) {
           const G_bayonetList = [];
           for (let key in bayonetList) {

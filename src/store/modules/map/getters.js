@@ -18,6 +18,7 @@ export const isInfoFrame = state => state.isInfoFrame;
 export const rtmpList = state => state.rtmpList;
 export const rtmpListOther = state => state.rtmpListOther;
 export const medicalList = state => state.medicalList;
+export const ljxqlist = state => state.ljxqlist;
 export const medicalListWithGeometry = state => state.medicalListWithGeometry;
 export const stationList = state => state.stationList;
 export const stationListWithGeometry = state => state.stationListWithGeometry;

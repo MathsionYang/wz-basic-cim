@@ -98,9 +98,6 @@
         <div class="title">信息详情</div>
         <div class="decorate"></div>
         <div class="close" @click="showSide = false"></div>
-        <!-- <div class="tab-list">
-          <div class="tab-item active">基本信息</div>
-        </div> -->
       </div>
       <ul class="info-content">
         <li
@@ -117,16 +114,390 @@
     <div class="extra-frame" v-if="isFrame">
       <span @click="isFrame = false">X</span><iframe :src="isFrame" />
     </div>
-    <div class="container" v-show="isLJ">
-      <ul id="nav">
-        <li><a href="javascript:;" class="snf-nav active">page1</a></li>
-        <li><a href="javascript:;" class="snf-nav">page2</a></li>
-        <li><a href="javascript:;" class="snf-nav">page3</a></li>
-        <li><a href="javascript:;" class="snf-nav">page4</a></li>
-      </ul>
-      <span @click="isFrame = false">X</span>
+
+    <div class="ljxqlabels" v-if="isld">
+      <div class="closes"></div>
+      <div id="mains">
+        <div class="snf-pages">
+          <div class="titles">建筑基本信息</div>
+          <div class="decorates"></div>
+          <table class="hovertable">
+            <tr>
+              <td class="table1">楼幢名称</td>
+              <td class="table2" colspan="3">蒲鞋市新村59号楼</td>
+            </tr>
+
+            <tr>
+              <td class="table1">性质</td>
+              <td class="table3">{{ forceEntity.fix_data["性质"] }}</td>
+              <td class="table1">面积</td>
+              <td class="table3">1000平方米</td>
+            </tr>
+            <tr>
+              <td class="table1">住宅</td>
+              <td class="table3">{{ forceEntity.fix_data["住宅"] }}</td>
+              <td class="table1">商业</td>
+              <td class="table3">{{ forceEntity.fix_data["商业"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">建成时间</td>
+              <td class="table3">{{ forceEntity.fix_data["建成时间"] }}</td>
+              <td class="table1">层数</td>
+              <td class="table3">{{ forceEntity.fix_data["层数"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">结构形式</td>
+              <td class="table3">{{ forceEntity.fix_data["结构形式"] }}</td>
+              <td class="table1">产权归属</td>
+              <td class="table3">{{ forceEntity.fix_data["产权归属"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">需要拆改</td>
+              <td class="table3">否</td>
+              <td class="table1">拆改形式</td>
+              <td class="table3">无</td>
+            </tr>
+
+            <tr>
+              <td class="table1">是否有加装电梯</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["否有加装电梯"] }}
+              </td>
+              <td class="table1">是否有平改坡</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["是否有平改坡"] }}
+              </td>
+            </tr>
+            <tr>
+              <td class="table1">违章情况</td>
+              <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
+              <td class="table1">有否单元门</td>
+              <td class="table3">有</td>
+            </tr>
+            <tr>
+              <td class="table1">雨棚</td>
+              <td class="table3">5</td>
+              <td class="table1">窗罩</td>
+              <td class="table3">7</td>
+            </tr>
+            <tr>
+              <td class="table1">空调机位置</td>
+              <td class="table3">窗台下</td>
+              <td class="table1">可再生能源使用</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["可再生能源使用"] }}
+              </td>
+            </tr>
+          </table>
+          <div class="titles">改造调查情况</div>
+          <div class="decorates"></div>
+          <table class="hovertable">
+            <tr>
+              <td class="table1">小区是否存在存量房</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["小区是否存在存量房"] }}
+              </td>
+              <td class="table1">是否有闲置车棚车库</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["是否有闲置车棚车库"] }}
+              </td>
+            </tr>
+
+            <tr>
+              <td class="table1">其他配套</td>
+              <td class="table3">{{ forceEntity.fix_data["其他配套"] }}</td>
+              <td class="table1">是否有物业</td>
+              <td class="table3">{{ forceEntity.fix_data["是否有物业"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">是否经过鉴定</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["是否经过鉴定"] }}
+              </td>
+              <td class="table1">是否有危房</td>
+              <td class="table3">{{ forceEntity.fix_data["是否有危房"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">是否需要拆除</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["是否需要拆除"] }}
+              </td>
+              <td class="table1">是否有加装电梯</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["是否有加装电梯"] }}
+              </td>
+            </tr>
+            <tr>
+              <td class="table1">是否有平改坡</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["是否有平改坡"] }}
+              </td>
+              <td class="table1">违章情况</td>
+              <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">是否有过综合整治</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["近是否有过综合整治"] }}
+              </td>
+              <td class="table1">住户数</td>
+              <td class="table3">{{ forceEntity.fix_data["住户数"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">年龄组成</td>
+              <td class="table3">{{ forceEntity.fix_data["年龄组成"] }}</td>
+              <td class="table1">居民改造意愿</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["居民改造意愿"] }}
+              </td>
+            </tr>
+            <tr>
+              <td class="table1">历史文化资源</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["历史文化资源"] }}
+              </td>
+              <td class="table1">小区特色</td>
+              <td class="table3">{{ forceEntity.fix_data["小区特色"] }}</td>
+            </tr>
+            <tr>
+              <td class="table1">机动车数量</td>
+              <td class="table3">{{ forceEntity.fix_data["机动车数量"] }}</td>
+              <td class="table1">非机动车数量</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["非机动车数量"] }}
+              </td>
+            </tr>
+            <tr>
+              <td class="table1">可再生能源使用</td>
+              <td class="table3">
+                {{ forceEntity.fix_data["可再生能源使用"] }}
+              </td>
+              <td class="table1"></td>
+              <td class="table3">{{ forceEntity.fix_data[""] }}</td>
+            </tr>
+          </table>
+        </div>
+        <div class="snf-pages">
+          <div class="titless">小区楼层信息</div>
+          <div class="decoratess"></div>
+          <table class="hovertable">
+            <tr>
+              <td class="table4">1F</td>
+              <td class="table4" @click="lcclick('2')">2F</td>
+              <td class="table4" @click="lcclick('3')">3F</td>
+              <td class="table4" @click="lcclick('4')">4F</td>
+            </tr>
+          </table>
+        </div>
+        <div class="snf-pages" v-if="lsdata != ''">
+          <div class="titless">小区楼室信息</div>
+          <div class="decoratess"></div>
+          <table class="hovertable">
+            <tr>
+              <td class="table4" @click="lsclick(lsdata + '01')">
+                {{ lsdata + "01" }}
+              </td>
+              <td class="table4" @click="lsclick(lsdata + '02')">
+                {{ lsdata + "02" }}
+              </td>
+              <td class="table4" @click="lsclick(lsdata + '03')">
+                {{ lsdata + "03" }}
+              </td>
+              <td class="table4" @click="lsclick(lsdata + '04')">
+                {{ lsdata + "04" }}
+              </td>
+            </tr>
+            <tr>
+              <td class="table4" @click="lsclick(lsdata + '05')">
+                {{ lsdata + "05" }}
+              </td>
+              <td class="table4" @click="lsclick(lsdata + '06')">
+                {{ lsdata + "06" }}
+              </td>
+              <td class="table4"></td>
+              <td class="table4"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" v-if="isLJ">
+      <div id="nav">
+        <div class="snf-nav active"><span class="lqwz">小区基本信息</span></div>
+        <div class="snf-nav"><span class="lqwz">小区楼栋信息</span></div>
+        <div class="snf-nav"><span class="lqwz">市政基本信息</span></div>
+        <div class="snf-nav"><span class="lqwz">景观绿化基本信息</span></div>
+      </div>
+      <div class="closes"></div>
       <div class="ljxqlabel">
         <div id="main">
+          <div class="snf-page">
+            <div class="titles">小区基本信息</div>
+            <div class="decorates"></div>
+            <div class="titless">小区建设现状</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table1">名称</td>
+                <td class="table2" colspan="3">
+                  {{ forceEntity.fix_data["名称"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">区(市、县)</td>
+                <td class="table3">{{ forceEntity.fix_data["区市县"] }}</td>
+                <td class="table1">街道</td>
+                <td class="table3">{{ forceEntity.fix_data["街道"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">社区</td>
+                <td class="table3">{{ forceEntity.fix_data["社区"] }}</td>
+                <td class="table1">性质</td>
+                <td class="table3">{{ forceEntity.fix_data["性质"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">建筑总面积</td>
+                <td class="table3">{{ forceEntity.fix_data["建筑总面积"] }}</td>
+                <td class="table1">容积率</td>
+                <td class="table3">{{ forceEntity.fix_data["容积率"] }}</td>
+              </tr>
+
+              <tr>
+                <td class="table1">绿化率</td>
+                <td class="table3">{{ forceEntity.fix_data["绿化率"] }}</td>
+                <td class="table1">幢数</td>
+                <td class="table3">{{ forceEntity.fix_data["幢数"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">住宅</td>
+                <td class="table3">{{ forceEntity.fix_data["住宅"] }}</td>
+                <td class="table1">商业</td>
+                <td class="table3">{{ forceEntity.fix_data["商业"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">建成时间</td>
+                <td class="table3">{{ forceEntity.fix_data["建成时间"] }}</td>
+                <td class="table1">层数</td>
+                <td class="table3">{{ forceEntity.fix_data["层数"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">结构形式</td>
+                <td class="table3">{{ forceEntity.fix_data["结构形式"] }}</td>
+                <td class="table1">产权归属</td>
+                <td class="table3">{{ forceEntity.fix_data["产权归属"] }}</td>
+              </tr>
+            </table>
+            <div class="titless">改造调查情况</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table1">小区是否存在存量房</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["小区是否存在存量房"] }}
+                </td>
+                <td class="table1">是否有闲置车棚车库</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有闲置车棚车库"] }}
+                </td>
+              </tr>
+
+              <tr>
+                <td class="table1">其他配套</td>
+                <td class="table3">{{ forceEntity.fix_data["其他配套"] }}</td>
+                <td class="table1">是否有物业</td>
+                <td class="table3">{{ forceEntity.fix_data["是否有物业"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">是否经过鉴定</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否经过鉴定"] }}
+                </td>
+                <td class="table1">是否有危房</td>
+                <td class="table3">{{ forceEntity.fix_data["是否有危房"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">是否需要拆除</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否需要拆除"] }}
+                </td>
+                <td class="table1">是否有加装电梯</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有加装电梯"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">是否有平改坡</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["是否有平改坡"] }}
+                </td>
+                <td class="table1">违章情况</td>
+                <td class="table3">{{ forceEntity.fix_data["违章情况"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">是否有过综合整治</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["近是否有过综合整治"] }}
+                </td>
+                <td class="table1">住户数</td>
+                <td class="table3">{{ forceEntity.fix_data["住户数"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">年龄组成</td>
+                <td class="table3">{{ forceEntity.fix_data["年龄组成"] }}</td>
+                <td class="table1">居民改造意愿</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["居民改造意愿"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">历史文化资源</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["历史文化资源"] }}
+                </td>
+                <td class="table1">小区特色</td>
+                <td class="table3">{{ forceEntity.fix_data["小区特色"] }}</td>
+              </tr>
+              <tr>
+                <td class="table1">机动车数量</td>
+                <td class="table3">{{ forceEntity.fix_data["机动车数量"] }}</td>
+                <td class="table1">非机动车数量</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["非机动车数量"] }}
+                </td>
+              </tr>
+              <tr>
+                <td class="table1">可再生能源使用</td>
+                <td class="table3">
+                  {{ forceEntity.fix_data["可再生能源使用"] }}
+                </td>
+                <td class="table1"></td>
+                <td class="table3">{{ forceEntity.fix_data[""] }}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="snf-page">
+            <div class="titless">小区楼栋信息</div>
+            <div class="decoratess"></div>
+            <table class="hovertable">
+              <tr>
+                <td class="table4" @click="ldclick('51')">51</td>
+                <td class="table4" @click="ldclick('52')">52</td>
+                <td class="table4" @click="ldclick('53')">53</td>
+                <td class="table4" @click="ldclick('54')">54</td>
+                <td class="table4" @click="ldclick('55')">55</td>
+              </tr>
+              <tr>
+                <td class="table4" @click="ldclick('56')">56</td>
+                <td class="table4" @click="ldclick('57')">57</td>
+                <td class="table4" @click="ldclick('58')">58</td>
+                <td class="table4" @click="ldclick('59')">59</td>
+                <td class="table4" @click="ldclick('60')">60</td>
+              </tr>
+            </table>
+          </div>
           <div class="snf-page">
             <table class="hovertable">
               <tr>
@@ -176,576 +547,52 @@
               </tr>
             </table>
           </div>
-          <div class="snf-page">
+          <div class="snf-page" style="height: 1100px">
             <table class="hovertable">
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目名称
-                </td>
-                <td
-                  class="table2"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                  colspan="3"
-                >
+                <td class="table1">项目名称</td>
+                <td class="table2" colspan="3">
                   温州市兴元建筑施工图审查咨询有限公司
                 </td>
               </tr>
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目编号
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  温州市兴元建筑施工图审查咨询有限公司
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  施工许可证号
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
+                <td class="table1">项目编号</td>
+                <td class="table3">温州市兴元建筑施工图审查咨询有限公司</td>
+                <td class="table1">施工许可证号</td>
+                <td class="table3">项目 1C</td>
               </tr>
 
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目所在地
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程类型
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  工程类型
-                </td>
+                <td class="table1">项目所在地</td>
+                <td class="table3">1783485486</td>
+                <td class="table1">工程类型</td>
+                <td class="table3">工程类型</td>
               </tr>
 
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程用途
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程状态
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
+                <td class="table1">工程用途</td>
+                <td class="table3">项目 1C</td>
+                <td class="table1">工程状态</td>
+                <td class="table3">1783485486</td>
               </tr>
 
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目经理
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  设计经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
+                <td class="table1">项目经理</td>
+                <td class="table3">项目经理</td>
+                <td class="table1">设计经理</td>
+                <td class="table3">项目 1C</td>
               </tr>
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  施工经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  发包形式
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  发包形式
-                </td>
+                <td class="table1">施工经理</td>
+                <td class="table3">1783485486</td>
+                <td class="table1">发包形式</td>
+                <td class="table3">发包形式</td>
               </tr>
               <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  投资额
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  投资性质
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="snf-page">
-            <table class="hovertable">
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目名称
-                </td>
-                <td
-                  class="table2"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                  colspan="3"
-                >
-                  温州市兴元建筑施工图审查咨询有限公司
-                </td>
-              </tr>
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目编号
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  温州市兴元建筑施工图审查咨询有限公司
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  施工许可证号
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目所在地
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程类型
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  工程类型
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程用途
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程状态
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目经理
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  设计经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-              </tr>
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  施工经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  发包形式
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  发包形式
-                </td>
-              </tr>
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  投资额
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  投资性质
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-              </tr>
-            </table>
-          </div>
-          <div class="snf-page">
-            <table class="hovertable">
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目名称
-                </td>
-                <td
-                  class="table2"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                  colspan="3"
-                >
-                  温州市兴元建筑施工图审查咨询有限公司
-                </td>
-              </tr>
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目编号
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  温州市兴元建筑施工图审查咨询有限公司
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  施工许可证号
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目所在地
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程类型
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  工程类型
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程用途
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  工程状态
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-              </tr>
-
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  项目经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目经理
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  设计经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-              </tr>
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  施工经理
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  发包形式
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  发包形式
-                </td>
-              </tr>
-              <tr>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  投资额
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  项目 1C
-                </td>
-                <td
-                  class="table1"
-                  onmouseout="this.style.backgroundColor='#a2c4fa';"
-                >
-                  投资性质
-                </td>
-                <td
-                  class="table3"
-                  onmouseover="this.style.backgroundColor='#4085f4';"
-                  onmouseout="this.style.backgroundColor='#bdd5fc';"
-                >
-                  1783485486
-                </td>
+                <td class="table1">投资额</td>
+                <td class="table3">项目 1C</td>
+                <td class="table1">投资性质</td>
+                <td class="table3">1783485486</td>
               </tr>
             </table>
           </div>
@@ -756,7 +603,7 @@
 </template>
 <script>
 import { simpleNavFollow } from "./simpleNavFollowing";
-
+import { getIserverFields } from "api/iServerAPI";
 export default {
   data() {
     return {
@@ -769,52 +616,16 @@ export default {
       isFrame: false,
       isSelected: "",
       isLJ: false,
+      isld: false,
+      lsdata: "",
+      LCdata: [],
+      Lb: [],
     };
   },
   async mounted() {
     this.eventRegsiter();
   },
   methods: {
-    // 防抖
-    // debounce(func, wait, immediate) {
-    //   var timeout, args, context, timestamp, result;
-    //   var later = function () {
-    //     // 据上一次触发时间间隔
-    //     var last = new Date() - timestamp;
-    //     // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
-    //     if (last < wait && last > 0) {
-    //       timeout = setTimeout(later, wait - last);
-    //     } else {
-    //       timeout = null;
-    //       // 如果设定为immediate===true，因为开始边界已经调用过了此处无需调用
-    //       if (!immediate) {
-    //         result = func.apply(context, args);
-    //         if (!timeout) context = args = null;
-    //       }
-    //     }
-    //   };
-
-    //   return function () {
-    //     context = this;
-    //     args = arguments;
-    //     timestamp = new Date();
-    //     var callNow = immediate && !timeout;
-    //     // 如果延时不存在，重新设定延时
-    //     if (!timeout) timeout = setTimeout(later, wait);
-    //     if (callNow) {
-    //       result = func.apply(context, args);
-    //       context = args = null;
-    //     }
-
-    //     return result;
-    //   };
-    // },
-    // navClick(e) {
-    //   console.log("lieb", e);
-    //   var scrollBox1 = document.querySelector(".container");
-    //   scrollBox1.scrollTo(0, [...e.target.id].pop() * 500);
-    //   this.isSelected = e.target.id + "-selected";
-    // },
     bindHandler() {
       var snf = simpleNavFollow({
         parentElement: "#main", //内容类的父元素
@@ -823,6 +634,48 @@ export default {
         leaveTop: 0, //离父类距离
         initTo: 0, //初始跳转
         animation: 400, //动画时间
+        followCallBack: function (index) {
+          $("#enterIndex").text(index + 1);
+        },
+        navCallBack: function (index) {
+          $("#clickIndex").text(index + 1);
+        },
+      });
+      $("#destroy").click(function () {
+        snf.destroyed();
+      });
+      $("#clickToggle").click(function () {
+        if (snf.getStopState.nav()) {
+          snf.stopCallBack.nav(false);
+        } else {
+          snf.stopCallBack.nav(true);
+        }
+      });
+      $("#enterToggle").click(function () {
+        if (snf.getStopState.follow()) {
+          snf.stopCallBack.follow(false);
+        } else {
+          snf.stopCallBack.follow();
+        }
+      });
+      $("#init").click(function () {
+        if (snf.destroyed) {
+          snf.destroyed();
+        }
+        snf = simpleNavFollow({
+          parentElement: "#main", //内容类的父元素
+          nav: ".snf-nav", //导航类
+          page: ".snf-page", //内容类
+          leaveTop: 0, //离父元素距离
+          initTo: 0, //初始跳转
+          animation: 400, //动画时间
+          followCallBack: function (index) {
+            $("#enterIndex").text(index + 1);
+          },
+          navCallBack: function (index) {
+            $("#clickIndex").text(index + 1);
+          },
+        });
       });
     },
     eventRegsiter() {
@@ -832,6 +685,298 @@ export default {
       this.$bus.$on("cesium-3d-detail-pop-clear", () => {
         this.closePopup();
       });
+    },
+    //选择楼栋
+    ldclick(data) {
+      var sqls = "NAME= '蒲鞋市新村" + data + "号楼'";
+      const V_LAYER = window.earth.scene.layers.find("Ljxq");
+      V_LAYER.setOnlyObjsVisible([348], false);
+      window.earth.scene.addS3MTilesLayerByScp(
+        "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E5%8F%B7%E6%A5%BC/config",
+        {
+          name: "蒲鞋市新村59号楼",
+        }
+      );
+      var node = {
+        newdataset: "erweidata:蒲鞋市59栋",
+        url:
+          "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
+      };
+      this.getPOIPickedFeature(node);
+      this.sqlQuery(sqls);
+    },
+    //选择层数
+    lcclick(data) {
+      this.lsdata = data;
+      if (window.lastHouseEntity) {
+        window.earth.entities.remove(window.lastHouseEntity);
+        window.lastHouseEntity = null;
+      }
+      const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+      for (let i = 0; i < this.LCdata.length; i++) {
+        Lj.setOnlyObjsVisible(this.LCdata[i], true);
+      }
+      var yblc = this.LCdata[parseInt(data) - 1];
+      Lj.brightness = 0.5;
+      Lj.setOnlyObjsVisible(yblc, false);
+      Lj.setOnlyObjsVisible(this.Lb, true);
+    },
+    //选择户室
+    lsclick(data) {
+      var LC = "ROOM = '" + data + "'";
+      var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+      getFeatureParam = new SuperMap.REST.FilterParameter({
+        attributeFilter: LC,
+      });
+      getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
+        queryParameter: getFeatureParam,
+        toIndex: -1,
+        datasetNames: ["erweidata:蒲鞋市59栋户型"],
+      });
+      var url =
+        "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data";
+      getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
+        eventListeners: {
+          processCompleted: async (res) => {
+            if (window.lastHouseEntity) {
+              window.earth.entities.remove(window.lastHouseEntity);
+              window.lastHouseEntity = null;
+            }
+
+            var selectedFeatures = res.originResult.features;
+            addFeature(selectedFeatures[0]);
+            function addFeature(feature) {
+              var center = feature.geometry.center;
+              var lonLatArr = getLonLatArray(feature.geometry.points);
+              var bottom =
+                feature.fieldValues[
+                  feature.fieldNames.indexOf("BOTTOMALTITUDE")
+                ];
+              var HEIGHT =
+                feature.fieldValues[feature.fieldNames.indexOf("HEIGHT")];
+              var headheight = parseFloat(bottom) + parseFloat(HEIGHT);
+              window.lastHouseEntity = window.earth.entities.add({
+                id: data,
+                name: "单体化标识面",
+                polygon: {
+                  hierarchy: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
+                  material: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
+                  height: bottom,
+                  extrudedHeight: headheight,
+                },
+                position: Cesium.Cartesian3.fromDegrees(
+                  center.x,
+                  center.y,
+                  headheight + 1
+                ),
+                label: {
+                  text: data,
+                  font: "32px sans-serif",
+                  style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                  outlineColor: Cesium.Color.BLACK,
+                  outlineWidth: 2.0,
+                },
+              });
+            }
+            function getLonLatArray(points) {
+              var point3D = [];
+              points.forEach(function (point) {
+                point3D.push(point.x);
+                point3D.push(point.y);
+              });
+              return point3D;
+            }
+          },
+          processFailed: (msg) => console.log("查询失败", msg),
+        },
+      });
+      getFeatureBySQLService.processAsync(getFeatureBySQLParams);
+    },
+    //选择楼栋覆盖二维面
+    sqlQuery(SQL) {
+      var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+      getFeatureParam = new SuperMap.REST.FilterParameter({
+        attributeFilter: SQL,
+      });
+      getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
+        queryParameter: getFeatureParam,
+        toIndex: -1,
+        datasetNames: ["CIM_2D:" + "JZ_2D_buffer"], // 本例中“户型面”为数据源名称，“专题户型面2D”为楼层面相应的数据集名称
+      });
+      var url =
+        "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data"; // 数据服务地址
+      getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
+        eventListeners: {
+          processCompleted: async (queryEventArgs) => {
+            console.log("新分层", queryEventArgs);
+            if (window.lastHouseEntity) {
+              window.earth.entities.remove(window.lastHouseEntity);
+              window.lastHouseEntity = null;
+            }
+            if (queryEventArgs.originResult.features.length != 0) {
+              var selectedFeature = queryEventArgs.originResult.features[0]; //选中楼层的楼层面信息对象
+
+              if (!selectedFeature.geometry.points) {
+                return;
+              }
+              var bottomHeight = Number(
+                selectedFeature.fieldValues[
+                  selectedFeature.fieldNames.indexOf("BOTTOMALTITUDE")
+                ]
+              ); // 底部高程
+              var extrudeHeight = Number(
+                selectedFeature.fieldValues[
+                  selectedFeature.fieldNames.indexOf("HEIGHT")
+                ]
+              ); // 层高（拉伸高度）
+              Cesium.GroundPrimitive.bottomAltitude = bottomHeight; // 矢量面贴对象的底部高程
+              Cesium.GroundPrimitive.extrudeHeight = extrudeHeight; // 矢量面贴对象的拉伸高度
+              var points3D = []; // [经度, 纬度, 经度, 纬度, ...]的形式，存放楼层面上的点坐标
+              for (var pt of selectedFeature.geometry.points) {
+                points3D.push(pt.x, pt.y);
+              }
+              if (
+                window.ispartsclick &&
+                queryEventArgs.result.features[0].data.NAME.indexOf(
+                  "市民中心"
+                ) > -1
+              ) {
+              } else {
+                if (
+                  queryEventArgs.result.features[0].data.NAME.indexOf(
+                    "市民中心"
+                  ) > -1
+                ) {
+                  for (
+                    let i = 0;
+                    i < window.earth.scene.layers.layerQueue.length;
+                    i++
+                  ) {
+                    if (
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "ivilization_center"
+                      ) > -1 ||
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "chao"
+                      ) > -1
+                    ) {
+                      window.earth.scene.layers.layerQueue[
+                        i
+                      ].orderIndependentTranslucency = false;
+                    }
+                  }
+                } else {
+                  for (
+                    let i = 0;
+                    i < window.earth.scene.layers.layerQueue.length;
+                    i++
+                  ) {
+                    if (
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "ivilization_center"
+                      ) > -1 ||
+                      window.earth.scene.layers.layerQueue[i].name.indexOf(
+                        "chao"
+                      ) > -1
+                    ) {
+                      window.earth.scene.layers.layerQueue[
+                        i
+                      ].orderIndependentTranslucency = true;
+                    }
+                  }
+                }
+
+                window.lastHouseEntity = window.earth.entities.add({
+                  polygon: {
+                    hierarchy: Cesium.Cartesian3.fromDegreesArray(points3D),
+                    material: getColorRamp([0.0, 0.8], true),
+                  },
+                  classificationType: Cesium.ClassificationType.S3M_TILE, // 贴在S3M模型表面
+                });
+                this.isld = true;
+                this.isLJ = false;
+              }
+
+              function getColorRamp(elevationRamp) {
+                var ramp = document.createElement("canvas");
+                ramp.width = 1;
+                ramp.height = 100;
+                var ctx = ramp.getContext("2d");
+                var values = elevationRamp;
+                var grd = ctx.createLinearGradient(0, 0, 100, 50);
+                grd.addColorStop(values[0], "#E84929");
+                grd.addColorStop(values[1], "#FFFF08");
+                ctx.fillStyle = grd;
+                ctx.fillRect(0, 0, 1, 100);
+                return ramp;
+              }
+              let url =
+                "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data";
+              let newdataset = "CIM_2D:JZ_2D_buffer";
+              const fields = await getIserverFields(url, newdataset);
+              const fieldHash = {};
+              fields.map(({ name, caption }) => {
+                const reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+                reg.test(caption)
+                  ? (fieldHash[name.toLowerCase()] = caption)
+                  : undefined;
+              });
+              let tempObj = queryEventArgs.result.features[0].attributes;
+              const fixAttributes = {};
+              for (let v in tempObj) {
+                const V = v.toLowerCase();
+                fieldHash[V]
+                  ? (fixAttributes[fieldHash[V]] = tempObj[v])
+                  : undefined;
+              }
+              let detailData = Object.keys(fixAttributes).map((k) => {
+                return { k, v: fixAttributes[k] };
+              });
+              console.log("deatdata", detailData);
+              //this.SetForceBimData(detailData);
+            }
+          }, // 查询成功时的回调函数
+          processFailed: (msg) => console.log("查询失败分层分户", msg), // 查询失败时的回调函数
+        },
+      });
+      getFeatureBySQLService.processAsync(getFeatureBySQLParams);
+    },
+    //查询老旧小区选中楼参数
+    getPOIPickedFeature(node, fn) {
+      const { newdataset, url } = node;
+      var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+      getFeatureParam = new SuperMap.REST.FilterParameter({
+        attributeFilter: `SMID >= 0`,
+      });
+      getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
+        queryParameter: getFeatureParam,
+        toIndex: -1,
+        datasetNames: [newdataset],
+      });
+      getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
+        eventListeners: {
+          processCompleted: async (res) => {
+            for (let i = 1; i < 5; i++) {
+              var floors = i + "F";
+              var LCdatas = [];
+              this.Lb = [];
+              for (let j = 0; j < res.result.features.length; j++) {
+                if (res.result.features[j].data.FLOOR != floors) {
+                  LCdatas.push(parseInt(res.result.features[j].data.SMID));
+                }
+                if (res.result.features[j].data.LAYERNAME == "外立面") {
+                  this.Lb.push(parseInt(res.result.features[j].data.SMID));
+                }
+                if (j + 1 == res.result.features.length) {
+                  this.LCdata.push(LCdatas);
+                }
+              }
+            }
+          },
+          processFailed: (msg) => console.log(msg),
+        },
+      });
+      getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
     /**
      *  详情点赋值
@@ -923,6 +1068,8 @@ export default {
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
+      console.log("关闭");
+      this.isLJ = false;
       this.forcePosition = {};
       this.forceEntity = {};
       this.buffer = null;
@@ -935,11 +1082,11 @@ export default {
     isLJ(val) {
       if (val) {
         setTimeout(() => {
-          this.bindHandler()
-        }, 200)
+          this.bindHandler();
+        }, 200);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -947,7 +1094,7 @@ export default {
 @import url("./aroundPeople.less");
 
 .table1 {
-  width: 14%;
+  width: 23%;
   text-align: center;
   vertical-align: middle;
   line-height: 0.2rem;
@@ -968,11 +1115,12 @@ export default {
   font-size: 14px;
   font-family: PingFang SC;
   font-weight: 400;
+  background-color: #05583f4a;
   color: #ffffff;
   opacity: 1;
 }
 .table3 {
-  width: 42%;
+  width: 21%;
   text-align: center;
   vertical-align: middle;
   line-height: 0.2rem;
@@ -980,15 +1128,25 @@ export default {
   font-family: PingFang SC;
   font-weight: 400;
   color: #ffffff;
+  background-color: #05583f4a;
+  opacity: 1;
+}
+.table4 {
+  width: 16vw;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 0.2rem;
+  font-size: 14px;
+  font-family: PingFang SC;
+  font-weight: 400;
+  color: #ffffff;
+  background-color: #05583f4a;
   opacity: 1;
 }
 table.hovertable {
   font-family: verdana, arial, sans-serif;
   font-size: 11px;
   color: #333333;
-  // border-width: 1px;
-  // border-color: #999999;
-  // border-collapse: collapse;
   background-size: 100% 100%;
   background-image: url(/static/images/mode-ico/bg@2x.png);
 }
@@ -1002,246 +1160,16 @@ table.hovertable tr {
   border-width: 1px;
   padding: 8px;
   border-style: solid;
-  border-color: #4eda8e;
+  border-color: #1bffe4;
   height: 4vh;
 }
 table.hovertable td {
-  // border-width: 1px;
-  // padding: 8px;
-  // border-style: solid;
-  // border-color: #a9c6c9;
+  border-width: 1px;
+  padding: 8px;
+  border-style: solid;
+  border-color: #1bffe4;
 }
-.table-boxs {
-  margin-bottom: 0.3rem;
-  border-top: 0.01rem solid #0d5978;
-  border-left: 0.01rem solid #0d5978;
-  overflow: hidden;
-  &.no-line {
-    border-top: none;
-  }
-  .item1 {
-    position: relative;
-    float: left;
-    width: 50%;
-    .key1 {
-      color: #000000;
-      background: #f5f7fa;
-      width: 1.2rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      text-align: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #2c5a73;
-      font-size: 0.16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 0.05rem;
-    }
-    .value1 {
-      color: #000000;
-      width: 100%;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #024364;
-      padding: 0 0.1rem 0 1.3rem;
-      display: block;
-      font-size: 0.16rem;
-      font-weight: 400;
-      .no-wrap();
-    }
-  }
-  .item2 {
-    position: relative;
-    float: left;
-    width: 28%;
-    .key2 {
-      color: #000000;
-      background: #f5f7fa;
-      width: 1.2rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      text-align: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #2c5a73;
-      font-size: 0.16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 0.05rem;
-    }
-    .value2 {
-      color: rgb(0, 0, 0);
-      width: 2.1rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #024364;
-      padding: 0 0.1rem 0 1.3rem;
-      display: block;
-      font-size: 0.16rem;
-      font-weight: 400;
-      .no-wrap();
-    }
-  }
-  .item3 {
-    position: relative;
-    float: left;
-    width: 22%;
-    .key3 {
-      color: #000000;
-      background: #f5f7fa;
-      width: 1.2rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      text-align: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #2c5a73;
-      font-size: 0.16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 0.05rem;
-    }
-    .value3 {
-      color: rgb(0, 0, 0);
-      width: 1.48rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #024364;
-      padding: 0 0.1rem 0 0.3rem;
-      display: block;
-      font-size: 0.16rem;
-      font-weight: 400;
-      .no-wrap();
-    }
-  }
-  .item4 {
-    position: relative;
-    float: left;
-    width: 100%;
-    .key4 {
-      color: #000000;
-      background: #f5f7fa;
-      width: 1.2rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      text-align: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #2c5a73;
-      font-size: 0.16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 0.05rem;
-    }
-    .value4 {
-      color: rgb(0, 0, 0);
-      width: 6.73rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #024364;
-      padding: 0 0.1rem 0 1.3rem;
-      display: block;
-      font-size: 0.16rem;
-      font-weight: 400;
-      .no-wrap();
-    }
-  }
-  .item5 {
-    position: relative;
-    float: left;
-    width: 66%;
-    .key5 {
-      color: #000000;
-      background: #f5f7fa;
-      width: 1.2rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      text-align: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #2c5a73;
-      font-size: 0.16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 0.05rem;
-    }
-    .value5 {
-      color: #000000;
-      width: 100%;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #024364;
-      padding: 0 0.1rem 0 1.3rem;
-      display: block;
-      font-size: 0.16rem;
-      font-weight: 400;
-      .no-wrap();
-    }
-  }
-  .item6 {
-    position: relative;
-    float: left;
-    width: 33%;
-    .key6 {
-      color: #000000;
-      background: #f5f7fa;
-      width: 1.2rem;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      text-align: center;
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #2c5a73;
-      font-size: 0.16rem;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      padding: 0 0.05rem;
-    }
-    .value6 {
-      color: #000000;
-      width: 100%;
-      height: 0.32rem;
-      line-height: 0.32rem;
-      border-right: 0.01rem solid #024364;
-      border-bottom: 0.01rem solid #024364;
-      padding: 0 0.1rem 0 1.3rem;
-      display: block;
-      font-size: 0.16rem;
-      font-weight: 400;
-      .no-wrap();
-    }
-  }
-}
+
 .ljxqlabel {
   background-image: url(/static/images/mode-ico/大框@2x.png);
   background-size: 100% 100%;
@@ -1252,7 +1180,25 @@ table.hovertable td {
   top: 10vh;
   width: 25vw;
 }
-
+.ljxqlabels {
+  height: 67vh;
+  position: fixed;
+  z-index: 99;
+  right: 10px;
+  top: 10vh;
+  width: 25vw;
+}
+.closes {
+  width: 1vw;
+  height: 2vh;
+  background: url(/static/images/mode-ico/叉2.png) no-repeat center;
+  background-size: 100% 100%;
+  z-index: 99;
+  top: 10.5vh;
+  right: 2vw;
+  z-index: 100;
+  position: fixed;
+}
 ul li {
   list-style: none;
 }
@@ -1265,77 +1211,89 @@ ul li {
   position: relative;
   margin-right: 1vw;
 }
-
+#mains {
+  height: 58vh;
+  overflow: auto;
+  margin-top: 3vh;
+  margin-left: 1vw;
+  position: relative;
+  margin-right: 1vw;
+}
 .snf-page {
-  height: 500px;
+  height: auto;
   margin-bottom: 1vh;
+  margin-right: 0.5vw;
 }
-
+.snf-pages {
+  height: auto;
+  margin-bottom: 1vh;
+  margin-right: 0.5vw;
+}
 .snf-page:nth-child(2n) {
-  background: #e1e1e1;
+  //background: #e1e1e1;
 }
 
-.btns {
-  position: fixed;
-  width: 1000px;
-  top: 0;
-  left: 50%;
-  margin-left: -500px;
-  text-align: center;
-  z-index: 10;
-}
-
-.btns a {
-  display: inline-block;
-}
-
-li {
-  list-style-type: none;
-}
-a {
-  text-decoration: none;
-  outline: 0;
-}
 #nav {
-  top: 20vh;
-  left: 20px;
+  top: 24vh;
+  right: 26vw;
   margin-top: -140px;
   display: inline-block;
   vertical-align: middle;
   z-index: 99;
   position: fixed;
 }
+.snf-nav {
+  height: 14vh;
+  margin: 2vh 0;
+  width: 2.5vw;
+  text-align: center;
+  vertical-align: middle;
+  .bg-image("/static/images/mode-ico/选择框@2x");
+}
 
+#nav div.active {
+  height: 14vh;
+  margin: 2vh 0;
+  width: 2.5vw;
+  text-align: center;
+  vertical-align: middle;
+  .bg-image("/static/images/mode-ico/已选择框@2x");
+}
+.lqwz {
+  font-size: 16px;
+  font-family: YouSheBiaoTiHei;
+  color: #ffffff;
+  -webkit-writing-mode: vertical-r;
+  writing-mode: vertical-rl;
+
+  margin-top: 0.5vh;
+}
 ul li {
   list-style: none;
 }
-
-#nav a {
-  display: block;
-  position: relative;
-  width: 98px;
-  height: 28px;
-  line-height: 28px;
-  text-align: center;
-  background-color: #eee;
-  color: #333;
-  border-left: 2px solid transparent;
-  cursor: pointer;
-}
-
-#nav a:hover {
-  width: 98px;
-  border-left: 2px solid #4b59ff;
-}
-
-#nav a p {
-  position: relative;
-  z-index: 3;
-}
-
-#nav a.active {
-  background-color: #4b59ff;
+.titles {
+  font-family: YouSheBiaoTiHei;
   color: #fff;
+  font-size: 2vh;
+}
+.decorates {
+  margin: 4px 0;
+  width: 100%;
+  height: 0.3vh;
+  .bg-image("/static/images/mode-ico/装饰_1");
+}
+.titless {
+  font-family: YouSheBiaoTiHei;
+  color: #fff;
+  font-size: 1.7vh;
+  margin-left: 0.5vw;
+  margin-top: 1vh;
+}
+.decoratess {
+  margin: -0.7vh 0.3vw 0.5vh 0vw;
+  width: 35%;
+  height: 1vh;
+  .bg-image("/static/images/mode-ico/路径");
 }
 
 #forcePopUp {

@@ -133,6 +133,13 @@ const SW_TOPIC = [
     type: 'model'
   },
   {
+    label: "地质体模型",
+    componentEvent: "cesium-3d-dzt",
+    componentKey: "3d3",
+    url: 'true',
+    type: 'model'
+  },
+  {
     label: "场地三维模型",
     componentEvent: "cesium-3d-hub-event",
     componentKey: "",
@@ -1276,7 +1283,7 @@ export const SET_CESIUM_TREE_EXTRA_DATA_WITH_GEOMETRY = [
   "setStationListWithGeometry", "setTourPointListWithGeometry"
 ];
 export const CESIUM_TREE_EXTRA_DATA_WITH_GEOMETRY = ["medicalListWithGeometry", "bayonetListWithGeometry", "stationListWithGeometry", "tourPointListWithGeometry"];
-export const CESIUM_TREE_EXTRA_DATA = ["medicalList", "bayonetList", "stationList", "tourPointList"];
+export const CESIUM_TREE_EXTRA_DATA = ["ljxqlist","medicalList", "bayonetList", "stationList", "tourPointList"];
 export const CESIUM_TREE_OPTION = [
   {
     id: "时空基础数据",

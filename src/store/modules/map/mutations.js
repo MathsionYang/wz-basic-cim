@@ -44,6 +44,9 @@ const mutations = {
   [types.SET_MEDICAL_LIST](state, data) {
     state.medicalList = data;
   },
+  [types.SET_LJXQ_LIST](state, data) {
+    state.ljxqlist = data;
+  },
   [types.SET_STATION_LIST_WITH_GEOMETRY](state, data) {
     state.stationListWithGeometry = data;
   },

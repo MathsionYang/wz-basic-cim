@@ -82,8 +82,12 @@ export const mapBJSWQLayerInit = (name,url,datanames) => {
       return point3D;
     }
     function addFeature(feature,) {
-        console.log("faea",feature)
       var lonLatArr = getLonLatArray(feature.geometry.points);
+      for(let i =0 ;i<feature.fieldNames.length;i++){
+          if(feature.fieldNames[i]=="NAME"){
+              name = feature.fieldValues[i];
+          }
+      }
       window.earth.entities.add({
         id: name,
         name: name,

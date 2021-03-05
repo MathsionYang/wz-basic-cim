@@ -15,49 +15,7 @@
       class="leaflet-popup-medical"
       :style="{ transform: `translate3d(${item.x}px,${item.y + 10}px, 0)` }"
     >
-      <div class="popup-tip-container">
-        <div class="popup-tip-inner">
-          <div class="tip-name" @click="showDetail(item)">
-            {{ item.shortname }}
-          </div>
-          <div class="tip-num">
-            <table border="0">
-              <tbody>
-                <tr>
-                  <td>等级</td>
-                  <td>{{ item.grade || "-" }}</td>
-                </tr>
-                <tr>
-                  <td>发热人数</td>
-                  <td>{{ item.extra_data["发热病人"] || "-" }}</td>
-                </tr>
-                <tr>
-                  <td>门诊人次</td>
-                  <td>{{ item.extra_data["实时门诊人次"] || "-" }}</td>
-                </tr>
-                <tr>
-                  <td>住院人数</td>
-                  <td>{{ item.extra_data["住院人次"] || "-" }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="right-btns">
-          <span @click="doVideoRtmp(item)">直达现场</span>
-          <span @click="doCircleBuffer(item)">周边人口</span>
-        </div>
-        <div class="around-people" v-if="bufferHash[item.id]">
-          <img src="/static/images/common/frameline@2x.png" />
-          <div>
-            <header>周边实时人口</header>
-            <div>
-              <p>范围：500米</p>
-              <strong>{{ `人数：${bufferHash[item.id].data || "-"}人` }}</strong>
-              <p>{{ bufferHash[item.id].task_time }}</p>
-            </div>
-          </div>
-        </div>
+      <div class="popup-tip-container" @click="showDetail(item)">
       </div>
     </div>
   </div>
@@ -66,7 +24,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 export default {
-  name: "medicalPopup",
+  name: "LjxqPopup",
   data() {
     return {
       shallPop: false,
@@ -76,7 +34,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("map", ["medicalList", "forceTrueTopicLabels"]),
+    ...mapGetters("map", ["ljxqlist", "forceTrueTopicLabels"]),
   },
   async created() {
     await this.fetchMedicalList();
@@ -92,21 +50,21 @@ export default {
       });
     },
     fixPopup() {
-      //console.log("医疗功能",window.entityMapGeometry);
       if (
         !window.entityMapGeometry ||
-        !window.entityMapGeometry["医疗场所"] ||
-        !~this.forceTrueTopicLabels.indexOf("医疗场所")
+        !window.entityMapGeometry["老旧小区"] ||
+        !~this.forceTrueTopicLabels.indexOf("老旧小区")
       ) {
+          
         this.doPopup([]);
       } else {
-        console.log("医疗功能");
-        const medicalList = this.medicalList;
-        if (medicalList && Object.keys(medicalList).length) {
+          console.log('老旧小区',window.entityMapGeometry["老旧小区"])
+        const ljxqlist = this.ljxqlist;
+        if (ljxqlist && Object.keys(ljxqlist).length) {
           const G_medicalList = [];
-          for (let key in medicalList) {
-            if (window.entityMapGeometry["医疗场所"][key]) {
-              const item = window.entityMapGeometry["医疗场所"][key];
+          for (let key in ljxqlist) {
+            if (window.entityMapGeometry["老旧小区"][key]) {
+              const item = window.entityMapGeometry["老旧小区"][key];
               const { x, y } = item.geometry;
               const pointToWindow = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
                 window.earth.scene,
@@ -116,7 +74,7 @@ export default {
                 G_medicalList.push({
                   ...item,
                   geometry: { x, y },
-                  extra_data: medicalList[key],
+                  extra_data: ljxqlist[key],
                   pointToWindow,
                 });
             }

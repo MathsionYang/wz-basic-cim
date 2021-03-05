@@ -15,6 +15,9 @@ const state = {
   //  视频列表
   rtmpList: [],
   rtmpListOther: [],
+  //小区数据
+  ljxqlist:{},
+  
   //  医院数据
   medicalList: {},
   medicalListWithGeometry: [],

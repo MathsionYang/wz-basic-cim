@@ -16,6 +16,7 @@
       <MedicalPopup ref="medicalPopup" />
       <DetailPopup ref="detailPopup" />
       <StationPopup ref="stationPopup" />
+      <LjxqPopup ref="ljxqpopup"/>
     </div>
     <!-- 城市各类指标 -->
     <CityIndex ref="totalTarget" />
@@ -32,6 +33,8 @@
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
 
       <Ljxq ref="ljxq" v-if="showLjxq == '3d2'" />
+
+      <Dzt ref ="dzt" v-if="showdzt == '3d3'" />
 
       <TrafficSubwayModel
         ref="trafficSubwayModel"
@@ -84,6 +87,7 @@ import SearchBox from "components/sourcelayer/layerHub/searchBox";
 import CityIndex from "components/sourcelayer/CityIndex/index";
 import Roulette from "components/sourcelayer/roulette/roulette";
 import Ljxq from "components/sourcelayer/extraModel/Ljxq/Ljxq";
+import Dzt from "components/sourcelayer/extraModel/dzt/Dzt.vue";
 import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedModel";
 import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceAnalyse/AroundSourceAnalyse";
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
@@ -101,6 +105,7 @@ import BayonetPopup from "components/sourcelayer/commonFrame/Popups/bayonetPopup
 import StationPopup from "components/sourcelayer/commonFrame/Popups/stationPopup";
 import DetailPopup from "components/sourcelayer/commonFrame/Popups/DetailPopup";
 import TourPointPopup from "components/sourcelayer/commonFrame/Popups/tourPointPopup";
+import LjxqPopup from "components/sourcelayer/commonFrame/Popups/LjxqPopup";
 import RtmpVideo from "components/sourcelayer/extraModel/RtmpVideo/RtmpVideo";
 import Population from "components/sourcelayer/extraModel/Population/Population";
 import RoadLine from "components/sourcelayer/extraModel/PolylineTrailLink/RoadLine";
@@ -149,6 +154,7 @@ export default {
       showDXFrame: null,
       showKgFrame: null,
       showLjxq: null,
+      showdzt:null,
       showqxsyFrame: null,
       showjzFrame: null,
       showouhaiFrame: null,
@@ -188,6 +194,7 @@ export default {
     BJSWQModel,
     BJJM,
     Ljxq,
+    Dzt,
     OUHAI,
     Dxkj,
     WZDem,
@@ -200,6 +207,7 @@ export default {
     BayonetPopup,
     StationPopup,
     TourPointPopup,
+    LjxqPopup,
     DetailPopup,
     RtmpVideo,
     Population,
@@ -259,6 +267,10 @@ export default {
         if (this.$refs.bayonetPopup) {
           this.$refs.bayonetPopup.fixPopup();
         }
+        //  *****[LjxqList] 老旧小区点位*****
+        if (this.$refs.LjxqPopup) {
+          this.$refs.LjxqPopup.fixPopup();
+        }
         //  *****[stationList] 站点点位*****
         if (this.$refs.stationPopup) {
           this.$refs.stationPopup.fixPopup();
@@ -280,8 +292,8 @@ export default {
           this.$refs.detailPopup.renderForceEntity();
         }
         //  *****[dxkj]  地下图例*****
-        if (this.$refs.dxkj) {
-          this.$refs.dxkj.renderForceEntity();
+        if (this.$refs.dzt) {
+          this.$refs.dzt.renderForceEntity();
         }
       });
     },
@@ -318,7 +330,7 @@ export default {
               }
               var bottomHeight = Number(
                 selectedFeature.fieldValues[
-                  selectedFeature.fieldNames.indexOf("BOTTOMATTITUDE")
+                  selectedFeature.fieldNames.indexOf("BOTTOMALTITUDE")
                 ]
               ); // 底部高程
               var extrudeHeight = Number(
@@ -497,7 +509,7 @@ export default {
                 window.lastHouseEntity = null;
               }
             } else {
-              var sqls = `BottomAttitude < ${height} and ${height} < (BottomAttitude + Height) and ${longitude} > SmSdriW and ${longitude} < SmSdriE and ${latitude} > SmSdriS and ${latitude} < SmSdriN`;
+              var sqls = `BottomAltitude < ${height} and ${height} < (BottomAltitude + Height) and ${longitude} > SmSdriW and ${longitude} < SmSdriE and ${latitude} > SmSdriS and ${latitude} < SmSdriN`;
               this.sqlQuery(sqls);
             }
           }
@@ -635,8 +647,12 @@ export default {
       //简易模型
       this.$bus.$off("cesium-3d-bm");
       this.$bus.$on("cesium-3d-bm", ({ value }) => {
-        console.log("简易模型", value);
         this.showJYmx = value;
+      });
+      //地质体
+      this.$bus.$off("cesium-3d-dzt");
+      this.$bus.$on("cesium-3d-dzt",({value}) => {
+        this.showdzt =value;
       });
       //工具栏
       this.$bus.$off("cesium-3d-maptool");
