@@ -54,6 +54,7 @@
           v-show="selectedSourceObj.title == item"
           class="around-source-list-shine"
         ></div>
+        <p class="sourceName" :class="{selected:selectedSourceObj.title == item}">{{item}}</p>
       </div>
     </div>
     <ul
@@ -392,13 +393,22 @@ export default {
               height: 35,
             },
           });
-          // if (item.resourceType == "fire_station") {
+          if (item.resourceType == "fire_station") {
             carModelMove(window.billboardMap["pathRoute_analyse_lines"]);
-          // }
+          }
         });
       } else {
         x = item.geometry.x;
         y = item.geometry.y;
+        window.earth.camera.flyTo({
+          destination: Cesium.Cartesian3.fromDegrees(+x, +y - 0.005, 450),
+          orientation: {
+            heading: 0.003336768850279448,
+            pitch: -0.5808830390057418,
+            roll: 0.0,
+          },
+          maximumHeight: 450,
+        });
       }
       // window.earth.camera.flyTo({
       //   destination: Cesium.Cartesian3.fromDegrees(+x, +y - 0.005, 450),

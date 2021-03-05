@@ -147,6 +147,12 @@
                 background-size: 100% 100%;
                 pointer-events: auto;
             }
+            .sourceName {
+                color: #1BFFE4;
+                &.selected {
+                    color: #FFFF08;
+                }
+            }
         }
     }
     .around-source-list-single {
@@ -184,8 +190,11 @@
                 overflow: hidden;
                 white-space: nowrap;
                 text-overflow: ellipsis;
+                border-right: 2px solid #fff;
+                line-height: 20px;
             }
             .navigate {
+                padding: 0 0 0 5px;
                 cursor: pointer;
             }
             &:nth-child(even) {
