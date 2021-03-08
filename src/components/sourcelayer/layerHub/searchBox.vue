@@ -48,14 +48,15 @@
           <li
             class="result-item"
             :class="{
-              checked: ~hospitalChecked.indexOf(item.name),
+              checked: ~hospitalChecked.indexOf(i),
             }"
             v-for="(item, i) in extraSearchList"
             :key="`sitem-${i}`"
           >
             <div class="left">
               <div class="address">
-                <i class="icon-position"></i>
+                <!-- <i class="icon-position"></i> -->
+                <span>{{i+1}}.</span>
                 <p class="name">
                   {{ item.name }}
                 </p>
@@ -64,8 +65,8 @@
             <div class="right">
               <input
                 type="checkbox"
-                :checked="hospitalChecked.indexOf(item.name) >= 0"
-                @click="checkedOne(item)"
+                :checked="hospitalChecked.indexOf(i) >= 0"
+                @click="checkedOne(item,i)"
               />
             </div>
           </li>
@@ -216,7 +217,7 @@ export default {
       //this.layerdata = window.layersdata;
       //console.log("aaa", this.layerdata);
     },
-    checkedOne(item) {
+    checkedOne(item,i) {
       this.$bus.$emit("cesium-3d-detail-pop-clear");
       let idIndex = this.hospitalChecked.indexOf(item.name);
       if (idIndex >= 0) {
@@ -225,7 +226,7 @@ export default {
       } else {
         // 选中该checkbox
         this.hospitalChecked = [];
-        this.hospitalChecked.push(item.name);
+        this.hospitalChecked.push(i);
         // 移动到对应实例位置
         const { x, y } = item.geometry;
         window.earth.camera.flyTo({
