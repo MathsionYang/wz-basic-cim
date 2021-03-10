@@ -22,11 +22,8 @@
       </div>
     </div>
     <div class="cityIndex-source">
-      <div  style="margin-top: 5vh">
-        <div style="background-image:url('/static/images/mode-ico/区域.png');background-size:100% 100%;width:48px;height:39px;display: inline-block;vertical-align: middle;"></div>
-        <div style="background-image:url('/static/images/mode-ico/箭头.png');background-size:100% 100%;width:6.7px;height:11.68px;display: inline-block;vertical-align: middle;"></div>
-        <div style="background-image:url('/static/images/mode-ico/装饰_1.png');background-size:100% 100%;width:252px;height:3px;"></div>
-        <div style="background-image:url('/static/images/mode-ico/区域icon.png');background-size:100% 100%;width:258.9px;height:471.02px"></div>
+      <div style="margin-top: 5vh">
+        <component :is="fixforceTrueTopicLabels"/>
       </div>
     </div>
 
@@ -54,6 +51,9 @@ const indexHash = {
   资源专题: "sourceIndex",
   交通专题: "trafficIndex",
   重点项目: "keyIndex",
+  温州市: "wzsdata",
+  老旧小区: "ljxq",
+
 };
 import { mapGetters } from "vuex";
 import Switchlabel from "../commonFrame/Switchlabels/Switchlabel";
@@ -71,6 +71,9 @@ import trafficIndex from "./now/trafficIndex";
 import keyIndex from "./now/keyIndex";
 //  pass
 import cityIndexPass from "./pass/cityIndex";
+//cim
+import wzsdata from "./now/wzsdata";
+import ljxq from "./now/ljxqdata";
 
 export default {
   data() {
@@ -80,16 +83,25 @@ export default {
       nowTime: null, //存放时分秒变量
       timer: "", //定义一个定时器的变量
       currentTime: new Date(),
+      isljxqclick: '',
     };
   },
   created() {
     this.timer = setInterval(this.getTime, 1000);
   },
   computed: {
-    ...mapGetters("map", ["forceTime", "forceIndex"]),
-    fixForceIndex() {
-      return indexHash[this.forceIndex] || "cityIndex";
-    },
+    ...mapGetters("map", ["forceTime", "forceIndex", "forceTrueTopicLabels"]),
+    // fixForceIndex() {
+    //   return indexHash[this.forceIndex] || "cityIndex";
+    // },
+    fixforceTrueTopicLabels(){
+      if(~this.forceTrueTopicLabels.indexOf("老旧小区")){
+         return indexHash['老旧小区'];
+      }else{
+         return indexHash['温州市'];
+      
+      }
+    }
   },
   watch: {
     forceIndex(n) {
@@ -139,6 +151,8 @@ export default {
     keyIndex,
     cityIndexPass,
     Switchlabel,
+    wzsdata,
+    ljxq,
   },
 };
 </script>

@@ -654,6 +654,7 @@ export default {
       lsdata: "",
       LCdata: [],
       Lb: [],
+      Buildinglogo: [],
     };
   },
   async mounted() {
@@ -749,7 +750,7 @@ export default {
         }
       } else {
         window.earth.scene.addS3MTilesLayerByScp(
-          "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E5%8F%B7%E6%A5%BC/config",
+          "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E6%A0%8B/config",
           {
             name: "蒲鞋市新村59号楼",
           }
@@ -762,6 +763,7 @@ export default {
         url:
           "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
       };
+
       this.getPOIPickedFeature(node);
       this.sqlQuery(sqls);
     },
@@ -794,7 +796,7 @@ export default {
       var yblc = this.LCdata[parseInt(data) - 1];
       Lj.brightness = 0.5; //图层亮度调节
       Lj.setOnlyObjsVisible(yblc, false); //隐藏非选中层部件
-      Lj.setOnlyObjsVisible(this.Lb, true); //显示外立面部件
+      //Lj.setOnlyObjsVisible(this.Lb, true); //显示外立面部件
     },
     //选择户室
     lsclick(data) {
@@ -968,6 +970,32 @@ export default {
                   },
                   classificationType: Cesium.ClassificationType.S3M_TILE, // 贴在S3M模型表面
                 });
+                var a = window.earth.entities.getById(
+                  selectedFeature.fieldValues["22"]
+                );
+                window.earth.entities.remove(a);
+                window.earth.entities.add({
+                  position: Cesium.Cartesian3.fromDegrees(
+                    parseFloat(selectedFeature.fieldValues["32"]),
+                    parseFloat(selectedFeature.fieldValues["33"]),
+                    parseFloat(selectedFeature.fieldValues["30"]) + 3
+                  ),
+                  billboard: {
+                    image: "/static/images/common/选中楼标.png",
+                    width: 90,
+                    height: 60,
+                  },
+                  label: {
+                    text: selectedFeature.fieldValues["28"],
+                    font: "40px PingFang SC bold;",
+                    style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                    outlineColor: Cesium.Color.White,
+                    outlineWidth: 3,
+                    pixelOffset: new Cesium.Cartesian2(0, -5),
+                  },
+                  id: selectedFeature.fieldValues["22"],
+                  name: selectedFeature.fieldValues["22"],
+                });
                 this.isld = true;
                 this.isLJ = false;
               }
@@ -1055,10 +1083,6 @@ export default {
     },
     //返回键
     fh() {
-      console.log("相机参数1", window.earth.scene.camera.position);
-      console.log("相机参数2", window.earth.scene.camera.heading);
-      console.log("相机参数3", window.earth.scene.camera.pitch);
-      console.log("相机参数4", window.earth.scene.camera.roll);
       this.isld = false; //关闭楼栋信息
       this.isLJ = true; //开启小区信息
       //关闭覆盖面
@@ -1066,6 +1090,30 @@ export default {
         window.earth.entities.remove(window.lastHouseEntity);
         window.lastHouseEntity = null;
       }
+      var a = window.earth.entities.getById("蒲鞋市新村59号楼");
+      window.earth.entities.remove(a);
+      window.earth.entities.add({
+        position: Cesium.Cartesian3.fromDegrees(
+          parseFloat(120.67072463337485),
+          parseFloat(28.008283756760193),
+          parseFloat(16.414042574353516) + 3
+        ),
+        billboard: {
+          image: "/static/images/common/楼标.png",
+          width: 90,
+          height: 60,
+        },
+        label: {
+          text: "59号楼",
+          font: "40px PingFang SC bold;",
+          style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+          outlineColor: Cesium.Color.White,
+          outlineWidth: 3,
+          pixelOffset: new Cesium.Cartesian2(0, -5),
+        },
+        id: "蒲鞋市新村59号楼",
+        name: "蒲鞋市新村59号楼",
+      });
       //关闭59号楼精模
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       V_ld.visible = false;
@@ -1090,10 +1138,79 @@ export default {
         this.$bus.$emit("cesium-3d-rtmpFetch-cb");
       } else if (forceEntity._NODEID_.includes("老旧小区")) {
         this.isLJ = true;
+        var points = null;
+        if (window.Buildinglogo.length > 0) {
+          for (var i = 0; i < window.Buildinglogo.length; i++) {
+            var a = window.earth.entities.getById(
+              window.Buildinglogo[i].fieldValues["22"]
+            );
+            window.earth.entities.remove(a);
+          }
+        }
+        for (let i = 0; i < window.fwm.length; i++) {
+          if (window.fwm[i].name == this.forceEntity.name) {
+            points = window.fwm[i].points;
+          }
+        }
+        var queryObj = {
+          getFeatureMode: "SPATIAL",
+          spatialQueryMode: "CONTAIN",
+          datasetNames: ["CIM_2D:JZ_2D_buffer"],
+          geometry: {
+            points: points,
+            type: "REGION",
+          },
+        };
+        var queryData = JSON.stringify(queryObj); // 转化为JSON字符串作为查询参数
+        $.ajax({
+          type: "post",
+          url:
+            "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data/featureResults.rjson?returnContent=true",
+          data: queryData,
+          success: function (result) {
+            var resultObj = JSON.parse(result);
+
+            if (resultObj.featureCount > 0) {
+              window.Buildinglogo = resultObj.features;
+              processCompleted(resultObj.features);
+            }
+          },
+          error: function (msg) {
+            console.log(msg);
+          },
+        });
+        function processCompleted(features) {
+          var selectedFeatures = features;
+          for (var i = 0; i < selectedFeatures.length; i++) {
+            window.earth.entities.add({
+              position: Cesium.Cartesian3.fromDegrees(
+                parseFloat(selectedFeatures[i].fieldValues["32"]),
+                parseFloat(selectedFeatures[i].fieldValues["33"]),
+                parseFloat(selectedFeatures[i].fieldValues["30"]) + 3
+              ),
+              billboard: {
+                image: "/static/images/common/楼标.png",
+                width: 90,
+                height: 60,
+              },
+              label: {
+                text: selectedFeatures[i].fieldValues["28"],
+                font: "40px PingFang SC bold;",
+                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                outlineColor: Cesium.Color.White,
+                outlineWidth: 3,
+                pixelOffset: new Cesium.Cartesian2(0, -5),
+              },
+              id: selectedFeatures[i].fieldValues["22"],
+              name: selectedFeatures[i].fieldValues["22"],
+            });
+          }
+        }
       } else {
         this.showSide = false;
       }
     },
+
     /**
      *  框体移动
      *  @param {object} position
@@ -1163,6 +1280,14 @@ export default {
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
+      if (window.Buildinglogo.length > 0) {
+        for (var i = 0; i < window.Buildinglogo.length; i++) {
+          var a = window.earth.entities.getById(
+            window.Buildinglogo[i].fieldValues["22"]
+          );
+          window.earth.entities.remove(a);
+        }
+      }
       this.isLJ = false;
       this.isld = false;
       this.forcePosition = {};
@@ -1184,6 +1309,7 @@ export default {
           Lj.setOnlyObjsVisible(this.LCdata[i], false);
         }
       }
+
       // this.$parent.$refs.aroundSourceAnalyse.closeAroundSourceAnalyse()
     },
   },

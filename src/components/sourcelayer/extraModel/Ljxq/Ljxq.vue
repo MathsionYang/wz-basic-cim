@@ -66,9 +66,14 @@ export default {
           );
           window.labelMap[this.node.id].setAllLabelsVisible(true);
           this.switchSearchBox(this.node);
+          // mapBJSWQLayerInit(
+          //   "LJxqImage",
+          //   ServiceUrl.LJxqImage,
+          //   "erweidata:old_ommunity"
+          // );
         });
       } else {
-        const PROMISES = LAYERS.map((v) => {
+        LAYERS.map((v) => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
             name: v.name,
           });
@@ -135,7 +140,6 @@ export default {
     },
     //  清除
     clearTrafficSubwayModel() {
-                
       const V_LAYER = window.earth.scene.layers.find(LAYERS[0].name);
       V_LAYER.setOnlyObjsVisible([348], true);
       V_LAYER.visible = false;

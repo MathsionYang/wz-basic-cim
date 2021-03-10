@@ -562,6 +562,7 @@ export default {
           if (
             _data_[f].k == "直径" ||
             _data_[f].k == "长度" ||
+            _data_[f].k == "管线种类"||
             _data_[f].k == "地质层"
           ) {
             gx = true;
@@ -740,6 +741,8 @@ export default {
       });
       window.layersdata = []; //初始设置图层控制
       window.checkedkey = []; //初始设置默认选中图层
+      window.fwm=[];//初始所有范围面
+      window.Buildinglogo=[];//初始选中楼层
       //  地图配置
       mapConfigInit();
       //  相机位置

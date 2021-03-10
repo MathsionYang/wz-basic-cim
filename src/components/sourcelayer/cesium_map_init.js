@@ -65,8 +65,7 @@ export const mapBJSWQLayerInit = (name,url,datanames) => {
     );
     getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     function onQueryComplete(queryEventArgs) {
-      var selectedFeatures = queryEventArgs.originResult.features;
-      console.log("1111",selectedFeatures);
+      var selectedFeatures = queryEventArgs.originResult.features; 
       for (var i = 0; i < selectedFeatures.length; i++) {
         addFeature(selectedFeatures[i]);
       }
@@ -81,12 +80,14 @@ export const mapBJSWQLayerInit = (name,url,datanames) => {
       });
       return point3D;
     }
-    function addFeature(feature,) {
+    function addFeature(feature) {
       var lonLatArr = getLonLatArray(feature.geometry.points);
       for(let i =0 ;i<feature.fieldNames.length;i++){
           if(feature.fieldNames[i]=="NAME"){
               name = feature.fieldValues[i];
+              window.fwm.push({name:feature.fieldValues[i],points:feature.geometry.points});
           }
+ 
       }
       window.earth.entities.add({
         id: name,
@@ -95,7 +96,8 @@ export const mapBJSWQLayerInit = (name,url,datanames) => {
           positions: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
           width: 5,
           material: new Cesium.Color(0 / 255, 255 / 255, 0, 1),
-          classificationType: Cesium.ClassificationType.S3M_TILE, //矢量线贴对象
+          clampToGround:true,//矢量线贴对象
+          //classificationType: Cesium.ClassificationType.S3M_TILE, //矢量线贴对象
         },
       });
     }

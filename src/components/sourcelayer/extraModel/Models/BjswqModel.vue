@@ -7,6 +7,8 @@ const Cesium = window.Cesium;
 import { ExtraSourceURL } from "config/server/mapConfig";
 import { mapGetters, mapActions } from "vuex";
 const LAYERS = [{ name: "BJSWQ", url: ExtraSourceURL.BJSWQ }];
+const LAYERS_JFJ = [{ name: "JFJ", url: ExtraSourceURL.JFJ }];
+//const LAYERS_Ljxqqx = [{ name: "Ljxqqx", url: ExtraSourceURL.Ljxqqx }];
 export default {
   name: "BjswqModels",
   async mounted() {
@@ -30,16 +32,27 @@ export default {
           const V_LAYER = window.earth.scene.layers.find(v.name);
           V_LAYER.visible = true;
         });
+        LAYERS_JFJ.map((v) => {
+          const V_LAYER = window.earth.scene.layers.find(v.name);
+          V_LAYER.visible = true;
+        });
+       
       } else {
-        const PROMISES = LAYERS.map((v) => {
+        LAYERS.map((v) => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
             name: v.name,
           });
         });
+        LAYERS_JFJ.map((v) => {
+          return window.earth.scene.addS3MTilesLayerByScp(v.url, {
+            name: v.name,
+          });
+        });
+       
       }
     },
     //  相机移动
-       cameraMove() {
+    cameraMove() {
       window.earth.camera.flyTo({
         destination: {
           x: -2879361.2453708444,
@@ -61,6 +74,14 @@ export default {
     //  清除BIM模块
     clearTrafficSubwayModel() {
       LAYERS.map((v) => {
+        const V_LAYER = window.earth.scene.layers.find(v.name);
+        V_LAYER.visible = false;
+      });
+      LAYERS_JFJ.map((v) => {
+        const V_LAYER = window.earth.scene.layers.find(v.name);
+        V_LAYER.visible = false;
+      });
+      LAYERS_Ljxqqx.map((v) => {
         const V_LAYER = window.earth.scene.layers.find(v.name);
         V_LAYER.visible = false;
       });

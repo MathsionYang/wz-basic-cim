@@ -87,23 +87,16 @@ export default {
         );
         var models = [];
         var modelUrls = [
-          //"http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip_dig"
-          //"http://www.supermapol.com/realspace/services/data-dizhiti/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93/datasets/Layer1/features/1.stream",
-           "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip/features/1.stream",
+          "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip/features/1.stream",
         ];
-        function showModel() {
-          console.log("aqada");
-            var models = [];
-            // 也可以不设置纹理，设置颜色
-            models.push({
-                id: 1,
-                model: modelUrls[0],
-            });
-            solidModelsProfile.addModels(models);
-        }
-
-        showModel();
-
+        var models = [];
+        // 也可以不设置纹理，设置颜色
+        models.push({
+          id: 1,
+          model: modelUrls[0],
+        });
+        solidModelsProfile.addModels(models);
+        console.log("dd",solidModelsProfile)
         // const promise = window.earth.scene.addS3MTilesLayerByScp(
         //   `${_SCENE_URL_}/datas/${key}/config`,
         //   { name: _KEY_ }

@@ -28,6 +28,9 @@ const _UNDERGROUND_HASH_ = {
   YSLINE: "雨水管线",
   JSWELL: "雨水井盖",
 };
+const _ZSUNDERGROUND_HASH_ = {
+  "中山公园": "中山公园地下管线",
+};
 let handlerPolygon = undefined;
 import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
 import { mapActions } from "vuex";
@@ -55,6 +58,7 @@ export default {
     handlerPolygon = undefined;
     //  图层开关
     this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
+    this.doCivilizationCenterVisible(_ZSUNDERGROUND_HASH_, false);
   },
   methods: {
     ...mapActions("map", []),
@@ -64,14 +68,16 @@ export default {
     initScene() {
       if (window.extraHash.gxgl) {
         this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, true);
+        this.doCivilizationCenterVisible(_ZSUNDERGROUND_HASH_, true);
       } else {
-        const {
-          ABOVEGROUND,
-          UNDERGROUND,
-          UNDERGROUND_DATA,
-          ABOVEGROUND_DATA,
-        } = CIVILIZATION_CENTER_URL;
+        const { UNDERGROUND, UNDERGROUND_DATA } = CIVILIZATION_CENTER_URL;
         this.doGroundInit(_UNDERGROUND_HASH_, UNDERGROUND, UNDERGROUND_DATA);
+        const { ZSUNDERGROUND, ZSUNDERGROUND_DATA } = CIVILIZATION_CENTER_URL;
+        this.doGroundInit(
+          _ZSUNDERGROUND_HASH_,
+          ZSUNDERGROUND,
+          ZSUNDERGROUND_DATA
+        );
       }
     },
     /**
@@ -139,6 +145,7 @@ export default {
      * @param {object} _DATA_ 数据服务地址
      */
     doGroundInit(_HASH_, _SCENE_URL_, _DATA_) {
+      console.log("数据服务",_DATA_)
       Object.keys(_HASH_).map((key) => {
         const _KEY_ = `gxgl_${key}`;
         const promise = window.earth.scene.addS3MTilesLayerByScp(

@@ -109,6 +109,10 @@ export const ExtraSourceURL = {
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-S1/rest/realspace/datas/S1/config",
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
+  JFJ:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
+  Ljxqqx:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/PuXieShi/config",    
   BJJM:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/max_cim_sample/config",
   OUHAI:
@@ -144,6 +148,11 @@ export const CIVILIZATION_CENTER_URL = {
   UNDERGROUND_DATA: {
     url: "http://172.20.83.223:8098/iserver/services/data-Pipes/rest/data",
     dataSourceName: "Pipes_table"
+  },
+  ZSUNDERGROUND:"http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
+  ZSUNDERGROUND_DATA: {
+    url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
+    dataSourceName: "erweidata"
   },
   //地上模型
   ABOVEGROUND1: "http://172.20.83.223:8098/iserver/services/3D-mongodb7/rest/realspace",
