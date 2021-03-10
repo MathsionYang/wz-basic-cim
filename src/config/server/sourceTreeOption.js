@@ -542,6 +542,13 @@ const DMDZ_TOPIC = [
 ];
 const SHH_TOPIC = [
   {
+    label: "楼宇经济",
+    type: 'mvt',
+    dataname: 'erweidata:',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+    dataset: "Mansion_points"
+  },
+  {
     label: "服务大数据",
     type: 'mvt',
     dataname: 'erweidata:',
@@ -610,7 +617,7 @@ const BASIC_TOPIC = [
         icon: v.label,
         url: v.url,
         type: v.type,
-        newdataset: `${SW_DATA_NAME}${v.dataset}`
+        newdataset: `${v.dataname}${v.dataset}`
       };
     })
   },

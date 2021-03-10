@@ -45,7 +45,8 @@ export const dealPathWithXhr = (gcoord, originGCJ02, destinationGCJ02, fn) => {
           name: "pathRoute_line",
           polyline: {
             positions: Cesium.Cartesian3.fromDegreesArray(positionsWGS84),
-            width: 12,
+            width: 14,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY,
             material: new Cesium.PolylineArrowMaterialProperty(Cesium.Color.RED),
             clampToGround: true,
           },

@@ -344,6 +344,26 @@ export default {
     },
     async getAPIFeature(node, fn) {
       let res = await getEventData(node.event);
+      res.push({
+        areaCode: "330300000000",
+        content: "超高层消防事件",
+        contryAddr: "温州市",
+        eventCoordinate: "120.723778,28.009498",
+        eventCreator: null,
+        eventCreatorTel: null,
+        eventPlaceName: "温州市商务路61号",
+        eventTime: "2021-03-06 10:23:21",
+        eventUrl: "https://wzxf.wzcitybrain.com:1180/wenzhoucity/#/inteligentControl/c1f49eaa-ef11-4074-8ccd-ecc5ed08f300/11d9a28d7c1d4d5ca926abb6abfe45ad",
+        innerEventId: "147952",
+        msgType: 9,
+        origin: "温州市消防救援支队",
+        scence: "wzxfsj",
+        streetAddr: "温州市",
+        streetCode: "330300000000",
+        superviseStatus: 1,
+        title: "智慧消防-超高层消防事件",
+      })
+      console.log('res', res)
       let features = [];
       res.forEach((item) => {
         features.push({

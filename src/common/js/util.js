@@ -159,3 +159,25 @@ export function arrayCompareWithParam(propertyName) {
     return object1[propertyName] - object2[propertyName]
   };
 }
+
+function deepClone(data) {
+  if (!data || !(data instanceof Object) || typeof data == "function") {
+    return data || undefined;
+  }
+  var constructor = data.constructor;
+  var result = new constructor();
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+      result[key] = deepClone(data[key]);
+    }
+  }
+  return result;
+}
+
+/**
+ * 深拷贝
+ * @param {*} obj
+ */
+export function clone(data) {
+  return deepClone(data);
+}

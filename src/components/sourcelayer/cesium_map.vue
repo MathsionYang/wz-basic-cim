@@ -17,6 +17,7 @@
       <DetailPopup ref="detailPopup" />
       <StationPopup ref="stationPopup" />
       <LjxqPopup ref="ljxqpopup"/>
+      <BuildPopup ref="buildPopup"/>
     </div>
     <!-- 城市各类指标 -->
     <CityIndex ref="totalTarget" />
@@ -106,6 +107,7 @@ import StationPopup from "components/sourcelayer/commonFrame/Popups/stationPopup
 import DetailPopup from "components/sourcelayer/commonFrame/Popups/DetailPopup";
 import TourPointPopup from "components/sourcelayer/commonFrame/Popups/tourPointPopup";
 import LjxqPopup from "components/sourcelayer/commonFrame/Popups/LjxqPopup";
+import BuildPopup from "components/sourcelayer/commonFrame/Popups/BuildPopup/buidInform";
 import RtmpVideo from "components/sourcelayer/extraModel/RtmpVideo/RtmpVideo";
 import Population from "components/sourcelayer/extraModel/Population/Population";
 import RoadLine from "components/sourcelayer/extraModel/PolylineTrailLink/RoadLine";
@@ -209,6 +211,7 @@ export default {
     TourPointPopup,
     LjxqPopup,
     DetailPopup,
+    BuildPopup,
     RtmpVideo,
     Population,
     RoadLine,
@@ -486,11 +489,16 @@ export default {
           const [_TYPE_, _SMID_, _NODEID_] = pick.id.split("@");
           //  *****[detailPopup]  资源详情点*****
           if (~["label", "billboard", "eventLayer_billboard"].indexOf(_TYPE_)) {
-            this.$refs.detailPopup.getForceEntity({
-              ...window.featureMap[_NODEID_][_SMID_],
-              position: pick.primitive.position,
-              _NODEID_,
-            });
+            if (_NODEID_ == '楼宇经济') {
+              const item = window.featureMap[_NODEID_][_SMID_]
+              this.$refs.buildPopup.fetchBuild({ name: "buildid", val: item.attributes.GDID })
+            } else {
+              this.$refs.detailPopup.getForceEntity({
+                ...window.featureMap[_NODEID_][_SMID_],
+                position: pick.primitive.position,
+                _NODEID_,
+              });
+            }
           } else {
             var cartographic = Cesium.Cartographic.fromCartesian(position);
             var longitude = Cesium.Math.toDegrees(cartographic.longitude);
