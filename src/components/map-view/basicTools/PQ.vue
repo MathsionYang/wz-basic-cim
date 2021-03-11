@@ -62,10 +62,8 @@ export default {
       handlerBox.activate();
     },
     initTailor() {
-      console.log('initTailor')
       handlerBox = new Cesium.DrawHandler(window.earth, Cesium.DrawMode.Box);
       handlerBox.drawEvt.addEventListener((e) => {
-        console.log('111')
         boxEntity = e.object;
         var newDim = boxEntity.box.dimensions.getValue();
         var position = boxEntity.position.getValue(0);
@@ -79,7 +77,6 @@ export default {
         //box编辑
         editorBox = new Cesium.BoxEditor(window.earth, boxEntity);
         editorBox.editEvt.addEventListener((e) => {
-          console.log(222)
           boxEntity.box.dimensions = e.dimensions;
           boxEntity.position = e.position;
           boxEntity.orientation = e.orientation;
@@ -90,19 +87,16 @@ export default {
         //   950
         // );
         editorBox.activate();
-        console.log('fuck')
         this.setAllLayersClipOptions(boxOption);
         handlerBox.clear();
         handlerBox.deactivate();
       });
     },
     setClipBox() {
-      console.log(444)
       var newDim = boxEntity.box.dimensions.getValue();
       var position = boxEntity.position.getValue(0);
       var heading = 0;
       if (typeof boxEntity.orientation != "undefined") {
-        console.log(555)
         let rotationM3 = Cesium.Matrix3.fromQuaternion(
           boxEntity.orientation._value,
           new Cesium.Matrix3()
@@ -136,7 +130,6 @@ export default {
       this.setAllLayersClipOptions(boxOptions);
     },
     setAllLayersClipOptions(boxOptions) {
-      console.log(333)
       var layers = window.earth.scene.layers;
       for (let i = 0; i < layers.layerQueue.length; i++) {
         const layer = layers.layerQueue[i];
@@ -146,7 +139,6 @@ export default {
       this.$bus.$emit("dzt-clip", boxOptions);
     },
     sightlineClear() {
-      console.log('sightlineClear')
       var layers = window.earth.scene.layers;
       for (let i = 0; i < layers.layerQueue.length; i++) {
         const layer = layers.layerQueue[i];

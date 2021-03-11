@@ -41,7 +41,6 @@ export default {
     };
   },
   async mounted() {
-    console.log("mounted");
     this.eventRegsiter();
     this.$parent.$refs.roadline.doPolylineTrailVisible(false);
     this.initBimScene();
@@ -49,7 +48,6 @@ export default {
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
-    console.log("beforeDestroy");
     this.$parent.$refs.roadline.doPolylineTrailVisible(true);
     this.change_Alpha_Value(0);
     this.solidModelsProfile.clear();
@@ -60,8 +58,6 @@ export default {
       //  监听工具栏剖切
       this.$bus.$off("dzt-clip");
       this.$bus.$on("dzt-clip", (boxOptions) => {
-        // let newDim = boxEntity.box.dimensions.getValue();
-        // let position = Cesium.Cartographic.fromCartesian(boxEntity.position.getValue(0));
         console.log("boxOptions", boxOptions);
         this.solidModelsProfile.clearProfile();
         let newDim = boxOptions.dimensions;
@@ -72,7 +68,6 @@ export default {
           Cesium.Math.toDegrees(position.latitude),
           position.height
         );
-        console.log("geoBox", geoBox);
         this.solidModelsProfile.addProfileGeometry(geoBox);
         this.solidModelsProfile.build();
       });
