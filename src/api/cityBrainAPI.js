@@ -94,10 +94,10 @@ export const getWzAllMedicalInsurancePayment = () => {
 export const getEventData = () => {
   const endTime = new Date();
   return getAxios("100027001", {
-    startTime: getDate(new Date(endTime.getTime() - 7 * 24 * 3600 * 1000)),
+    startTime: getDate(new Date(new Date(new Date().toLocaleDateString()))),
     endTime: getDate(endTime),
-    areaCode: "330300",
-    status: 1,
+    // areaCode: "330300",
+    // status: 1,
     onlyCount: false
   }, "GET");
 };

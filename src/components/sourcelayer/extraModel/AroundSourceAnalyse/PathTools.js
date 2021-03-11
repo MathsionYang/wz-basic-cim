@@ -71,7 +71,7 @@ export const clearPath = () => {
  * 模型按路径移动
  */
 export const carModelMove = (lineEntity) => {
-  console.log('carModelMove', lineEntity)
+  // console.log('carModelMove', lineEntity)
   if (!lineEntity) return;
   let positions = lineEntity.polyline.positions.getValue();
   if (!positions) return;
@@ -83,7 +83,7 @@ export const carModelMove = (lineEntity) => {
     );
     allDis += dis;
   }
-  let playTime = 10;
+  let playTime = 20;
   let v = allDis / playTime;
   let startTime = window.earth.clock.currentTime;
   let endTime = Cesium.JulianDate.addSeconds(
@@ -116,7 +116,7 @@ export const carModelMove = (lineEntity) => {
     orientation: new Cesium.VelocityOrientationProperty(property),
     model: {
       uri: "/static/gltf/Firetruck_rotate_270.gltf",
-      scale: 6,
+      scale: 10,
     },
   });
   window.earth.clock.currentTime = startTime;

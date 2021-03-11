@@ -252,7 +252,7 @@ export default {
       console.log("this.checkgj",this.checkgj)
       window.gjlclickdata = data.label;
       this.$bus.$emit("cesium-3d-maptool", data);
-       this.$bus.$off("cesium-3d-imgs");
+      this.$bus.$off("cesium-3d-imgs");
       this.$bus.$on("cesium-3d-imgs", ({ value }) => {
         this.checkgj = value;
       });

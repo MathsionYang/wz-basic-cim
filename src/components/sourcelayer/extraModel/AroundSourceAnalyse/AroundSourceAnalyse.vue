@@ -397,28 +397,16 @@ export default {
             carModelMove(window.billboardMap["pathRoute_analyse_lines"]);
           }
         });
-      } else {
-        x = item.geometry.x;
-        y = item.geometry.y;
-        window.earth.camera.flyTo({
-          destination: Cesium.Cartesian3.fromDegrees(+x, +y - 0.005, 450),
-          orientation: {
-            heading: 0.003336768850279448,
-            pitch: -0.5808830390057418,
-            roll: 0.0,
-          },
-          maximumHeight: 450,
-        });
       }
-      // window.earth.camera.flyTo({
-      //   destination: Cesium.Cartesian3.fromDegrees(+x, +y - 0.005, 450),
-      //   orientation: {
-      //     heading: 0.003336768850279448,
-      //     pitch: -0.5808830390057418,
-      //     roll: 0.0,
-      //   },
-      //   maximumHeight: 450,
-      // });
+      window.earth.camera.setView({
+        destination: Cesium.Cartesian3.fromDegrees(+x + 0.01, +y - 0.02, 1450),
+        orientation: {
+          heading: 5.9232943303067405,
+          pitch: -0.574668319401269,
+          roll: 0
+        },
+        maximumHeight: 450,
+      });
     },
   },
 };

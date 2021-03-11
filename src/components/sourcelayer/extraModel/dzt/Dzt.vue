@@ -24,10 +24,6 @@
 <script>
 import { mapActions } from "vuex";
 import { CIVILIZATION_CENTER_URL } from "config/server/mapConfig";
-const _ABOVEGROUND_HASH_ = {
-  B2土建: "给水管线",
-  B1土建: "B1土建_table",
-};
 const _GEOLOGY_HASH_ = {
   CIM_Geology: "地质体",
 };
@@ -39,39 +35,56 @@ export default {
       aMin: 0,
       aMax: 100,
       aValue: 75,
-      position: Cesium.Cartesian3.fromDegrees(120.7281, 28.01, 4),
+      position: Cesium.Cartesian3.fromDegrees(120.7271, 28.01, 4),
       forcePosition: {},
+      solidModelsProfile: undefined,
     };
   },
   async mounted() {
+    console.log("mounted");
+    this.eventRegsiter();
     this.$parent.$refs.roadline.doPolylineTrailVisible(false);
     this.initBimScene();
     this.cameraMove();
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
+    console.log("beforeDestroy");
     this.$parent.$refs.roadline.doPolylineTrailVisible(true);
     this.change_Alpha_Value(0);
-    this.doCivilizationCenterVisible(_GEOLOGY_HASH_, false);
-    // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, false);
+    this.solidModelsProfile.clear();
   },
   methods: {
     ...mapActions("map", []),
+    eventRegsiter() {
+      //  监听工具栏剖切
+      this.$bus.$off("dzt-clip");
+      this.$bus.$on("dzt-clip", (boxOptions) => {
+        // let newDim = boxEntity.box.dimensions.getValue();
+        // let position = Cesium.Cartographic.fromCartesian(boxEntity.position.getValue(0));
+        console.log("boxOptions", boxOptions);
+        this.solidModelsProfile.clearProfile();
+        let newDim = boxOptions.dimensions;
+        let position = Cesium.Cartographic.fromCartesian(boxOptions.position);
+        let geoBox = new Cesium.GeoBox(newDim.x, newDim.y, newDim.z);
+        geoBox.geoPosition = new Cesium.Point3D(
+          Cesium.Math.toDegrees(position.longitude),
+          Cesium.Math.toDegrees(position.latitude),
+          position.height
+        );
+        console.log("geoBox", geoBox);
+        this.solidModelsProfile.addProfileGeometry(geoBox);
+        this.solidModelsProfile.build();
+      });
+      this.$bus.$off("dzt-clear");
+      this.$bus.$on("dzt-clear", () => {
+        this.solidModelsProfile.clearProfile();
+      });
+    },
     //  初始化BIM场景
     initBimScene() {
-      if (window.extraHash.geology) {
-        this.doCivilizationCenterVisible(_GEOLOGY_HASH_, true);
-        // this.doCivilizationCenterVisible(_ABOVEGROUND_HASH_, true);
-      } else {
-        const {
-          GEOLOGY,
-          // ABOVEGROUND,
-          // ABOVEGROUND_DATA,
-          GEOLOGY_DATA,
-        } = CIVILIZATION_CENTER_URL;
-        this.doGroundInit(_GEOLOGY_HASH_, GEOLOGY, GEOLOGY_DATA);
-        // this.doGroundInit(_ABOVEGROUND_HASH_, ABOVEGROUND, ABOVEGROUND_DATA);
-      }
+      const { GEOLOGY, GEOLOGY_DATA } = CIVILIZATION_CENTER_URL;
+      this.doGroundInit(_GEOLOGY_HASH_, GEOLOGY, GEOLOGY_DATA);
     },
     /**
      * 图层控制
@@ -82,71 +95,50 @@ export default {
     doGroundInit(_HASH_, _SCENE_URL_, _DATA_) {
       Object.keys(_HASH_).map((key) => {
         const _KEY_ = `geology_${key}`;
-        var solidModelsProfile = new Cesium.SolidModelsProfile(
+        this.solidModelsProfile = new Cesium.SolidModelsProfile(
           window.earth.scene
         );
-        var models = [];
-        var modelUrls = [
-          "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip/features/1.stream",
-        ];
-        var models = [];
+        // let modelUrls = [
+        //   "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip/features/1.stream",
+        // ];
+        var baseUrl = "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip_dig/features/"
+        let models = [];
         // 也可以不设置纹理，设置颜色
-        models.push({
-          id: 1,
-          model: modelUrls[0],
-        });
-        solidModelsProfile.addModels(models);
-        console.log("dd",solidModelsProfile)
-        // const promise = window.earth.scene.addS3MTilesLayerByScp(
-        //   `${_SCENE_URL_}/datas/${key}/config`,
-        //   { name: _KEY_ }
-        // );
-        // if (_DATA_) {
-        //   Cesium.when(promise, async () => {
-        //     const { url, dataSourceName } = _DATA_;
-        //     const layer = window.earth.scene.layers.find(_KEY_);
-        //     layer.setQueryParameter({
-        //       url,
-        //       isMerge: true,
-        //       ...(dataSourceName
-        //         ? {
-        //             dataSourceName,
-        //             dataSetName: _HASH_[key],
-        //           }
-        //         : {
-        //             dataSourceName: _HASH_[key],
-        //           }),
-        //     });
-        //     layer.datasetInfo().then((result) => {
-        //       console.log('result', result)
-        //     })
-        //   });
-        // }
-        //  做全局标识，不保存图层指针了
-        window.extraHash.geology = true;
-      });
-    },
-    /**
-     * 显隐控制
-     * @param {object} _HASH_ hash
-     * @param {boolean} boolean 开关
-     */
-    doCivilizationCenterVisible(_HASH_, boolean) {
-      Object.keys(_HASH_).map((key) => {
-        const _KEY_ = `geology_${key}`;
-        const layer = window.earth.scene.layers.find(_KEY_);
-        layer.visible = boolean;
+        // models.push({
+        //   id: 1,
+        //   model: modelUrls[0],
+        // });
+        for (let i = 1; i <= 990; i++) {
+          models.push({
+            id: i,
+            model: `${baseUrl}${i}.stream`,
+          });
+        }
+        this.solidModelsProfile.addModels(models);
       });
     },
     change_Alpha_Value(val) {
       window.earth.scene.globe.globeAlpha = (100 - val) / 100;
     },
     cameraMove() {
+      // window.earth.camera.flyTo({
+      //   destination: {
+      //     x: -2877358.4295731103,
+      //     y: 4841834.134246617,
+      //     z: 2994574.2246890087,
+      //   },
+      //   orientation: {
+      //     heading: 0.003336768850279448,
+      //     pitch: -0.5808830390057418,
+      //     roll: 0.0,
+      //   },
+      //   maximumHeight: 450,
+      // });
       window.earth.camera.flyTo({
         destination: {
-          x: -2877358.4295731103,
-          y: 4841134.134246617,
-          z: 2994874.2246890087,
+          x: -2876906.002533756,
+          y: 4841075.198844643,
+          z: 2995213.4453336787,
         },
         orientation: {
           heading: 0.003336768850279448,
