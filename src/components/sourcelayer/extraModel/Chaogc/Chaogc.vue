@@ -34,7 +34,7 @@ export default {
   },
   beforeDestroy() {
     //  透明度
-    this.change_Alpha_Value(0);
+    // this.change_Alpha_Value(0);
     //  句柄销毁
     handlerPolygon.clear();
     handlerPolygon = undefined;

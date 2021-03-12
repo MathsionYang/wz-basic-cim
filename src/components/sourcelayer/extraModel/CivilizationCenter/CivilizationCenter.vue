@@ -197,7 +197,7 @@ export default {
   },
   beforeDestroy() {
     //  透明度
-    this.change_Alpha_Value(0);
+    // this.change_Alpha_Value(0);
     //  图层开关
     // this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
     // this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, false);
