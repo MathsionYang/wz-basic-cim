@@ -285,14 +285,20 @@
           <div class="snf-pages">
             <div class="titless">小区楼层信息</div>
             <div class="decoratess"></div>
-            <table class="hovertable">
+            <!-- <table class="hovertable">
               <tr>
                 <td class="table4">1F</td>
                 <td class="table4" @click="lcclick('2')">2F</td>
                 <td class="table4" @click="lcclick('3')">3F</td>
                 <td class="table4" @click="lcclick('4')">4F</td>
               </tr>
-            </table>
+            </table> -->
+            <div class="btn-group">
+              <el-button class="btn-item" size="mini">1F</el-button>
+              <el-button class="btn-item" size="mini" @click="lcclick('2')">2F</el-button>
+              <el-button class="btn-item" size="mini" @click="lcclick('3')">3F</el-button>
+              <el-button class="btn-item" size="mini" @click="lcclick('4')">4F</el-button>
+            </div>
           </div>
           <div class="snf-pages" v-if="lsdata != ''">
             <div class="titless">小区楼室信息</div>
@@ -487,7 +493,7 @@
           <div class="snf-page">
             <div class="titless">小区楼栋信息</div>
             <div class="decoratess"></div>
-            <table class="hovertable">
+            <!-- <table class="hovertable">
               <tr>
                 <td class="table4" @click="ldclick('51')">51</td>
                 <td class="table4" @click="ldclick('52')">52</td>
@@ -502,7 +508,19 @@
                 <td class="table4" @click="ldclick('59')">59</td>
                 <td class="table4" @click="ldclick('60')">60</td>
               </tr>
-            </table>
+            </table> -->
+            <div class="btn-group">
+              <el-button class="btn-item" @click="ldclick('51')" size="mini">51</el-button>
+              <el-button class="btn-item" @click="ldclick('52')" size="mini">52</el-button>
+              <el-button class="btn-item" @click="ldclick('53')" size="mini">53</el-button>
+              <el-button class="btn-item" @click="ldclick('54')" size="mini">54</el-button>
+              <el-button class="btn-item" @click="ldclick('55')" size="mini">55</el-button>
+              <el-button class="btn-item" @click="ldclick('56')" size="mini">56</el-button>
+              <el-button class="btn-item" @click="ldclick('57')" size="mini">57</el-button>
+              <el-button class="btn-item" @click="ldclick('58')" size="mini">58</el-button>
+              <el-button class="btn-item" @click="ldclick('59')" size="mini">59</el-button>
+              <el-button class="btn-item" @click="ldclick('60')" size="mini">60</el-button>
+            </div>
           </div>
           <div class="snf-page">
             <div class="titles">市政基本信息</div>
@@ -1445,7 +1463,7 @@ export default {
   opacity: 1;
 }
 .table4 {
-  width: 16vw;
+  // width: 16vw;
   text-align: center;
   vertical-align: middle;
   line-height: 0.2rem;
@@ -1462,6 +1480,7 @@ table.hovertable {
   color: #333333;
   background-size: 100% 100%;
   background-image: url(/static/images/mode-ico/bg@2x.png);
+  width: 100%;
 }
 table.hovertable th {
   // border-width: 1px;
@@ -1481,6 +1500,15 @@ table.hovertable td {
   padding: 8px;
   border-style: solid;
   border-color: #1bffe4;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  .btn-item {
+    width: 15%;
+    margin: 5px 10px;
+  }
 }
 
 .ljxqlabel {
