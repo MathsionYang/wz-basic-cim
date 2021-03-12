@@ -59,7 +59,15 @@ const TRAFFIC_TOPIC = [
     url: 'true',
     type: 'model'
   },
+  {
+    label: "2021年倾斜摄影",
+    componentEvent: "cesium-3d-2021qxsy",
+    componentKey: "3d21",
+    url: 'true',
+    type: 'model'
+  },
 ];
+
 //电子地图
 const DZ_TOPIC = [
   {

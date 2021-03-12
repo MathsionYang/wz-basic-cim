@@ -420,8 +420,8 @@ export default {
     position: fixed;
     top: 80px !important;
     bottom: unset !important;
-    left: 0;
-    right: 40% !important;
+    /* left: 0; */
+    right: 25vw;
     width: 125px;
     margin: 0 auto;
     overflow: hidden;

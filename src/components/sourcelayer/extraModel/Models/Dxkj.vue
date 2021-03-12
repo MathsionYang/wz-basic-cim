@@ -1,15 +1,5 @@
 <template>
-  <div class="ThreeDContainer dxkj-analyse" :style="{ width: '300px' }">
-    <div>透明度：{{ aValue }}%</div>
-    <div class="slider-wrapper" @click.stop>
-      <el-slider
-        @change="change_Alpha_Value"
-        :min="aMin"
-        :max="aMax"
-        v-model="aValue"
-      ></el-slider>
-    </div>
-  </div>
+  
 </template>
 <script>
 import { mapActions } from "vuex";

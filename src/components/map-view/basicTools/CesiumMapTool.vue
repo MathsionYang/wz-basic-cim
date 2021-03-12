@@ -8,10 +8,6 @@
 -->
 <template>
   <div class="ThreeDContainercl" v-drag>
-    <div style="background-color: rgba(5, 41, 110, 0.78)">
-      <img src="/static/images/common/框.png" />
-    </div>
-
     <div
       class="cesiummaptool tframe"
       style="background-color: rgba(5, 41, 110, 0.78); padding-top: 7px"
@@ -45,12 +41,12 @@ export default {
     return {
       toolTypeRules: {
         rivername: [
-          { required: true, message: "请选择测量类型", trigger: "change" },
-        ],
+          { required: true, message: "请选择测量类型", trigger: "change" }
+        ]
       },
       toolTypes: [
         { label: "空间测量", value: "空间测量" },
-        { label: "贴地测量", value: "贴地测量" },
+        { label: "贴地测量", value: "贴地测量" }
       ],
       toolType: "空间测量",
       // cesium Object
@@ -58,7 +54,7 @@ export default {
       handlerDis: undefined,
       handlerArea: undefined,
       handlerHeight: undefined,
-      clampMode: 0,
+      clampMode: 0
     };
   },
   created() {
@@ -92,24 +88,26 @@ export default {
     //  事件绑定
     eventRegsiter() {
       const that = this;
-      that.handlerDis.measureEvt.addEventListener(function (result) {
+      that.handlerDis.measureEvt.addEventListener(function(result) {
         var dis = Number(result.distance);
         var positions = result.positions;
         var distance =
           dis > 1000 ? (dis / 1000).toFixed(2) + "km" : dis.toFixed(2) + "m";
         that.handlerDis.disLabel.text = "距离:" + distance;
       });
-      that.handlerDis.activeEvt.addEventListener(function (isActive) {
+      that.handlerDis.activeEvt.addEventListener(function(isActive) {
         if (isActive == true) {
           that.viewer.enableCursorStyle = false;
           that.viewer._element.style.cursor = "";
-          $("body").removeClass("measureCur").addClass("measureCur");
+          $("body")
+            .removeClass("measureCur")
+            .addClass("measureCur");
         } else {
           that.viewer.enableCursorStyle = true;
           $("body").removeClass("measureCur");
         }
       });
-      that.handlerArea.measureEvt.addEventListener(function (result) {
+      that.handlerArea.measureEvt.addEventListener(function(result) {
         var mj = Number(result.area);
         var positions = result.positions;
         var area =
@@ -118,17 +116,19 @@ export default {
             : mj.toFixed(2) + "㎡";
         that.handlerArea.areaLabel.text = "面积:" + area;
       });
-      that.handlerArea.activeEvt.addEventListener(function (isActive) {
+      that.handlerArea.activeEvt.addEventListener(function(isActive) {
         if (isActive == true) {
           that.viewer.enableCursorStyle = false;
           that.viewer._element.style.cursor = "";
-          $("body").removeClass("measureCur").addClass("measureCur");
+          $("body")
+            .removeClass("measureCur")
+            .addClass("measureCur");
         } else {
           that.viewer.enableCursorStyle = true;
           $("body").removeClass("measureCur");
         }
       });
-      that.handlerHeight.measureEvt.addEventListener(function (result) {
+      that.handlerHeight.measureEvt.addEventListener(function(result) {
         var distance =
           result.distance > 1000
             ? (result.distance / 1000).toFixed(2) + "km"
@@ -145,11 +145,13 @@ export default {
         that.handlerHeight.vLabel.text = "垂直高度:" + vHeight;
         that.handlerHeight.hLabel.text = "水平距离:" + hDistance;
       });
-      that.handlerHeight.activeEvt.addEventListener(function (isActive) {
+      that.handlerHeight.activeEvt.addEventListener(function(isActive) {
         if (isActive == true) {
           that.viewer.enableCursorStyle = false;
           that.viewer._element.style.cursor = "";
-          $("body").removeClass("measureCur").addClass("measureCur");
+          $("body")
+            .removeClass("measureCur")
+            .addClass("measureCur");
         } else {
           that.viewer.enableCursorStyle = true;
           $("body").removeClass("measureCur");
@@ -191,20 +193,20 @@ export default {
       this.handlerDis && this.handlerDis.deactivate();
       this.handlerArea && this.handlerArea.deactivate();
       this.handlerHeight && this.handlerHeight.deactivate();
-    },
+    }
   },
   directives: {
     drag: {
       // 指令的定义
-      bind: function (el) {
+      bind: function(el) {
         let odiv = el; //获取当前元素
-        el.onmousedown = (e) => {
+        el.onmousedown = e => {
           //算出鼠标相对元素的位置
           let disX = e.clientX - odiv.offsetLeft;
           let disY = e.clientY - odiv.offsetTop;
           let left = "";
           let top = "";
-          document.onmousemove = (e) => {
+          document.onmousemove = e => {
             //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
             left = e.clientX - disX;
             top = e.clientY - disY;
@@ -213,22 +215,22 @@ export default {
             odiv.style.left = left + "px";
             odiv.style.top = top + "px";
           };
-          document.onmouseup = (e) => {
+          document.onmouseup = e => {
             document.onmousemove = null;
             document.onmouseup = null;
           };
         };
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 <style>
 .ThreeDContainercl {
   position: absolute;
   z-index: 7;
-  top: 16vh;
-  left: 22vw;
+  top: 8vh;
+  left: 16vw;
   border-top: 10px solid transparent;
   border-right: 30px solid transparent;
   border-left: 33px solid transparent;

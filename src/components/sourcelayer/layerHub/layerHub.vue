@@ -142,9 +142,9 @@ export default {
       checkgj: [],
       gjldata: [
         {
-          imgs: "/static/images/mode-ico/视角切换选中框.png",
-          img: "/static/images/mode-ico/视角切换.png",
-          label: "视角切换",
+          imgs: "/static/images/mode-ico/地表开挖选中框.png",
+          img: "/static/images/mode-ico/地表开挖.png",
+          label: "地表开挖",
         },
         {
           imgs: "/static/images/mode-ico/剖切选中框.png",

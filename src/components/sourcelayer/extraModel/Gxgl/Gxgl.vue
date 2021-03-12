@@ -1,23 +1,4 @@
 <template>
-  <div class="ThreeDContainer civilization-center" :style="{ width: '400px' }">
-    <el-divider content-position="left">地表透明度</el-divider>
-    <div class="civilization-frame">
-      <div>透明度：{{ aValue }}%</div>
-      <div class="slider-wrapper" @click.stop>
-        <el-slider
-          @change="change_Alpha_Value"
-          :min="aMin"
-          :max="aMax"
-          v-model="aValue"
-        ></el-slider>
-      </div>
-    </div>
-    <el-divider content-position="left">倾斜开挖</el-divider>
-    <div class="civilization-frame">
-      <el-button class="elformbtn" @click="doExcavate">倾斜开挖</el-button>
-      <el-button class="elformbtn" @click="clearExcavate">清除</el-button>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -46,9 +27,9 @@ export default {
   },
   async mounted() {
     this.initScene();
-    this.initExcavate();
+    //this.initExcavate();
     this.cameraMove();
-    this.change_Alpha_Value(this.aValue);
+    //this.change_Alpha_Value(this.aValue);
   },
   beforeDestroy() {
     //  透明度

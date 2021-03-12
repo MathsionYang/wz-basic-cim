@@ -111,6 +111,8 @@ export const ExtraSourceURL = {
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-S1/rest/realspace/datas/S1/config",
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
+  BJSWQNEW:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_new/config",  
   JFJ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
   BJJM:

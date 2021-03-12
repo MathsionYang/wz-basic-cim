@@ -28,7 +28,7 @@
             :key="index"
             v-show="item && !~filterKey.indexOf(key) && index < 6"
           >
-            <div style="display: inline-block">{{ key }}:</div>
+            <div style="display: inline-block;color:#ffffff">{{ key }}:</div>
             <div style="display: inline-block">{{ item }}</div>
           </div>
           <!-- <ul class="content-body">
@@ -765,9 +765,11 @@ export default {
         for (let i = 0; i < this.LCdata.length; i++) {
           Lj.setOnlyObjsVisible(this.LCdata[i], true);
         }
+        Lj.setOnlyObjsVisible(this.Lb, true); //显示外立面部件
       } else {
         window.earth.scene.addS3MTilesLayerByScp(
-          "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E6%A0%8B/config",
+          "http://172.20.83.223:8098/iserver/services/3D-mongodb16/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E5%8F%B7%E6%A5%BC/config",
+          //"http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E6%A0%8B/config",
           {
             name: "蒲鞋市新村59号楼"
           }
@@ -807,14 +809,14 @@ export default {
       }
       //现将所有部件显示
       const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
-      console.log("图层时候",this.LCdata)
+      console.log("图层时候", this.LCdata);
       for (let i = 0; i < this.LCdata.length; i++) {
         Lj.setOnlyObjsVisible(this.LCdata[i], false);
       }
       var yblc = this.LCdata[parseInt(data) - 1];
+      Lj.setOnlyObjsVisible(this.Lb, false); //显示外立面部件
       Lj.brightness = 0.5; //图层亮度调节
       Lj.setOnlyObjsVisible(yblc, true); //隐藏非选中层部件
-      //Lj.setOnlyObjsVisible(this.Lb, true); //显示外立面部件
     },
     //选择户室
     lsclick(data) {
@@ -1097,10 +1099,11 @@ export default {
               var LCdatas = [];
               this.Lb = [];
               for (let j = 0; j < res.result.features.length; j++) {
+                console.log("获取图层", res.result.features[j].data.FLOOR);
                 if (res.result.features[j].data.FLOOR == floors) {
                   LCdatas.push(parseInt(res.result.features[j].data.SMID));
                 }
-                if (res.result.features[j].data.LAYERNAME == "外立面") {
+                if (res.result.features[j].data.LAYERNAME == "房顶") {
                   this.Lb.push(parseInt(res.result.features[j].data.SMID));
                 }
                 if (j + 1 == res.result.features.length) {
@@ -1169,6 +1172,10 @@ export default {
     fh() {
       this.isld = false; //关闭楼栋信息
       this.isLJ = true; //开启小区信息
+      const LJxqXQ = window.earth.scene.layers.find("LJxqXQ");
+      if (LJxqXQ) {
+        LJxqXQ.removeAllFlattenRegion();
+      }
       //关闭覆盖面
       if (window.lastHouseEntity) {
         window.earth.entities.remove(window.lastHouseEntity);
@@ -1202,8 +1209,8 @@ export default {
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       V_ld.visible = false;
       //打开原59号楼精模
-      const V_LAYER = window.earth.scene.layers.find("Ljxq");
-      V_LAYER.setOnlyObjsVisible([348], true);
+      // const V_LAYER = window.earth.scene.layers.find("Ljxq");
+      //V_LAYER.setOnlyObjsVisible([348], true);
     },
     /**
      *  详情点赋值
@@ -1519,7 +1526,7 @@ table.hovertable td {
   z-index: 99;
   right: 10px;
   top: 10vh;
-  width: 25vw;
+  width: 54vh;
 }
 .ljxqlabels {
   height: 67vh;
@@ -1587,7 +1594,7 @@ ul li {
 
 #nav {
   top: 24vh;
-  right: 26vw;
+  right: 55vh;
   margin-top: -140px;
   display: inline-block;
   vertical-align: middle;
@@ -1597,7 +1604,7 @@ ul li {
 .snf-nav {
   height: 14vh;
   margin: 2vh 0;
-  width: 2.5vw;
+  width: 6vh;
   text-align: center;
   vertical-align: middle;
   .bg-image("/static/images/mode-ico/选择框@2x");
@@ -1606,7 +1613,7 @@ ul li {
 #nav div.active {
   height: 14vh;
   margin: 2vh 0;
-  width: 2.5vw;
+  width: 6vh;
   text-align: center;
   vertical-align: middle;
   .bg-image("/static/images/mode-ico/已选择框@2x");
@@ -1675,7 +1682,7 @@ ul li {
   .leaflet-popup-content-wrapper {
     //text-align: center;
     //height: 19vh;
-    width: 16vw;
+    width: 30vh;
     //box-sizing: border-box;
     //padding: 3vh;
     padding-bottom: 4vh;

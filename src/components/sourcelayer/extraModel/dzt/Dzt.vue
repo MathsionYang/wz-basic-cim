@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="ThreeDContainer geology-analyse" :style="{ width: '300px' }">
+    <!-- <div class="ThreeDContainer geology-analyse" :style="{ width: '300px' }">
       <div>透明度：{{ aValue }}%</div>
       <div class="slider-wrapper" @click.stop>
         <el-slider
@@ -10,7 +10,7 @@
           v-model="aValue"
         ></el-slider>
       </div>
-    </div>
+    </div> -->
     <div
       class="legend-popup"
       :style="{

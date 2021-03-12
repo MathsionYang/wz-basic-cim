@@ -59,7 +59,7 @@ export default {
     //  关闭倾斜摄影模块
     closeTrafficSubwayModel() {
       this.clearTrafficSubwayModel();
-      this.$bus.$emit("cesium-3d-hub-event", { value: null });
+      this.$bus.$emit("cesium-3d-jz", { value: null });
     },
     //  清除BIM模块
     clearTrafficSubwayModel() {

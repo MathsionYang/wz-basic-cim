@@ -12,7 +12,7 @@
       :class="{
         label: true,
         active: item.id == forceTreeLabel,
-        disabled: item.disabled,
+        disabled: item.disabled
       }"
       v-for="(item, i) in data"
       :key="i"
@@ -39,8 +39,8 @@ export default {
         { id: "孪生城市全貌", label: "孪生城市全貌" },
         { id: "城市规划", label: "城市规划" },
         { id: "城市建设", label: "城市建设" },
-        { id: "城市运营", label: "城市运营" },
-      ],
+        { id: "城市运营", label: "城市运营" }
+      ]
     };
   },
   computed: {},
@@ -49,8 +49,8 @@ export default {
     ...mapActions("map", ["SetNightMode", "SetCameraMode"]),
     SetForceTreeLabels(item) {
       this.forceTreeLabel = item;
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -80,7 +80,7 @@ export default {
     z-index: 7;
     width: 8vw;
     border: 0;
-    margin-right: 5px;
+    margin-right: 0.3vw;
     background-size: 100% 100%;
     background-image: url(/static/images/mode-ico/标题.png);
   }
@@ -91,7 +91,7 @@ export default {
       z-index: 7;
       width: 8vw;
       border: 0;
-      margin-right: 5px;
+      margin-right: 0.3vw;
       background-size: 100% 100%;
       background-image: url(/static/images/mode-ico/标题选中.png);
     }
@@ -99,10 +99,10 @@ export default {
 
   > .bt {
     position: absolute;
-    font-size: 20px;
+    font-size: 1vw;
     font-family: YouSheBiaoTiHei;
     font-weight: 400;
-    line-height: 49px;
+    line-height: 3vw;
     bottom: 0;
     left: 0;
     color: #ffffff;
@@ -117,10 +117,10 @@ export default {
   &.active {
     > .bt {
       position: absolute;
-      font-size: 20px;
+      font-size: 1vw;
       font-family: YouSheBiaoTiHei;
       font-weight: 400;
-      line-height: 49px;
+      line-height: 3vw;
       bottom: 0;
       left: 0;
       color: #ffff08;

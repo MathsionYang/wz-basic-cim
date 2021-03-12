@@ -30,7 +30,7 @@ const Cesium = window.Cesium;
 
 export default {
   name: "TJXline",
-  data: function () {
+  data: function() {
     return {
       sightline: undefined,
       visibleColor: "rbg(0,200,0)", // 可见区域显示的颜色
@@ -43,7 +43,7 @@ export default {
       screenSpaceEventHandler: undefined,
       tooltip: null,
       handlerPolygon: undefined,
-      skyline: null,
+      skyline: null
     };
   },
   created() {
@@ -103,20 +103,20 @@ export default {
       this.sightlineClear();
       this.$bus.$emit("cesium-3d-maptool", { value: null });
       this.$bus.$emit("cesium-3d-imgs", { value: "清除" });
-    },
+    }
   },
   directives: {
     drag: {
       // 指令的定义
-      bind: function (el) {
+      bind: function(el) {
         let odiv = el; //获取当前元素
-        el.onmousedown = (e) => {
+        el.onmousedown = e => {
           //算出鼠标相对元素的位置
           let disX = e.clientX - odiv.offsetLeft;
           let disY = e.clientY - odiv.offsetTop;
           let left = "";
           let top = "";
-          document.onmousemove = (e) => {
+          document.onmousemove = e => {
             //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
             left = e.clientX - disX;
             top = e.clientY - disY;
@@ -125,22 +125,22 @@ export default {
             odiv.style.left = left + "px";
             odiv.style.top = top + "px";
           };
-          document.onmouseup = (e) => {
+          document.onmouseup = e => {
             document.onmousemove = null;
             document.onmouseup = null;
           };
         };
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 <style>
 .ThreeDContainer {
   position: absolute;
   z-index: 7;
-  top: 16vh;
-  left: 22vw;
+  top: 8vh;
+  left: 16vw;
   border: 27px solid transparent;
   -moz-border-image: url("/static/images/common/框.png") 30 30 round; /* Old Firefox */
   -webkit-border-image: url("/static/images/common/框.png") 30 30 round; /* Safari and Chrome */

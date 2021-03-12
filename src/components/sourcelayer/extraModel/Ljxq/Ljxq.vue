@@ -56,6 +56,10 @@ export default {
         LAYERS.map(v => {
           const V_LAYER = window.earth.scene.layers.find(v.name);
           V_LAYER.visible = true;
+          V_LAYER.removeAllFlattenRegion();
+          const V_LAYERS = window.earth.scene.layers.find("Ljxq");
+          V_LAYERS.visible = true;
+          V_LAYERS.removeAllFlattenRegion();
           var fwm = window.earth.entities.values;
           for (let i = 0; i < fwm.length; i++) {
             if (fwm[i].id != "滨江CBD") {
@@ -67,15 +71,10 @@ export default {
           );
           window.labelMap[this.node.id].setAllLabelsVisible(true);
           this.switchSearchBox(this.node);
-          // mapBJSWQLayerInit(
-          //   "LJxqImage",
-          //   ServiceUrl.LJxqImage,
-          //   "erweidata:old_ommunity"
-          // );
         });
       } else {
         this.initBimScenes();
-       //this.addFlattenRegions();
+        //this.addFlattenRegions();
       }
     },
     initBimScenes() {
@@ -146,7 +145,7 @@ export default {
     //  关闭
     closeTrafficSubwayModel() {
       this.clearTrafficSubwayModel();
-      this.$bus.$emit("cesium-3d-hub-event", { value: null });
+      this.$bus.$emit("cesium-3d-ljxq", { value: null });
     },
     //  清除
     clearTrafficSubwayModel() {
@@ -154,8 +153,9 @@ export default {
       // V_LAYER.setOnlyObjsVisible([348], true);
       const V_LAYER = window.earth.scene.layers.find("Ljxq");
       V_LAYER.visible = false;
+      V_LAYER.removeAllFlattenRegion();
       const V_LAYERS = window.earth.scene.layers.find("LJxqXQ");
-      V_LAYERS.removeAllFlattenRegion();    
+      V_LAYERS.removeAllFlattenRegion();
       V_LAYERS.visible = false;
 
       const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");

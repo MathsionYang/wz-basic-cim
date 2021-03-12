@@ -18,6 +18,7 @@
       position: relative;
       top: 0;
       left: 0;
+      width: 2vw;
       transition: all 0.5s linear;
       cursor: pointer;
 
@@ -28,8 +29,9 @@
 
     .gjls {
       position: absolute;
-      top: 1.2vh;
-      right: 0.8vw;
+      top: 1.5vh;
+      width: 1vw;
+      right: 2vh;
     }
 
     @keyframes round_animate {
@@ -42,7 +44,7 @@
   .gjl {
     position: absolute;
     text-align: center;
-    z-index: 7;
+    z-index: 35;
     right: 1vw;
     bottom: -1vh;
     display: none;
@@ -60,7 +62,7 @@
       position: relative;
       top: 0;
       left: 0;
-      width: 19vw
+      width: 14vw
     }
 
     .gjla {
@@ -69,13 +71,13 @@
       right: -1vw;
 
       .gjlb {
-        margin-right: 3vw;
+        margin-right: 1.3vw;
         margin-top: 3.4vh;
 
         .gjltb {
           display: inline-block;
-          width: 3vw;
-          height: 5vh;
+          width: 2.4vw;
+          height: 8vh;
         }
       }
     }
@@ -87,7 +89,7 @@
     bottom: 0;
 
     .event {
-      width: 6vh;
+      width: 3vw;
     }
 
     .mark {
@@ -137,7 +139,7 @@
         position: relative;
         margin: 0 auto;
         padding: 3px 10px;
-        font-size: 18px;
+        font-size: 1vw;
         font-family: YouSheBiaoTiHei;
         font-weight: 400;
         // line-height: 7px;
@@ -173,8 +175,8 @@
         .fuhao {
           background-image: url("/static/images/mode-ico/未选中.png");
           background-size: 100% 100%;
-          width: 23px;
-          height: 23px;
+          width: 1vw;
+          height: 1vw;
           display: inline-block;
           vertical-align: middle;
           // margin-left: 1vh;
@@ -183,8 +185,8 @@
         .notfuhao {
           background-image: url("/static/images/mode-ico/未选中.png");
           background-size: 100% 100%;
-          width: 23px;
-          height: 23px;
+          width: 1vw;
+          height: 1vw;
           display: inline-block;
           vertical-align: middle;
           // margin-left: 1vh;
@@ -194,8 +196,8 @@
           >.fuhao {
             background-image: url("/static/images/mode-ico/选中.png");
             background-size: 100% 100%;
-            width: 23px;
-            height: 23px;
+            width: 1vw;
+            height: 1vw;
             display: inline-block;
             vertical-align: middle;
             //margin-left: 1vh;
@@ -203,7 +205,7 @@
         }
 
         .ring {
-          font-size: 18px;
+          font-size: 1vw;
           font-family: YouSheBiaoTiHei;
           /* font-weight: 400; */
           /* line-height: 7px; */
@@ -220,7 +222,7 @@
 
         &.active {
           .ring {
-            font-size: 18px;
+            font-size: 1vw;
             font-family: YouSheBiaoTiHei;
             /* font-weight: 400; */
             /* line-height: 7px; */
@@ -404,10 +406,10 @@
 
       >.bt {
         position: absolute;
-        font-size: 17px;
+        font-size: 1vw;
         font-family: YouSheBiaoTiHei;
         font-weight: 400;
-        line-height: 49px;
+        line-height: 2.5vw;
         bottom: 0;
         left: 0;
         color: rgb(255, 255, 255);
@@ -422,10 +424,10 @@
       &.active {
         >.bt {
           position: absolute;
-          font-size: 17px;
+          font-size: 1vw;
           font-family: YouSheBiaoTiHei;
           font-weight: 400;
-          line-height: 49px;
+          line-height: 2.5vw;
           bottom: 0;
           left: 0;
           color: #FFFF08;

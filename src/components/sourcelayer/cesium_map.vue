@@ -42,6 +42,7 @@
         v-if="showgdFrame == '3d4'"
       />
       <BJSWQModel ref="bjswqmodel" v-if="showqxsyFrame == '3d5'" />
+      <BJSWQModelS ref="bjswqmodels" v-if="showqxsyFrames == '3d21'" />
       <BJJM ref="bjjm" v-if="showjzFrame == '3d6'" />
       <OUHAI ref="ouhai" v-if="showouhaiFrame == '3d20'" />
       <CivilizationCenter
@@ -56,6 +57,7 @@
       <SZgc v-if="showSZGC == '3d18'" />
       <JYmx v-if="showJYmx == '3d19'" />
 
+      <Surface ref="surface" v-if="showSubTool == '地表开挖'" />
       <CesiumMapTool ref="cesiummaptool" v-if="showSubTool == '长度测量'" />
       <VisualizationAnalyse
         ref="visualizationanalyse"
@@ -93,6 +95,7 @@ import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedMode
 import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceAnalyse/AroundSourceAnalyse";
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
 import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
+import BJSWQModelS from "components/sourcelayer/extraModel/Models/BjswqModels.vue";
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
 import OUHAI from "components/sourcelayer/extraModel/Models/OuhaiModel";
 import Dxkj from "components/sourcelayer/extraModel/Models/Dxkj";
@@ -116,6 +119,7 @@ import AuthFailPopup from "components/sourcelayer/commonFrame/AuthFailPopup/Auth
 import Overview from "components/sourcelayer/extraModel/Overview/Overview.vue";
 
 import CesiumMapTool from "components/map-view/basicTools/CesiumMapTool";
+import Surface from "components/map-view/basicTools/Surface";
 import Sightline from "components/map-view/basicTools/Sightline";
 import VisualizationAnalyse from "components/map-view/basicTools/VisualizationAnalyse";
 import TJXline from "components/map-view/basicTools/TJXline";
@@ -174,7 +178,8 @@ export default {
       validated: false,
       isInfoFrame: false,
       authFailshallPop: false,
-      ispartsclick: false
+      ispartsclick: false,
+      showqxsyFrames: null,
     };
   },
   computed: {
@@ -228,7 +233,9 @@ export default {
     VisualizationAnalyse,
     TJXline,
     RZFx,
-    Pq
+    Pq,
+    Surface,
+    BJSWQModelS
   },
   created() {
     window.extraHash = {};
@@ -632,6 +639,11 @@ export default {
       this.$bus.$off("cesium-3d-qxsy");
       this.$bus.$on("cesium-3d-qxsy", ({ value }) => {
         this.showqxsyFrame = value;
+      });
+      //2021倾斜摄影
+      this.$bus.$off("cesium-3d-2021qxsy");
+      this.$bus.$on("cesium-3d-2021qxsy", ({ value }) => {
+        this.showqxsyFrames = value;
       });
       //建筑三维
       this.$bus.$off("cesium-3d-jz");

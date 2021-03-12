@@ -6,6 +6,15 @@
     >
       <div>
         <div class="gjllabel">剖切裁剪</div>
+        <div style="margin-top: 1vh;color: white;">透明度：{{ aValue }}%</div>
+        <div class="slider-wrapper" @click.stop>
+          <el-slider
+            @change="change_Alpha_Value"
+            :min="aMin"
+            :max="aMax"
+            v-model="aValue"
+          ></el-slider>
+        </div>
         <div class="buttons" @click="eventRegsiter">
           <span class="bt">开始</span>
         </div>
@@ -27,7 +36,7 @@ let editorBox = undefined;
 let boxEntity = undefined;
 export default {
   name: "RZFX",
-  data: function () {
+  data: function() {
     return {
       sightline: undefined,
       visibleColor: "rbg(0,200,0)", // 可见区域显示的颜色
@@ -40,11 +49,15 @@ export default {
       screenSpaceEventHandler: undefined,
       tooltip: null,
       handlerPolygon: undefined,
+      aMin: 0,
+      aMax: 100,
+      aValue: 75
     };
   },
   created() {},
   async mounted() {
     this.initTailor();
+    this.change_Alpha_Value(75);
     //this.eventRegsiter(); //监听eventDraw方法
   },
   beforeDestroy() {
@@ -55,15 +68,19 @@ export default {
     this.screenSpaceEventHandler = undefined;
     this.handlerPolygon = undefined;
     this.sightlineClear();
+    this.change_Alpha_Value(0);
   },
   methods: {
     //事件绑定
     eventRegsiter() {
       handlerBox.activate();
     },
+    change_Alpha_Value(val) {
+      window.earth.scene.globe.globeAlpha = (100 - val) / 100;
+    },
     initTailor() {
       handlerBox = new Cesium.DrawHandler(window.earth, Cesium.DrawMode.Box);
-      handlerBox.drawEvt.addEventListener((e) => {
+      handlerBox.drawEvt.addEventListener(e => {
         boxEntity = e.object;
         var newDim = boxEntity.box.dimensions.getValue();
         var position = boxEntity.position.getValue(0);
@@ -71,12 +88,12 @@ export default {
           dimensions: newDim,
           position: position,
           clipMode: "clip_behind_all_plane",
-          heading: 0,
+          heading: 0
         };
 
         //box编辑
         editorBox = new Cesium.BoxEditor(window.earth, boxEntity);
-        editorBox.editEvt.addEventListener((e) => {
+        editorBox.editEvt.addEventListener(e => {
           boxEntity.box.dimensions = e.dimensions;
           boxEntity.position = e.position;
           boxEntity.orientation = e.orientation;
@@ -125,7 +142,7 @@ export default {
         dimensions: newDim,
         position: position,
         clipMode: "clip_behind_all_plane",
-        heading: heading,
+        heading: heading
       };
       this.setAllLayersClipOptions(boxOptions);
     },
@@ -156,20 +173,20 @@ export default {
       this.sightlineClear();
       this.$bus.$emit("cesium-3d-maptool", { value: null });
       this.$bus.$emit("cesium-3d-imgs", { value: "清除" });
-    },
+    }
   },
   directives: {
     drag: {
       // 指令的定义
-      bind: function (el) {
+      bind: function(el) {
         let odiv = el; //获取当前元素
-        el.onmousedown = (e) => {
+        el.onmousedown = e => {
           //算出鼠标相对元素的位置
           let disX = e.clientX - odiv.offsetLeft;
           let disY = e.clientY - odiv.offsetTop;
           let left = "";
           let top = "";
-          document.onmousemove = (e) => {
+          document.onmousemove = e => {
             //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
             left = e.clientX - disX;
             top = e.clientY - disY;
@@ -178,22 +195,32 @@ export default {
             odiv.style.left = left + "px";
             odiv.style.top = top + "px";
           };
-          document.onmouseup = (e) => {
+          document.onmouseup = e => {
             document.onmousemove = null;
             document.onmouseup = null;
           };
         };
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 <style>
+.el-slider__runway {
+  width: 100%;
+  height: 6px;
+  margin: 6px 0;
+  background-color: #e4e7ed;
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  vertical-align: middle;
+}
 .ThreeDContainer {
   position: absolute;
   z-index: 7;
-  top: 16vh;
-  left: 22vw;
+  top: 8vh;
+  left: 16vw;
   border: 27px solid transparent;
   -moz-border-image: url("/static/images/common/框.png") 30 30 round; /* Old Firefox */
   -webkit-border-image: url("/static/images/common/框.png") 30 30 round; /* Safari and Chrome */

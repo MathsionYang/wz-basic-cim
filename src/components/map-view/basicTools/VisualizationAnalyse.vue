@@ -29,7 +29,6 @@
           <span class="bt">关闭</span>
         </div>
       </div>
-     
     </div>
   </div>
 </template>
@@ -42,7 +41,7 @@ const viewModel = {
   verticalFov: 1.0,
   horizontalFov: 1.0,
   visibleAreaColor: "#ffffffff",
-  invisibleAreaColor: "#ffffffff",
+  invisibleAreaColor: "#ffffffff"
 };
 export default {
   name: "VisualizationAnalyse",
@@ -51,7 +50,7 @@ export default {
     handler: undefined,
     viewshed3D: undefined,
     viewPosition: undefined,
-    viewer: undefined,
+    viewer: undefined
   },
   created() {
     this.viewer = window.earth;
@@ -78,7 +77,7 @@ export default {
     //  事件绑定
     eventRegsiter() {
       const that = this;
-      that.handler.setInputAction(function (e) {
+      that.handler.setInputAction(function(e) {
         if (!that.viewPosition) return;
         // 若此标记为false，则激活对可视域分析对象的操作
         if (!that.viewer.scene.viewFlag) {
@@ -98,11 +97,11 @@ export default {
           }
         }
       }, Cesium.ScreenSpaceEventType.MOUSE_MOVE);
-      that.handler.setInputAction(function (e) {
+      that.handler.setInputAction(function(e) {
         //鼠标右键事件回调，不再执行鼠标移动事件中对可视域的操作
         that.viewer.scene.viewFlag = true;
       }, Cesium.ScreenSpaceEventType.RIGHT_CLICK);
-      that.pointHandler.drawEvt.addEventListener(function (result) {
+      that.pointHandler.drawEvt.addEventListener(function(result) {
         const point = result.object;
         const position = point.position;
         that.viewPosition = position;
@@ -141,27 +140,27 @@ export default {
       this.clearVisualize();
       this.viewshed3D && this.viewshed3D.destroy();
       this.$bus.$emit("cesium-3d-maptool", { value: null });
-        this.$bus.$emit("cesium-3d-imgs", { value: "清除" });
+      this.$bus.$emit("cesium-3d-imgs", { value: "清除" });
     },
     //  清除分析结果
     clearVisualize() {
       this.viewer && this.viewer.entities.removeAll();
       this.viewshed3D && (this.viewshed3D.distance = 0.1);
       this.viewer && (this.viewer.scene.viewFlag = true);
-    },
+    }
   },
-    directives: {
+  directives: {
     drag: {
       // 指令的定义
-      bind: function (el) {
+      bind: function(el) {
         let odiv = el; //获取当前元素
-        el.onmousedown = (e) => {
+        el.onmousedown = e => {
           //算出鼠标相对元素的位置
           let disX = e.clientX - odiv.offsetLeft;
           let disY = e.clientY - odiv.offsetTop;
           let left = "";
           let top = "";
-          document.onmousemove = (e) => {
+          document.onmousemove = e => {
             //用鼠标的位置减去鼠标相对元素的位置，得到元素的位置
             left = e.clientX - disX;
             top = e.clientY - disY;
@@ -170,22 +169,22 @@ export default {
             odiv.style.left = left + "px";
             odiv.style.top = top + "px";
           };
-          document.onmouseup = (e) => {
+          document.onmouseup = e => {
             document.onmousemove = null;
             document.onmouseup = null;
           };
         };
-      },
-    },
-  },
+      }
+    }
+  }
 };
 </script>
 <style>
 .ThreeDContainerts {
   position: absolute;
   z-index: 7;
-  top: 16vh;
-  left: 22vw;
+  top: 8vh;
+  left: 16vw;
   border: 27px solid transparent;
   -moz-border-image: url("/static/images/common/框.png") 30 30 round; /* Old Firefox */
   -webkit-border-image: url("/static/images/common/框.png") 30 30 round; /* Safari and Chrome */
