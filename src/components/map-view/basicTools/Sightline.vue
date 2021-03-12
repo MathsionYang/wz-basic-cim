@@ -211,10 +211,10 @@ export default {
   top: 16vh;
   left: 22vw;
   border: 27px solid transparent;
-  -moz-border-image: url("/static/images/mode-ico/通用框.png") 30 30 round; /* Old Firefox */
-  -webkit-border-image: url("/static/images/mode-ico/通用框.png") 30 30 round; /* Safari and Chrome */
-  -o-border-image: url("/static/images/mode-ico/通用框.png") 30 30 round; /* Opera */
-  border-image: url("/static/images/mode-ico/通用框_1.png") 30 30 round;
+  -moz-border-image: url("/static/images/common/框.png") 30 30 round; /* Old Firefox */
+  -webkit-border-image: url("/static/images/common/框.png") 30 30 round; /* Safari and Chrome */
+  -o-border-image: url("/static/images/common/框.png") 30 30 round; /* Opera */
+  border-image: url("/static/images/common/框.png") 30 30 round;
 }
 .gjllabel {
   font-size: 18px;

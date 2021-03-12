@@ -26,14 +26,17 @@ export default {
     initBimScene(fn) {
       const _LAYER_ = window.earth.scene.layers.find(LAYERS[0].name);
       if (_LAYER_) {
-        LAYERS.map((v) => {
+        LAYERS.map(v => {
           const V_LAYER = window.earth.scene.layers.find(v.name);
           V_LAYER.visible = true;
+          const V_LAYER_baimo = window.earth.scene.layers.find("BJJM");
+          console.log("图层控制", V_LAYER_baimo);
+          V_LAYER_baimo.setOnlyObjsVisible([350], false);
         });
       } else {
-        const PROMISES = LAYERS.map((v) => {
+        const PROMISES = LAYERS.map(v => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
-            name: v.name,
+            name: v.name
           });
         });
       }
@@ -44,13 +47,13 @@ export default {
         destination: {
           x: -2879361.2453708444,
           y: 4842957.116771699,
-          z: 2993404.3775209677,
+          z: 2993404.3775209677
         },
         orientation: {
           heading: 5.9232943303067405,
           pitch: -0.574668319401269,
-          roll: 0,
-        },
+          roll: 0
+        }
       });
     },
     //  关闭倾斜摄影模块
@@ -60,11 +63,11 @@ export default {
     },
     //  清除BIM模块
     clearTrafficSubwayModel() {
-      LAYERS.map((v) => {
+      LAYERS.map(v => {
         const V_LAYER = window.earth.scene.layers.find(v.name);
         V_LAYER.visible = false;
       });
-    },
-  },
+    }
+  }
 };
 </script>

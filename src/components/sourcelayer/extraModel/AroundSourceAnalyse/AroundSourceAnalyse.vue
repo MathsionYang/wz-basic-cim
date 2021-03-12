@@ -193,6 +193,7 @@ export default {
       const aroundSourceAnalyseList = [];
 
       this.aroundOption.forEach((item) => hideVisible(item));
+      console.log("aa",forceEntity)
       this.aroundOption
         .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
         .forEach((item) => {

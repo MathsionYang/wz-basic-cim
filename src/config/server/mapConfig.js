@@ -8,7 +8,8 @@
  */
 export const ServiceUrl = {
   //  温州全市域白模
-  WZBaimo: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-RESPYQSY/rest/realspace/datas/RES_PY_QSY/config",
+  //WZBaimo: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-RESPYQSY/rest/realspace/datas/RES_PY_QSY/config",
+   WZBaimo: "http://172.20.83.223:8098/iserver/services/3D-mongodb14/rest/realspace/datas/RES_PY_QSY/config",
   //  夜间模型
   WZBaimo_OBJ: [
     {
@@ -57,7 +58,8 @@ export const ServiceUrl = {
   STATIC_RIVER: "https://ditu.wzcitybrain.com/iserver/services/3D-River_Static/rest/realspace/datas/River@River/config",
   //  影像底图
   SWImage:
-    "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-YX2019SW/rest/realspace/datas/YX_2019_SW",
+    //"https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-YX2019SW/rest/realspace/datas/YX_2019_SW",
+    "http://10.36.245.203:8090/iserver/services/map-agscachev2-YXYX2020CGCS2000/rest/maps/YX_YX_2020_CGCS2000",
   //  大数据底图
   DataImage:
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DSJCGS2000SW/rest/realspace/datas/DSJ_CGS2000_SW",
@@ -111,14 +113,14 @@ export const ExtraSourceURL = {
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   JFJ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
-  Ljxqqx:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/PuXieShi/config",    
   BJJM:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/max_cim_sample/config",
   OUHAI:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxouhaiqufu/rest/realspace/datas/max_ouhai_qufu/config",
   LJxq:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimpuxieshi/rest/realspace/datas/max_cim_puxieshi/config",  
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimpuxieshi/rest/realspace/datas/max_cim_puxieshi/config",
+  LJxqXQ:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/PuXieShi/config"    
 };
 
 

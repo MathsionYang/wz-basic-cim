@@ -9,7 +9,7 @@
 <template>
   <div class="ThreeDContainercl" v-drag>
     <div style="background-color: rgba(5, 41, 110, 0.78)">
-      <img src="/static/images/mode-ico/通用框装饰.png" />
+      <img src="/static/images/common/框.png" />
     </div>
 
     <div
