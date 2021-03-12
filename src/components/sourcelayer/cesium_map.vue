@@ -67,7 +67,7 @@
       <Pq ref="pq" v-if="showSubTool == '剖切'" />
 
       <VideoCircle ref="videoCircle" />
-      <RoadLine ref="roadline" />
+      <!-- <RoadLine ref="roadline" /> -->
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
       <BIMinfoFrame ref="biminfoFrame" />
       <AroundSourceAnalyse ref="aroundSourceAnalyse" />

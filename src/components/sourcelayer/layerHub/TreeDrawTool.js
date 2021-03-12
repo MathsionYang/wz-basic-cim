@@ -142,7 +142,7 @@ export const treeDrawTool = (context, { result }, node, fields = [], fn) => {
       v.geometry.y,
       4
     );
-    !node.hiddenIcon && !node.hiddenLabel && window.labelMap[node.id].add({
+    !node.hiddenLabel && window.labelMap[node.id].add({
       id: `label@${v.attributes.SMID}@${node.id}`,
       text: v.attributes.SHORTNAME || v.attributes[node.withExtraKey] || v.attributes.NAME,
       position,

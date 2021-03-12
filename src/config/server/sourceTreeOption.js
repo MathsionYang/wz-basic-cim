@@ -354,6 +354,7 @@ const CITYBJ_TOPIC = [
       id: "路灯",
       newdataset: "erweidata:JMSS_LD",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     }, {
       label: '',
       type: 'mvt',
@@ -363,6 +364,7 @@ const CITYBJ_TOPIC = [
       id: "电杆",
       newdataset: "erweidata:SZSS_DG",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     }, {
       label: '消防栓',
       type: 'mvt',
@@ -372,6 +374,7 @@ const CITYBJ_TOPIC = [
       id: "消防栓",
       newdataset: "erweidata:SZSS_XFS",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     },
     {
       label: '天然气管线检修井',
@@ -382,6 +385,7 @@ const CITYBJ_TOPIC = [
       id: "天然气管线检修井",
       newdataset: "erweidata:SZSS_RQGXJXJ",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     },
     {
       label: '污水检修井',
@@ -392,6 +396,7 @@ const CITYBJ_TOPIC = [
       id: "污水检修井",
       newdataset: "erweidata:SZSS_WSJXJ",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     },
     {
       label: '电力检修井',
@@ -402,6 +407,7 @@ const CITYBJ_TOPIC = [
       id: "电力检修井",
       newdataset: "erweidata:SZSS_DLJXJ",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     },
     {
       label: '给水管线检修井',
@@ -412,6 +418,7 @@ const CITYBJ_TOPIC = [
       id: "给水管线检修井",
       newdataset: "erweidata:SZSS_JSGXJXJ",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     },
     {
       label: '雨水检修井',
@@ -422,6 +429,7 @@ const CITYBJ_TOPIC = [
       id: "雨水检修井",
       newdataset: "erweidata:SZSS_YSJXJ",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      hiddenLabel: true
     }
   ]
   },

@@ -88,6 +88,7 @@
 import gcoord from "gcoord";
 import { mapGetters } from "vuex";
 import { treeDrawTool } from "../../layerHub/TreeDrawTool";
+import { getIserverFields } from "api/iServerAPI";
 import {
   CESIUM_TREE_AROUND_ANALYSE_OPTION,
   CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION,
@@ -204,7 +205,7 @@ export default {
               // 缓冲距离单位疑似十万米！！！图形单位米！！！
               bufferDistance: distance / 100000,
               toIndex: -1,
-              datasetNames: [`${item.newdataset}`],
+              datasetNames: [item.newdataset],
               returnContent: true,
               geometry: forceEntity.geometry,
             }
@@ -219,7 +220,8 @@ export default {
                     res.result.features &&
                     res.result.features.length
                   ) {
-                    treeDrawTool(this, res, item);
+                    const fields = await getIserverFields(item.url, item.newdataset);
+                    treeDrawTool(this, res, item, fields);
 
                     //  求距离
                     let geodesic = new Cesium.EllipsoidGeodesic();
