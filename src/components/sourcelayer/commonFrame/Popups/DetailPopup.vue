@@ -13,7 +13,7 @@
       class="leaflet-popup"
       v-show="forcePosition.x && forcePosition.y"
       :style="{
-        transform: `translate3d(${forcePosition.x}px,${forcePosition.y}px, 0)`,
+        transform: `translate3d(${forcePosition.x}px,${forcePosition.y}px, 0)`
       }"
     >
       <a class="leaflet-popup-close-button" href="#" @click="closePopup">×</a>
@@ -94,11 +94,11 @@
         </div>
       </div>
     </div>
-    <div class="side-info" v-show="showSide">
+    <div class="side-info" v-if="showSide">
       <div class="info-header">
         <div class="title">信息详情</div>
         <div class="decorate"></div>
-        <div class="close" @click="showSide = false"></div>
+        <div class="close" @click="closePopup"></div>
       </div>
       <ul class="info-content">
         <li
@@ -115,7 +115,7 @@
     <div class="extra-frame" v-if="isFrame">
       <span @click="isFrame = false">X</span><iframe :src="isFrame" />
     </div>
-    <div class="container" v-if="isld">
+    <div class="container" v-if="isld && !showSide">
       <div class="fhj" @click="fh"></div>
       <div class="closes" @click="closePopup"></div>
       <div class="ljxqlabel">
@@ -193,6 +193,7 @@
                 </td>
               </tr>
             </table>
+
             <div class="titles">改造调查情况</div>
             <div class="decoratess"></div>
             <table class="hovertable">
@@ -326,7 +327,7 @@
         </div>
       </div>
     </div>
-    <div class="container" v-if="isLJ">
+    <div class="container" v-if="isLJ && !showSide">
       <div id="nav">
         <div class="snf-nav active"><span class="lqwz">小区基本信息</span></div>
         <div class="snf-nav"><span class="lqwz">小区楼栋信息</span></div>
@@ -394,6 +395,7 @@
                 <td class="table3">{{ forceEntity.fix_data["产权归属"] }}</td>
               </tr>
             </table>
+
             <div class="titless">改造调查情况</div>
             <div class="decoratess"></div>
             <table class="hovertable">
@@ -654,7 +656,7 @@ export default {
       lsdata: "",
       LCdata: [],
       Lb: [],
-      Buildinglogo: [],
+      Buildinglogo: []
     };
   },
   async mounted() {
@@ -669,31 +671,31 @@ export default {
         leaveTop: 0, //离父类距离
         initTo: 0, //初始跳转
         animation: 400, //动画时间
-        followCallBack: function (index) {
+        followCallBack: function(index) {
           $("#enterIndex").text(index + 1);
         },
-        navCallBack: function (index) {
+        navCallBack: function(index) {
           $("#clickIndex").text(index + 1);
-        },
+        }
       });
-      $("#destroy").click(function () {
+      $("#destroy").click(function() {
         snf.destroyed();
       });
-      $("#clickToggle").click(function () {
+      $("#clickToggle").click(function() {
         if (snf.getStopState.nav()) {
           snf.stopCallBack.nav(false);
         } else {
           snf.stopCallBack.nav(true);
         }
       });
-      $("#enterToggle").click(function () {
+      $("#enterToggle").click(function() {
         if (snf.getStopState.follow()) {
           snf.stopCallBack.follow(false);
         } else {
           snf.stopCallBack.follow();
         }
       });
-      $("#init").click(function () {
+      $("#init").click(function() {
         if (snf.destroyed) {
           snf.destroyed();
         }
@@ -704,12 +706,12 @@ export default {
           leaveTop: 0, //离父元素距离
           initTo: 0, //初始跳转
           animation: 400, //动画时间
-          followCallBack: function (index) {
+          followCallBack: function(index) {
             $("#enterIndex").text(index + 1);
           },
-          navCallBack: function (index) {
+          navCallBack: function(index) {
             $("#clickIndex").text(index + 1);
-          },
+          }
         });
       });
     },
@@ -728,17 +730,14 @@ export default {
         destination: {
           x: -2872556.8010957814,
           y: 4843598.135541798,
-          z: 2995082.209321462,
+          z: 2995082.209321462
         },
         orientation: {
           heading: 0.08452214613176423,
           pitch: -0.6963175946906643,
-          roll: 0,
-        },
+          roll: 0
+        }
       });
-      //关闭59号楼
-      const V_LAYER = window.earth.scene.layers.find("Ljxq");
-      V_LAYER.setOnlyObjsVisible([348], false);
       //判断59楼新精模是否加载过
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       if (V_ld) {
@@ -752,7 +751,7 @@ export default {
         window.earth.scene.addS3MTilesLayerByScp(
           "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E6%A0%8B/config",
           {
-            name: "蒲鞋市新村59号楼",
+            name: "蒲鞋市新村59号楼"
           }
         );
       }
@@ -761,7 +760,7 @@ export default {
       var node = {
         newdataset: "erweidata:蒲鞋市59栋",
         url:
-          "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
+          "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data"
       };
 
       this.getPOIPickedFeature(node);
@@ -774,13 +773,13 @@ export default {
         destination: {
           x: -2872523.3970611463,
           y: 4843511.355584916,
-          z: 2995221.392416414,
+          z: 2995221.392416414
         },
         orientation: {
           heading: 0.023851433491184793,
           pitch: -1.551835556648097,
-          roll: 0,
-        },
+          roll: 0
+        }
       });
       this.lsdata = data;
       //移除覆盖面高亮
@@ -790,12 +789,13 @@ export default {
       }
       //现将所有部件显示
       const Lj = window.earth.scene.layers.find("蒲鞋市新村59号楼");
+      console.log("图层时候",this.LCdata)
       for (let i = 0; i < this.LCdata.length; i++) {
-        Lj.setOnlyObjsVisible(this.LCdata[i], true);
+        Lj.setOnlyObjsVisible(this.LCdata[i], false);
       }
       var yblc = this.LCdata[parseInt(data) - 1];
       Lj.brightness = 0.5; //图层亮度调节
-      Lj.setOnlyObjsVisible(yblc, false); //隐藏非选中层部件
+      Lj.setOnlyObjsVisible(yblc, true); //隐藏非选中层部件
       //Lj.setOnlyObjsVisible(this.Lb, true); //显示外立面部件
     },
     //选择户室
@@ -803,18 +803,18 @@ export default {
       var LC = "ROOM = '" + data + "'";
       var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
       getFeatureParam = new SuperMap.REST.FilterParameter({
-        attributeFilter: LC,
+        attributeFilter: LC
       });
       getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
         queryParameter: getFeatureParam,
         toIndex: -1,
-        datasetNames: ["erweidata:蒲鞋市59栋户型"],
+        datasetNames: ["erweidata:蒲鞋市59栋户型"]
       });
       var url =
         "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data";
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
-          processCompleted: async (res) => {
+          processCompleted: async res => {
             if (window.lastHouseEntity) {
               window.earth.entities.remove(window.lastHouseEntity);
               window.lastHouseEntity = null;
@@ -839,7 +839,7 @@ export default {
                   hierarchy: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
                   material: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
                   height: bottom,
-                  extrudedHeight: headheight,
+                  extrudedHeight: headheight
                 },
                 position: Cesium.Cartesian3.fromDegrees(
                   center.x,
@@ -851,21 +851,21 @@ export default {
                   font: "32px sans-serif",
                   style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                   outlineColor: Cesium.Color.BLACK,
-                  outlineWidth: 2.0,
-                },
+                  outlineWidth: 2.0
+                }
               });
             }
             function getLonLatArray(points) {
               var point3D = [];
-              points.forEach(function (point) {
+              points.forEach(function(point) {
                 point3D.push(point.x);
                 point3D.push(point.y);
               });
               return point3D;
             }
           },
-          processFailed: (msg) => console.log("查询失败", msg),
-        },
+          processFailed: msg => console.log("查询失败", msg)
+        }
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
@@ -873,18 +873,18 @@ export default {
     sqlQuery(SQL) {
       var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
       getFeatureParam = new SuperMap.REST.FilterParameter({
-        attributeFilter: SQL,
+        attributeFilter: SQL
       });
       getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
         queryParameter: getFeatureParam,
         toIndex: -1,
-        datasetNames: ["CIM_2D:" + "JZ_2D_buffer"], // 本例中“户型面”为数据源名称，“专题户型面2D”为楼层面相应的数据集名称
+        datasetNames: ["CIM_2D:" + "JZ_2D_buffer"] // 本例中“户型面”为数据源名称，“专题户型面2D”为楼层面相应的数据集名称
       });
       var url =
         "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data"; // 数据服务地址
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
-          processCompleted: async (queryEventArgs) => {
+          processCompleted: async queryEventArgs => {
             console.log("新分层", queryEventArgs);
             if (window.lastHouseEntity) {
               window.earth.entities.remove(window.lastHouseEntity);
@@ -892,10 +892,25 @@ export default {
             }
             if (queryEventArgs.originResult.features.length != 0) {
               var selectedFeature = queryEventArgs.originResult.features[0]; //选中楼层的楼层面信息对象
-
+              console.log("面参数", selectedFeature.geometry.points);
               if (!selectedFeature.geometry.points) {
                 return;
               }
+              //裁剪59号楼
+              var points2D = []; // [经度, 纬度, 经度, 纬度, ...]的形式，存放楼层面上的点坐标
+              var TOPALTITUDE = Number(
+                selectedFeature.fieldValues[
+                  selectedFeature.fieldNames.indexOf("TOPALTITUDE")
+                ]
+              );
+              for (var pt of selectedFeature.geometry.points) {
+                points2D.push(pt.x, pt.y, 4.0);
+              }
+              const V_LAYERS = window.earth.scene.layers.find("LJxqXQ");
+              V_LAYERS.addFlattenRegion({
+                position: points2D,
+                name: "FlattenRegion"
+              });
               var bottomHeight = Number(
                 selectedFeature.fieldValues[
                   selectedFeature.fieldNames.indexOf("BOTTOMALTITUDE")
@@ -966,9 +981,9 @@ export default {
                 window.lastHouseEntity = window.earth.entities.add({
                   polygon: {
                     hierarchy: Cesium.Cartesian3.fromDegreesArray(points3D),
-                    material: getColorRamp([0.0, 0.8], true),
+                    material: getColorRamp([0.0, 0.8], true)
                   },
-                  classificationType: Cesium.ClassificationType.S3M_TILE, // 贴在S3M模型表面
+                  classificationType: Cesium.ClassificationType.S3M_TILE // 贴在S3M模型表面
                 });
                 var a = window.earth.entities.getById(
                   selectedFeature.fieldValues["22"]
@@ -983,7 +998,7 @@ export default {
                   billboard: {
                     image: "/static/images/common/选中楼标.png",
                     width: 90,
-                    height: 60,
+                    height: 60
                   },
                   label: {
                     text: selectedFeature.fieldValues["28"],
@@ -991,10 +1006,10 @@ export default {
                     style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                     outlineColor: Cesium.Color.White,
                     outlineWidth: 3,
-                    pixelOffset: new Cesium.Cartesian2(0, -5),
+                    pixelOffset: new Cesium.Cartesian2(0, -5)
                   },
                   id: selectedFeature.fieldValues["22"],
-                  name: selectedFeature.fieldValues["22"],
+                  name: selectedFeature.fieldValues["22"]
                 });
                 this.isld = true;
                 this.isLJ = false;
@@ -1032,15 +1047,15 @@ export default {
                   ? (fixAttributes[fieldHash[V]] = tempObj[v])
                   : undefined;
               }
-              let detailData = Object.keys(fixAttributes).map((k) => {
+              let detailData = Object.keys(fixAttributes).map(k => {
                 return { k, v: fixAttributes[k] };
               });
               console.log("deatdata", detailData);
               //this.SetForceBimData(detailData);
             }
           }, // 查询成功时的回调函数
-          processFailed: (msg) => console.log("查询失败分层分户", msg), // 查询失败时的回调函数
-        },
+          processFailed: msg => console.log("查询失败分层分户", msg) // 查询失败时的回调函数
+        }
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
@@ -1049,22 +1064,22 @@ export default {
       const { newdataset, url } = node;
       var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
       getFeatureParam = new SuperMap.REST.FilterParameter({
-        attributeFilter: `SMID >= 0`,
+        attributeFilter: `SMID >= 0`
       });
       getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
         queryParameter: getFeatureParam,
         toIndex: -1,
-        datasetNames: [newdataset],
+        datasetNames: [newdataset]
       });
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
-          processCompleted: async (res) => {
+          processCompleted: async res => {
             for (let i = 1; i < 5; i++) {
               var floors = i + "F";
               var LCdatas = [];
               this.Lb = [];
               for (let j = 0; j < res.result.features.length; j++) {
-                if (res.result.features[j].data.FLOOR != floors) {
+                if (res.result.features[j].data.FLOOR == floors) {
                   LCdatas.push(parseInt(res.result.features[j].data.SMID));
                 }
                 if (res.result.features[j].data.LAYERNAME == "外立面") {
@@ -1076,8 +1091,59 @@ export default {
               }
             }
           },
-          processFailed: (msg) => console.log(msg),
-        },
+          processFailed: msg => console.log(msg)
+        }
+      });
+      getFeatureBySQLService.processAsync(getFeatureBySQLParams);
+    },
+    //压平精模
+    addFlattenRegions() {
+      var SQL = "SMID>0";
+      var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
+      getFeatureParam = new SuperMap.REST.FilterParameter({
+        attributeFilter: SQL
+      });
+      getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
+        queryParameter: getFeatureParam,
+        toIndex: -1,
+        datasetNames: ["erweidata:蒲鞋市倾斜范围面"]
+      });
+      var url =
+        "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data"; // 数据服务地址
+      getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
+        eventListeners: {
+          processCompleted: async queryEventArgs => {
+            console.log("新分层", queryEventArgs);
+            if (window.lastHouseEntity) {
+              window.earth.entities.remove(window.lastHouseEntity);
+              window.lastHouseEntity = null;
+            }
+            if (queryEventArgs.originResult.features.length != 0) {
+              var selectedFeature = queryEventArgs.originResult.features[0]; //选中楼层的楼层面信息对象
+              console.log("面参数", selectedFeature.geometry.points);
+              if (!selectedFeature.geometry.points) {
+                return;
+              }
+              //压平
+              var points2D = []; // [经度, 纬度, 经度, 纬度, ...]的形式，存放楼层面上的点坐标
+              var TOPALTITUDE = Number(
+                selectedFeature.fieldValues[
+                  selectedFeature.fieldNames.indexOf("TOPALTITUDE")
+                ]
+              );
+              for (var pt of selectedFeature.geometry.points) {
+                points2D.push(pt.x, pt.y, 4.0);
+              }
+              const V_LAYERS = window.earth.scene.layers.find("Ljxq");
+              console.log("图层", V_LAYERS);
+              V_LAYERS.addFlattenRegion({
+                position: points2D,
+                name: "LjxqJMYP"
+              });
+            }
+          }, // 查询成功时的回调函数
+          processFailed: msg => console.log("查询失败", msg) // 查询失败时的回调函数
+        }
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
@@ -1101,7 +1167,7 @@ export default {
         billboard: {
           image: "/static/images/common/楼标.png",
           width: 90,
-          height: 60,
+          height: 60
         },
         label: {
           text: "59号楼",
@@ -1109,10 +1175,10 @@ export default {
           style: Cesium.LabelStyle.FILL_AND_OUTLINE,
           outlineColor: Cesium.Color.White,
           outlineWidth: 3,
-          pixelOffset: new Cesium.Cartesian2(0, -5),
+          pixelOffset: new Cesium.Cartesian2(0, -5)
         },
         id: "蒲鞋市新村59号楼",
-        name: "蒲鞋市新村59号楼",
+        name: "蒲鞋市新村59号楼"
       });
       //关闭59号楼精模
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
@@ -1138,7 +1204,9 @@ export default {
         this.$bus.$emit("cesium-3d-rtmpFetch-cb");
       } else if (forceEntity._NODEID_.includes("老旧小区")) {
         this.isLJ = true;
+        this.showSide = false;
         var points = null;
+        this.addFlattenRegions();
         if (window.Buildinglogo.length > 0) {
           for (var i = 0; i < window.Buildinglogo.length; i++) {
             var a = window.earth.entities.getById(
@@ -1158,8 +1226,8 @@ export default {
           datasetNames: ["CIM_2D:JZ_2D_buffer"],
           geometry: {
             points: points,
-            type: "REGION",
-          },
+            type: "REGION"
+          }
         };
         var queryData = JSON.stringify(queryObj); // 转化为JSON字符串作为查询参数
         $.ajax({
@@ -1167,7 +1235,7 @@ export default {
           url:
             "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data/featureResults.rjson?returnContent=true",
           data: queryData,
-          success: function (result) {
+          success: function(result) {
             var resultObj = JSON.parse(result);
 
             if (resultObj.featureCount > 0) {
@@ -1175,9 +1243,9 @@ export default {
               processCompleted(resultObj.features);
             }
           },
-          error: function (msg) {
+          error: function(msg) {
             console.log(msg);
-          },
+          }
         });
         function processCompleted(features) {
           var selectedFeatures = features;
@@ -1191,7 +1259,7 @@ export default {
               billboard: {
                 image: "/static/images/common/楼标.png",
                 width: 90,
-                height: 60,
+                height: 60
               },
               label: {
                 text: selectedFeatures[i].fieldValues["28"],
@@ -1199,10 +1267,10 @@ export default {
                 style: Cesium.LabelStyle.FILL_AND_OUTLINE,
                 outlineColor: Cesium.Color.White,
                 outlineWidth: 3,
-                pixelOffset: new Cesium.Cartesian2(0, -5),
+                pixelOffset: new Cesium.Cartesian2(0, -5)
               },
               id: selectedFeatures[i].fieldValues["22"],
-              name: selectedFeatures[i].fieldValues["22"],
+              name: selectedFeatures[i].fieldValues["22"]
             });
           }
         }
@@ -1233,7 +1301,7 @@ export default {
             y:
               pointToWindow.y -
               ($(".leaflet-popup-content-wrapper").height() || 0) -
-              90,
+              90
           };
         }
       }
@@ -1251,8 +1319,8 @@ export default {
         id: name,
         geometry: {
           lng: geometry.x,
-          lat: geometry.y,
-        },
+          lat: geometry.y
+        }
       });
     },
     /**
@@ -1265,7 +1333,7 @@ export default {
       const { x, y } = geometry;
       this.$bus.$emit("cesium-3d-rtmpFetch", {
         shortname: name,
-        geometry: { lng: x, lat: y },
+        geometry: { lng: x, lat: y }
       });
     },
     /**
@@ -1280,6 +1348,11 @@ export default {
       this.$bus.$emit("cesium-3d-around-analyse-pick", { geometry, type });
     },
     closePopup() {
+      const LJxqXQ = window.earth.scene.layers.find("LJxqXQ");
+      if (LJxqXQ) {
+        LJxqXQ.removeAllFlattenRegion();
+      }
+
       if (window.Buildinglogo.length > 0) {
         for (var i = 0; i < window.Buildinglogo.length; i++) {
           var a = window.earth.entities.getById(
@@ -1288,6 +1361,11 @@ export default {
           window.earth.entities.remove(a);
         }
       }
+      if (window.lastHouseEntity) {
+        window.earth.entities.remove(window.lastHouseEntity);
+        window.lastHouseEntity = null;
+      }
+      this.showSide = false;
       this.isLJ = false;
       this.isld = false;
       this.forcePosition = {};
@@ -1295,10 +1373,10 @@ export default {
       this.buffer = null;
       this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
       this.$bus.$emit("cesium-3d-rtmpFetch-cb");
-      const V_LAYER = window.earth.scene.layers.find("Ljxq");
-      if (V_LAYER) {
-        V_LAYER.setOnlyObjsVisible([348], true);
-      }
+      // const V_LAYER = window.earth.scene.layers.find("Ljxq");
+      // if (V_LAYER) {
+      //   V_LAYER.setOnlyObjsVisible([348], true);
+      // }
       //判断59楼新精模是否加载过
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       if (V_ld) {
@@ -1311,7 +1389,7 @@ export default {
       }
 
       // this.$parent.$refs.aroundSourceAnalyse.closeAroundSourceAnalyse()
-    },
+    }
   },
   watch: {
     isLJ(val) {
@@ -1320,8 +1398,8 @@ export default {
           this.bindHandler();
         }, 200);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -8,7 +8,7 @@ const _ABOVEGROUND_HASH_ = {
   裙房_结构: "裙房_结构",
   裙房_建筑: "裙房_建筑",
   塔楼_建筑: "塔楼_建筑",
-  幕墙:"幕墙",
+  玻璃幕墙:"玻璃幕墙",
 };
 let handlerPolygon = undefined;
 let handlerBox = undefined;
