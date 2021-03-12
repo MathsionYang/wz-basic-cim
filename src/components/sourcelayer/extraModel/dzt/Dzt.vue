@@ -41,7 +41,7 @@ export default {
     };
   },
   async mounted() {
-    this.eventRegsiter();
+    // this.eventRegsiter();
     this.$parent.$refs.roadline.doPolylineTrailVisible(false);
     this.initBimScene();
     this.cameraMove();
@@ -50,7 +50,8 @@ export default {
   beforeDestroy() {
     this.$parent.$refs.roadline.doPolylineTrailVisible(true);
     this.change_Alpha_Value(0);
-    this.solidModelsProfile.clear();
+    this.doCivilizationCenterVisible(_GEOLOGY_HASH_, false);
+    // this.solidModelsProfile.clear();
   },
   methods: {
     ...mapActions("map", []),
@@ -79,7 +80,11 @@ export default {
     //  初始化BIM场景
     initBimScene() {
       const { GEOLOGY, GEOLOGY_DATA } = CIVILIZATION_CENTER_URL;
-      this.doGroundInit(_GEOLOGY_HASH_, GEOLOGY, GEOLOGY_DATA);
+      if (window.extraHash.geology) {
+        this.doCivilizationCenterVisible(_GEOLOGY_HASH_, true);
+      } else {
+        this.doGroundInit(_GEOLOGY_HASH_, GEOLOGY, GEOLOGY_DATA);
+      }
     },
     /**
      * 图层控制
@@ -90,50 +95,68 @@ export default {
     doGroundInit(_HASH_, _SCENE_URL_, _DATA_) {
       Object.keys(_HASH_).map((key) => {
         const _KEY_ = `geology_${key}`;
-        this.solidModelsProfile = new Cesium.SolidModelsProfile(
-          window.earth.scene
+        // this.solidModelsProfile = new Cesium.SolidModelsProfile(
+        //   window.earth.scene
+        // );
+        // var baseUrl = "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip_dig/features/"
+        // let models = [];
+        // for (let i = 1; i <= 990; i++) {
+        //   models.push({
+        //     id: i,
+        //     model: `${baseUrl}${i}.stream`,
+        //   });
+        // }
+        // this.solidModelsProfile.addModels(models);
+        const promise = window.earth.scene.addS3MTilesLayerByScp(
+          `${_SCENE_URL_}/datas/${key}/config`,
+          { name: _KEY_ }
         );
-        // let modelUrls = [
-        //   "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip/features/1.stream",
-        // ];
-        var baseUrl = "http://172.20.83.223:8098/iserver/services/data-DiZhiTi/rest/data/datasources/%E5%9C%B0%E8%B4%A8%E4%BD%93%E4%B8%8A%E5%9B%BE/datasets/layer_clip_dig/features/"
-        let models = [];
-        // 也可以不设置纹理，设置颜色
-        // models.push({
-        //   id: 1,
-        //   model: modelUrls[0],
-        // });
-        for (let i = 1; i <= 990; i++) {
-          models.push({
-            id: i,
-            model: `${baseUrl}${i}.stream`,
+        if (_DATA_) {
+          Cesium.when(promise, async () => {
+            const { url, dataSourceName } = _DATA_;
+            const layer = window.earth.scene.layers.find(_KEY_);
+            layer.setQueryParameter({
+              url,
+              isMerge: true,
+              ...(dataSourceName
+                ? {
+                    dataSourceName,
+                    dataSetName: _HASH_[key],
+                  }
+                : {
+                    dataSourceName: _HASH_[key],
+                  }),
+            });
+            layer.datasetInfo().then((result) => {
+              // console.log('result', result)
+            })
           });
         }
-        this.solidModelsProfile.addModels(models);
+        //  做全局标识，不保存图层指针了
+        window.extraHash.geology = true;
+      });
+    },
+    /**
+     * 显隐控制
+     * @param {object} _HASH_ hash
+     * @param {boolean} boolean 开关
+     */
+    doCivilizationCenterVisible(_HASH_, boolean) {
+      Object.keys(_HASH_).map((key) => {
+        const _KEY_ = `geology_${key}`;
+        const layer = window.earth.scene.layers.find(_KEY_);
+        layer.visible = boolean;
       });
     },
     change_Alpha_Value(val) {
       window.earth.scene.globe.globeAlpha = (100 - val) / 100;
     },
     cameraMove() {
-      // window.earth.camera.flyTo({
-      //   destination: {
-      //     x: -2877358.4295731103,
-      //     y: 4841834.134246617,
-      //     z: 2994574.2246890087,
-      //   },
-      //   orientation: {
-      //     heading: 0.003336768850279448,
-      //     pitch: -0.5808830390057418,
-      //     roll: 0.0,
-      //   },
-      //   maximumHeight: 450,
-      // });
       window.earth.camera.flyTo({
         destination: {
-          x: -2876906.002533756,
-          y: 4841075.198844643,
-          z: 2995213.4453336787,
+          x: -2877358.4295731103,
+          y: 4841834.134246617,
+          z: 2994574.2246890087,
         },
         orientation: {
           heading: 0.003336768850279448,
@@ -142,6 +165,19 @@ export default {
         },
         maximumHeight: 450,
       });
+      // window.earth.camera.flyTo({
+      //   destination: {
+      //     x: -2876906.002533756,
+      //     y: 4841075.198844643,
+      //     z: 2995213.4453336787,
+      //   },
+      //   orientation: {
+      //     heading: 0.003336768850279448,
+      //     pitch: -0.5808830390057418,
+      //     roll: 0.0,
+      //   },
+      //   maximumHeight: 450,
+      // });
     },
     renderForceEntity() {
       const pointToWindow = Cesium.SceneTransforms.wgs84ToWindowCoordinates(

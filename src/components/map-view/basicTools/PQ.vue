@@ -136,7 +136,7 @@ export default {
         layer.setCustomClipBox(boxOptions);
       }
       //  地质体剖切单独处理
-      this.$bus.$emit("dzt-clip", boxOptions);
+      // this.$bus.$emit("dzt-clip", boxOptions);
     },
     sightlineClear() {
       var layers = window.earth.scene.layers;
@@ -149,7 +149,7 @@ export default {
         handlerBox.clear();
         handlerBox.deactivate();
       } catch (error) {}
-      this.$bus.$emit("dzt-clear");
+      // this.$bus.$emit("dzt-clear");
       //window.earth.entities.removeAll();
     },
     sightlineClose() {
