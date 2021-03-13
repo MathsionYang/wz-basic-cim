@@ -41,65 +41,129 @@ export const mapImageLayerInit = (url) => {
 export const mapMvtLayerInit = (name, url) => {
     window.earth.scene.addVectorTilesMap({ url, name, viewer: window.earth });
 }
-
-export const mapBJSWQLayerInit = (name,url,datanames) => {
+//范围面叠加
+export const mapBJSWQLayerInit = (name, url, datanames) => {
     var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
     getFeatureParam = new SuperMap.REST.FilterParameter({
-      attributeFilter: "SMID>0",
+        attributeFilter: "SMID>0",
     });
     getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters(
-      {
-        queryParameter: getFeatureParam,
-        toIndex: -1,
-        datasetNames: [datanames],
-      }
+        {
+            queryParameter: getFeatureParam,
+            toIndex: -1,
+            datasetNames: [datanames],
+        }
     );
     getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(
         url,
-      {
-        eventListeners: {
-          processCompleted: onQueryComplete,
-          processFailed: processFailed,
-        },
-      }
+        {
+            eventListeners: {
+                processCompleted: onQueryComplete,
+                processFailed: processFailed,
+            },
+        }
     );
     getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     function onQueryComplete(queryEventArgs) {
-      var selectedFeatures = queryEventArgs.originResult.features; 
-      for (var i = 0; i < selectedFeatures.length; i++) {
-        addFeature(selectedFeatures[i]);
-      }
+        var selectedFeatures = queryEventArgs.originResult.features;
+        for (var i = 0; i < selectedFeatures.length; i++) {
+            addFeature(selectedFeatures[i]);
+        }
     }
     function processFailed(queryEventArgs) {
     }
     function getLonLatArray(points) {
-      var point3D = [];
-      points.forEach(function (point) {
-        point3D.push(point.x);
-        point3D.push(point.y);
-      });
-      return point3D;
+        var point3D = [];
+        points.forEach(function (point) {
+            point3D.push(point.x);
+            point3D.push(point.y);
+        });
+        return point3D;
     }
     function addFeature(feature) {
-      var lonLatArr = getLonLatArray(feature.geometry.points);
-      for(let i =0 ;i<feature.fieldNames.length;i++){
-          if(feature.fieldNames[i]=="NAME"){
-              name = feature.fieldValues[i];
-              window.fwm.push({name:feature.fieldValues[i],points:feature.geometry.points});
-          }
- 
-      }
-      window.earth.entities.add({
-        id: name,
-        name: name,
-        polyline: {
-          positions: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
-          width: 5,
-          material: new Cesium.Color(0 / 255, 255 / 255, 0, 1),
-          clampToGround:true,//矢量线贴对象
-          //classificationType: Cesium.ClassificationType.S3M_TILE, //矢量线贴对象
+        var lonLatArr = getLonLatArray(feature.geometry.points);
+        for (let i = 0; i < feature.fieldNames.length; i++) {
+            if (feature.fieldNames[i] == "NAME") {
+                name = feature.fieldValues[i];
+                window.fwm.push({ name: feature.fieldValues[i], points: feature.geometry.points });
+            }
+
+        }
+        window.earth.entities.add({
+            id: name,
+            name: name,
+            polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
+                width: 5,
+                material: new Cesium.Color(0 / 255, 255 / 255, 0, 1),
+                clampToGround: true,//矢量线贴对象
+                //classificationType: Cesium.ClassificationType.S3M_TILE, //矢量线贴对象
+            },
+        });
+    }
+}
+//地图模型标签
+export const maplabel = (name, url, datanames, type) => {
+    var points = null;
+    for (let i = 0; i < window.fwm.length; i++) {
+        if (window.fwm[i].name == name) {
+            points = window.fwm[i].points;
+        }
+    }
+    var queryObj = {
+        getFeatureMode: "SPATIAL",
+        spatialQueryMode: "CONTAIN",
+        datasetNames: [datanames],
+        geometry: {
+            points: points,
+            type: "REGION"
+        }
+    };
+    var queryData = JSON.stringify(queryObj); // 转化为JSON字符串作为查询参数
+    $.ajax({
+        type: "post",
+        url: url,
+        data: queryData,
+        success: function (result) {
+            var resultObj = JSON.parse(result);
+            if (resultObj.featureCount > 0) {
+                window.Buildinglogo = resultObj.features;
+                processCompleted(resultObj.features);
+            }
         },
-      });
+        error: function (msg) {
+            console.log(msg);
+        }
+    });
+    function processCompleted(features) {
+        var selectedFeatures = features;
+        if (type == "老旧小区") {
+            for (var i = 0; i < selectedFeatures.length; i++) {
+                window.earth.entities.add({
+                    position: Cesium.Cartesian3.fromDegrees(
+                        parseFloat(selectedFeatures[i].fieldValues["32"]),
+                        parseFloat(selectedFeatures[i].fieldValues["33"]),
+                        parseFloat(selectedFeatures[i].fieldValues["30"]) + 3
+                    ),
+                    billboard: {
+                        image: "/static/images/common/楼标.png",
+                        width: 90,
+                        height: 60
+                    },
+                    label: {
+                        text: selectedFeatures[i].fieldValues["28"],
+                        font: "40px PingFang SC bold;",
+                        style: Cesium.LabelStyle.FILL_AND_OUTLINE,
+                        outlineColor: Cesium.Color.White,
+                        outlineWidth: 3,
+                        pixelOffset: new Cesium.Cartesian2(0, -5)
+                    },
+                    id: selectedFeatures[i].fieldValues["22"],
+                    name: selectedFeatures[i].fieldValues["22"]
+                });
+            }
+        }
+
     }
 }
 /**

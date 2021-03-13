@@ -295,9 +295,15 @@
             </table> -->
             <div class="btn-group">
               <el-button class="btn-item" size="mini">1F</el-button>
-              <el-button class="btn-item" size="mini" @click="lcclick('2')">2F</el-button>
-              <el-button class="btn-item" size="mini" @click="lcclick('3')">3F</el-button>
-              <el-button class="btn-item" size="mini" @click="lcclick('4')">4F</el-button>
+              <el-button class="btn-item" size="mini" @click="lcclick('2')"
+                >2F</el-button
+              >
+              <el-button class="btn-item" size="mini" @click="lcclick('3')"
+                >3F</el-button
+              >
+              <el-button class="btn-item" size="mini" @click="lcclick('4')"
+                >4F</el-button
+              >
             </div>
           </div>
           <div class="snf-pages" v-if="lsdata != ''">
@@ -510,16 +516,36 @@
               </tr>
             </table> -->
             <div class="btn-group">
-              <el-button class="btn-item" @click="ldclick('51')" size="mini">51</el-button>
-              <el-button class="btn-item" @click="ldclick('52')" size="mini">52</el-button>
-              <el-button class="btn-item" @click="ldclick('53')" size="mini">53</el-button>
-              <el-button class="btn-item" @click="ldclick('54')" size="mini">54</el-button>
-              <el-button class="btn-item" @click="ldclick('55')" size="mini">55</el-button>
-              <el-button class="btn-item" @click="ldclick('56')" size="mini">56</el-button>
-              <el-button class="btn-item" @click="ldclick('57')" size="mini">57</el-button>
-              <el-button class="btn-item" @click="ldclick('58')" size="mini">58</el-button>
-              <el-button class="btn-item" @click="ldclick('59')" size="mini">59</el-button>
-              <el-button class="btn-item" @click="ldclick('60')" size="mini">60</el-button>
+              <el-button class="btn-item" @click="ldclick('51')" size="mini"
+                >51</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('52')" size="mini"
+                >52</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('53')" size="mini"
+                >53</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('54')" size="mini"
+                >54</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('55')" size="mini"
+                >55</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('56')" size="mini"
+                >56</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('57')" size="mini"
+                >57</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('58')" size="mini"
+                >58</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('59')" size="mini"
+                >59</el-button
+              >
+              <el-button class="btn-item" @click="ldclick('60')" size="mini"
+                >60</el-button
+              >
             </div>
           </div>
           <div class="snf-page">
@@ -658,6 +684,7 @@
 <script>
 import { simpleNavFollow } from "./simpleNavFollowing";
 import { getIserverFields } from "api/iServerAPI";
+import { maplabel } from "components/sourcelayer/cesium_map_init";
 export default {
   data() {
     return {
@@ -1239,8 +1266,15 @@ export default {
             );
             window.earth.entities.remove(a);
           }
+        } else {
+          maplabel(
+            this.forceEntity.name,
+            "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data/featureResults.rjson?returnContent=true",
+            "CIM_2D:JZ_2D_buffer",
+            "老旧小区"
+          );
         }
-        for (let i = 0; i < window.fwm.length; i++) {
+/*         for (let i = 0; i < window.fwm.length; i++) {
           if (window.fwm[i].name == this.forceEntity.name) {
             points = window.fwm[i].points;
           }
@@ -1298,7 +1332,7 @@ export default {
               name: selectedFeatures[i].fieldValues["22"]
             });
           }
-        }
+        } */
       } else {
         this.showSide = false;
       }
@@ -1398,10 +1432,6 @@ export default {
       this.buffer = null;
       this.$bus.$emit("cesium-3d-population-circle", { doDraw: false });
       this.$bus.$emit("cesium-3d-rtmpFetch-cb");
-      // const V_LAYER = window.earth.scene.layers.find("Ljxq");
-      // if (V_LAYER) {
-      //   V_LAYER.setOnlyObjsVisible([348], true);
-      // }
       //判断59楼新精模是否加载过
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       if (V_ld) {

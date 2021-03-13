@@ -8,7 +8,6 @@ import { ExtraSourceURL } from "config/server/mapConfig";
 import { mapGetters, mapActions } from "vuex";
 const LAYERS = [{ name: "BJSWQ", url: ExtraSourceURL.BJSWQ }];
 const LAYERS_JFJ = [{ name: "JFJ", url: ExtraSourceURL.JFJ }];
- const LAYERS_NEW = [{ name: "BJSWQNEW", url: ExtraSourceURL.BJSWQNEW }];
 export default {
   name: "BjswqModels",
   async mounted() {
@@ -36,10 +35,6 @@ export default {
           const V_LAYER = window.earth.scene.layers.find(v.name);
           V_LAYER.visible = true;
         });
-        LAYERS_NEW.map(v => {
-          const V_LAYER = window.earth.scene.layers.find(v.name);
-          V_LAYER.visible = true;
-        });
       } else {
         LAYERS.map(v => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
@@ -47,11 +42,6 @@ export default {
           });
         });
         LAYERS_JFJ.map(v => {
-          return window.earth.scene.addS3MTilesLayerByScp(v.url, {
-            name: v.name
-          });
-        });
-        LAYERS_NEW.map(v => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
             name: v.name
           });
@@ -85,10 +75,6 @@ export default {
         V_LAYER.visible = false;
       });
       LAYERS_JFJ.map(v => {
-        const V_LAYER = window.earth.scene.layers.find(v.name);
-        V_LAYER.visible = false;
-      });
-      LAYERS_NEW.map(v => {
         const V_LAYER = window.earth.scene.layers.find(v.name);
         V_LAYER.visible = false;
       });
