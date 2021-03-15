@@ -166,6 +166,8 @@ export const maplabel = (name, url, datanames, type) => {
 
     }
 }
+//压平模型
+
 /**
  * 水面叠加
  * @param {*} name 

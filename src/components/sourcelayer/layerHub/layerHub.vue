@@ -274,6 +274,7 @@ export default {
      * 默认选中二级菜单第一个点
      */
     initForceTreeTopic() {
+      console.log("SetForceTrueTopicLabels",this.SetForceTrueTopicLabels);
       console.log("initForceTreeTopic", this.forceTreeTopic);
       //  清除旧图层
       this.forceTreeTopic
@@ -298,18 +299,20 @@ export default {
      * @param {string} id
      */
     doForceTrueTopicLabels(item, children, id) {
-      console.log("组别", id);
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
+        console.log("1");
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
         this.SetForceTrueTopicLabels(_fttl_);
         this.nodeCheckChange(label, false);
       } else {
+        console.log("2");
         this.SetForceTrueTopicLabels([
           ...new Set(this.forceTrueTopicLabels.concat([label.id])),
         ]);
         this.SetForceTrueTopicLabelId(label.id);
+        console.log("点击图册",label)
         this.nodeCheckChange(label, true);
       }
       console.log("数组", this.forceTrueTopicLabels);

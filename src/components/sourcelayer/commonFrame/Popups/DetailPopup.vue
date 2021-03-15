@@ -771,18 +771,7 @@ export default {
     //选择楼栋
     ldclick(data) {
       //相机视角移动
-      window.earth.camera.flyTo({
-        destination: {
-          x: -2872556.8010957814,
-          y: 4843598.135541798,
-          z: 2995082.209321462
-        },
-        orientation: {
-          heading: 0.08452214613176423,
-          pitch: -0.6963175946906643,
-          roll: 0
-        }
-      });
+      this.cameraMove();
       //判断59楼新精模是否加载过
       const V_ld = window.earth.scene.layers.find("蒲鞋市新村59号楼");
       if (V_ld) {
@@ -796,7 +785,6 @@ export default {
       } else {
         window.earth.scene.addS3MTilesLayerByScp(
           "http://172.20.83.223:8098/iserver/services/3D-mongodb16/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E5%8F%B7%E6%A5%BC/config",
-          //"http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimsample/rest/realspace/datas/%E8%92%B2%E9%9E%8B%E5%B8%82%E6%96%B0%E6%9D%9159%E6%A0%8B/config",
           {
             name: "蒲鞋市新村59号楼"
           }
@@ -932,14 +920,12 @@ export default {
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
           processCompleted: async queryEventArgs => {
-            console.log("新分层", queryEventArgs);
             if (window.lastHouseEntity) {
               window.earth.entities.remove(window.lastHouseEntity);
               window.lastHouseEntity = null;
             }
             if (queryEventArgs.originResult.features.length != 0) {
               var selectedFeature = queryEventArgs.originResult.features[0]; //选中楼层的楼层面信息对象
-              console.log("面参数", selectedFeature.geometry.points);
               if (!selectedFeature.geometry.points) {
                 return;
               }
@@ -1161,14 +1147,12 @@ export default {
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
           processCompleted: async queryEventArgs => {
-            console.log("新分层", queryEventArgs);
             if (window.lastHouseEntity) {
               window.earth.entities.remove(window.lastHouseEntity);
               window.lastHouseEntity = null;
             }
             if (queryEventArgs.originResult.features.length != 0) {
               var selectedFeature = queryEventArgs.originResult.features[0]; //选中楼层的楼层面信息对象
-              console.log("面参数", selectedFeature.geometry.points);
               if (!selectedFeature.geometry.points) {
                 return;
               }
@@ -1183,7 +1167,6 @@ export default {
                 points2D.push(pt.x, pt.y, 4.0);
               }
               const V_LAYERS = window.earth.scene.layers.find("Ljxq");
-              console.log("图层", V_LAYERS);
               V_LAYERS.addFlattenRegion({
                 position: points2D,
                 name: "LjxqJMYP"
@@ -1239,6 +1222,21 @@ export default {
       // const V_LAYER = window.earth.scene.layers.find("Ljxq");
       //V_LAYER.setOnlyObjsVisible([348], true);
     },
+    //相机移动
+    cameraMove() {
+      window.earth.camera.flyTo({
+        destination: {
+          x: -2872556.8010957814,
+          y: 4843598.135541798,
+          z: 2995082.209321462
+        },
+        orientation: {
+          heading: 0.08452214613176423,
+          pitch: -0.6963175946906643,
+          roll: 0
+        }
+      });
+    },
     /**
      *  详情点赋值
      *  @param {object} forceEntity 详情点信息
@@ -1274,7 +1272,7 @@ export default {
             "老旧小区"
           );
         }
-/*         for (let i = 0; i < window.fwm.length; i++) {
+        /*         for (let i = 0; i < window.fwm.length; i++) {
           if (window.fwm[i].name == this.forceEntity.name) {
             points = window.fwm[i].points;
           }
@@ -1468,7 +1466,7 @@ export default {
   line-height: 0.2rem;
   background-image: url(/static/images/mode-ico/tb.png);
   background-size: 100% 100%;
-  font-size: 14px;
+  font-size: 1.6vh;
   font-family: PingFang SC;
   font-weight: bold;
   line-height: 20px;
@@ -1480,7 +1478,7 @@ export default {
   text-align: center;
   vertical-align: middle;
   line-height: 0.2rem;
-  font-size: 14px;
+  font-size: 1.6vh;
   font-family: PingFang SC;
   font-weight: 400;
   background-color: #05583f4a;
@@ -1492,7 +1490,7 @@ export default {
   text-align: center;
   vertical-align: middle;
   line-height: 0.2rem;
-  font-size: 14px;
+  font-size: 1.6vh;
   font-family: PingFang SC;
   font-weight: 400;
   color: #ffffff;
@@ -1567,7 +1565,7 @@ table.hovertable td {
   width: 25vw;
 }
 .closes {
-  width: 2vw;
+  width: 4vh;
   height: 4vh;
   background: url(/static/images/mode-ico/叉2.png) no-repeat center;
   background-size: 100% 100%;
@@ -1649,7 +1647,7 @@ ul li {
   .bg-image("/static/images/mode-ico/已选择框@2x");
 }
 .lqwz {
-  font-size: 16px;
+  font-size: 1.7vh;
   font-family: YouSheBiaoTiHei;
   color: #ffffff;
   -webkit-writing-mode: vertical-r;
@@ -1930,12 +1928,14 @@ ul li {
           padding: 0 5px;
           overflow: hidden;
           white-space: nowrap;
+          font-size: 1.4vh;
           text-overflow: ellipsis;
           border-right: 2px solid #fff;
         }
         .value {
           flex: 4;
           padding: 0 5px;
+          font-size: 1.4vh;
           overflow: hidden;
           white-space: nowrap;
           text-overflow: ellipsis;

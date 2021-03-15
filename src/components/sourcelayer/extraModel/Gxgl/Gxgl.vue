@@ -32,11 +32,7 @@ export default {
     //this.change_Alpha_Value(this.aValue);
   },
   beforeDestroy() {
-    //  透明度
-    this.change_Alpha_Value(0);
-    //  句柄销毁
-    handlerPolygon.clear();
-    handlerPolygon = undefined;
+    console.log("aa");
     //  图层开关
     this.doCivilizationCenterVisible(_UNDERGROUND_HASH_, false);
     this.doCivilizationCenterVisible(_ZSUNDERGROUND_HASH_, false);
@@ -166,19 +162,6 @@ export default {
         const layer = window.earth.scene.layers.find(_KEY_);
         layer.visible = boolean;
       });
-    },
-    // change_Height_Value(val) {},
-    change_Alpha_Value(val) {
-      window.earth.scene.globe.globeAlpha = (100 - val) / 100;
-    },
-    doExcavate() {
-      handlerPolygon.activate();
-    },
-    clearExcavate() {
-      handlerPolygon.deactivate();
-      window.earth.scene.globe.removeAllExcavationRegion();
-      handlerPolygon.polygon.show = false;
-      handlerPolygon.polyline.show = false;
     },
     cameraMove() {
       window.earth.camera.flyTo({

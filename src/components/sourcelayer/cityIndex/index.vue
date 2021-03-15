@@ -15,8 +15,9 @@
       <div class="line"></div>
       <Switchlabel />
       <img src="/static/images/mode-ico/装饰.png" class="zs" />
+      <img src="/static/images/mode-ico/大建大美logo.png" class="djdm"/>
       <img src="/static/images/mode-ico/温州设计集团logo.png" class="logo" />
-      <div style="top: 3.5vh; position: absolute; z-index: 7; right: 1vw">
+      <div style="top: 5.5vh; position: absolute; z-index: 7; right: 1vw">
         <div class="sj">{{ nowTime }}</div>
         <div class="rq">{{ nowDate }}</div>
       </div>

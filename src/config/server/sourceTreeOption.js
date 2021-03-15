@@ -53,7 +53,7 @@ const TRAFFIC_TOPIC = [
     type: 'model'
   },
   {
-    label: "倾斜摄影",
+    label: "2017年倾斜摄影",
     componentEvent: "cesium-3d-qxsy",
     componentKey: "3d5",
     url: 'true',
@@ -995,13 +995,13 @@ const CULTURE_TOPIC = [
 ];
 
 const GCJSXM_TOPIC = [
-  {
-    label: "集团项目",
-    type: 'mvt',
-    dataname: '172.20.83.196_ersjdata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
-    dataset: "JTXM"
-  },
+  // {
+  //   label: "集团项目",
+  //   type: 'mvt',
+  //   dataname: '172.20.83.196_ersjdata:',
+  //   url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
+  //   dataset: "JTXM"
+  // },
   {
     label: "工程项目",
     type: "mvt",
