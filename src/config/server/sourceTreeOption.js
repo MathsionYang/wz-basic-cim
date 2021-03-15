@@ -10,6 +10,7 @@ const SERVER_HOST = "https://ditu.wzcitybrain.com/iserver/services";
 const SW_DATA = "/data-SW_DATA/rest/data";
 const SW_DATA_NAME = "erweidata:";
 const SERVER_DEFAULT_DATA = SERVER_HOST + SW_DATA;
+
 //  行政区
 const TOUR_TOPIC = [
   {
@@ -66,6 +67,13 @@ const TRAFFIC_TOPIC = [
     url: 'true',
     type: 'model'
   },
+  {
+    label: "激光点云数据",
+    componentEvent: "",
+    componentKey: "",
+    url: '',
+    type: 'model'
+  }
 ];
 
 //电子地图
@@ -76,6 +84,7 @@ const DZ_TOPIC = [
     type: "image"
   },
 ];
+//三维模型
 const SW_TOPIC = [
   {
     label: "数字高程模型",
@@ -127,6 +136,13 @@ const SW_TOPIC = [
   //   url: '',
   //   type: 'model'
   // },
+  {
+    label: "水利三维模型",
+    componentEvent: "",
+    componentKey: "",
+    url: '',
+    type: 'model'
+  },
   {
     label: "管线管廊模型",
     componentEvent: "cesium-3d-gx",
@@ -195,6 +211,7 @@ const JC_TOPIC = [
     dataset: "quanjin"
   }
 ];
+
 // 时空基础数据
 const MEDICAL_TOPIC = [
   {
@@ -681,6 +698,19 @@ const BASIC_TOPIC = [
   },
 
 ];
+//开发评价
+const KFPJ_TOPIC = [
+  {
+    label: "资源环境承载能力评价",
+    url: ``,
+    type: "image"
+  },
+  {
+    label: "国土空间开发适宜性评价",
+    url: ``,
+    type: "image"
+  }
+];
 const ZYKZJ_TOPIC = [
   {
     label: "生态保护红线",
@@ -937,6 +967,20 @@ const YYGGGH_TOPIC = [
 ];
 // 规划管控数据
 const CULTURE_TOPIC = [
+  {
+    id: "开发评价",
+    label: "开发评价",
+    children: KFPJ_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
   {
     id: "重要控制线",
     label: "重要控制线",
