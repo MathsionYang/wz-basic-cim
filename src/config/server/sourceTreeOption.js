@@ -114,18 +114,19 @@ const SW_TOPIC = [
   },
   {
     label: "交通三维模型",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "",
-    url: '',
-    type: 'model'
-  },
-  {
-    label: "轨道交通模型",
+
     componentEvent: "cesium-3d-gd",
     componentKey: "3d4",
     url: 'true',
     type: 'model'
   },
+  // {
+  //   label: "轨道交通模型",
+  //   componentEvent: "cesium-3d-hub-event",
+  //   componentKey: "",
+  //   url: '',
+  //   type: 'model'
+  // },
   {
     label: "管线管廊模型",
     componentEvent: "cesium-3d-gx",

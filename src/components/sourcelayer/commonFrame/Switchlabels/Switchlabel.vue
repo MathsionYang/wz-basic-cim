@@ -11,7 +11,7 @@
     <div
       :class="{
         label: true,
-       // active: item.id,
+        // active: item.id,
         active: item.id == forceTreeLabels,
         disabled: item.disabled
       }"
@@ -75,7 +75,7 @@ export default {
       "SetForceTrueTopicLabelId"
     ]),
     SetForceTreeLabels(item) {
-      console.log("点击",item);
+      console.log("点击", item);
       this.forceTreeLabels = item;
       if (this.oldlabel != "") {
         this.liebiao(this.oldlabel);
@@ -127,7 +127,7 @@ export default {
         this.liebiao(this.label);
       } else {
         //this.$router.push('http://125.124.19.162:8888/');
-        window.location.href = 'http://125.124.19.162:8888/';
+        window.open("http://125.124.19.162:8888/");
         this.oldlabel = "";
       }
     },
@@ -332,7 +332,7 @@ export default {
   display: inline-block;
 
   .imgs {
-    height: 2.7vw;
+    height: 1.7vw;
     opacity: 1;
     z-index: 7;
     width: 8vw;
@@ -343,7 +343,7 @@ export default {
   }
   &.active {
     > .imgs {
-      height: 2.7vw;
+      height: 1.7vw;
       opacity: 1;
       z-index: 7;
       width: 8vw;
@@ -356,10 +356,10 @@ export default {
 
   > .bt {
     position: absolute;
-    font-size: 1vw;
+    font-size: 0.8vw;
     font-family: YouSheBiaoTiHei;
     font-weight: 400;
-    line-height: 3vw;
+    line-height: 1.6vw;
     bottom: 0;
     left: 0;
     color: #ffffff;
@@ -374,10 +374,10 @@ export default {
   &.active {
     > .bt {
       position: absolute;
-      font-size: 1vw;
+      font-size: 0.8vw;
       font-family: YouSheBiaoTiHei;
       font-weight: 400;
-      line-height: 3vw;
+      line-height: 1.7vw;
       bottom: 0;
       left: 0;
       color: #ffff08;
