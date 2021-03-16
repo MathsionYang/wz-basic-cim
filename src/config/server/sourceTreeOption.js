@@ -566,7 +566,25 @@ const EDUCATION_TOPIC = [
       };
     })
   },
-]
+];
+//社会数据
+const SH_TOPIC = [
+  {
+    label: "就业和失业登记",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "人员和单位社保",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  }
+];
+//法人数据
 const FR_TOPIC = [
   {
     label: "机关",
@@ -596,6 +614,38 @@ const FR_TOPIC = [
     url: '',
     dataset: ""
   },
+];
+const HGJJ_TOPIC = [
+  {
+    label: "国内生产总值",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+];
+const RK_TOPIC = [
+  {
+    label: "人口基本信息",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "人口统计",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "人口结构",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  }
 ];
 const XQD_TOPIC = [
   {
@@ -641,9 +691,51 @@ const SHH_TOPIC = [
 //公共专题
 const BASIC_TOPIC = [
   {
+    id: "社会数据",
+    label: "社会数据",
+    children: SH_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
+  {
     id: "法人数据",
     label: "法人数据",
     children: FR_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
+  {
+    id: "宏观经济数据",
+    label: "宏观经济数据",
+    children: HGJJ_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
+  {
+    id: "人口数据",
+    label: "人口数据",
+    children: RK_TOPIC.map(v => {
       return {
         ...v,
         id: v.label,
@@ -958,12 +1050,20 @@ const YYGGGH_TOPIC = [
     dataset: ""
   },
   {
+    label: "原土地利用总体规划",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
     label: "原城乡规划",
     type: 'mvt',
     dataname: '172.20.83.196_ersjdata:',
     url: '',
     dataset: ""
   },
+  
 ];
 // 规划管控数据
 const CULTURE_TOPIC = [
