@@ -1,6 +1,6 @@
 <template>
   <div class="ThreeDContainer kg-box-analyse" :style="{ width: '300px' }">
-    <KgLegend />
+    <!-- <KgLegend /> -->
   </div>
 </template>
 <script>

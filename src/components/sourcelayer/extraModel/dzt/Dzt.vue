@@ -42,13 +42,13 @@ export default {
   },
   async mounted() {
     // this.eventRegsiter();
-    this.$parent.$refs.roadline.doPolylineTrailVisible(false);
+    // this.$parent.$refs.roadline.doPolylineTrailVisible(false);
     this.initBimScene();
     this.cameraMove();
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
-    this.$parent.$refs.roadline.doPolylineTrailVisible(true);
+    // this.$parent.$refs.roadline.doPolylineTrailVisible(true);
     this.change_Alpha_Value(0);
     this.doCivilizationCenterVisible(_GEOLOGY_HASH_, false);
     // this.solidModelsProfile.clear();

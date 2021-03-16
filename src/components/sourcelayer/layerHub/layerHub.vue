@@ -56,7 +56,7 @@
     </div>
     <!-- extra Components -->
     <transition name="fade">
-      <KgLegend v-if="~forceTrueTopicLabels.indexOf('控规信息')" />
+      <SourceLegend />
     </transition>
     <div class="gj">
       <div>
@@ -76,21 +76,18 @@
       <img src="/static/images/mode-ico/框@2x.png" class="gjlk" />
       <div class="gjla">
         <div class="gjlb">
-            <img
-              :src="checkgj == item.label ? item.imgs : item.img"
-              v-for="(item, index) in gjldata"
-              :key="index"
-              class="gjltb"
-              alt=""
-              @click="gjl(item)"
-            />
+          <img
+            :src="checkgj == item.label ? item.imgs : item.img"
+            v-for="(item, index) in gjldata"
+            :key="index"
+            class="gjltb"
+            alt=""
+            @click="gjl(item)"
+          />
         </div>
       </div>
     </div>
-    <div
-      class="layer-btn event"
-      @click="doForceEventTopicLabels('消防事件')"
-    >
+    <div class="layer-btn event" @click="doForceEventTopicLabels('消防事件')">
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
       <img
         class="mark"
@@ -106,7 +103,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import KgLegend from "./components/KgLegend";
+import SourceLegend from "./components/SourceLegend";
 import { treeDrawTool, treeDrawEventTool } from "./TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
 import {
@@ -196,7 +193,7 @@ export default {
       layerdatas: "",
     };
   },
-  components: { KgLegend },
+  components: { SourceLegend },
   computed: {
     ...mapGetters("map", [
       "forceTreeLabel",
@@ -249,7 +246,7 @@ export default {
     },
     gjl(data) {
       this.checkgj = data.label;
-      console.log("this.checkgj",this.checkgj)
+      console.log("this.checkgj", this.checkgj);
       window.gjlclickdata = data.label;
       this.$bus.$emit("cesium-3d-maptool", data);
       this.$bus.$off("cesium-3d-imgs");
@@ -276,9 +273,18 @@ export default {
     initForceTreeTopic() {
       console.log("initForceTreeTopic", this.forceTreeTopic);
       //  清除旧图层
-      this.forceTreeTopic
-        .filter((v) => ~this.forceTrueTopicLabels.indexOf(v.id))
-        .map((v) => this.nodeCheckChange(v, false));
+      // this.forceTreeTopic.forEach((item) => {
+      //   item.children
+      //     .filter((v) => ~this.forceTrueTopicLabels.indexOf(v.id))
+      //     .forEach((v) => {
+      //       this.nodeCheckChange(v, false);
+      //       this.doForceTrueTopicLabels(
+      //         this.forceTreeLabel,
+      //         item.children,
+      //         v.id
+      //       );
+      //     });
+      // });
       //  处理新图层
       const Topics = this.CESIUM_TREE_OPTION.filter(
         (v) => v.label == this.forceTreeLabel
@@ -353,7 +359,8 @@ export default {
         eventCreatorTel: null,
         eventPlaceName: "温州市商务路61号",
         eventTime: "2021-03-06 10:23:21",
-        eventUrl: "https://wzxf.wzcitybrain.com:1180/wenzhoucity/#/inteligentControl/c1f49eaa-ef11-4074-8ccd-ecc5ed08f300/11d9a28d7c1d4d5ca926abb6abfe45ad",
+        eventUrl:
+          "https://wzxf.wzcitybrain.com:1180/wenzhoucity/#/inteligentControl/c1f49eaa-ef11-4074-8ccd-ecc5ed08f300/11d9a28d7c1d4d5ca926abb6abfe45ad",
         innerEventId: "147952",
         msgType: 9,
         origin: "温州市消防救援支队",
@@ -362,8 +369,8 @@ export default {
         streetCode: "330300000000",
         superviseStatus: 1,
         title: "智慧消防-超高层消防事件",
-      })
-      console.log('res', res)
+      });
+      console.log("res", res);
       let features = [];
       res.forEach((item) => {
         features.push({
@@ -392,12 +399,10 @@ export default {
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
             if (type == "source") {
-              console.log('node1',node)
               this.getPOIPickedFeature(node, () => {
                 this.switchSearchBox(node);
               });
             } else {
-               console.log('node2',node)
               this.getAPIFeature(node, () => {
                 this.switchSearchBox(node);
               });
@@ -456,7 +461,7 @@ export default {
             })
           );
         }
-        this.switchSearchBox(node);
+        // this.switchSearchBox(node);
         //  有相机视角配置 -> 跳视角
         node.camera && window.earth.scene.camera.setView(node.camera);
       } else {
@@ -480,6 +485,7 @@ export default {
               window.checkedkey.splice(a, 1);
             }
           }
+          this.switchSearchBox(node, false)
         }
         if (node.moreurl) {
           //隐藏图层
@@ -503,6 +509,7 @@ export default {
               }
             }
           }
+          this.switchSearchBox(node, false)
         }
         if (node.withImage) {
           node.withImage.forEach((item) => {
@@ -515,9 +522,9 @@ export default {
       }
     },
     //  先只显示医疗
-    switchSearchBox(node) {
+    switchSearchBox(node, shall=true) {
       this.$bus.$emit("cesium-3d-switch-searchBox", {
-        shall: node.type == "mvt" && node.id ? true : false,
+        shall: shall && node.type == "mvt" && node.id ? true : false,
         node,
       });
     },

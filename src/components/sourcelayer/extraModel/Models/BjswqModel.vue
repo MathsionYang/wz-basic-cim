@@ -37,9 +37,15 @@ export default {
         });
       } else {
         LAYERS.map(v => {
-          return window.earth.scene.addS3MTilesLayerByScp(v.url, {
+          const promise = window.earth.scene.addS3MTilesLayerByScp(v.url, {
             name: v.name
           });
+          Cesium.when(promise, async (_LAYER_) => {
+            const LAYER = window.earth.scene.layers.find(v.name);
+            LAYER.brightness = 0.5;
+            LAYER.gamma = 0.6;
+            LAYER.refresh();
+          })
         });
         LAYERS_JFJ.map(v => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
