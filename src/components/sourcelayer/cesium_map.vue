@@ -704,6 +704,7 @@ export default {
       this.$bus.$off("cesium-3d-bm");
       this.$bus.$on("cesium-3d-bm", ({ value }) => {
         this.showJYmx = value;
+        // console.log('WZBaiMo',window.earth.scene.layers.find('WZBaimo'));
       });
       //地质体
       this.$bus.$off("cesium-3d-dzt");
@@ -718,10 +719,10 @@ export default {
       });
       this.$bus.$on("cesium-3d-switch", ({ value }) => {
         this.$bus.$emit("cesium-3d-event", { value: !value ? "3d1" : null });
-        ServiceUrl.WZBaimo_OBJ.map(({ KEY }) => {
-          const _LAYER_ = window.earth.scene.layers.find(KEY);
-          _LAYER_.visible = !value ? false : true;
-        });
+        // ServiceUrl.WZBaimo_OBJ.map(({ KEY }) => {
+        //   const _LAYER_ = window.earth.scene.layers.find(KEY);
+        //   _LAYER_.visible = !value ? false : true;
+        // });
         //  鼠标缩放限制
         // window.earth.scene.screenSpaceCameraController.maximumZoomDistance = !value
         //   ? 800
