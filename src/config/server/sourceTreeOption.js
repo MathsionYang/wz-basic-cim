@@ -372,7 +372,7 @@ const CITYBJ_TOPIC = [
     url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "",
     moreurl: [{
-      label: '',
+      label: '路灯',
       type: 'mvt',
       dataset: 'JMSS_LD',
       dataname: 'erweidata:',
@@ -382,7 +382,7 @@ const CITYBJ_TOPIC = [
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
       hiddenLabel: true
     }, {
-      label: '',
+      label: '电杆',
       type: 'mvt',
       dataset: 'SZSS_DG',
       dataname: 'erweidata:',
@@ -463,9 +463,19 @@ const CITYBJ_TOPIC = [
     label: "道路交通类",
     type: 'mvt',
     dataname: '',
-    url: '',
+    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "",
-   
+    moreurl:[{
+      label: '停车场',
+      type: 'mvt',
+      dataset: 'Parkinglot_CBD',
+      dataname: 'erweidata:',
+      icon: "停车场",
+      id: "停车场库",
+      newdataset: "erweidata:Parkinglot_CBD",
+      url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      // hiddenLabel: true
+    }]
   },
   {
     label: "市容环境类",
