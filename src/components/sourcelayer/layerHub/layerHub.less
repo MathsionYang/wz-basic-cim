@@ -11,14 +11,18 @@
     position: absolute;
     text-align: center;
     z-index: 7;
-    right: 1vw;
-    bottom: 1.5vh;
+    // right: 1vw;
+    right: 1vh;
+    // bottom: 1.5vh;
+    bottom: 0.5vh;
+    cursor: pointer;
 
     .zsk {
       position: relative;
       top: 0;
       left: 0;
-      width: 2vw;
+      // width: 2vw;
+      width: 6vh;
       transition: all 0.5s linear;
       cursor: pointer;
 
@@ -29,67 +33,82 @@
 
     .gjls {
       position: absolute;
-      top: 1.5vh;
-      width: 1vw;
-      right: 2vh;
+      // top: 1.5vh;
+      // width: 1vw;
+      width: 4vh;
+      // right: 2vh;
+      top: 50%;
+      left: 48%;
+      transform: translate(-50%,-50%);
     }
 
-    @keyframes round_animate {
-      to {
-        transform: rotate(1turn);
-      }
-    }
+    // @keyframes round_animate {
+    //   to {
+    //     transform: rotate(1turn);
+    //   }
+    // }
   }
 
   .gjl {
     position: absolute;
     text-align: center;
     z-index: 35;
-    right: 1vw;
+    // right: 1vw;
+    right: 5vh;
     bottom: -1vh;
-    display: none;
+    // display: none;
+    width: 38vh;
+    height: 16vh;
+    .bg-image("/static/images/mode-ico/框@2x");
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh 2vh 1vh 1vh;
 
-    &.active {
-      position: absolute;
-      text-align: center;
-      z-index: 7;
-      right: 2.5vw;
-      bottom: 0.5vh;
-      display: inline;
-    }
+    // &.active {
+    //   position: absolute;
+    //   text-align: center;
+    //   z-index: 7;
+    //   right: 2.5vw;
+    //   bottom: 0.5vh;
+    //   display: inline;
+    // }
 
-    .gjlk {
-      position: relative;
-      top: 0;
-      left: 0;
-      width: 14vw
-    }
+    // .gjlk {
+    //   position: relative;
+    //   top: 0;
+    //   left: 0;
+    //   width: 14vw
+    // }
 
-    .gjla {
-      position: absolute;
-      top: 0.7vh;
-      right: -1vw;
+    // .gjla {
+    //   position: absolute;
+    //   top: 0.7vh;
+    //   right: -1vw;
 
-      .gjlb {
-        margin-right: 1.3vw;
-        margin-top: 3.4vh;
+    //   .gjlb {
+    //     margin-right: 1.3vw;
+    //     margin-top: 3.4vh;
 
         .gjltb {
-          display: inline-block;
-          width: 2.4vw;
-          height: 8vh;
+          // display: inline-block;
+          width: 19%;
+          // height: 8vh;
         }
-      }
-    }
+    //   }
+    // }
   }
 
   .layer-btn {
     position: absolute;
-    right: 21.5vw;
+    // right: 21.5vw;
+    right: 43vh;
     bottom: 0;
 
     .event {
-      width: 3vw;
+      // width: 3vw;
+      width: 6vh;
     }
 
     .mark {
@@ -119,9 +138,12 @@
     .erji {
       background-image: url("/static/images/mode-ico/树框.png");
       background-size: 100% 100%;
-      max-width: 11vw;
-      min-width: 6vw;
-      height: 5.7vw;
+      // max-width: 11vw;
+      max-width: 22vh;
+      // min-width: 6vw;
+      min-width: 12vh;
+      // height: 5.7vw;
+      height: 12vh;
       margin-right: 1vh;
       display: flex;
       flex-direction: column;
@@ -139,7 +161,8 @@
         position: relative;
         margin: 0 auto;
         padding: 3px 10px;
-        font-size: 1vw;
+        // font-size: 1vw;
+        font-size: 2vh;
         font-family: YouSheBiaoTiHei;
         font-weight: 400;
         // line-height: 7px;
@@ -175,8 +198,10 @@
         .fuhao {
           background-image: url("/static/images/mode-ico/未选中.png");
           background-size: 100% 100%;
-          width: 1vw;
-          height: 1vw;
+          // width: 1vw;
+          width: 2vh;
+          // height: 1vw;
+          height: 2vh;
           display: inline-block;
           vertical-align: middle;
           // margin-left: 1vh;
@@ -185,8 +210,10 @@
         .notfuhao {
           background-image: url("/static/images/mode-ico/未选中.png");
           background-size: 100% 100%;
-          width: 1vw;
-          height: 1vw;
+          // width: 1vw;
+          width: 2vh;
+          // height: 1vw;
+          height: 2vh;
           display: inline-block;
           vertical-align: middle;
           // margin-left: 1vh;
@@ -196,16 +223,17 @@
           >.fuhao {
             background-image: url("/static/images/mode-ico/选中.png");
             background-size: 100% 100%;
-            width: 1vw;
-            height: 1vw;
-            display: inline-block;
-            vertical-align: middle;
+            // width: 1vw;
+            // height: 1vw;
+            // display: inline-block;
+            // vertical-align: middle;
             //margin-left: 1vh;
           }
         }
 
         .ring {
-          font-size: 0.7vw;
+          // font-size: 0.7vw;
+          font-size: 1.4vh;
           font-family: YouSheBiaoTiHei;
           /* font-weight: 400; */
           /* line-height: 7px; */
@@ -222,11 +250,11 @@
 
         &.active {
           .ring {
-            font-size: 0.7vw;
-            font-family: YouSheBiaoTiHei;
+            // font-size: 0.7vw;
+            // font-family: YouSheBiaoTiHei;
             /* font-weight: 400; */
             /* line-height: 7px; */
-            opacity: 1;
+            // opacity: 1;
             /* height: 4vh; */
             display: initial;
             width: 100%;
@@ -366,7 +394,8 @@
   }
 
   .bottom-topics-container {
-    margin-left: 26vw;
+    // margin-left: 26vw;
+    margin-left: 52vh;
     // width: 100vh;
     // margin: 0 auto;
     // background-image: linear-gradient(to right,
@@ -381,11 +410,13 @@
       display: inline-block;
 
       .imgs {
-        height: 2vw;
+        // height: 2vw;
+        height: 4vh;
         opacity: 1;
         z-index: 7;
         margin-right: 5px;
-        width: 8vw;
+        // width: 8vw;
+        width: 16vh;
         background-size: 100% 100%;
         border: 0;
         background-image: url(/static/images/mode-ico/底部标题.png);
@@ -393,12 +424,12 @@
 
       &.active {
         >.imgs {
-          height: 2vw;
-          opacity: 1;
-          z-index: 7;
-          width: 8vw;
-          border: 0;
-          margin-right: 5px;
+          // height: 2vw;
+          // opacity: 1;
+          // z-index: 7;
+          // width: 8vw;
+          // border: 0;
+          // margin-right: 5px;
           background-size: 100% 100%;
           background-image: url(/static/images/mode-ico/底部标题选中.png);
         }
@@ -406,10 +437,12 @@
 
       >.bt {
         position: absolute;
-        font-size: 0.8vw;
+        // font-size: 0.8vw;
+        font-size: 1.6vh;
         font-family: YouSheBiaoTiHei;
         font-weight: 400;
-        line-height: 2vw;
+        // line-height: 2vw;
+        line-height: 4vh;
         bottom: 0;
         left: 0;
         color: rgb(255, 255, 255);
@@ -423,20 +456,20 @@
 
       &.active {
         >.bt {
-          position: absolute;
-          font-size: 0.8vw;
-          font-family: YouSheBiaoTiHei;
-          font-weight: 400;
-          line-height: 2vw;
-          bottom: 0;
-          left: 0;
+          // position: absolute;
+          // font-size: 0.8vw;
+          // font-family: YouSheBiaoTiHei;
+          // font-weight: 400;
+          // line-height: 2vw;
+          // bottom: 0;
+          // left: 0;
           color: #FFFF08;
-          text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
-          opacity: 1;
-          margin: 0.5vh 0vw;
-          display: block;
-          width: 100%;
-          text-align: center;
+          // text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
+          // opacity: 1;
+          // margin: 0.5vh 0vw;
+          // display: block;
+          // width: 100%;
+          // text-align: center;
         }
       }
 

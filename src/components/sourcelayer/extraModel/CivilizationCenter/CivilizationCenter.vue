@@ -421,7 +421,8 @@ export default {
     top: 80px !important;
     bottom: unset !important;
     /* left: 0; */
-    right: 25vw;
+    // right: 25vw;
+    right: 50vh;
     width: 125px;
     margin: 0 auto;
     overflow: hidden;

@@ -145,8 +145,9 @@ export default {
         this.forceNode = node || {};
         shall ? this.searchFilter() : undefined;
         this.layerdata = window.layersdata;
+        console.log('layerdata', this.layerdata)
         this.checkedkeys = window.checkedkey;
-        console.log("dd", this.checkedkeys);
+        console.log("checkedkeys", this.checkedkeys);
         this.$nextTick(() => {
           this.$refs.tree.setCheckedKeys(this.checkedkeys); //
         });

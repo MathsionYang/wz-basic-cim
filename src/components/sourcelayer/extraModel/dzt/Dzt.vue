@@ -199,7 +199,8 @@ export default {
 .geology-analyse {
   z-index: 7;
   position: absolute;
-  left: 26vw;
+  // left: 26vw;
+  left: 52vh;
   -webkit-transform: translateX(-50%);
   top: 10vh;
   overflow: hidden;

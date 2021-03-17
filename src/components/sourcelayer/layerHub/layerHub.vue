@@ -58,34 +58,30 @@
     <transition name="fade">
       <SourceLegend />
     </transition>
-    <div class="gj">
-      <div>
-        <img
-          src="/static/images/mode-ico/装饰框.png"
-          class="zsk"
-          @click="gjlclick()"
-        />
-        <img
-          src="/static/images/mode-ico/工具栏.png"
-          class="gjls"
-          @click="gjlclick()"
-        />
-      </div>
+    <div class="gj" @click="gjlclick()">
+      <img
+        src="/static/images/mode-ico/装饰框.png"
+        class="zsk"
+      />
+      <img
+        src="/static/images/mode-ico/工具栏.png"
+        class="gjls"
+      />
     </div>
-    <div class="gjl" :class="showgjl == true ? 'active' : ''">
-      <img src="/static/images/mode-ico/框@2x.png" class="gjlk" />
-      <div class="gjla">
-        <div class="gjlb">
+    <!-- <div class="gjl" :class="showgjl == true ? 'active' : ''"> -->
+    <div class="gjl" v-show="showgjl">
+      <!-- <img src="/static/images/mode-ico/框@2x.png" class="gjlk" /> -->
+      <!-- <div class="gjla"> -->
+        <!-- <div class="gjlb"> -->
           <img
             :src="checkgj == item.label ? item.imgs : item.img"
             v-for="(item, index) in gjldata"
             :key="index"
             class="gjltb"
-            alt=""
             @click="gjl(item)"
           />
-        </div>
-      </div>
+        <!-- </div> -->
+      <!-- </div> -->
     </div>
     <div class="layer-btn event" @click="doForceEventTopicLabels('消防事件')">
       <img class="event" src="/static/images/layer-ico/eventFire.png" />
@@ -242,6 +238,7 @@ export default {
       this.SetForceTreeLabel(data);
     },
     gjlclick() {
+      console.log('gjlclick')
       this.showgjl = !this.showgjl;
     },
     gjl(data) {

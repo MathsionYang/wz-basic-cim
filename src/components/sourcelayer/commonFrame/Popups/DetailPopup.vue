@@ -1562,7 +1562,8 @@ table.hovertable td {
   z-index: 99;
   right: 10px;
   top: 10vh;
-  width: 25vw;
+  // width: 25vw;
+  width: 50vh;
 }
 .closes {
   width: 4vh;
@@ -1571,18 +1572,21 @@ table.hovertable td {
   background-size: 100% 100%;
   z-index: 99;
   top: 10.5vh;
-  right: 2vw;
+  // right: 2vw;
+  right: 4vh;
   z-index: 100;
   position: fixed;
 }
 .fhj {
-  width: 2vw;
+  // width: 2vw;
+  width: 4vh;
   height: 4vh;
   background: url(/static/images/mode-ico/返回键.png) no-repeat center;
   background-size: 100% 100%;
   z-index: 99;
   top: 10.5vh;
-  right: 4vw;
+  // right: 4vw;
+  right: 8vh;
   z-index: 100;
   position: fixed;
 }
@@ -1594,27 +1598,33 @@ ul li {
   height: 58vh;
   overflow: auto;
   margin-top: 3vh;
-  margin-left: 1vw;
+  // margin-left: 1vw;
+  margin-left: 2vh;
   position: relative;
-  margin-right: 1vw;
+  // margin-right: 1vw;
+  margin-right: 2vh;
 }
 #mains {
   height: 58vh;
   overflow: auto;
   margin-top: 4vh;
-  margin-left: 1vw;
+  // margin-left: 1vw;
+  margin-left: 2vh;
   position: relative;
-  margin-right: 1vw;
+  // margin-right: 1vw;
+  margin-right: 2vh;
 }
 .snf-page {
   height: auto;
   margin-bottom: 1vh;
-  margin-right: 0.5vw;
+  // margin-right: 0.5vw;
+  margin-right: 1vh;
 }
 .snf-pages {
   height: auto;
   margin-bottom: 1vh;
-  margin-right: 0.5vw;
+  // margin-right: 0.5vw;
+  margin-right: 1vh;
 }
 .snf-page:nth-child(2n) {
   //background: #e1e1e1;
@@ -1673,11 +1683,13 @@ ul li {
   font-family: YouSheBiaoTiHei;
   color: #fff;
   font-size: 1.7vh;
-  margin-left: 0.5vw;
+  // margin-left: 0.5vw;
+  margin-left: 1vh;
   margin-top: 1vh;
 }
 .decoratess {
-  margin: -0.7vh 0.3vw 0.5vh 0vw;
+  // margin: -0.7vh 0.3vw 0.5vh 0vw;
+  margin: -0.7vh 0.6vh 0.5vh 0vh;
   width: 35%;
   height: 1vh;
   .bg-image("/static/images/mode-ico/路径");
@@ -1695,9 +1707,11 @@ ul li {
   .leaflet-popup-close-button {
     position: absolute;
     top: 0.5vh;
-    right: 1vw;
+    // right: 1vw;
+    right: 2vh;
     text-align: center;
-    width: 1vw;
+    // width: 1vw;
+    width: 2vh;
     height: 2vh;
     font: 2.2vh/2vh Tahoma, Verdana, sans-serif;
     color: #fff;
@@ -1714,12 +1728,14 @@ ul li {
     //box-sizing: border-box;
     //padding: 3vh;
     padding-bottom: 4vh;
-    padding-left: 1vw;
+    // padding-left: 1vw;
+    padding-left: 2vh;
     > .toubu {
       height: 4vh;
       line-height: 5vh;
       box-sizing: border-box;
-      padding-right: 1vw;
+      // padding-right: 1vw;
+      padding-right: 2vh;
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
@@ -1751,7 +1767,8 @@ ul li {
     font-size: 1.6vh;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    padding: 1vh 0.5vw;
+    // padding: 1vh 0.5vw;
+    padding: 1vh 1vh;
     color: white;
     display: inline-block;
     cursor: pointer;
