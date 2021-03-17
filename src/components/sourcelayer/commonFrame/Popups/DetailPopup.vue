@@ -1781,6 +1781,20 @@ ul li {
       background-image: url("/static/images/mode-ico/人口动态选中.png");
     }
   }
+  .extra-tab_VR{
+     background-image: url("/static/images/mode-ico/VR全景.png");
+    &.active {
+      background-size: 100% 100%;
+      background-image: url("/static/images/mode-ico/VR全景选中.png");
+    }
+  }
+  .extra-tab_TZ{
+     background-image: url("/static/images/mode-ico/图档资料.png");
+    &.active {
+      background-size: 100% 100%;
+      background-image: url("/static/images/mode-ico/图档资料选中.png");
+    }
+  }
   .overview {
     position: absolute;
     right: 10px;
