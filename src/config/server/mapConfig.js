@@ -9,7 +9,7 @@
 export const ServiceUrl = {
   //  温州全市域白模
   //WZBaimo: "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-RESPYQSY/rest/realspace/datas/RES_PY_QSY/config",
-   WZBaimo: "http://172.20.83.223:8098/iserver/services/3D-mongodb14/rest/realspace/datas/RES_PY_QSY/config",
+  WZBaimo: "http://172.20.83.223:8098/iserver/services/3D-mongodb14/rest/realspace/datas/RES_PY_QSY/config",
   //  夜间模型
   WZBaimo_OBJ: [
     {
@@ -163,13 +163,13 @@ export const CIVILIZATION_CENTER_URL = {
     url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
     dataSourceName: "erweidata"
   },
-  //地上模型
+  //市民中心地上地下
   ABOVEGROUND1: "http://172.20.83.223:8098/iserver/services/3D-mongodb7/rest/realspace",
   //地上模型数据绑定
   ABOVEGROUND_DATA1: {
     url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
   },
-  //地上模型
+  //市民中心地上分层
   ABOVEGROUND2: "http://172.20.83.223:8098/iserver/services/3D-mongodb9/rest/realspace",
   //地上模型数据绑定
   ABOVEGROUND_DATA2: {
@@ -190,7 +190,7 @@ export const CIVILIZATION_CENTER_URL = {
   },
 } 
 export const CHAO_CENTER_URL = {
-  //地上模型
+  //超高层
   ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb8/rest/realspace",
   //地上模型数据绑定
   ABOVEGROUND_DATA: {

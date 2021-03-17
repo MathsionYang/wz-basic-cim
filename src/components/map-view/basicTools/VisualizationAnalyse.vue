@@ -204,7 +204,7 @@ export default {
   font-size: 14px;
   color: #ffffff;
   letter-spacing: 4px;
-  width: 7vw;
+  width: 12vh;
   display: inline-block;
   font-family: PingFang SC;
   font-weight: bold;
@@ -227,7 +227,7 @@ export default {
   vertical-align: middle;
 }
 .buttons {
-  height: 2vw;
+  height: 5vh;
   opacity: 1;
   z-index: 7;
   margin-right: 10px;
@@ -239,7 +239,7 @@ export default {
   background-image: url(/static/images/mode-ico/工具栏按钮.png);
 }
 .buttons:hover {
-  height: 2vw;
+  height: 5vh;
   opacity: 1;
   z-index: 7;
   margin-right: 10px;

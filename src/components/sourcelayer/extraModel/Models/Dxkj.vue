@@ -20,13 +20,13 @@ export default {
     };
   },
   async mounted() {
-    this.$parent.$refs.roadline.doPolylineTrailVisible(false)
+    //this.$parent.$refs.roadline.doPolylineTrailVisible(false)
     this.initScene();
     this.cameraMove();
     this.change_Alpha_Value(75);
   },
   beforeDestroy() {
-    this.$parent.$refs.roadline.doPolylineTrailVisible(true)
+    //this.$parent.$refs.roadline.doPolylineTrailVisible(true)
     this.change_Alpha_Value(0);
     this.doCivilizationCenterVisible(_ABOVEGROUND1_HASH_, false);
   },
@@ -42,6 +42,7 @@ export default {
           ABOVEGROUND_DATA1
         } = CIVILIZATION_CENTER_URL;
         this.doGroundInit(_ABOVEGROUND1_HASH_, ABOVEGROUND1, ABOVEGROUND_DATA1);
+        window.earth.scene.screenSpaceCameraController.minimumZoomDistance = -100;   //使镜头可进入地下
       }
     },
     /**
@@ -61,6 +62,10 @@ export default {
           Cesium.when(promise, async () => {
             const { url, dataSourceName } = _DATA_;
             const layer = window.earth.scene.layers.find(_KEY_);
+            layer.style3D.fillStyle = Cesium.FillStyle.Fill_And_WireFrame; //线框加填充
+            layer.wireFrameMode = Cesium.WireFrameType.EffectOutline;  
+            layer.style3D.lineColor = Cesium.Color.fromCssColorString("rgb(204,204,204)");  //线框颜色
+            layer.style3D.lineWidth = 1;  //线框粗细
             layer.setQueryParameter({
               url,
               isMerge: true,

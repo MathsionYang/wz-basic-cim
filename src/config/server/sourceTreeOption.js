@@ -10,6 +10,7 @@ const SERVER_HOST = "https://ditu.wzcitybrain.com/iserver/services";
 const SW_DATA = "/data-SW_DATA/rest/data";
 const SW_DATA_NAME = "erweidata:";
 const SERVER_DEFAULT_DATA = SERVER_HOST + SW_DATA;
+
 //  行政区
 const TOUR_TOPIC = [
   {
@@ -53,7 +54,7 @@ const TRAFFIC_TOPIC = [
     type: 'model'
   },
   {
-    label: "倾斜摄影",
+    label: "2017年倾斜摄影",
     componentEvent: "cesium-3d-qxsy",
     componentKey: "3d5",
     url: 'true',
@@ -66,6 +67,13 @@ const TRAFFIC_TOPIC = [
     url: 'true',
     type: 'model'
   },
+  {
+    label: "激光点云数据",
+    componentEvent: "",
+    componentKey: "",
+    url: '',
+    type: 'model'
+  }
 ];
 
 //电子地图
@@ -76,6 +84,7 @@ const DZ_TOPIC = [
     type: "image"
   },
 ];
+//三维模型
 const SW_TOPIC = [
   {
     label: "数字高程模型",
@@ -114,16 +123,24 @@ const SW_TOPIC = [
   },
   {
     label: "交通三维模型",
-    componentEvent: "cesium-3d-hub-event",
-    componentKey: "",
-    url: '',
-    type: 'model'
-  },
-  {
-    label: "轨道交通模型",
+
     componentEvent: "cesium-3d-gd",
     componentKey: "3d4",
     url: 'true',
+    type: 'model'
+  },
+  // {
+  //   label: "轨道交通模型",
+  //   componentEvent: "cesium-3d-hub-event",
+  //   componentKey: "",
+  //   url: '',
+  //   type: 'model'
+  // },
+  {
+    label: "水利三维模型",
+    componentEvent: "",
+    componentKey: "",
+    url: '',
     type: 'model'
   },
   {
@@ -194,6 +211,7 @@ const JC_TOPIC = [
     dataset: "quanjin"
   }
 ];
+
 // 时空基础数据
 const MEDICAL_TOPIC = [
   {
@@ -557,7 +575,25 @@ const EDUCATION_TOPIC = [
       };
     })
   },
-]
+];
+//社会数据
+const SH_TOPIC = [
+  {
+    label: "就业和失业登记",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "人员和单位社保",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  }
+];
+//法人数据
 const FR_TOPIC = [
   {
     label: "机关",
@@ -587,6 +623,38 @@ const FR_TOPIC = [
     url: '',
     dataset: ""
   },
+];
+const HGJJ_TOPIC = [
+  {
+    label: "国内生产总值",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+];
+const RK_TOPIC = [
+  {
+    label: "人口基本信息",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "人口统计",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
+    label: "人口结构",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  }
 ];
 const XQD_TOPIC = [
   {
@@ -632,9 +700,51 @@ const SHH_TOPIC = [
 //公共专题
 const BASIC_TOPIC = [
   {
+    id: "社会数据",
+    label: "社会数据",
+    children: SH_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
+  {
     id: "法人数据",
     label: "法人数据",
     children: FR_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
+  {
+    id: "宏观经济数据",
+    label: "宏观经济数据",
+    children: HGJJ_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
+  {
+    id: "人口数据",
+    label: "人口数据",
+    children: RK_TOPIC.map(v => {
       return {
         ...v,
         id: v.label,
@@ -688,6 +798,19 @@ const BASIC_TOPIC = [
     })
   },
 
+];
+//开发评价
+const KFPJ_TOPIC = [
+  {
+    label: "资源环境承载能力评价",
+    url: ``,
+    type: "image"
+  },
+  {
+    label: "国土空间开发适宜性评价",
+    url: ``,
+    type: "image"
+  }
 ];
 const ZYKZJ_TOPIC = [
   {
@@ -936,15 +1059,37 @@ const YYGGGH_TOPIC = [
     dataset: ""
   },
   {
+    label: "原土地利用总体规划",
+    type: 'mvt',
+    dataname: '',
+    url: '',
+    dataset: ""
+  },
+  {
     label: "原城乡规划",
     type: 'mvt',
     dataname: '172.20.83.196_ersjdata:',
     url: '',
     dataset: ""
   },
+  
 ];
 // 规划管控数据
 const CULTURE_TOPIC = [
+  {
+    id: "开发评价",
+    label: "开发评价",
+    children: KFPJ_TOPIC.map(v => {
+      return {
+        ...v,
+        id: v.label,
+        icon: v.label,
+        url: v.url,
+        type: v.type,
+        newdataset: `${SW_DATA_NAME}${v.dataset}`
+      };
+    })
+  },
   {
     id: "重要控制线",
     label: "重要控制线",
@@ -1004,13 +1149,13 @@ const CULTURE_TOPIC = [
 ];
 
 const GCJSXM_TOPIC = [
-  {
-    label: "集团项目",
-    type: 'mvt',
-    dataname: '172.20.83.196_ersjdata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
-    dataset: "JTXM"
-  },
+  // {
+  //   label: "集团项目",
+  //   type: 'mvt',
+  //   dataname: '172.20.83.196_ersjdata:',
+  //   url: 'http://172.20.83.223:8090/iserver/services/data-EW_DATA/rest/data',
+  //   dataset: "JTXM"
+  // },
   {
     label: "工程项目",
     type: "mvt",

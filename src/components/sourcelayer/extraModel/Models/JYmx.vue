@@ -23,7 +23,7 @@ export default {
     this.initBimScene();
     this.eventRegsiter();
     this.cameraMove();
-    //this.falsedatas();
+    // this.falsedatas();
   },
   beforeDestroy() {
     this.closeTrafficSubwayModel();
@@ -33,11 +33,11 @@ export default {
     eventRegsiter() {
       const that = this;
       //this.initBimScene();
-      //this.falsedatas();
+      // this.falsedatas();
     },
     falsedatas() {
       var asda = window.earth.scene.layers.find("WZBaimo");
-      console.log(asda);
+      console.log('asda',asda);
       asda.brightness = 0.5;
       if (
         window.earth.scene.layers.find("BJJM") ||
@@ -71,7 +71,7 @@ export default {
             console.log("白模隐藏", resultObj);
             if (resultObj.featureCount > 0) {
               //window.Buildinglogo = resultObj.features;
-              processCompleted(resultObj.features);
+              processCompleted(resultObj.features); 
             }
           },
           error: function(msg) {
@@ -87,10 +87,12 @@ export default {
           const V_LAYER_baimo = window.earth.scene.layers.find("WZBaimo");
           //V_LAYER_baimo.setOnlyObjsVisible([2682489],false)
           V_LAYER_baimo.setOnlyObjsVisible(window.baimo, false);
+          window.baimo
         }
       }
     },
-    //  初始化BIM场景
+    
+    //  初始化白模场景
     initBimScene(fn) {
       const _LAYER_ = window.earth.scene.layers.find(LAYERS[0].name);
       if (_LAYER_) {
@@ -99,12 +101,46 @@ export default {
           V_LAYER.visible = true;
         });
       } else {
-        const PROMISES = LAYERS.map(v => {
-          return window.earth.scene.addS3MTilesLayerByScp(v.url, {
+        LAYERS.map(v => {
+          const BaiMo_promise = window.earth.scene.addS3MTilesLayerByScp(v.url, {
             name: v.name
           });
+          Cesium.when(BaiMo_promise, async (_LAYER_)=>{
+            let BaiMo_layer = window.earth.scene.layers.find("WZBaimo");
+            
+            // BaiMo_layer.brightness = 0.65; //调亮度
+            BaiMo_layer.style3D.fillStyle = Cesium.FillStyle.Fill_And_WireFrame; //线框加填充
+            BaiMo_layer.wireFrameMode = Cesium.WireFrameType.EffectOutline;  
+            BaiMo_layer.style3D.lineColor = Cesium.Color.fromCssColorString("rgb(204,204,204)");  //线框颜色
+            BaiMo_layer.style3D.lineWidth = 1;  //线框粗细
+            BaiMo_layer.style3D.fillForeColor = Cesium.Color.fromCssColorString(
+                "rgba(255,255,255,0.6)"
+            );
+            //白模分层设色
+            // BaiMo_layer.indexedDBSetting.isGeoTilesRootNodeSave = true;
+            // BaiMo_layer.residentRootTile = true;
+            // let hyp = new Cesium.HypsometricSetting();
+            // let colorTable = new Cesium.ColorTable();
+            // hyp.MaxVisibleValue = 3000;
+            // hyp.MinVisibleValue = 0;
+            // colorTable.insert(3000, new Cesium.Color(1, 1, 1));
+            // colorTable.insert(1600, new Cesium.Color(0.95, 0.95, 0.95));
+            // colorTable.insert(760, new Cesium.Color(0.7, 0.7, 0.7));
+            // colorTable.insert(0, new Cesium.Color(13 / 255, 24 / 255, 45 / 255));
+            // hyp.ColorTable = colorTable;
+            // // hyp.DisplayMode = Cesium.HypsometricSettingEnum.DisplayMode.FACE;
+            // // hyp.Opacity = 1;
+            // BaiMo_layer.hypsometricSetting = {
+            //     hypsometricSetting: hyp,
+            //     analysisMode:
+            //         Cesium.HypsometricSettingEnum.AnalysisRegionMode.ARM_ALL
+            // };
+          })
         });
-      }
+        // Cesium.when(PROMISES, async (...arguments) => {         
+        // })
+      };
+      
       // return new Promise((resolve, reject) => {
       //   const _LAYER_ = window.earth.scene.layers.find('WZBaimo_POINT_AROUND')
       //   if (_LAYER_) {
