@@ -32,11 +32,9 @@
       <DetailedModel v-if="showSubFrame == '3d1'" />
       <!-- <CesiumMapVideo v-if="showSubFrame == '3d1'" /> -->
       <Overview ref="overview" v-if="showSubHubFrame == '3d1'" />
-
       <Ljxq ref="ljxq" v-if="showLjxq == '3d2'" />
-
       <Dzt ref="dzt" v-if="showdzt == '3d3'" />
-
+      <Light ref="light" v-if="showLight == '3d22'" />
       <TrafficSubwayModel
         ref="trafficSubwayModel"
         v-if="showgdFrame == '3d4'"
@@ -56,6 +54,7 @@
       <WZDem v-if="showDem == '3d17'" />
       <SZgc v-if="showSZGC == '3d18'" />
       <JYmx v-if="showJYmx == '3d19'" />
+
 
       <Surface ref="surface" v-if="showSubTool == '地表开挖'" />
       <CesiumMapTool ref="cesiummaptool" v-if="showSubTool == '长度测量'" />
@@ -103,6 +102,7 @@ import WZDem from "components/sourcelayer/extraModel/Models/WzDem";
 import SZgc from "components/sourcelayer/extraModel/Models/SZgc";
 import JYmx from "components/sourcelayer/extraModel/Models/JYmx";
 import KgBoxAnalyse from "components/sourcelayer/extraModel/Models/KgBoxAnalyse";
+import Light from "components/sourcelayer/extraModel/Models/StreetLight.vue";
 import InfoFrame from "components/sourcelayer/commonFrame/InfoFrame/InfoFrame";
 import MedicalPopup from "components/sourcelayer/commonFrame/Popups/medicalPopup";
 import BayonetPopup from "components/sourcelayer/commonFrame/Popups/bayonetPopup";
@@ -161,6 +161,7 @@ export default {
       showKgFrame: null,
       showLjxq: null,
       showdzt: null,
+      showLight: null,
       showqxsyFrame: null,
       showjzFrame: null,
       showouhaiFrame: null,
@@ -202,6 +203,7 @@ export default {
     BJJM,
     Ljxq,
     Dzt,
+    Light,
     OUHAI,
     Dxkj,
     WZDem,
@@ -710,6 +712,11 @@ export default {
       this.$bus.$off("cesium-3d-dzt");
       this.$bus.$on("cesium-3d-dzt", ({ value }) => {
         this.showdzt = value;
+      });
+      //路灯
+      this.$bus.$off("cesium-3d-light");
+      this.$bus.$on("cesium-3d-light", ({ value }) => {
+        this.showLight = value;
       });
       //工具栏
       this.$bus.$off("cesium-3d-maptool");

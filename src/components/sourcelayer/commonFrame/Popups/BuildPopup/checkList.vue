@@ -131,7 +131,8 @@ export default {
   .mask {
     background: rgba(0,0,0,0.5);
     height: 100vh;
-    width: 100vw;
+    // width: 100vw;
+    width: 200vh;
     position: fixed;
     left: 0;
     top: 0;

@@ -371,17 +371,19 @@ const CITYBJ_TOPIC = [
     dataname: '',
     url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
     dataset: "",
-    moreurl: [{
-      label: '路灯',
-      type: 'mvt',
-      dataset: 'JMSS_LD',
-      dataname: 'erweidata:',
-      icon: "路灯",
-      id: "路灯",
-      newdataset: "erweidata:JMSS_LD",
-      url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
-      hiddenLabel: true
-    }, {
+    moreurl: [
+      // {
+      // label: '路灯',
+      // type: 'mvt',
+      // dataset: 'JMSS_LD',
+      // dataname: 'erweidata:',
+      // icon: "路灯",
+      // id: "路灯",
+      // newdataset: "erweidata:JMSS_LD",
+      // url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+      // hiddenLabel: true
+      // }, 
+    {
       label: '电杆',
       type: 'mvt',
       dataset: 'SZSS_DG',
@@ -502,6 +504,13 @@ const CITYBJ_TOPIC = [
     dataname: 'erweidata:',
     url: '',
     dataset: ""
+  },
+  {
+    label: "路灯",
+    componentEvent: "cesium-3d-light",
+    componentKey: "3d22",
+    url: 'true',
+    type: 'model'
   },
 ];
 //  资源调查数据

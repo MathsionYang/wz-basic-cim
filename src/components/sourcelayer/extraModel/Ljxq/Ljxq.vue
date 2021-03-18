@@ -98,6 +98,8 @@ export default {
       this.getPOIPickedFeature(this.node, () => {
         this.switchSearchBox(this.node);
       });
+      window.checkedkey.push(this.node.id);
+      window.layersdata.push({ label: this.node.label, id: this.node.id });
     },
     switchSearchBox(node) {
       this.$bus.$emit("cesium-3d-switch-searchBox", {

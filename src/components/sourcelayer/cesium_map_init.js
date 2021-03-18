@@ -257,6 +257,7 @@ export const mapShadowInit = () => {
  * 白模叠加初始化
  * @param {*} arrURL 
  */
+
 export const mapBaimoLayerInit = (arrURL) => {
     return new Promise((resolve, reject) => {
         arrURL.map(({ KEY, URL, FLOW, d, s, withoutFix }, index) => {

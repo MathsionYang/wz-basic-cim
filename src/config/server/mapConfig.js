@@ -122,7 +122,12 @@ export const ExtraSourceURL = {
   LJxq:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb-maxcimpuxieshi/rest/realspace/datas/max_cim_puxieshi/config",
   LJxqXQ:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/PuXieShi/config"    
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/PuXieShi/config",
+  LIGHT: "http://172.20.83.223:8098/iserver/services/3D-mongodb15/rest/realspace",
+  LIGHT_DATA: {
+    url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
+    dataSourceName: "erweidata"
+  },
 };
 
 
@@ -182,7 +187,7 @@ export const CIVILIZATION_CENTER_URL = {
   GEOLOGY_DATA: {
     url: "http://172.20.83.223:8098/iserver/services/data-DiZhiTi_table/rest/data",
     dataSourceName: "地质体_table"
-  }
+  },
 } 
 export const CHAO_CENTER_URL = {
   //超高层

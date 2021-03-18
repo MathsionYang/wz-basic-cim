@@ -44,7 +44,7 @@ export default {
   top: 12vh;
   bottom: 0vh;
   overflow: hidden;
-  right: 1vw;
+  right: 2vh;
   width: 36vh;
   color: white;
   box-sizing: border-box;
