@@ -11,35 +11,33 @@
     <div
       :class="{
         label: true,
-        active: item.id == forceTreeLabels,
+        active: item.value == forceTreeLabels,
         disabled: item.disabled,
       }"
       v-for="(item, i) in data"
       :key="i"
-      @click="!item.disabled ? SetForceTreeLabels(item.id) : undefined"
     >
       <div class="imgs"></div>
-      <span class="bt">{{ item.label }}</span>
-      <ul
-        class="child-list"
-        v-show="item.children && item.id == forceTreeLabels"
+      <span
+        class="bt"
+        @click.self="
+          !item.disabled ? SetForceTreeLabels(item.value) : undefined
+        "
+        >{{ item.label }}</span
       >
-        <li
-          class="child-item"
-          :class="{active: child.id == childSelectedLabel}"
-          v-for="(child, index) in item.children"
-          :key="index"
-          @click.stop="childClick(child.id)"
-        >
-          {{ child.label }}
-        </li>
-      </ul>
+      <el-cascader-panel
+        class="child-list"
+        v-show="item.children && item.value == forceTreeLabels"
+        v-model="childrenValue"
+        :options="item.children"
+        @change="handleChange"
+      ></el-cascader-panel>
     </div>
   </div>
 </template>
 
 <script>
-const RATE = 30;
+// const RATE = 30;
 import { treeDrawTool } from "components/sourcelayer/layerHub/TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
 import { mapGetters, mapActions } from "vuex";
@@ -49,24 +47,33 @@ export default {
     return {
       toRight: true,
       forceTreeLabels: "",
-      childSelectedLabel: "",
+      childrenValue: [],
       cameraTimer: undefined,
       heading: 0,
       label: "",
       oldlabel: "",
       tileLayers: {},
       data: [
-        { id: "孪生城市全貌", label: "孪生城市全貌" },
+        { value: "孪生城市全貌", label: "孪生城市全貌" },
+        { value: "数字规划", label: "数字规划" },
         {
-          id: "数字工程",
-          label: "数字工程",
+          value: "数字建设",
+          label: "数字建设",
           children: [
-            { id: "项目全过程", label: "项目全过程" },
-            { id: "项目综合管理", label: "项目综合管理" },
+            {
+              value: "数字工程",
+              label: "数字工程",
+              children: [
+                { value: "项目全过程", label: "项目全过程" },
+                { value: "项目综合管理", label: "项目综合管理" },
+              ],
+            },
+            { value: "数字住房", label: "数字住房" },
+            { value: "数字城建", label: "数字城建" },
+            { value: "数字城管", label: "数字城管" },
           ],
         },
-        { id: "数字住房", label: "数字住房" },
-        { id: "数字城管", label: "数字城管" },
+        { value: "数字运营", label: "数字运营" },
       ],
     };
   },
@@ -88,32 +95,19 @@ export default {
       "SetForceTrueTopicLabelId",
     ]),
     SetForceTreeLabels(item) {
+      this.childrenValue = []
       if (this.forceTreeLabels == item) {
         this.forceTreeLabels = "";
         this.liebiao(this.oldlabel);
-        this.oldlabel = ""
+        this.oldlabel = "";
         return;
       }
       if (this.oldlabel) {
         this.liebiao(this.oldlabel);
+        this.oldlabel = "";
       }
       this.forceTreeLabels = item;
-      this.childSelectedLabel = "";
-      if (item == "数字住房") {
-        this.label = {
-          componentEvent: "cesium-3d-ljxq",
-          componentKey: "3d2",
-          icon: "老旧小区",
-          id: "老旧小区",
-          label: "老旧小区",
-          newdataset: "undefined",
-          type: "model",
-        };
-        this.oldlabel = this.label;
-        this.liebiao(this.label);
-      } else if (item == "数字工程") {
-        this.oldlabel = "";
-      } else if (item == "孪生城市全貌") {
+      if (item == "孪生城市全貌") {
         this.label = {
           componentEvent: "cesium-3d-2021qxsy",
           componentKey: "3d21",
@@ -126,24 +120,28 @@ export default {
         };
         this.oldlabel = this.label;
         this.liebiao(this.label);
-      } else if (item == "数字城管") {
-        //this.$router.push('http://125.124.19.162:8888/');
-        window.open("http://125.124.19.162:8888/");
-        this.oldlabel = "";
-      }
+      } 
     },
-    childClick(item) {
-      if (this.childSelectedLabel == item) {
-        this.childSelectedLabel = "";
-        this.liebiao(this.oldlabel);
-        this.oldlabel = ""
-        return;
-      }
+    handleChange(value) {
+      let res = value[value.length-1]
       if (this.oldlabel) {
         this.liebiao(this.oldlabel);
+        this.oldlabel = "";
       }
-      this.childSelectedLabel = item
-      if (item == '项目全过程') {
+      if (res == "数字住房") {
+        this.label = {
+          componentEvent: "cesium-3d-ljxq",
+          componentKey: "3d2",
+          icon: "老旧小区",
+          id: "老旧小区",
+          label: "老旧小区",
+          newdataset: "undefined",
+          type: "model",
+        };
+        this.oldlabel = this.label;
+        this.liebiao(this.label);
+      }
+      if (res == "项目全过程") {
         this.label = {
           dataset: "erweidata:V_TM_PROJECT_P",
           icon: "工程项目",
@@ -164,13 +162,17 @@ export default {
         this.oldlabel = this.label;
         this.liebiao(this.label);
       }
-      if (item == '项目综合管理') {
+      if (res == "项目综合管理") {
         window.open("http://www.epc-pm.cn:8888/");
+        this.oldlabel = "";
+      }
+      if (item == "数字城管") {
+        window.open("http://125.124.19.162:8888/");
         this.oldlabel = "";
       }
     },
     liebiao(label) {
-      console.log('liebiao', label)
+      // console.log("liebiao", label);
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
@@ -333,7 +335,7 @@ export default {
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
     switchSearchBox(node) {
-      console.log('switchSearchBox', node)
+      console.log("switchSearchBox", node);
       this.$bus.$emit("cesium-3d-switch-searchBox", {
         shall: node.type == "mvt" && node.id ? true : false,
         node,
@@ -345,13 +347,14 @@ export default {
 
 <style scoped lang="less">
 .labelleng {
-  top: 1.5vh;
-  position: absolute;
-  z-index: 7;
-  height: auto;
-  width: auto;
+  // top: 1.5vh;
+  // position: absolute;
+  // z-index: 7;
+  // height: auto;
+  // width: auto;
   // left: 27vw;
-  left: 54vh;
+  // left: 54vh;
+  display: flex;
   background: linear-gradient(
     180deg,
     #030303 0%,
@@ -362,7 +365,7 @@ export default {
 }
 .label {
   position: relative;
-  display: inline-block;
+  // display: inline-block;
   cursor: pointer;
 
   .imgs {
@@ -419,19 +422,44 @@ export default {
     width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    .bg-image("/static/images/mode-ico/图例背景");
+    // .bg-image("/static/images/mode-ico/图例背景");
     padding: 0.8vh 0;
-    text-align: center;
-    .child-item {
-      padding: 0.6vh 0;
+    // text-align: center;
+    border: none;
+    // .child-item {
+    //   padding: 0.6vh 0;
+    //   font-size: 1.6vh;
+    //   line-height: 1.5vh;
+    //   color: #ffffff;
+    //   font-family: YouSheBiaoTiHei;
+    //   &.active {
+    //     color: #ffff08;
+    //     text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
+    //   }
+    // }
+    /deep/.el-cascader-menu {
+      min-width: 100%;
+      color: #fff;
       font-size: 1.6vh;
-      line-height: 1.5vh;
-      color: #ffffff;
+      border-right: none;
+      .bg-image("/static/images/mode-ico/图例背景");
+    }
+    /deep/.el-cascader-menu__list {
+      min-height: 0;
+    }
+    /deep/.el-cascader-node__label {
       font-family: YouSheBiaoTiHei;
-      &.active {
-        color: #ffff08;
-        text-shadow: rgba(4, 36, 39, 0.4) 0px 2px 4px;
-      }
+      padding-right: 0;
+    }
+    /deep/.el-cascader-node:not(.is-disabled):focus,
+    /deep/.el-cascader-node:not(.is-disabled):hover {
+      background-color: transparent;
+    }
+    /deep/.el-cascader-node.is-active {
+      color: #ffff08;
+    }
+    /deep/.el-cascader-node__prefix {
+      display: none;
     }
   }
 

@@ -91,7 +91,7 @@
     </div>
     <div class="tulibackground" v-show="checkedkeys != ''">
       <div class="bjs">
-        <div v-for="(item, i) in checkedkeys" :key="i">
+        <div class="legend-item" v-for="(item, i) in checkedkeys" :key="i">
           <img :src="'/static/images/map-ico/' + item + '.png'" class="imgs" />
           <label class="labels">{{ item }}</label>
         </div>

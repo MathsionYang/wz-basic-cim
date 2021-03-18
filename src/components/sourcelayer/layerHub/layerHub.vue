@@ -53,6 +53,14 @@
         <div class="imgs"></div>
         <span class="bt">{{ item.label }}</span>
       </div>
+      <div class="layer-btn" @click="doForceEventTopicLabels('消防事件')">
+        <img class="event" src="/static/images/layer-ico/eventFire.png" />
+        <img
+          class="mark"
+          :class="{ breath: isEventLayerOpen }"
+          src="/static/images/layer-ico/mark.png"
+        />
+      </div>
     </div>
     <!-- extra Components -->
     <transition name="fade">
@@ -82,14 +90,6 @@
           />
         <!-- </div> -->
       <!-- </div> -->
-    </div>
-    <div class="layer-btn event" @click="doForceEventTopicLabels('消防事件')">
-      <img class="event" src="/static/images/layer-ico/eventFire.png" />
-      <img
-        class="mark"
-        :class="{ breath: isEventLayerOpen }"
-        src="/static/images/layer-ico/mark.png"
-      />
     </div>
     <div class="dibu" @click="sousu()">
       <img src="/static/images/mode-ico/底部.png" />

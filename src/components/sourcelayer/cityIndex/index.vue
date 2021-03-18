@@ -12,9 +12,11 @@
       <img src="/static/images/mode-ico/icon.png" class="tb" />
       <img src="/static/images/mode-ico/温州市CIM基础平台.png" class="xmname" />
       <!-- <img src="/static/images/mode-ico/瓯海三维地图平台.png" class="xmname" /> -->
-      <div class="line"></div>
-      <Switchlabel />
-      <img src="/static/images/mode-ico/装饰.png" class="zs" />
+      <div class="middle">
+        <div class="line"></div>
+        <Switchlabel />
+        <img src="/static/images/mode-ico/装饰.png" class="zs" />
+      </div>
       <img src="/static/images/mode-ico/大建大美logo.png" class="djdm"/>
       <img src="/static/images/mode-ico/温州设计集团logo.png" class="logo" />
       <div style="top: 5.5vh; position: absolute; z-index: 7; right: 2vh">
