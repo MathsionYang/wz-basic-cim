@@ -304,21 +304,17 @@ export default {
     doForceTrueTopicLabels(item, children, id) {
       const label = children.filter((v) => v.id == id)[0];
       if (~this.forceTrueTopicLabels.indexOf(label.id)) {
-        console.log("1");
         let _fttl_ = [...this.forceTrueTopicLabels];
         _fttl_.splice(_fttl_.indexOf(label.id), 1);
         this.SetForceTrueTopicLabels(_fttl_);
         this.nodeCheckChange(label, false);
       } else {
-        console.log("2");
         this.SetForceTrueTopicLabels([
           ...new Set(this.forceTrueTopicLabels.concat([label.id])),
         ]);
         this.SetForceTrueTopicLabelId(label.id);
-        console.log("点击图册",label)
         this.nodeCheckChange(label, true);
       }
-      console.log("数组", this.forceTrueTopicLabels);
     },
     /**
      * POI fetch
@@ -389,7 +385,6 @@ export default {
     },
     nodeCheckChange(node, checked, type = "source") {
       if (checked) {
-        console.log("点击内容", node);
         if (node.type == "mvt" && node.id) {
           console.log("点");
           if (node.id && window.billboardMap[node.id]) {
