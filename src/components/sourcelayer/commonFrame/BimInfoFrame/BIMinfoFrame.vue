@@ -74,8 +74,12 @@ export default {
       "SetForceBimIDS",
     ]),
     ispartsclick() {
+      if (window.lastHouseEntity) {
+        window.earth.entities.remove(window.lastHouseEntity);
+        window.lastHouseEntity = null;
+      }
       window.ispartsclick = !window.ispartsclick;
-      console.log("部件",window.ispartsclick)
+      console.log("部件", window.ispartsclick);
       if (window.ispartsclick) {
         for (let i = 0; i < window.earth.scene.layers.layerQueue.length; i++) {
           if (
@@ -91,10 +95,6 @@ export default {
         }
       }
       this.partsclick = window.ispartsclick;
-      if (window.lastHouseEntity) {
-        window.earth.entities.remove(window.lastHouseEntity);
-        window.lastHouseEntity = null;
-      }
     },
     closeBimFrame() {
       window.ispartsclick = false;
