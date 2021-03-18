@@ -16,6 +16,7 @@
       }"
       v-for="(item, i) in data"
       :key="i"
+      @mouseenter="handleEnter(item.value)"
     >
       <div class="imgs"></div>
       <span
@@ -27,10 +28,11 @@
       >
       <el-cascader-panel
         class="child-list"
-        v-show="item.children && item.value == forceTreeLabels"
+        v-show="item.children && item.value == hoverLabel"
         v-model="childrenValue"
         :options="item.children"
         @change="handleChange"
+        :props="{ expandTrigger: 'hover' }"
       ></el-cascader-panel>
     </div>
   </div>
@@ -46,6 +48,7 @@ export default {
   data() {
     return {
       toRight: true,
+      hoverLabel: "",
       forceTreeLabels: "",
       childrenValue: [],
       cameraTimer: undefined,
@@ -94,6 +97,14 @@ export default {
       "SetForceTrueTopicLabels",
       "SetForceTrueTopicLabelId",
     ]),
+    handleEnter(item) {
+      console.log('handleEnter', item)
+      this.hoverLabel = item
+    },
+    // handleOut() {
+    //   console.log('handleOut')
+    //   this.hoverLabel = ''
+    // },
     SetForceTreeLabels(item) {
       this.childrenValue = []
       if (this.forceTreeLabels == item) {
@@ -123,6 +134,7 @@ export default {
       } 
     },
     handleChange(value) {
+      this.forceTreeLabels = this.hoverLabel;
       let res = value[value.length-1]
       if (this.oldlabel) {
         this.liebiao(this.oldlabel);
@@ -166,7 +178,7 @@ export default {
         window.open("http://www.epc-pm.cn:8888/");
         this.oldlabel = "";
       }
-      if (item == "数字城管") {
+      if (res == "数字城管") {
         window.open("http://125.124.19.162:8888/");
         this.oldlabel = "";
       }
