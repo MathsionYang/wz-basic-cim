@@ -74,7 +74,7 @@ export default {
               let lightPos = new Cesium.Cartesian3.fromDegrees(
                 +attributes.CENTER_X,
                 +attributes.CENTER_Y + 0.00001,
-                30
+                20
               );
               let lightTargetPos = new Cesium.Cartesian3.fromDegrees(
                 +attributes.CENTER_X,
@@ -95,10 +95,10 @@ export default {
       let sliceList =  list.slice(0, 100)
       let option = {
         color: new Cesium.Color(6, 5, 0.2, 1),
-        distance: 100,
+        distance: 30,
         decay: 3,
         intensity: 13,
-        angle: Math.PI,
+        // angle: Math.PI / 2
       };
       sliceList.forEach(item => {
         let spotLight = new Cesium.SpotLight(item.pos, item.targetPos, option);
