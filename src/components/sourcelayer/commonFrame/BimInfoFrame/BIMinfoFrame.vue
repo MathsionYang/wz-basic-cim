@@ -1,6 +1,6 @@
 
 <template>
-  <div class="side-info" v-if="fixedForceBimData.length">
+  <div class="side-info" v-if="false">
     <div class="info-header">
       <div class="title">信息详情</div>
       <div class="decorate"></div>
