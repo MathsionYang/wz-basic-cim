@@ -17,6 +17,7 @@
       v-for="(item, i) in data"
       :key="i"
       @mouseenter="handleEnter(item.value)"
+      @mouseleave="handleLeave"
     >
       <div class="imgs"></div>
       <span
@@ -98,13 +99,11 @@ export default {
       "SetForceTrueTopicLabelId",
     ]),
     handleEnter(item) {
-      console.log('handleEnter', item)
       this.hoverLabel = item
     },
-    // handleOut() {
-    //   console.log('handleOut')
-    //   this.hoverLabel = ''
-    // },
+    handleLeave() {
+      this.hoverLabel = ''
+    },
     SetForceTreeLabels(item) {
       this.childrenValue = []
       if (this.forceTreeLabels == item) {
