@@ -54,7 +54,12 @@
           v-show="selectedSourceObj.title == item"
           class="around-source-list-shine"
         ></div>
-        <p class="sourceName" :class="{selected:selectedSourceObj.title == item}">{{item}}</p>
+        <p
+          class="sourceName"
+          :class="{ selected: selectedSourceObj.title == item }"
+        >
+          {{ item }}
+        </p>
       </div>
     </div>
     <ul
@@ -77,7 +82,9 @@
             : item.resourceName
         }}</span>
         <span class="single-distance">{{ (+item.distance).toFixed(2) }}米</span>
-        <span class="navigate" @click="navigate(item, forceEntity.type)">导航</span>
+        <span class="navigate" @click="navigate(item, forceEntity.type)"
+          >导航</span
+        >
       </li>
       <p class="no-data" v-if="!selectedSourceObj.list.length">暂无数据</p>
     </ul>
@@ -91,14 +98,14 @@ import { treeDrawTool } from "../../layerHub/TreeDrawTool";
 import { getIserverFields } from "api/iServerAPI";
 import {
   CESIUM_TREE_AROUND_ANALYSE_OPTION,
-  CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION,
+  CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION
 } from "config/server/sourceTreeOption";
 import {
   aroundSourceAnalyseDraw,
   initPrimitivesCollection,
   hideVisible,
   aroundSourceAnalyseCircle,
-  removeAroundSourceAnalyseCircle,
+  removeAroundSourceAnalyseCircle
 } from "./AroundSourceAnalyseDraw";
 import { dealPathWithXhr, clearPath, carModelMove } from "./PathTools";
 import { getAroundSourceAnalyse } from "@/api/layerServerAPI";
@@ -118,13 +125,13 @@ export default {
       selectedSourceObj: {
         title: "",
         key: "",
-        list: [],
-      },
+        list: []
+      }
     };
   },
   props: ["force"],
   computed: {
-    ...mapGetters("map", []),
+    ...mapGetters("map", [])
   },
   mounted() {
     this.eventRegsiter();
@@ -133,7 +140,7 @@ export default {
   methods: {
     eventRegsiter() {
       this.$bus.$off("cesium-3d-around-analyse-pick");
-      this.$bus.$on("cesium-3d-around-analyse-pick", (forceEntity) => {
+      this.$bus.$on("cesium-3d-around-analyse-pick", forceEntity => {
         this.forceEntity = forceEntity;
         this.initAroundOption();
         this.initCircle();
@@ -156,14 +163,14 @@ export default {
       this.aroundOption.map(({ value }) => initPrimitivesCollection(value));
       //  周边分析
       this.aroundOption
-        .filter((v) => ~this.selectSourceLayer.indexOf(v.label))
+        .filter(v => ~this.selectSourceLayer.indexOf(v.label))
         .map(async ({ label, value }) => {
           let distance = this.distanceObj[label].distance;
           const { data } = await getAroundSourceAnalyse({
             resourceType: value,
             lng,
             lat,
-            distance,
+            distance
           });
           let list = data.sort(arrayCompareWithParam("distance")).slice(0, 20);
           const sourceAnalyseResult = {
@@ -172,7 +179,7 @@ export default {
             list,
             dataset: CESIUM_TREE_EVENT_AROUND_ANALYSE_OPTION.children.filter(
               ({ resourceType }) => resourceType == value
-            )[0],
+            )[0]
           };
 
           aroundSourceAnalyseList.push(sourceAnalyseResult);
@@ -193,11 +200,11 @@ export default {
     fetchSourceAround(forceEntity) {
       const aroundSourceAnalyseList = [];
 
-      this.aroundOption.forEach((item) => hideVisible(item));
-      console.log("aa",forceEntity)
+      this.aroundOption.forEach(item => hideVisible(item));
+      console.log("aa", forceEntity);
       this.aroundOption
-        .filter((v) => ~this.selectSourceLayer.indexOf(v.value))
-        .forEach((item) => {
+        .filter(v => ~this.selectSourceLayer.indexOf(v.value))
+        .forEach(item => {
           let distance = this.distanceObj[item.label].distance;
           let getFeatureParameter, getFeatureService;
           getFeatureParameter = new SuperMap.REST.GetFeaturesByBufferParameters(
@@ -207,20 +214,23 @@ export default {
               toIndex: -1,
               datasetNames: [item.newdataset],
               returnContent: true,
-              geometry: forceEntity.geometry,
+              geometry: forceEntity.geometry
             }
           );
           getFeatureService = new SuperMap.REST.GetFeaturesByBufferService(
             item.url,
             {
               eventListeners: {
-                processCompleted: async (res) => {
+                processCompleted: async res => {
                   if (
                     res.result &&
                     res.result.features &&
                     res.result.features.length
                   ) {
-                    const fields = await getIserverFields(item.url, item.newdataset);
+                    const fields = await getIserverFields(
+                      item.url,
+                      item.newdataset
+                    );
                     treeDrawTool(this, res, item, fields);
 
                     //  求距离
@@ -229,7 +239,7 @@ export default {
                       this.forceEntity.geometry.x,
                       this.forceEntity.geometry.y
                     );
-                    res.result.features.map((v) => {
+                    res.result.features.map(v => {
                       let endCartographic = Cesium.Cartographic.fromDegrees(
                         v.geometry.x,
                         v.geometry.y
@@ -244,7 +254,7 @@ export default {
                     key: item.value,
                     list: res.result.features.sort(
                       arrayCompareWithParam("distance")
-                    ),
+                    )
                   };
                   aroundSourceAnalyseList.push(sourceAnalyseResult);
                   if (
@@ -258,8 +268,8 @@ export default {
                     this.sourceClick(this.selectedSourceObj.title);
                   }
                 },
-                processFailed: (msg) => console.log(msg),
-              },
+                processFailed: msg => console.log(msg)
+              }
             }
           );
           getFeatureService.processAsync(getFeatureParameter);
@@ -269,7 +279,7 @@ export default {
     initAroundOption() {
       if (this.forceEntity && this.forceEntity.type == "source") {
         this.aroundOption = CESIUM_TREE_AROUND_ANALYSE_OPTION.children.map(
-          (item) => {
+          item => {
             return { ...item, value: item.id };
           }
         );
@@ -284,19 +294,22 @@ export default {
       this.initDistanceOption();
     },
     initSelectSourceLayer() {
-      this.selectSourceLayer = this.aroundOption.map((v) => v.label);
+      this.selectSourceLayer = this.aroundOption.map(v => v.label);
     },
     initDistanceOption() {
       this.distanceObj = {};
-      this.aroundOption.map((v) => {
+      this.aroundOption.map(v => {
         this.distanceObj[v.label] = {};
         this.distanceObj[v.label].option = [
           { value: 250, label: "250m" },
           { value: 500, label: "500m" },
-          { value: 1000, label: "1000m" },
+          { value: 1000, label: "1000m" }
         ];
-        if (v.label == '医疗场所' || v.label == '消防站') {
-          this.distanceObj[v.label].option.push({value: 200000000, label: "最近"})
+        if (v.label == "医疗场所" || v.label == "消防站") {
+          this.distanceObj[v.label].option.push({
+            value: 200000000,
+            label: "最近"
+          });
         }
         //  默认展示1000米范围
         this.distanceObj[v.label].distance = 1000;
@@ -309,9 +322,9 @@ export default {
         "around"
       );
       window.earth.dataSources.add(AroundCircleEntityCollection);
-      window.labelMap["pathRoute_analyse_labels"] = window.earth.scene.primitives.add(
-        new Cesium.LabelCollection()
-      );
+      window.labelMap[
+        "pathRoute_analyse_labels"
+      ] = window.earth.scene.primitives.add(new Cesium.LabelCollection());
       const lng = this.forceEntity.geometry.x;
       const lat = this.forceEntity.geometry.y;
       aroundSourceAnalyseCircle(lng, lat, 250);
@@ -337,7 +350,7 @@ export default {
     //  关闭周边分析
     closeAroundSourceAnalyse() {
       this.aroundOption.map(({ value }) => initPrimitivesCollection(value));
-      this.aroundOption.forEach((item) => hideVisible(item));
+      this.aroundOption.forEach(item => hideVisible(item));
       this.isLoaded = false;
       this.forceEntity = undefined;
       this.selectSourceLayer = [];
@@ -346,13 +359,14 @@ export default {
       this.locationBillboard &&
         window.earth.entities.remove(this.locationBillboard);
       removeAroundSourceAnalyseCircle();
+      this.$bus.$emit("cesium-3d-around-close", {});
     },
     // 选择类型
     sourceClick(source) {
       this.locationBillboard &&
-          window.earth.entities.remove(this.locationBillboard);
-      clearPath()
-      this.aroundSourceAnalyseList.forEach((v) => {
+        window.earth.entities.remove(this.locationBillboard);
+      clearPath();
+      this.aroundSourceAnalyseList.forEach(v => {
         if (v.title == source) {
           this.selectedSourceObj = v;
         }
@@ -365,7 +379,7 @@ export default {
       if (type == "event") {
         x = item.lng;
         y = item.lat;
-        clearPath()
+        clearPath();
         this.locationBillboard &&
           window.earth.entities.remove(this.locationBillboard);
         let originPosition = Cesium.Cartesian3.fromDegrees(
@@ -381,7 +395,7 @@ export default {
         let destinationGCJ02 = gcoord.transform(
           [
             this.forceEntity.geometry.x.toFixed(6),
-            this.forceEntity.geometry.y.toFixed(6),
+            this.forceEntity.geometry.y.toFixed(6)
           ],
           gcoord.WGS84,
           gcoord.GCJ02
@@ -393,8 +407,8 @@ export default {
             billboard: {
               image: `/static/images/map-ico/location.png`,
               width: 34,
-              height: 35,
-            },
+              height: 35
+            }
           });
           if (item.resourceType == "fire_station") {
             carModelMove(window.billboardMap["pathRoute_analyse_lines"]);
@@ -408,10 +422,10 @@ export default {
           pitch: -0.574668319401269,
           roll: 0
         },
-        maximumHeight: 450,
+        maximumHeight: 450
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

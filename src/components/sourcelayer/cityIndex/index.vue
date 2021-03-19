@@ -26,7 +26,7 @@
     </div>
     <div class="cityIndex-source">
       <div style="margin-top: 5vh">
-        <component :is="fixforceTrueTopicLabels"/>
+        <component :is="fixforceTrueTopicLabels" />
       </div>
     </div>
 
@@ -56,7 +56,7 @@ const indexHash = {
   重点项目: "keyIndex",
   温州市: "wzsdata",
   老旧小区: "ljxq",
-
+  交通三维模型:"s1"
 };
 import { mapGetters } from "vuex";
 import Switchlabel from "../commonFrame/Switchlabels/Switchlabel";
@@ -77,6 +77,7 @@ import cityIndexPass from "./pass/cityIndex";
 //cim
 import wzsdata from "./now/wzsdata";
 import ljxq from "./now/ljxqdata";
+import s1 from "./now/S1";
 
 export default {
   data() {
@@ -86,7 +87,7 @@ export default {
       nowTime: null, //存放时分秒变量
       timer: "", //定义一个定时器的变量
       currentTime: new Date(),
-      isljxqclick: '',
+      isljxqclick: ""
     };
   },
   created() {
@@ -97,19 +98,20 @@ export default {
     // fixForceIndex() {
     //   return indexHash[this.forceIndex] || "cityIndex";
     // },
-    fixforceTrueTopicLabels(){
-      if(~this.forceTrueTopicLabels.indexOf("老旧小区")){
-         return indexHash['老旧小区'];
-      }else{
-         return indexHash['温州市'];
-      
+    fixforceTrueTopicLabels() {
+      if (~this.forceTrueTopicLabels.indexOf("老旧小区")) {
+        return indexHash["老旧小区"];
+      } else if (~this.forceTrueTopicLabels.indexOf("交通三维模型")) {
+        return indexHash["交通三维模型"];
+      } else {
+        return indexHash["温州市"];
       }
     }
   },
   watch: {
     forceIndex(n) {
       console.log(n);
-    },
+    }
   },
   methods: {
     getTime() {
@@ -138,7 +140,7 @@ export default {
       }
       this.nowDate = year + "-" + this.month + "-" + this.day;
       this.nowTime = this.hour + ":" + this.minute + ":" + this.second;
-    },
+    }
   },
   components: {
     SceneSwitch,
@@ -156,7 +158,8 @@ export default {
     Switchlabel,
     wzsdata,
     ljxq,
-  },
+    s1,
+  }
 };
 </script>
 

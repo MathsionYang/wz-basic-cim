@@ -188,6 +188,7 @@ export default {
           this.$nextTick(() => {
             this.$refs.tree.setCheckedKeys(this.checkedkeys);
           });
+          console.log("隐藏图例",node.id);
           //隐藏对应图层
           window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
           window.labelMap[node.id].setAllLabelsVisible(false);

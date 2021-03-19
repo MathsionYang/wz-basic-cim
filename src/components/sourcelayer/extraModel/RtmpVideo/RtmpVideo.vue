@@ -123,24 +123,24 @@ export default {
       isCircleVideo: false,
       isHightVideo: false,
       //  激活列表
-      entitiesID: [],
+      entitiesID: []
     };
   },
   components: {
-    flv,
+    flv
   },
   computed: {
     ...mapGetters("map", ["rtmpList", "rtmpListOther"]),
     fixRtmpList() {
       const arr = [
         this.videoOfPrivate ? false : undefined,
-        this.videoOfPublic ? true : undefined,
+        this.videoOfPublic ? true : undefined
       ];
       const isHightVideo = this.isHightVideo ? "高位" : "";
       return (this.isCircleVideo ? this.rtmpListOther : this.rtmpList).filter(
-        (v) => ~arr.indexOf(v.private) && ~v.mp_name.indexOf(isHightVideo)
+        v => ~arr.indexOf(v.private) && ~v.mp_name.indexOf(isHightVideo)
       );
-    },
+    }
   },
   async mounted() {
     this.eventRegsiter();
@@ -151,7 +151,7 @@ export default {
     eventRegsiter() {
       const that = this;
       this.$bus.$off("cesium-3d-rtmpFetch");
-      this.$bus.$on("cesium-3d-rtmpFetch", async (item) => {
+      this.$bus.$on("cesium-3d-rtmpFetch", async item => {
         //  code fetch rtmpURLs
         this.isCircleVideo = false;
         this.isHightVideo = false;
@@ -172,23 +172,23 @@ export default {
       });
       // 穿透事件监控视频点
       this.$bus.$off("cesium-3d-videoPointClick");
-      this.$bus.$on("cesium-3d-videoPointClick", (item) => {
+      this.$bus.$on("cesium-3d-videoPointClick", item => {
         this.isCircleVideo = true;
         this.fixRtmpList.length &&
           this.openRtmpVideoFrame({
             mp_name: item.mp_name,
-            mp_id: item.mp_id.split("videopoint_")[1],
+            mp_id: item.mp_id.split("videopoint_")[1]
           });
         this.doRtmpListFrame = true;
       });
       // 图层监控视频点
       this.$bus.$off("cesium-3d-normalPointClick");
-      this.$bus.$on("cesium-3d-normalPointClick", (item) => {
+      this.$bus.$on("cesium-3d-normalPointClick", item => {
         this.isCircleVideo = false;
         this.fixRtmpList.length &&
           this.openRtmpVideoFrame({
             mp_name: item.mp_name,
-            mp_id: item.mp_id.split("normalpoint_")[1],
+            mp_id: item.mp_id.split("normalpoint_")[1]
           });
         this.doRtmpListFrame = true;
       });
@@ -236,9 +236,9 @@ export default {
           material: Cesium.Color.WHITE.withAlpha(0.1),
           outline: true,
           outlineWidth: 3,
-          outlineColor: Cesium.Color.WHITE,
+          outlineColor: Cesium.Color.WHITE
         },
-        name: "videoCircle",
+        name: "videoCircle"
       });
       window.earth.entities.add(circleEntity);
       this.entitiesID.push(circleEntity.id);
@@ -260,14 +260,14 @@ export default {
           ),
           eyeOffset: new Cesium.Cartesian3(0.0, -260.0, 0),
           scaleByDistance: new Cesium.NearFarScalar(5000, 1, 10000, 0.5),
-          disableDepthTestDistance: Number.POSITIVE_INFINITY,
+          disableDepthTestDistance: Number.POSITIVE_INFINITY
         },
-        name: "normalCircleLabel",
+        name: "normalCircleLabel"
       });
       window.earth.entities.add(circleLabelEntity);
       this.entitiesID.push(circleLabelEntity.id);
 
-      this.rtmpList.forEach((item) => {
+      this.rtmpList.forEach(item => {
         const videoPointEntity = new Cesium.Entity({
           id: `normalpoint_${item.mp_id}`,
           position: Cesium.Cartesian3.fromDegrees(
@@ -279,9 +279,9 @@ export default {
             image: "/static/images/map-ico/视频监控.png",
             width: 40,
             height: 40,
-            disableDepthTestDistance: Number.POSITIVE_INFINITY,
+            disableDepthTestDistance: Number.POSITIVE_INFINITY
           },
-          name: item.mp_name,
+          name: item.mp_name
         });
         window.earth.entities.add(videoPointEntity);
         this.entitiesID.push(videoPointEntity.id);
@@ -292,7 +292,7 @@ export default {
      * @param {string|number|undefined} 有id删id 没id删全部
      */
     removeVideoCircle(id) {
-      this.entitiesID.forEach((item) => {
+      this.entitiesID.forEach(item => {
         window.earth.entities.removeById(item);
       });
       this.entitiesID = [];
@@ -313,8 +313,9 @@ export default {
       this.RtmpVideoURL = undefined;
       this.RtmpVideoMode = "flash";
       this.RtmpForcePoint = {};
-    },
-  },
+      this.$bus.$emit("cesium-3d-around-close", {});
+    }
+  }
 };
 </script>
 

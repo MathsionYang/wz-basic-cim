@@ -468,6 +468,7 @@ export default {
         if (node.icon && window.billboardMap[node.id]) {
           window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
           window.labelMap[node.id].setAllLabelsVisible(false);
+               console.log("图层",window.billboardMap);
           //清除已选择图层内容
           for (var i = 0; i < window.layersdata.length; i++) {
             if (window.layersdata[i].id == node.id) {

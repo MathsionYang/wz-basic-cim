@@ -429,11 +429,11 @@ const CITYBJ_TOPIC = [
     {
       label: '电力检修井',
       type: 'mvt',
-      dataset: 'SZSS_DLJXJ',
+      dataset: 'SZSS_DLGXJXJ',
       dataname: 'erweidata:',
       icon: "电力检修井",
       id: "电力检修井",
-      newdataset: "erweidata:SZSS_DLJXJ",
+      newdataset: "erweidata:SZSS_DLGXJXJ",
       url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
       hiddenLabel: true
     },
@@ -1309,19 +1309,7 @@ const JTJC_TOPIC = [
     saveExtraDataByGeometry: "setBayonetListWithGeometry",
     withExtraKey: "MC",
     hiddenLabel: true
-  },
-  {
-    label: "S1站点",
-    type: 'mvt',
-    dataname: 'erweidata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
-    dataset: "T2_WZ_S1_Station_2019",
-    withExtraData: "stationList",
-    withExtraDataGeometry: "stationListWithGeometry",
-    saveExtraDataByGeometry: "setStationListWithGeometry",
-    withExtraKey: "NAME",
-    hiddenLabel: true
-  },
+  }
 ];
 //  应急专题
 const EMERGENCY_TOPIC = [

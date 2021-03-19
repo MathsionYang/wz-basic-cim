@@ -43,9 +43,6 @@
           </ul> -->
         </div>
 
-        <!-- <div id="forcePopUpLink" class="leaflet-popup-content">
-
-        </div> -->
         <div
           class="extra-tab extra-tab_SP"
           :class="{ active: extraTabActive == 'sp' }"
@@ -166,7 +163,7 @@
       <span @click="(isFrame = false), (extraTabActive = '')">X</span
       ><iframe :src="isFrame" />
     </div>
-    <div class="container" v-if="isld && !showSide">
+    <div class="container" v-if="isld && !showSide && !showrk">
       <div class="fhj" @click="fh"></div>
       <div class="closes" @click="closePopup"></div>
       <div class="ljxqlabel">
@@ -390,7 +387,7 @@
         </div>
       </div>
     </div>
-    <div class="container" v-if="isLJ && !showSide">
+    <div class="container" v-if="isLJ && !showSide && !showrk">
       <div id="nav">
         <div class="snf-nav active"><span class="lqwz">小区基本信息</span></div>
         <div class="snf-nav"><span class="lqwz">小区楼栋信息</span></div>
@@ -744,6 +741,7 @@ export default {
       forceEntity: {},
       forcePosition: {},
       buffer: null,
+      showrk: false,
       filterKey: ["永久固定码", "唯一码", "分类代码", "全景地址"],
       showSide: false,
       extraTabActive: "",
@@ -1005,6 +1003,11 @@ export default {
       });
       this.$bus.$on("cesium-3d-detail-pop-clear", () => {
         this.closePopup();
+      });
+      this.$bus.$off("cesium-3d-around-close");
+      this.$bus.$on("cesium-3d-around-close", () => {
+        this.showrk = false;
+        this.extraTabActive = '';
       });
     },
     //选择楼栋
@@ -1610,6 +1613,7 @@ export default {
      */
     doCircleBuffer() {
       this.extraTabActive = "rkdt";
+
       this.buffer = this.buffer ? null : {};
       const { name, geometry } = this.forceEntity;
       this.$bus.$emit("cesium-3d-population-circle", {
@@ -1639,6 +1643,7 @@ export default {
      */
     doAroundSourceAnalyse() {
       this.extraTabActive = "fx";
+      this.showrk = true;
       // this.showSide = false
       const { geometry } = this.forceEntity;
       let type = this.forceEntity._NODEID_.includes("事件")
@@ -1649,6 +1654,7 @@ export default {
     closePopup() {
       this.extraTabActive = "";
       this.showSide = false;
+      this.showrk = false;
       this.fixedForceBimData.length = 0;
       const LJxqXQ = window.earth.scene.layers.find("LJxqXQ");
       if (LJxqXQ) {
@@ -1799,7 +1805,7 @@ table.hovertable td {
   background-size: 100% 100%;
   height: 67vh;
   position: fixed;
-  z-index: 99;
+  z-index: 1;
   right: 10px;
   top: 10vh;
   width: 54vh;
@@ -1807,7 +1813,7 @@ table.hovertable td {
 .ljxqlabels {
   height: 67vh;
   position: fixed;
-  z-index: 99;
+  z-index: 1;
   right: 10px;
   top: 10vh;
   // width: 25vw;
@@ -1884,7 +1890,7 @@ ul li {
   margin-top: -140px;
   display: inline-block;
   vertical-align: middle;
-  z-index: 99;
+  z-index: 1;
   position: fixed;
 }
 .snf-nav {

@@ -39,6 +39,7 @@
         ref="trafficSubwayModel"
         v-if="showgdFrame == '3d4'"
       />
+      <Stationtour ref="Stationtour" v-if="showgdFrame == '3d4'" />
       <BJSWQModel ref="bjswqmodel" v-if="showqxsyFrame == '3d5'" />
       <BJSWQModelS ref="bjswqmodels" v-if="showqxsyFrames == '3d21'" />
       <BJJM ref="bjjm" v-if="showjzFrame == '3d6'" />
@@ -54,7 +55,6 @@
       <WZDem v-if="showDem == '3d17'" />
       <SZgc v-if="showSZGC == '3d18'" />
       <JYmx v-if="showJYmx == '3d19'" />
-
 
       <Surface ref="surface" v-if="showSubTool == '地表开挖'" />
       <CesiumMapTool ref="cesiummaptool" v-if="showSubTool == '长度测量'" />
@@ -95,6 +95,7 @@ import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceA
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
 import BJSWQModel from "components/sourcelayer/extraModel/Models/BjswqModel.vue";
 import BJSWQModelS from "components/sourcelayer/extraModel/Models/BjswqModels.vue";
+import Stationtour from "components/sourcelayer/extraModel/Models/Stationtour";
 import BJJM from "components/sourcelayer/extraModel/Models/BJJM";
 import OUHAI from "components/sourcelayer/extraModel/Models/OuhaiModel";
 import Dxkj from "components/sourcelayer/extraModel/Models/Dxkj";
@@ -180,7 +181,7 @@ export default {
       isInfoFrame: false,
       authFailshallPop: false,
       ispartsclick: false,
-      showqxsyFrames: null,
+      showqxsyFrames: null
     };
   },
   computed: {
@@ -237,7 +238,8 @@ export default {
     RZFx,
     Pq,
     Surface,
-    BJSWQModelS
+    BJSWQModelS,
+    Stationtour
   },
   created() {
     window.extraHash = {};
@@ -466,15 +468,57 @@ export default {
       // 监听左键点击事件
       handler.setInputAction(e => {
         const pick = window.earth.scene.pick(e.position);
-        const position = window.earth.scene.pickPosition(e.position);
-        window.position = position;
 
+        const position = window.earth.scene.pickPosition(e.position);
+        var cartographic = Cesium.Cartographic.fromCartesian(position);
+        var longitude = Cesium.Math.toDegrees(cartographic.longitude);
+        var latitude = Cesium.Math.toDegrees(cartographic.latitude);
+        window.position = position;
+        var queryPolygonGeometrys = new SuperMap.Geometry.Point(
+          longitude,
+          latitude
+        );
         console.log("点击pick.id", pick);
         if (window.lastHouseEntitys) {
           window.earth.entities.remove(window.lastHouseEntitys);
           window.lastHouseEntitys = null;
         }
+        if (pick == undefined) {
+          console.log("进入", window.earth.scene.layers);
+
+          console.log("国土调查");
+          var getFeaturesByGeometryParameters, getFeaturesByGeometryService;
+          getFeaturesByGeometryParameters = new SuperMap.REST.GetFeaturesByGeometryParameters(
+            {
+              datasetNames: ["erweidata:ZYDC_GTDCSJ"],
+              toIndex: -1,
+              spatialQueryMode: SuperMap.REST.SpatialQueryMode.WITHIN,
+              geometry: queryPolygonGeometrys
+            }
+          );
+          var url =
+            "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data";
+          getFeaturesByGeometryService = new SuperMap.REST.GetFeaturesByGeometryService(
+            url,
+            {
+              eventListeners: {
+                processCompleted: (...arg) => {
+                  console.log("面的参数",arg);
+                  //FaceHighlight(arg); //面的高亮
+                  //qp(arg);
+                },
+                processFailed: (...err) => {
+                  console.error("error", err);
+                }
+              }
+            }
+          );
+          getFeaturesByGeometryService.processAsync(
+            getFeaturesByGeometryParameters
+          );
+        }
         if (!pick || !pick.id) return;
+
         // var cartographic = Cesium.Cartographic.fromCartesian(position);
         // var longitude = Cesium.Math.toDegrees(cartographic.longitude);
         // var latitude = Cesium.Math.toDegrees(cartographic.latitude);
