@@ -119,6 +119,7 @@
           :class="{ active: partsclick == true }"
           @click="ispartsclick()"
         ></div>
+        <!-- <div @click="toggleLight()">灯开关</div> -->
         <div class="close" @click="closeBimFrame()"></div>
       </div>
       <ul class="info-content">
@@ -865,7 +866,7 @@ export default {
       this.showSide = false;
       return [
         ...this.forceBimData
-          .filter(({ k, v }) => !~FILTER_KEYS.indexOf(k))
+          .filter(({ k, v }) => !~FILTER_KEYS.indexOf(k) && v)
           .map(({ k, v }) => {
             if (v.indexOf("超高层") != -1) {
               this.JZLX = "超高层";
@@ -1687,6 +1688,9 @@ export default {
       }
 
       // this.$parent.$refs.aroundSourceAnalyse.closeAroundSourceAnalyse()
+    },
+    toggleLight() {
+      this.$bus.$emit("cesium-3d-toggleLight", {on: true, data: this.forceBimData});
     }
   },
   watch: {
