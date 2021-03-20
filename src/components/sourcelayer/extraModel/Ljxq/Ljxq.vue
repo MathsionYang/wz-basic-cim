@@ -92,7 +92,7 @@ export default {
       mapBJSWQLayerInit(
         "LJxqImage",
         ServiceUrl.LJxqImage,
-        "erweidata:old_ommunity"
+        "erweidata:Older_Communities"
       );
       //小区点位
       this.getPOIPickedFeature(this.node, () => {

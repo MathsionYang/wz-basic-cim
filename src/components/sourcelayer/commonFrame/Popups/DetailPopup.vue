@@ -135,7 +135,7 @@
         <div class="decorate"></div>
         <div class="close" @click="closePopup"></div>
       </div>
-      <ul class="info-content" v-if="JZLX == '市民中心'">
+      <ul class="info-content" v-if="JZLX == '市民中心' && !partsclick">
         <li
           class="info-item"
           v-for="(item, key, index) in CivicCenter"
@@ -147,7 +147,7 @@
           }}</span>
         </li>
       </ul>
-      <ul class="info-content" v-if="JZLX == '超高层'">
+      <ul class="info-content" v-if="JZLX == '超高层' && !partsclick">
         <li
           class="info-item"
           v-for="(item, key, index) in Superhighrise"

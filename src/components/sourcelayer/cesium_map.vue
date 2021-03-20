@@ -484,9 +484,13 @@ export default {
           window.lastHouseEntitys = null;
         }
         if (pick == undefined) {
-          console.log("进入", window.earth.scene.layers);
-
-          console.log("国土调查");
+          console.log("进入", window.earth.imageryLayers);
+          var fwm = window.earth.entities.values;
+          for (let i = 0; i < fwm.length; i++) {
+            if (fwm[i].id == "高亮") {
+               window.earth.entities.remove(fwm[i]);
+            }
+          }
           var getFeaturesByGeometryParameters, getFeaturesByGeometryService;
           getFeaturesByGeometryParameters = new SuperMap.REST.GetFeaturesByGeometryParameters(
             {
@@ -503,9 +507,8 @@ export default {
             {
               eventListeners: {
                 processCompleted: (...arg) => {
-                  console.log("面的参数",arg);
-                  //FaceHighlight(arg); //面的高亮
-                  //qp(arg);
+                  console.log("面的参数", arg);
+                  addFeature(arg); //面的高亮
                 },
                 processFailed: (...err) => {
                   console.error("error", err);
@@ -516,7 +519,33 @@ export default {
           getFeaturesByGeometryService.processAsync(
             getFeaturesByGeometryParameters
           );
+          function getLonLatArray(points) {
+            var point3D = [];
+            points.forEach(function(point) {
+              point3D.push(point.x);
+              point3D.push(point.y);
+            });
+            return point3D;
+          }
+
+          function addFeature(feature) {
+            var lonLatArr = getLonLatArray(
+              feature[0].originResult.features[0].geometry.points
+            );
+            window.earth.entities.add({
+              id: "高亮",
+              name: "高亮",
+              polyline: {
+                positions: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
+                width: 5,
+                material: Cesium.Color.RED,
+                clampToGround: true //矢量线贴对象
+              }
+            });
+
+          }
         }
+
         if (!pick || !pick.id) return;
 
         // var cartographic = Cesium.Cartographic.fromCartesian(position);

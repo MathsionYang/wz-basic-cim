@@ -460,6 +460,8 @@ export default {
         //  有相机视角配置 -> 跳视角
         node.camera && window.earth.scene.camera.setView(node.camera);
       } else {
+        
+          console.log("面1",this.tileLayers)
         const LAYER =
           node.type == "model"
             ? window.earth.scene.layers.find(node.id)

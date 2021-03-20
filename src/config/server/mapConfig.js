@@ -67,7 +67,7 @@ export const ServiceUrl = {
   BJImage:
     "http://172.20.83.223:8098/iserver/services/data-SW_DATA/rest/data",
   LJxqImage:
-    "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",  
+    "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
   YJDem:
     "https://ditu.wzcitybrain.com/iserver/services/3D-mongodb-DEMLC/rest/realspace/datas/DEM_LC",
   // mvt矢量服务
@@ -112,7 +112,8 @@ export const ExtraSourceURL = {
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   BJSWQNEW:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_new/config",  
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_0320/config",
+  //"http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_new/config",  
   JFJ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
   BJJM:
@@ -158,7 +159,7 @@ export const CIVILIZATION_CENTER_URL = {
     url: "http://172.20.83.223:8098/iserver/services/data-Pipes/rest/data",
     dataSourceName: "Pipes_table"
   },
-  ZSUNDERGROUND:"http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
+  ZSUNDERGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
   ZSUNDERGROUND_DATA: {
     url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
     dataSourceName: "erweidata"
@@ -188,7 +189,7 @@ export const CIVILIZATION_CENTER_URL = {
     url: "http://172.20.83.223:8098/iserver/services/data-DiZhiTi_table/rest/data",
     dataSourceName: "地质体_table"
   },
-} 
+}
 export const CHAO_CENTER_URL = {
   //超高层
   ABOVEGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb8/rest/realspace",
@@ -196,4 +197,4 @@ export const CHAO_CENTER_URL = {
   ABOVEGROUND_DATA: {
     url: "http://172.20.83.223:8098/iserver/services/data-Citizens_Parkinglot_table/rest/data",
   },
-} 
+}

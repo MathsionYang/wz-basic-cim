@@ -204,7 +204,7 @@ export default {
   font-size: 14px;
   color: #ffffff;
   letter-spacing: 4px;
-  width: 12vh;
+  width: 14vh;
   display: inline-block;
   font-family: PingFang SC;
   font-weight: bold;

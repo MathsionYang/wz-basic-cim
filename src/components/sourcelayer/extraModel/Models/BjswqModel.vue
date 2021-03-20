@@ -42,8 +42,8 @@ export default {
           });
           Cesium.when(promise, async (_LAYER_) => {
             const LAYER = window.earth.scene.layers.find(v.name);
-            LAYER.brightness = 0.5;
-            LAYER.gamma = 0.6;
+            //LAYER.brightness = 0.5;//建筑亮度
+            //LAYER.gamma = 0.6;
             LAYER.refresh();
           })
         });
