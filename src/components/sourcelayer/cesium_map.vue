@@ -70,7 +70,7 @@
       <VideoCircle ref="videoCircle" />
       <!-- <RoadLine ref="roadline" /> -->
       <InfoFrame ref="infoframe" v-show="isInfoFrame" />
-      <BIMinfoFrame ref="biminfoFrame" />
+      <!-- <BIMinfoFrame ref="biminfoFrame" /> -->
       <AroundSourceAnalyse ref="aroundSourceAnalyse" />
       <div v-show="true">
         <RtmpVideo />
@@ -613,12 +613,14 @@ export default {
 
       // 模型点击事件
       window.earth.pickEvent.addEventListener(feature => {
+        // console.log('feature', feature)
         const _data_ = Object.keys(feature).map(k => {
           return { k, v: feature[k] };
         });
         console.log("data", _data_);
         let gx = false;
         let building = false;
+        let streetLight = false;
         for (let f = 0; f < _data_.length; f++) {
           if (
             _data_[f].k == "直径" ||
@@ -629,14 +631,16 @@ export default {
             gx = true;
             break;
           }
-        }
-        for (let i = 0; i < _data_.length; i++) {
-          if (_data_[i].k == "所属楼层") {
+          if (_data_[f].k == "所属楼层") {
             building = true;
             break;
           }
+          if (_data_[f].k == "NAME" && _data_[f].v == "路灯") {
+            streetLight = true;
+            break;
+          }
         }
-        if (gx) {
+        if (gx || streetLight) {
           this.SetForceBimData(_data_);
         }
         if (building && window.ispartsclick) {

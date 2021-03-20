@@ -486,10 +486,10 @@ export default {
         if (node.moreurl) {
           //隐藏图层
           for (let i = 0; i < node.moreurl.length; i++) {
-            window.billboardMap[node.moreurl[i].id]._billboards.map(
+            window.billboardMap[node.moreurl[i].id] && window.billboardMap[node.moreurl[i].id]._billboards.map(
               (v) => (v.show = false)
             );
-            window.labelMap[node.moreurl[i].id].setAllLabelsVisible(false);
+            window.billboardMap[node.moreurl[i].id] && window.labelMap[node.moreurl[i].id].setAllLabelsVisible(false);
           }
           //清除已选择图层内容
           for (var i = 0; i < window.layersdata.length; i++) {

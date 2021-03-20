@@ -74,7 +74,14 @@ const BIM_FINE_MODEL_KEYS = [
   "LONGITUDE",
   "LATITUDE",
   "ALTITUDE",
-  "BIMID"
+  "BIMID",
+  "OBJECTID",
+  "NAME",
+  "标识",
+  "STYLE",
+  "ANGLE",
+  "CENTER_X",
+  "CENTER_Y"
 ];
 const BIM_FINE_MODEL_HASH = {};
 
