@@ -345,15 +345,22 @@ const GD_TOPIC = [
 const WATER_TOPIC = [
   {
     label: "水系水文",
-    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/river`,
+    url: ``,
     type: "image"
   },
+  // {
+  //   label: "水利工程",
+  //   type: 'mvt',
+  //   dataname: 'erweidata:',
+  //   url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
+  //   dataset: "river_sz"
+  // },
   {
-    label: "水利工程",
-    type: 'mvt',
-    dataname: 'erweidata:',
-    url: 'http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data',
-    dataset: "river_sz"
+    label:"水利工程",
+    componentEvent: "cesium-3d-dem",
+    componentKey: "3d23",
+    url: 'true',
+    type: 'model'
   },
   {
     label: "防汛抗旱",
@@ -505,13 +512,13 @@ const CITYBJ_TOPIC = [
     url: '',
     dataset: ""
   },
-  {
-    label: "路灯",
-    componentEvent: "cesium-3d-light",
-    componentKey: "3d22",
-    url: 'true',
-    type: 'model'
-  },
+  // {
+  //   label: "路灯",
+  //   componentEvent: "cesium-3d-light",
+  //   componentKey: "3d22",
+  //   url: 'true',
+  //   type: 'model'
+  // },
 ];
 //  资源调查数据
 const EDUCATION_TOPIC = [

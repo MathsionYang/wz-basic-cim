@@ -112,7 +112,7 @@ export const ExtraSourceURL = {
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   BJSWQNEW:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_0320/config",
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb17/rest/realspace/datas/BinJiangShangWuQu2021/config",
   //"http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_new/config",  
   JFJ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
@@ -129,6 +129,8 @@ export const ExtraSourceURL = {
     url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
     dataSourceName: "erweidata"
   },
+  Dem:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb13/rest/realspace/datas/dam/config",
 };
 
 
