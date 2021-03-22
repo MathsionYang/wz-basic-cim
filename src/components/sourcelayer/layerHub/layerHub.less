@@ -58,14 +58,15 @@
     right: 5vh;
     bottom: -1vh;
     // display: none;
-    width: 38vh;
-    height: 16vh;
+    // width: 38vh;
+    width: 16vw;
+    // height: 16vh;
     .bg-image("/static/images/mode-ico/框@2x");
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    padding: 2vh 2vh 1vh 1vh;
+    padding: 3vh 3vh 1vh 1vh;
 
     // &.active {
     //   position: absolute;
@@ -134,7 +135,7 @@
   }
 
   .bottom-layers-container {
-    margin-bottom: 1vh;
+    // margin-bottom: 1vh;
     display: flex;
     justify-content: center;
     text-align: left;
@@ -143,9 +144,9 @@
       background-image: url("/static/images/mode-ico/树框.png");
       background-size: 100% 100%;
       // max-width: 11vw;
-      max-width: 22vh;
+      max-width: 26vh;
       // min-width: 6vw;
-      min-width: 12vh;
+      min-width: 14vh;
       // height: 5.7vw;
       height: 12vh;
       margin-right: 1vh;
@@ -164,7 +165,7 @@
       .erjitoubu {
         position: relative;
         margin: 0 auto;
-        padding: 3px 10px;
+        padding: 3px 10px 6px 10px;
         // font-size: 1vw;
         font-size: 2vh;
         font-family: YouSheBiaoTiHei;
@@ -237,7 +238,7 @@
 
         .ring {
           // font-size: 0.7vw;
-          font-size: 1.4vh;
+          font-size: 1.8vh;
           font-family: YouSheBiaoTiHei;
           /* font-weight: 400; */
           /* line-height: 7px; */
@@ -412,19 +413,26 @@
     .label {
       position: relative;
       display: inline-block;
+      height: 4vh;
+      opacity: 1;
+      z-index: 7;
+      margin-right: 5px;
+      // width: 16vh;
+      width: 20vh;
+      background-size: 100% 100%;
+      border: 0;
+      background-image: url(/static/images/mode-ico/底部标题.png);
 
-      .imgs {
-        // height: 2vw;
-        height: 4vh;
-        opacity: 1;
-        z-index: 7;
-        margin-right: 5px;
-        // width: 8vw;
-        width: 16vh;
-        background-size: 100% 100%;
-        border: 0;
-        background-image: url(/static/images/mode-ico/底部标题.png);
-      }
+      // .imgs {
+      //   height: 4vh;
+      //   opacity: 1;
+      //   z-index: 7;
+      //   margin-right: 5px;
+      //   width: 16vh;
+      //   background-size: 100% 100%;
+      //   border: 0;
+      //   background-image: url(/static/images/mode-ico/底部标题.png);
+      // }
 
       &.active {
         >.imgs {
@@ -442,7 +450,8 @@
       >.bt {
         position: absolute;
         // font-size: 0.8vw;
-        font-size: 1.6vh;
+        // font-size: 1.6vh;
+        font-size: 2vh;
         font-family: YouSheBiaoTiHei;
         font-weight: 400;
         // line-height: 2vw;

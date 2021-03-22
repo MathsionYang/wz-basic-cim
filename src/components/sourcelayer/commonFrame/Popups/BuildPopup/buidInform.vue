@@ -8,7 +8,7 @@
     />
     <transition name="frame">
       <div class="buildInform" v-show="BuildDetail">
-        <div class="middle">
+        <div class="b-middle">
           <div>
             <p class="smalltitle">
               楼宇画像

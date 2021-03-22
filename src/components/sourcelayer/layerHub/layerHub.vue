@@ -50,7 +50,7 @@
         :key="i"
         @click="yiji(item.id)"
       >
-        <div class="imgs"></div>
+        <!-- <div class="imgs"></div> -->
         <span class="bt">{{ item.label }}</span>
       </div>
       <div class="layer-btn" @click="doForceEventTopicLabels('消防事件')">

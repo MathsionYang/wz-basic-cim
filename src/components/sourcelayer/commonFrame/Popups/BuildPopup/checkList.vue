@@ -124,15 +124,17 @@ export default {
 <style scoped lang="less">
 .b_fc {
   position: absolute;
-  top: 122px;
-  left: 100px;
-  right: 100px;
+  // top: 122px;
+  // left: 100px;
+  // right: 100px;
+  top: 10vh;
+  left: 10vh;
+  right: 10vh;
   z-index: 11;
   .mask {
     background: rgba(0,0,0,0.5);
     height: 100vh;
-    // width: 100vw;
-    width: 200vh;
+    width: 100vw;
     position: fixed;
     left: 0;
     top: 0;

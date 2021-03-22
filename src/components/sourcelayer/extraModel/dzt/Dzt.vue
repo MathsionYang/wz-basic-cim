@@ -227,5 +227,8 @@ export default {
   left: 0;
   position: absolute;
   z-index: 2;
+  >img {
+    height: 20vh;
+  }
 }
 </style>

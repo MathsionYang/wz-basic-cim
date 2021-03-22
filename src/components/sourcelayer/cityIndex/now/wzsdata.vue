@@ -2,7 +2,8 @@
   <div class="target-wrapper">
     <div class="titles">温州市</div>
     <div class="zhuangshi"></div>
-    <div class="wzsqq"></div>
+    <!-- <div class="wzsqq"></div> -->
+    <img class="wzsqq" src="/static/images/mode-ico/区域icon.png" />
   </div>
 </template>
 

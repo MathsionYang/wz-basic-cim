@@ -1,8 +1,8 @@
 <!--
  * @Author: eds
  * @Date: 2020-09-15 11:04:57
- * @LastEditTime: 2020-09-15 11:05:13
- * @LastEditors: eds
+ * @LastEditTime: 2021-03-22 10:02:31
+ * @LastEditors: Please set LastEditors
  * @Description:
  * @FilePath: \wz-city-culture-tour\src\components\sourcelayer\commonFrame\SceneSwitch\SceneSwitch.vue
 -->
@@ -411,11 +411,12 @@ export default {
   > .bt {
     position: absolute;
     // font-size: 0.8vw;
-    font-size: 1.6vh;
+    // font-size: 1.6vh;
+    font-size: 2vh;
     font-family: YouSheBiaoTiHei;
     font-weight: 400;
     // line-height: 1.6vw;
-    line-height: 3vh;
+    line-height: 2.6vh;
     // bottom: 0;
     top: 0;
     left: 0;

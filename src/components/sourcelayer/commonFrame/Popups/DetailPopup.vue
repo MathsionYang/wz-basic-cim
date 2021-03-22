@@ -1,8 +1,8 @@
 <!--
  * @Author: eds
  * @Date: 2020-08-12 14:32:09
- * @LastEditTime: 2020-09-04 16:33:01
- * @LastEditors: eds
+ * @LastEditTime: 2021-03-22 11:14:24
+ * @LastEditors: Please set LastEditors
  * @Description:
  * @FilePath: \wz-city-culture-tour\src\components\sourcelayer\commonFrame\DetailPopup\DetailPopup.vue
 -->
@@ -1888,16 +1888,17 @@ ul li {
 .snf-nav {
   height: 14vh;
   margin: 2vh 0;
-  width: 6vh;
+  // width: 6vh;
+  width: 4vh;
   text-align: center;
   vertical-align: middle;
   .bg-image("/static/images/mode-ico/选择框@2x");
 }
 
 #nav div.active {
-  height: 14vh;
-  margin: 2vh 0;
-  width: 6vh;
+  // height: 14vh;
+  // margin: 2vh 0;
+  // width: 6vh;
   text-align: center;
   vertical-align: middle;
   .bg-image("/static/images/mode-ico/已选择框@2x");
@@ -1985,7 +1986,8 @@ ul li {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis;
-      font-size: 22px;
+      // font-size: 22px;
+      font-size: 1.8vh;
       font-family: YouSheBiaoTiHei;
       font-weight: 400;
       //line-height: 29px;
@@ -1995,7 +1997,8 @@ ul li {
     > .zhongbu {
       //height: 70%;
       > .liebiao {
-        font-size: 14px;
+        // font-size: 14px;
+        font-size: 1.6vh;
         font-family: PingFang SC;
         font-weight: bold;
         line-height: 20px;
@@ -2146,7 +2149,8 @@ ul li {
 
   .side-info {
     position: fixed;
-    right: 10px;
+    // right: 10px;
+    right: 1vh;
     top: 10vh;
     width: 34vh;
     z-index: 99;
@@ -2235,7 +2239,7 @@ ul li {
           padding: 0 5px;
           overflow: hidden;
           white-space: nowrap;
-          font-size: 1.4vh;
+          font-size: 1.6vh;
           text-overflow: ellipsis;
           border-right: 2px solid #fff;
         }
@@ -2244,7 +2248,7 @@ ul li {
           padding: 0 5px;
           overflow: hidden;
           white-space: nowrap;
-          font-size: 1.4vh;
+          font-size: 1.6vh;
           text-overflow: ellipsis;
         }
         .value {
