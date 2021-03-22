@@ -56,6 +56,7 @@
       <SZgc v-if="showSZGC == '3d18'" />
       <JYmx v-if="showJYmx == '3d19'" />
       <Dem v-if="showriver == '3d23'" />
+      <Kggx v-if="showKggx == '3d24'" />
 
       <Surface ref="surface" v-if="showSubTool == '地表开挖'" />
       <CesiumMapTool ref="cesiummaptool" v-if="showSubTool == '长度测量'" />
@@ -92,6 +93,7 @@ import Roulette from "components/sourcelayer/roulette/roulette";
 import Ljxq from "components/sourcelayer/extraModel/Ljxq/Ljxq";
 import Dzt from "components/sourcelayer/extraModel/dzt/Dzt.vue";
 import Dem from "components/sourcelayer/extraModel/Models/dem";
+import Kggx from "components/sourcelayer/extraModel/Models/Kggx";
 import DetailedModel from "components/sourcelayer/extraModel/Models/DetailedModel";
 import AroundSourceAnalyse from "components/sourcelayer/extraModel/AroundSourceAnalyse/AroundSourceAnalyse";
 import TrafficSubwayModel from "components/sourcelayer/extraModel/Models/TrafficSubwayModel";
@@ -136,7 +138,7 @@ import Chaogc from "components/sourcelayer/extraModel/Chaogc/Chaogc";
 
 import {
   getCurrentExtent,
-  isContainByExtent,
+  isContainByExtent
 } from "components/sourcelayer/commonFrame/mapTool";
 import { CenterPoint } from "mock/overview.js";
 import {
@@ -148,18 +150,18 @@ import {
   mapBaimoLayerInit,
   mapRoadLampLayerInit,
   mapRoadLampLayerTurn,
-  mapShadowInit,
+  mapShadowInit
 } from "components/sourcelayer/cesium_map_init";
 import { doValidation } from "api/validation/validation";
 import { mapGetters, mapActions } from "vuex";
 import { getIserverFields } from "api/iServerAPI";
-import { treeDrawTool } from './layerHub/TreeDrawTool';
-
+import { treeDrawTool } from "./layerHub/TreeDrawTool";
 const Cesium = window.Cesium;
 
 export default {
   data() {
     return {
+      showKggx: null,
       showriver: null,
       showSubFrame: null,
       showDXFrame: null,
@@ -185,14 +187,14 @@ export default {
       isInfoFrame: false,
       authFailshallPop: false,
       ispartsclick: false,
-      showqxsyFrames: null,
+      showqxsyFrames: null
     };
   },
   computed: {
     ...mapGetters("map", ["initDataLoaded", "forceTreeLabel"]),
     isOverview() {
       return this.showSubHubFrame == "3d1";
-    },
+    }
   },
   created() {
     // this.forceTreeLabel == "城市总览" && (this.showSubHubFrame = "3d1");
@@ -245,6 +247,7 @@ export default {
     BJSWQModelS,
     Stationtour,
     Dem,
+    Kggx
   },
   created() {
     window.extraHash = {};
@@ -319,18 +322,18 @@ export default {
     sqlQuery(SQL) {
       var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
       getFeatureParam = new SuperMap.REST.FilterParameter({
-        attributeFilter: SQL,
+        attributeFilter: SQL
       });
       getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
         queryParameter: getFeatureParam,
         toIndex: -1,
-        datasetNames: ["CIM_2D:" + "JZ_2D_buffer"], // 本例中“户型面”为数据源名称，“专题户型面2D”为楼层面相应的数据集名称
+        datasetNames: ["CIM_2D:" + "JZ_2D_buffer"] // 本例中“户型面”为数据源名称，“专题户型面2D”为楼层面相应的数据集名称
       });
       var url =
         "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data"; // 数据服务地址
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
-          processCompleted: async (queryEventArgs) => {
+          processCompleted: async queryEventArgs => {
             console.log("新分层", queryEventArgs);
             if (window.lastHouseEntitys) {
               window.earth.entities.remove(window.lastHouseEntitys);
@@ -417,9 +420,9 @@ export default {
                 window.lastHouseEntitys = window.earth.entities.add({
                   polygon: {
                     hierarchy: Cesium.Cartesian3.fromDegreesArray(points3D),
-                    material: getColorRamp([0.0, 0.8], true),
+                    material: getColorRamp([0.0, 0.8], true)
                   },
-                  classificationType: Cesium.ClassificationType.S3M_TILE, // 贴在S3M模型表面
+                  classificationType: Cesium.ClassificationType.S3M_TILE // 贴在S3M模型表面
                 });
               }
 
@@ -455,14 +458,14 @@ export default {
                   ? (fixAttributes[fieldHash[V]] = tempObj[v])
                   : undefined;
               }
-              let detailData = Object.keys(fixAttributes).map((k) => {
+              let detailData = Object.keys(fixAttributes).map(k => {
                 return { k, v: fixAttributes[k] };
               });
               this.SetForceBimData(detailData);
             }
           }, // 查询成功时的回调函数
-          processFailed: (msg) => console.log("查询失败分层分户", msg), // 查询失败时的回调函数
-        },
+          processFailed: msg => console.log("查询失败分层分户", msg) // 查询失败时的回调函数
+        }
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
@@ -471,7 +474,7 @@ export default {
         window.earth.scene.canvas
       );
       // 监听左键点击事件
-      handler.setInputAction((e) => {
+      handler.setInputAction(e => {
         const pick = window.earth.scene.pick(e.position);
 
         const position = window.earth.scene.pickPosition(e.position);
@@ -483,90 +486,110 @@ export default {
           longitude,
           latitude
         );
-        console.log("点击pick.id", pick);
         if (window.lastHouseEntitys) {
           window.earth.entities.remove(window.lastHouseEntitys);
           window.lastHouseEntitys = null;
         }
         if (pick == undefined) {
-          console.log("进入", window.earth.imageryLayers);
-          var fwm = window.earth.entities.values;
-          for (let i = 0; i < fwm.length; i++) {
-            if (fwm[i].id == "高亮") {
-              window.earth.entities.remove(fwm[i]);
+          if (Object.keys(window.tileLayers).length) {
+            var datasetNames = "";
+            var fwm = window.earth.entities.values;
+            for (let i = 0; i < fwm.length; i++) {
+              if (fwm[i].id == "高亮") {
+                window.earth.entities.remove(fwm[i]);
+              }
             }
-          }
-          var getFeaturesByGeometryParameters, getFeaturesByGeometryService;
-          getFeaturesByGeometryParameters = new SuperMap.REST.GetFeaturesByGeometryParameters(
-            {
-              datasetNames: ["erweidata:ZYDC_GTDCSJ"],
-              toIndex: -1,
-              spatialQueryMode: SuperMap.REST.SpatialQueryMode.WITHIN,
-              geometry: queryPolygonGeometrys,
-            }
-          );
-          var url =
-            "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data";
-          getFeaturesByGeometryService = new SuperMap.REST.GetFeaturesByGeometryService(
-            url,
-            {
-              eventListeners: {
-                processCompleted: async (feature) => {
-                  console.log("面的参数", feature);
-                  //addFeature(arg); //面的高亮
-                  var lonLatArr = getLonLatArray(
-                    feature.originResult.features[0].geometry.points
-                  );
-                  let newdataset = "erweidata:ZYDC_GTDCSJ";
-                  const fields = await getIserverFields(url, newdataset);
-                  const fieldHash = {};
-                  fields.map(({ name, caption }) => {
-                    const reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
-                    reg.test(caption)
-                      ? (fieldHash[name.toLowerCase()] = caption)
-                      : undefined;
-                  });
-                  let tempObj = feature.result.features[0].attributes;
-                  const fixAttributes = {};
-                  for (let v in tempObj) {
-                    const V = v.toLowerCase();
-                    fieldHash[V]
-                      ? (fixAttributes[fieldHash[V]] = tempObj[v])
-                      : undefined;
+            for (let v in Object.keys(window.tileLayers)) {
+              if (
+                Object.keys(window.tileLayers)[v] == "国土调查" ||
+                Object.keys(window.tileLayers)[v] == "总体规划" ||
+                Object.keys(window.tileLayers)[v] == "详细规划"
+              ) {
+                if (
+                  window.tileLayers[Object.keys(window.tileLayers)[v]].show ==
+                  true
+                ) {
+                  if (Object.keys(window.tileLayers)[v] == "国土调查") {
+                    datasetNames = "erweidata:ZYDC_GTDCSJ";
+                  } else if (Object.keys(window.tileLayers)[v] == "总体规划") {
+                    datasetNames = "erweidata:WZKG";
+                  } else if (Object.keys(window.tileLayers)[v] == "详细规划") {
+                    datasetNames = "erweidata:WZZG";
                   }
-                  let detailData = Object.keys(fixAttributes).map((k) => {
-                    return { k, v: fixAttributes[k] };
-                  });
-                  console.log("deatdata", fixAttributes);
-                  this.$refs.detailPopup.getForceFace(fixAttributes);
-                  window.earth.entities.add({
-                    id: "高亮",
-                    name: "高亮",
-                    polyline: {
-                      positions: Cesium.Cartesian3.fromDegreesArray(lonLatArr),
-                      width: 5,
-                      material: Cesium.Color.RED,
-                      clampToGround: true, //矢量线贴对象
-                    },
-                  });
-                },
-                processFailed: (...err) => {
-                  console.error("error", err);
-                },
-              },
+                }
+              }
             }
-          );
-          getFeaturesByGeometryService.processAsync(
-            getFeaturesByGeometryParameters
-          );
-
-          function getLonLatArray(points) {
-            var point3D = [];
-            points.forEach(function (point) {
-              point3D.push(point.x);
-              point3D.push(point.y);
-            });
-            return point3D;
+            if (datasetNames != "") {
+              var getFeaturesByGeometryParameters, getFeaturesByGeometryService;
+              getFeaturesByGeometryParameters = new SuperMap.REST.GetFeaturesByGeometryParameters(
+                {
+                  datasetNames: [datasetNames],
+                  toIndex: -1,
+                  spatialQueryMode: SuperMap.REST.SpatialQueryMode.WITHIN,
+                  geometry: queryPolygonGeometrys
+                }
+              );
+              var url =
+                "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data";
+              getFeaturesByGeometryService = new SuperMap.REST.GetFeaturesByGeometryService(
+                url,
+                {
+                  eventListeners: {
+                    processCompleted: async feature => {
+                      console.log("面的参数", feature);
+                      var lonLatArr = getLonLatArray(
+                        feature.originResult.features[0].geometry.points
+                      );
+                      let newdataset = datasetNames;
+                      const fields = await getIserverFields(url, newdataset);
+                      const fieldHash = {};
+                      fields.map(({ name, caption }) => {
+                        const reg = new RegExp("[\\u4E00-\\u9FFF]+", "g");
+                        reg.test(caption)
+                          ? (fieldHash[name.toLowerCase()] = caption)
+                          : undefined;
+                      });
+                      let tempObj = feature.result.features[0].attributes;
+                      const fixAttributes = {};
+                      for (let v in tempObj) {
+                        const V = v.toLowerCase();
+                        fieldHash[V]
+                          ? (fixAttributes[fieldHash[V]] = tempObj[v])
+                          : undefined;
+                      }
+                      console.log("deatdata", fixAttributes);
+                      this.$refs.detailPopup.getForceFace(fixAttributes);
+                      window.earth.entities.add({
+                        id: "高亮",
+                        name: "高亮",
+                        polyline: {
+                          positions: Cesium.Cartesian3.fromDegreesArray(
+                            lonLatArr
+                          ),
+                          width: 5,
+                          material: Cesium.Color.RED,
+                          clampToGround: true //矢量线贴对象
+                        }
+                      });
+                    },
+                    processFailed: (...err) => {
+                      console.error("error", err);
+                    }
+                  }
+                }
+              );
+              getFeaturesByGeometryService.processAsync(
+                getFeaturesByGeometryParameters
+              );
+            }
+            function getLonLatArray(points) {
+              var point3D = [];
+              points.forEach(function(point) {
+                point3D.push(point.x);
+                point3D.push(point.y);
+              });
+              return point3D;
+            }
           }
         }
 
@@ -587,13 +610,13 @@ export default {
           if (pick.id.id && ~pick.id.id.indexOf("videopoint_")) {
             this.$bus.$emit("cesium-3d-videoPointClick", {
               mp_id: pick.id.id,
-              mp_name: pick.id.name,
+              mp_name: pick.id.name
             });
           }
           if (pick.id.id && ~pick.id.id.indexOf("normalpoint_")) {
             this.$bus.$emit("cesium-3d-normalPointClick", {
               mp_id: pick.id.id,
-              mp_name: pick.id.name,
+              mp_name: pick.id.name
             });
           }
         } else if (typeof pick.id == "string") {
@@ -604,14 +627,13 @@ export default {
               const item = window.featureMap[_NODEID_][_SMID_];
               this.$refs.buildPopup.fetchBuild({
                 name: "buildid",
-                val: item.attributes.GDID,
+                val: item.attributes.GDID
               });
             } else {
-              //console.log("参数",_NODEID_,_SMID_,pick.primitive.position)
               this.$refs.detailPopup.getForceEntity({
                 ...window.featureMap[_NODEID_][_SMID_],
                 position: pick.primitive.position,
-                _NODEID_,
+                _NODEID_
               });
             }
           } else {
@@ -640,7 +662,7 @@ export default {
       }, Cesium.ScreenSpaceEventType.LEFT_CLICK);
 
       // 监听鼠标滚轮事件
-      handler.setInputAction((wheelment) => {
+      handler.setInputAction(wheelment => {
         let cameraHeight = window.earth.camera.positionCartographic.height;
         //  很近时关闭气泡框,避免卡死
         if (cameraHeight <= 100) {
@@ -666,9 +688,9 @@ export default {
       }, Cesium.ScreenSpaceEventType.WHEEL);
 
       // 模型点击事件
-      window.earth.pickEvent.addEventListener((feature) => {
+      window.earth.pickEvent.addEventListener(feature => {
         // console.log('feature', feature)
-        const _data_ = Object.keys(feature).map((k) => {
+        const _data_ = Object.keys(feature).map(k => {
           return { k, v: feature[k] };
         });
         console.log("data", _data_);
@@ -703,27 +725,27 @@ export default {
           let datasetName = `AS_table:${feature["部件"]}`;
           var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
           getFeatureParam = new SuperMap.REST.FilterParameter({
-            attributeFilter: `ElementID = ${feature["ELEMENTID"]}`,
+            attributeFilter: `ElementID = ${feature["ELEMENTID"]}`
           });
           getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
             queryParameter: getFeatureParam,
             toIndex: -1,
-            datasetNames: [datasetName],
+            datasetNames: [datasetName]
           });
           getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(
             url,
             {
               eventListeners: {
-                processCompleted: async (res) => {
+                processCompleted: async res => {
                   console.log("数据", res);
                   let tempObj = res.result.features[0].attributes;
-                  let detailData = Object.keys(tempObj).map((k) => {
+                  let detailData = Object.keys(tempObj).map(k => {
                     return { k, v: tempObj[k] };
                   });
                   this.SetForceBimData(detailData);
                 },
-                processFailed: (msg) => console.log(msg),
-              },
+                processFailed: msg => console.log(msg)
+              }
             }
           );
           getFeatureBySQLService.processAsync(getFeatureBySQLParams);
@@ -738,6 +760,11 @@ export default {
       this.$bus.$off("cesium-3d-event");
       this.$bus.$on("cesium-3d-event", ({ value }) => {
         this.showSubFrame = value;
+      });
+      //数字管线
+      this.$bus.$off("cesium-3d-Kggx");
+      this.$bus.$on("cesium-3d-Kggx", ({ value }) => {
+        this.showKggx = value;
       });
       //水利工程
       this.$bus.$off("cesium-3d-dem");
@@ -868,7 +895,7 @@ export default {
         infoBox: false,
         selectionIndicator: false,
         // timeline:true,
-        shadows: true,
+        shadows: true
         // contextOptions: {
         //   maxDrawingBufferWidth: 15360,
         //   maxDrawingBufferHeight: 4320,
@@ -879,6 +906,7 @@ export default {
       window.fwm = []; //初始所有范围面
       window.Buildinglogo = []; //初始选中楼层
       window.baimo = []; //初始CBD范围内ids
+      window.tileLayers = {}; //初始面数据对象
       //  地图配置
       mapConfigInit();
       //  相机位置
@@ -912,8 +940,8 @@ export default {
      */
     cameraMove() {
       window.earth.scene.camera.setView(CenterPoint);
-    },
-  },
+    }
+  }
 };
 </script>
 

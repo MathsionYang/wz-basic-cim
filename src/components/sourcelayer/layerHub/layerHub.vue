@@ -406,19 +406,19 @@ export default {
           //用地红线展示
           if (node.withImage) {
             node.withImage.forEach((item) => {
-              const LAYER = this.tileLayers[item.name];
+              const LAYER = window.tileLayers[item.name];
               if (LAYER) {
                 LAYER.show = true;
               } else {
-                this.tileLayers[
+                window.tileLayers[
                   item.name
                 ] = window.earth.imageryLayers.addImageryProvider(
                   new Cesium.SuperMapImageryProvider({
                     url: item.url,
                   })
                 );
-                item.alpha && (this.tileLayers[item.name].alpha = item.alpha);
-                // window.earth.imageryLayers.lower(this.tileLayers[item.name]);
+                item.alpha && (window.tileLayers[item.name].alpha = item.alpha);
+                // window.earth.imageryLayers.lower(window.tileLayers[item.name]);
               }
             });
           }
@@ -446,8 +446,8 @@ export default {
             this.$bus.$emit(node.componentEvent, { value: node.componentKey });
         } else if (node.type == "image") {
           console.log("面", node);
-          const LAYER = this.tileLayers[node.id];
-          this.tileLayers[
+          const LAYER = window.tileLayers[node.id];
+          window.tileLayers[
             node.id
           ] = window.earth.imageryLayers.addImageryProvider(
             new Cesium.SuperMapImageryProvider({
@@ -463,7 +463,7 @@ export default {
         const LAYER =
           node.type == "model"
             ? window.earth.scene.layers.find(node.id)
-            : this.tileLayers[node.id];
+            : window.tileLayers[node.id];
         LAYER && (LAYER.show = false);
         if (node.icon && window.billboardMap[node.id]) {
           window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
@@ -508,7 +508,7 @@ export default {
         }
         if (node.withImage) {
           node.withImage.forEach((item) => {
-            const LAYER = this.tileLayers[item.name];
+            const LAYER = window.tileLayers[item.name];
             LAYER.show = false;
           });
         }

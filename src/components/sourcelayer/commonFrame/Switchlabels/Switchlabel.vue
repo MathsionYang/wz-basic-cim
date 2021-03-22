@@ -12,7 +12,7 @@
       :class="{
         label: true,
         active: item.value == forceTreeLabels,
-        disabled: item.disabled,
+        disabled: item.disabled
       }"
       v-for="(item, i) in data"
       :key="i"
@@ -70,15 +70,16 @@ export default {
               children: [
                 { value: "项目全过程", label: "项目全过程" },
                 { value: "项目综合管理", label: "项目综合管理" },
-              ],
+                { value: "智慧塘河", label: "智慧塘河" }
+              ]
             },
             { value: "数字住房", label: "数字住房" },
             { value: "数字城建", label: "数字城建" },
-            { value: "数字城管", label: "数字城管" },
-          ],
+            { value: "数字城管", label: "数字城管" }
+          ]
         },
-        { value: "数字运营", label: "数字运营" },
-      ],
+        { value: "数字运营", label: "数字运营" }
+      ]
     };
   },
   created() {
@@ -88,24 +89,24 @@ export default {
     ...mapGetters("map", [
       "forceTreeLabel",
       "forceTrueTopicLabels",
-      "forceTreeEventLabel",
-    ]),
+      "forceTreeEventLabel"
+    ])
   },
   watch: {},
   methods: {
     ...mapActions("map", [
       "SetForceTreeLabel",
       "SetForceTrueTopicLabels",
-      "SetForceTrueTopicLabelId",
+      "SetForceTrueTopicLabelId"
     ]),
     handleEnter(item) {
-      this.hoverLabel = item
+      this.hoverLabel = item;
     },
     handleLeave() {
-      this.hoverLabel = ''
+      this.hoverLabel = "";
     },
     SetForceTreeLabels(item) {
-      this.childrenValue = []
+      this.childrenValue = [];
       if (this.forceTreeLabels == item) {
         this.forceTreeLabels = "";
         this.liebiao(this.oldlabel);
@@ -126,15 +127,15 @@ export default {
           label: "2021年倾斜摄影",
           newdataset: "erweidata:undefined",
           type: "model",
-          url: "true",
+          url: "true"
         };
         this.oldlabel = this.label;
         this.liebiao(this.label);
-      } 
+      }
     },
     handleChange(value) {
       this.forceTreeLabels = this.hoverLabel;
-      let res = value[value.length-1]
+      let res = value[value.length - 1];
       if (this.oldlabel) {
         this.liebiao(this.oldlabel);
         this.oldlabel = "";
@@ -147,7 +148,7 @@ export default {
           id: "老旧小区",
           label: "老旧小区",
           newdataset: "undefined",
-          type: "model",
+          type: "model"
         };
         this.oldlabel = this.label;
         this.liebiao(this.label);
@@ -166,15 +167,19 @@ export default {
             {
               name: "ydhx",
               url:
-                "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/JSGC_DJDM",
-            },
-          ],
+                "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/JSGC_DJDM"
+            }
+          ]
         };
         this.oldlabel = this.label;
         this.liebiao(this.label);
       }
       if (res == "项目综合管理") {
         window.open("http://www.epc-pm.cn:8888/");
+        this.oldlabel = "";
+      }
+      if (res == "智慧塘河") {
+        window.open("http://172.20.83.227:8090/#/sourcelayer");
         this.oldlabel = "";
       }
       if (res == "数字城管") {
@@ -191,7 +196,7 @@ export default {
         this.nodeCheckChange(label, false);
       } else {
         this.SetForceTrueTopicLabels([
-          ...new Set(this.forceTrueTopicLabels.concat([label.id])),
+          ...new Set(this.forceTrueTopicLabels.concat([label.id]))
         ]);
         this.SetForceTrueTopicLabelId(label.id);
         this.nodeCheckChange(label, true);
@@ -202,9 +207,7 @@ export default {
         console.log("点击内容1", node);
         if (node.type == "mvt" && node.id) {
           if (node.id && window.billboardMap[node.id]) {
-            window.billboardMap[node.id]._billboards.map(
-              (v) => (v.show = true)
-            );
+            window.billboardMap[node.id]._billboards.map(v => (v.show = true));
             window.labelMap[node.id].setAllLabelsVisible(true);
           } else {
             this.getPOIPickedFeature(node, () => {
@@ -213,20 +216,20 @@ export default {
           }
           //用地红线展示
           if (node.withImage) {
-            node.withImage.forEach((item) => {
-              const LAYER = this.tileLayers[item.name];
+            node.withImage.forEach(item => {
+              const LAYER = window.tileLayers[item.name];
               if (LAYER) {
                 LAYER.show = true;
               } else {
-                this.tileLayers[
+                window.tileLayers[
                   item.name
                 ] = window.earth.imageryLayers.addImageryProvider(
                   new Cesium.SuperMapImageryProvider({
-                    url: item.url,
+                    url: item.url
                   })
                 );
-                item.alpha && (this.tileLayers[item.name].alpha = item.alpha);
-                // window.earth.imageryLayers.lower(this.tileLayers[item.name]);
+                item.alpha && (window.tileLayers[item.name].alpha = item.alpha);
+                // window.earth.imageryLayers.lower(window.tileLayers[item.name]);
               }
             });
           }
@@ -241,7 +244,7 @@ export default {
             this.layerdatas = {
               label: node.label,
               id: node.id,
-              children: node.moreurl,
+              children: node.moreurl
             };
           } else {
             window.checkedkey.push(node.id); //单图层数据存储到已选择数组中
@@ -254,13 +257,13 @@ export default {
             this.$bus.$emit(node.componentEvent, { value: node.componentKey });
         } else if (node.type == "image") {
           console.log("面", node);
-          const LAYER = this.tileLayers[node.id];
-          this.tileLayers[
+          const LAYER = window.tileLayers[node.id];
+          window.tileLayers[
             node.id
           ] = window.earth.imageryLayers.addImageryProvider(
             new Cesium.SuperMapImageryProvider({
               url: node.url,
-              name: node.id,
+              name: node.id
             })
           );
         }
@@ -271,10 +274,10 @@ export default {
         const LAYER =
           node.type == "model"
             ? window.earth.scene.layers.find(node.id)
-            : this.tileLayers[node.id];
+            : window.tileLayers[node.id];
         LAYER && (LAYER.show = false);
         if (node.icon && window.billboardMap[node.id]) {
-          window.billboardMap[node.id]._billboards.map((v) => (v.show = false));
+          window.billboardMap[node.id]._billboards.map(v => (v.show = false));
           window.labelMap[node.id].setAllLabelsVisible(false);
           //清除已选择图层内容
           for (var i = 0; i < window.layersdata.length; i++) {
@@ -293,7 +296,7 @@ export default {
           //隐藏图层
           for (let i = 0; i < node.moreurl.length; i++) {
             window.billboardMap[node.moreurl[i].id]._billboards.map(
-              (v) => (v.show = false)
+              v => (v.show = false)
             );
             window.labelMap[node.moreurl[i].id].setAllLabelsVisible(false);
           }
@@ -313,8 +316,8 @@ export default {
           }
         }
         if (node.withImage) {
-          node.withImage.forEach((item) => {
-            const LAYER = this.tileLayers[item.name];
+          node.withImage.forEach(item => {
+            const LAYER = window.tileLayers[item.name];
             LAYER.show = false;
           });
         }
@@ -327,21 +330,21 @@ export default {
       var getFeatureParam, getFeatureBySQLService, getFeatureBySQLParams;
       getFeatureParam = new SuperMap.REST.FilterParameter({
         // attributeFilter: `SMID <= 1000`,
-        attributeFilter: `SMID >= 0`,
+        attributeFilter: `SMID >= 0`
       });
       getFeatureBySQLParams = new SuperMap.REST.GetFeaturesBySQLParameters({
         queryParameter: getFeatureParam,
         toIndex: -1,
-        datasetNames: [newdataset],
+        datasetNames: [newdataset]
       });
       getFeatureBySQLService = new SuperMap.REST.GetFeaturesBySQLService(url, {
         eventListeners: {
-          processCompleted: async (res) => {
+          processCompleted: async res => {
             const fields = await getIserverFields(url, newdataset);
             treeDrawTool(this, res, node, fields, fn);
           },
-          processFailed: (msg) => console.log(msg),
-        },
+          processFailed: msg => console.log(msg)
+        }
       });
       getFeatureBySQLService.processAsync(getFeatureBySQLParams);
     },
@@ -349,10 +352,10 @@ export default {
       console.log("switchSearchBox", node);
       this.$bus.$emit("cesium-3d-switch-searchBox", {
         shall: node.type == "mvt" && node.id ? true : false,
-        node,
+        node
       });
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -381,11 +384,13 @@ export default {
 
   .imgs {
     // height: 1.7vw;
-    height: 3.4vh;
+    //height: 3.4vh;
+    height: 5vh;
     opacity: 1;
     z-index: 7;
     // width: 8vw;
-    width: 16.5vh;
+    //width: 16.5vh;
+    width: 21.5vh;
     border: 0;
     // margin-right: 0.3vw;
     margin-right: 0.6vh;
@@ -395,11 +400,11 @@ export default {
   &.active {
     > .imgs {
       // height: 1.7vw;
-      height: 3.4vh;
+      //height: 3.4vh;
       opacity: 1;
       z-index: 7;
       // width: 8vw;
-      width: 16vh;
+      //width: 16vh;
       border: 0;
       // margin-right: 0.3vw;
       margin-right: 0.6vh;
@@ -412,11 +417,11 @@ export default {
     position: absolute;
     // font-size: 0.8vw;
     // font-size: 1.6vh;
-    font-size: 2vh;
+    font-size: 3vh;
     font-family: YouSheBiaoTiHei;
     font-weight: 400;
     // line-height: 1.6vw;
-    line-height: 2.6vh;
+    line-height: 3vh;
     // bottom: 0;
     top: 0;
     left: 0;
@@ -452,7 +457,7 @@ export default {
     /deep/.el-cascader-menu {
       min-width: 100%;
       color: #fff;
-      font-size: 1.6vh;
+      font-size: 2.5vh;
       border-right: none;
       .bg-image("/static/images/mode-ico/图例背景");
     }

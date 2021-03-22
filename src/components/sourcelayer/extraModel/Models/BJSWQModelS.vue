@@ -6,7 +6,8 @@
 const Cesium = window.Cesium;
 import { ExtraSourceURL } from "config/server/mapConfig";
 import { mapGetters, mapActions } from "vuex";
- const LAYERS_NEW = [{ name: "BJSWQNEW", url: ExtraSourceURL.BJSWQNEW }];
+const LAYERS_NEW = [{ name: "BJSWQNEW", url: ExtraSourceURL.BJSWQNEW }];
+const LAYERS = [{ name: "BJSWQNEW1", url: ExtraSourceURL.BJSWQNEW1 }];
 export default {
   name: "BjswqModelss",
   async mounted() {
@@ -30,8 +31,17 @@ export default {
           const V_LAYER = window.earth.scene.layers.find(v.name);
           V_LAYER.visible = true;
         });
+        LAYERS.map(v => {
+          const V_LAYER = window.earth.scene.layers.find(v.name);
+          V_LAYER.visible = true;
+        });
       } else {
         LAYERS_NEW.map(v => {
+          return window.earth.scene.addS3MTilesLayerByScp(v.url, {
+            name: v.name
+          });
+        });
+        LAYERS.map(v => {
           return window.earth.scene.addS3MTilesLayerByScp(v.url, {
             name: v.name
           });
@@ -61,6 +71,10 @@ export default {
     //  清除BIM模块
     clearTrafficSubwayModel() {
       LAYERS_NEW.map(v => {
+        const V_LAYER = window.earth.scene.layers.find(v.name);
+        V_LAYER.visible = false;
+      });
+      LAYERS.map(v => {
         const V_LAYER = window.earth.scene.layers.find(v.name);
         V_LAYER.visible = false;
       });

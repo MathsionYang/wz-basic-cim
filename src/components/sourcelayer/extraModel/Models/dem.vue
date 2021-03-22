@@ -41,31 +41,31 @@ export default {
             dataset: "river_sz",
             dataname: "erweidata:",
             icon: "水利工程",
-            id: "水闸",
+            id: "水利工程",
             newdataset: "erweidata:river_sz",
             url:
               "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
           },
           {
-            label: "水利工程",
+            label: "港口码头",
             type: "mvt",
             dataset: "river_mt",
             dataname: "erweidata:",
-            icon: "水利工程",
-            id: "码头",
+            icon: "港口码头",
+            id: "港口码头",
             newdataset: "erweidata:river_mt",
             url:
               "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
           },
         ],
       },
-      imagenode: {
-        label: "水系水文",
-        type: "image",
-        id: "水系水文",
-        url:
-          "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/river",
-      },
+      // imagenode: {
+      //   label: "水系水文",
+      //   type: "image",
+      //   id: "水系水文",
+      //   url:
+      //     "http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/river",
+      // },
       tileLayers: [],
     };
   },
@@ -106,14 +106,14 @@ export default {
         window.layersdata.push(this.layerdatas);
         this.switchSearchBox(this.node);
         //隐藏水系水文覆盖面
-        this.tileLayers[
-          this.imagenode.id
-        ] = window.earth.imageryLayers.addImageryProvider(
-          new Cesium.SuperMapImageryProvider({
-            url: this.imagenode.url,
-            name: this.imagenode.id,
-          })
-        );
+        // window.tileLayers[
+        //   this.imagenode.id
+        // ] = window.earth.imageryLayers.addImageryProvider(
+        //   new Cesium.SuperMapImageryProvider({
+        //     url: this.imagenode.url,
+        //     name: this.imagenode.id,
+        //   })
+        // );
       } else {
         this.initBimScenes();
       }
@@ -139,14 +139,14 @@ export default {
         children: this.node.moreurl,
       };
       window.layersdata.push(this.layerdatas);
-      this.tileLayers[
-        this.imagenode.id
-      ] = window.earth.imageryLayers.addImageryProvider(
-        new Cesium.SuperMapImageryProvider({
-          url: this.imagenode.url,
-          name: this.imagenode.id,
-        })
-      );
+      // window.tileLayers[
+      //   this.imagenode.id
+      // ] = window.earth.imageryLayers.addImageryProvider(
+      //   new Cesium.SuperMapImageryProvider({
+      //     url: this.imagenode.url,
+      //     name: this.imagenode.id,
+      //   })
+      // );
     },
     switchSearchBox(node) {
       this.$bus.$emit("cesium-3d-switch-searchBox", {
@@ -224,7 +224,7 @@ export default {
       }
       this.switchSearchBox(this.node, false);
       //隐藏水系水文覆盖面
-      this.tileLayers["水系水文"].show = false;
+      window.tileLayers["水系水文"].show = false;
     },
   },
 };

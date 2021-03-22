@@ -345,7 +345,7 @@ const GD_TOPIC = [
 const WATER_TOPIC = [
   {
     label: "水系水文",
-    url: ``,
+    url: `http://172.20.83.223:8090/iserver/services/map-CIMERWEI/rest/maps/river`,
     type: "image"
   },
   // {
@@ -893,6 +893,13 @@ const ZXGH_TOPIC = [
     dataname: '172.20.83.196_ersjdata:',
     url: '',
     dataset: ""
+  },
+  {
+    label: "排水专项规划",
+    componentEvent: "cesium-3d-Kggx",
+    componentKey: "3d24",
+    url: 'true',
+    type: 'model'
   },
   {
     label: "历史文化名城保护规划",

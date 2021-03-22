@@ -108,7 +108,7 @@ export default {
         const LAYER =
           node.type == "model"
             ? window.earth.scene.layers.find(node.id)
-            : this.tileLayers[node.id];
+            : window.tileLayers[node.id];
         LAYER && (LAYER.show = false);
         if (node.icon && window.billboardMap[node.id]) {
           window.billboardMap[node.id]._billboards.map(v => (v.show = false));

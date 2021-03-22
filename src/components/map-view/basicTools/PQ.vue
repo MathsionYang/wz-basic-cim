@@ -150,6 +150,7 @@ export default {
       var layers = window.earth.scene.layers;
       for (let i = 0; i < layers.layerQueue.length; i++) {
         const layer = layers.layerQueue[i];
+        layer.style3D.lineWidth = 0;
         layer.setCustomClipBox(boxOptions);
       }
       //  地质体剖切单独处理
@@ -159,6 +160,7 @@ export default {
       var layers = window.earth.scene.layers;
       for (let i = 0; i < layers.layerQueue.length; i++) {
         const layer = layers.layerQueue[i];
+        layer.style3D.lineWidth = 1;
         layer.clearCustomClipBox();
       }
       try {

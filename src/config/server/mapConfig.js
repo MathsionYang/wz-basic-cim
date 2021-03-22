@@ -112,8 +112,9 @@ export const ExtraSourceURL = {
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   BJSWQNEW:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb17/rest/realspace/datas/BinJiangShangWuQu2021/config",
-  //"http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_new/config",  
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb17/rest/realspace/datas/BinJiangShangWuQu2021_0322/config",
+  BJSWQNEW1:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb17/rest/realspace/datas/BinJiangShangWuQu2021/config", 
   JFJ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
   BJJM:
@@ -154,6 +155,13 @@ export const BimSourceURL = {
 };
 
 export const CIVILIZATION_CENTER_URL = {
+  //控规管线
+  Pipeline: "http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
+  //地上模型数据绑定
+  Pipeline_DATA1: {
+    url: "http://172.20.83.223:8090/iserver/services/data-CIMERWEI/rest/data",
+    dataSourceName: "erweidata"
+  },
   //市民中心地下管线
   UNDERGROUND: "http://172.20.83.223:8098/iserver/services/3D-mongodb3/rest/realspace",
   //市民中心地下管线数据

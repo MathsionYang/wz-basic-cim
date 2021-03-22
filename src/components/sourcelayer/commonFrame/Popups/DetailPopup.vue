@@ -89,6 +89,7 @@
         </div>
       </div>
     </div>
+    <!-- 面的信息面板 -->
     <div
       class="side-info"
       v-if="!showSide && !fixedForceBimData.length && showface"
@@ -110,6 +111,7 @@
         </li>
       </ul>
     </div>
+    <!-- 一般模型和点位面板 -->
     <div
       class="side-info"
       v-if="showSide && !fixedForceBimData.length && !showface"
@@ -131,6 +133,7 @@
         </li>
       </ul>
     </div>
+    <!-- 市民中心和超高楼层 -->
     <div
       class="side-info"
       v-if="fixedForceBimData.length && !showSide && !showface"
@@ -157,7 +160,7 @@
           <span class="value" :title="item.v">{{ item.v }}</span>
         </li>
       </ul>
-      <div class="info-header" v-if="!partsclick">
+      <div class="info-header" v-if="!partsclick &&(JZLX == '市民中心'||JZLX == '超高层')">
         <div class="title">项目材料</div>
         <div class="decorate"></div>
         <div class="close" @click="closePopup"></div>
@@ -1494,65 +1497,6 @@ export default {
             "老旧小区"
           );
         }
-        /*         for (let i = 0; i < window.fwm.length; i++) {
-          if (window.fwm[i].name == this.forceEntity.name) {
-            points = window.fwm[i].points;
-          }
-        }
-        var queryObj = {
-          getFeatureMode: "SPATIAL",
-          spatialQueryMode: "CONTAIN",
-          datasetNames: ["CIM_2D:JZ_2D_buffer"],
-          geometry: {
-            points: points,
-            type: "REGION"
-          }
-        };
-        var queryData = JSON.stringify(queryObj); // 转化为JSON字符串作为查询参数
-        $.ajax({
-          type: "post",
-          url:
-            "http://172.20.83.223:8098/iserver/services/data-CIM_2D/rest/data/featureResults.rjson?returnContent=true",
-          data: queryData,
-          success: function(result) {
-            var resultObj = JSON.parse(result);
-
-            if (resultObj.featureCount > 0) {
-              window.Buildinglogo = resultObj.features;
-              processCompleted(resultObj.features);
-            }
-          },
-          error: function(msg) {
-            console.log(msg);
-          }
-        });
-        function processCompleted(features) {
-          var selectedFeatures = features;
-          for (var i = 0; i < selectedFeatures.length; i++) {
-            window.earth.entities.add({
-              position: Cesium.Cartesian3.fromDegrees(
-                parseFloat(selectedFeatures[i].fieldValues["32"]),
-                parseFloat(selectedFeatures[i].fieldValues["33"]),
-                parseFloat(selectedFeatures[i].fieldValues["30"]) + 3
-              ),
-              billboard: {
-                image: "/static/images/common/楼标.png",
-                width: 90,
-                height: 60
-              },
-              label: {
-                text: selectedFeatures[i].fieldValues["28"],
-                font: "40px PingFang SC bold;",
-                style: Cesium.LabelStyle.FILL_AND_OUTLINE,
-                outlineColor: Cesium.Color.White,
-                outlineWidth: 3,
-                pixelOffset: new Cesium.Cartesian2(0, -5)
-              },
-              id: selectedFeatures[i].fieldValues["22"],
-              name: selectedFeatures[i].fieldValues["22"]
-            });
-          }
-        } */
       } else {
         this.showSide = false;
         this.showface = false;

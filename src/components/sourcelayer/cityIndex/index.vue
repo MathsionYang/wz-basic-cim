@@ -15,7 +15,7 @@
       <div class="middle">
         <div class="line"></div>
         <Switchlabel />
-        <img src="/static/images/mode-ico/装饰.png" class="zs" />
+        <!-- <img src="/static/images/mode-ico/装饰.png" class="zs" /> -->
       </div>
       <img src="/static/images/mode-ico/大建大美logo.png" class="djdm"/>
       <img src="/static/images/mode-ico/温州设计集团logo.png" class="logo" />
