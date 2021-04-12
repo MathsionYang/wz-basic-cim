@@ -112,9 +112,11 @@ export const ExtraSourceURL = {
   BJSWQ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu/config",
   BJSWQNEW:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb17/rest/realspace/datas/BinJiangShangWuQu2021_0322/config",
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_top/config",
   BJSWQNEW1:
-    "http://172.20.83.223:8098/iserver/services/3D-mongodb17/rest/realspace/datas/BinJiangShangWuQu2021/config", 
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_bottom/config",
+  BJSWQNEW2:
+    "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/BinJiangShangWuQu_west/config", 
   JFJ:
     "http://172.20.83.223:8098/iserver/services/3D-mongodb11/rest/realspace/datas/JieFangJie/config",
   BJJM:
